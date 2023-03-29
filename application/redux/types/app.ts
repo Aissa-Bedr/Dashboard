@@ -37,6 +37,10 @@ export type AppStateActionType =
     | "changeQuickDraft"
     | "changeLogoAppearance"
     | "uploadFile"
-    | "removeFile";
+    | "removeFile"
+    | "addPost"
+    | "removePost"
+    | "toggleIsLiked"
+    | "toggleIsCommentsActive";
 
 export type Theme = "light" | "dark";

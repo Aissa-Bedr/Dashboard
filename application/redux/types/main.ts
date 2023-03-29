@@ -37,6 +37,7 @@ export interface AppState {
     reminders: Reminders[];
     projects: Projects[];
     quickDraft: QuickDraft;
+    posts: Posts[];
 }
 
 export interface AppStateAction {
@@ -55,6 +56,7 @@ export interface AppStateAction {
         reminders?: Partial<Reminders>;
         projects?: Partial<Projects>;
         quickDraft?: Partial<QuickDraft>;
+        posts?: Partial<Posts>;
     };
 }
 
@@ -107,6 +109,15 @@ export interface Projects extends ProjectsInfoItemProps {}
 export interface QuickDraft {
     title: string;
     content: string;
+}
+
+export interface Posts {
+    id?: number;
+    postOwner: string;
+    postTitle: string;
+    postDescription: string;
+    isLiked: boolean;
+    isCommentsActive: boolean;
 }
 
 interface LightApperanceType {

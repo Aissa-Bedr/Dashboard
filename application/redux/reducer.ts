@@ -75,6 +75,7 @@ export const initialState: AppState = {
         content:
             "If You See Time Speeding Up, Then You Are Wrong Because It Is Constant And It Is At The Same Pace Every Day, But You May See It As Such Due To The Stupidity Of Your Use Of It !",
     },
+    posts: [],
 };
 
 function reducer(state = initialState, action: AppStateAction): AppState {
@@ -489,6 +490,44 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                         src: action.payload?.appearance?.logo?.src!,
                     },
                 },
+            };
+
+        case "addPost":
+            return {
+                ...state,
+                posts: [
+                    {
+                        id: randomId(),
+                        postOwner: action.payload?.posts?.postOwner!,
+                        postTitle: action.payload?.posts?.postTitle!,
+                        postDescription: action.payload?.posts?.postDescription!,
+                        isLiked: false,
+                        isCommentsActive: false,
+                    },
+                    ...state.posts,
+                ],
+            };
+
+        case "removePost":
+            return {
+                ...state,
+                posts: [...state.posts].filter((post) => post.id !== action.payload?.posts?.id),
+            };
+
+        case "toggleIsLiked":
+            return {
+                ...state,
+                posts: [...state.posts].map((item) =>
+                    item.id === action.payload?.posts?.id ? { ...item, isLiked: !item.isLiked } : item
+                ),
+            };
+
+        case "toggleIsCommentsActive":
+            return {
+                ...state,
+                posts: [...state.posts].map((item) =>
+                    item.id === action.payload?.posts?.id ? { ...item, isCommentsActive: !item.isCommentsActive } : item
+                ),
             };
 
         default:
