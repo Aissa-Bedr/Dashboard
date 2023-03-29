@@ -1,5 +1,5 @@
 # Dashboard
-a Next.js and Tailwind.css dashboard project
+> a Next.js and Tailwind.css dashboard project
 
 ## src code: https://github.com/Aissa-Bedr/Dashboard/application
-### Made with love by ** Aissa Bedr **
+### Made with love by **Aissa Bedr**
