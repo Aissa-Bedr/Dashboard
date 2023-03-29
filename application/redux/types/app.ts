@@ -20,7 +20,6 @@ export type AppStateActionType =
     | "toggleIsYearlyTargetsActive"
     | "toggleIsTicketsStatisticsActive"
     | "toggleIsLatestNewsActive"
-    | "toggleIsLatestUploadsActive"
     | "toggleIsLastProjectProgressActive"
     | "changeGeneralInfo"
     | "changeUserInfo"
@@ -36,6 +35,8 @@ export type AppStateActionType =
     | "addReminder"
     | "removeReminder"
     | "changeQuickDraft"
-    | "changeLogoAppearance";
+    | "changeLogoAppearance"
+    | "uploadFile"
+    | "removeFile";
 
 export type Theme = "light" | "dark";

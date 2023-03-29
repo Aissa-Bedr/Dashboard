@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { SelectProps } from "./types/main";
 
-const Select: FC<SelectProps> = ({ className = "", onChange, children }) => {
+const Select: FC<SelectProps> = ({ className = "", value, onChange, children }) => {
     const state = useSelector<AppState, AppState>((state) => state);
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
 
@@ -18,6 +18,7 @@ const Select: FC<SelectProps> = ({ className = "", onChange, children }) => {
                 [className]: className,
                 "rounded-md": switchBooleans.uiControl.isRounded,
             })}
+            value={value}
             onChange={onChange}
         >
             {children}

@@ -27,7 +27,6 @@ export const initialState: AppState = {
             isYearlyTargetsActive: false,
             isTicketsStatisticsActive: false,
             isLatestNewsActive: false,
-            isLatestUploadsActive: false,
             isLastProjectProgressActive: false,
         },
     },
@@ -68,8 +67,9 @@ export const initialState: AppState = {
             type: "default",
         },
     },
-    projects: [],
+    files: [],
     reminders: [],
+    projects: [],
     quickDraft: {
         title: "Advice",
         content:
@@ -303,18 +303,6 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsLatestUploadsActive":
-            return {
-                ...state,
-                switchBooleans: {
-                    ...state.switchBooleans,
-                    widgetsControl: {
-                        ...state.switchBooleans.widgetsControl,
-                        isLatestUploadsActive: !state.switchBooleans.widgetsControl.isLatestUploadsActive,
-                    },
-                },
-            };
-
         case "toggleIsLastProjectProgressActive":
             return {
                 ...state,
@@ -417,6 +405,48 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
+        case "uploadFile":
+            return {
+                ...state,
+                files: [
+                    {
+                        id: randomId(),
+                        fileName: action.payload?.files?.fileName!,
+                        fileType: action.payload?.files?.fileType!,
+                        fileUploader: action.payload?.files?.fileUploader!,
+                        fileSize: action.payload?.files?.fileSize!,
+                        fileSizeType: action.payload?.files?.fileSizeType!,
+                    },
+                    ...state.files,
+                ],
+            };
+
+        case "removeFile":
+            return {
+                ...state,
+                files: [...state.files].filter((file) => file.id !== action.payload?.files?.id),
+            };
+
+        case "addReminder":
+            return {
+                ...state,
+                reminders: [
+                    {
+                        id: randomId(),
+                        title: action.payload?.reminders?.title!,
+                        time: action.payload?.reminders?.time!,
+                        theme: action.payload?.reminders?.theme!,
+                    },
+                    ...state.reminders,
+                ],
+            };
+
+        case "removeReminder":
+            return {
+                ...state,
+                reminders: [...state.reminders].filter((reminder) => reminder.id !== action.payload?.reminders?.id),
+            };
+
         case "addProject":
             return {
                 ...state,
@@ -438,26 +468,6 @@ function reducer(state = initialState, action: AppStateAction): AppState {
             return {
                 ...state,
                 projects: [...state.projects].filter((project) => project.id !== action.payload?.projects?.id),
-            };
-
-        case "addReminder":
-            return {
-                ...state,
-                reminders: [
-                    {
-                        id: randomId(),
-                        title: action.payload?.reminders?.title!,
-                        time: action.payload?.reminders?.time!,
-                        theme: action.payload?.reminders?.theme!,
-                    },
-                    ...state.reminders,
-                ],
-            };
-
-        case "removeReminder":
-            return {
-                ...state,
-                reminders: [...state.reminders].filter((reminder) => reminder.id !== action.payload?.reminders?.id),
             };
 
         case "changeQuickDraft":

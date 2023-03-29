@@ -1,8 +1,10 @@
+import { fileSizeType, FileType } from "./app";
+
 export interface LatestUploadsInfoItemProps {
     id?: number;
-    src: string;
     fileName: string;
+    fileType: FileType;
     fileUploader: string;
-    fileSize: number;
-    dontIncludeBorder?: boolean;
+    fileSize: number | null;
+    fileSizeType: fileSizeType;
 }

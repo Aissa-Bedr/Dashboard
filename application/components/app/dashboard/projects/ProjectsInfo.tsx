@@ -96,6 +96,7 @@ const ProjectsInfo = () => {
                 />
                 <Select
                     className="col-span-3 lg:col-span-1"
+                    value={projectInfo.status}
                     onChange={(e) =>
                         setProjectInfo((prevState) => ({ ...prevState, status: e.target.value as Status }))
                     }

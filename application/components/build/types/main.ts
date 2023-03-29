@@ -96,4 +96,10 @@ export interface InputProps
 
 export interface SelectProps extends ComponentProps {
     onChange?: React.ChangeEventHandler<HTMLSelectElement>;
+    value?: string;
+}
+
+export interface MoveProps extends ComponentProps {
+    href: string;
+    onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }

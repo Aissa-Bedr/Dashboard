@@ -67,6 +67,7 @@ const RemindersInfo = () => {
                     onChange={(e) => setReminderInfo((prevState) => ({ ...prevState, time: e.target.value }))}
                 />
                 <Select
+                    value={reminderInfo.theme}
                     onChange={(e) => setReminderInfo((prevState) => ({ ...prevState, theme: e.target.value as Theme }))}
                 >
                     <option

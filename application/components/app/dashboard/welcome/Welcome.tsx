@@ -1,6 +1,7 @@
 import ContentWrapper from "@/components/build/ContentWrapper";
 import Flex from "@/components/build/Flex";
 import LogoContainer from "@/components/build/LogoContainer";
+import Move from "@/components/build/Move";
 import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
 import classNames from "classnames";
 import Image from "next/image";
@@ -57,28 +58,17 @@ const Welcome = () => {
                     <WelcomeInfo />
                 </ContentWrapper>
 
-                <Flex className="p-5" direction="row" items="end" justify="end">
-                    <Link
-                        className={classNames("w-16 __button_end", {
-                            __default_button: state.components.button.type === "default",
-                            [`__primary_button ${state.appearance.dark.color}`]:
-                                state.components.button.type !== "default" && state.theme === "dark",
-                            [`__primary_button ${state.appearance.light.color}`]:
-                                state.components.button.type !== "default" && state.theme === "light",
-                            "!text-black dark:!text-white":
-                                state.appearance.light.theme === "default2" &&
-                                state.components.button.type === "default",
-                            [state.appearance.dark.backgroundColor]: state.theme === "dark",
-                            [state.appearance.light.backgroundColor]: state.theme === "light",
-                            "rounded-md": switchBooleans.uiControl.isRounded,
-                        })}
+                <Flex className="p-5" direction="row" items="center" justify="between">
+                    <Move href="/dashboard/welcome">Show more</Move>
+
+                    <Move
                         href="/profile"
                         onClick={() =>
                             dispatch({ type: "changeLink", payload: { links: { currentLinkValue: "profile" } } })
                         }
                     >
                         Profile
-                    </Link>
+                    </Move>
                 </Flex>
             </Flex>
         </BoxContainer>

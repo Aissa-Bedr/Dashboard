@@ -50,7 +50,7 @@ const Home = () => {
                     {!switchBooleans.widgetsControl.isLatestNewsActive && <LatestNews />}
                     <LatestTasks />
                     <TopSearchItems />
-                    {!switchBooleans.widgetsControl.isLatestUploadsActive && <LatestUploads />}
+                    <LatestUploads />
                     {!switchBooleans.widgetsControl.isLastProjectProgressActive && <LastProjectProgress />}
                     <Reminders />
                     <LatestPost />

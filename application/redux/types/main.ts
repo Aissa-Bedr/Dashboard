@@ -15,6 +15,7 @@ import {
     ButtonComponentSwitchType,
     SwitchType,
 } from "@/components/app/settings/components_shapes_control/controls/types/app";
+import { LatestUploadsInfoItemProps } from "@/components/app/dashboard/latest_uploads/types/main";
 
 interface Tasks {
     id: number;
@@ -32,8 +33,9 @@ export interface AppState {
     skills: Skill[];
     appearance: Appearance;
     components: Components;
-    projects: Projects[];
+    files: Files[];
     reminders: Reminders[];
+    projects: Projects[];
     quickDraft: QuickDraft;
 }
 
@@ -49,8 +51,9 @@ export interface AppStateAction {
         skills?: DataListProps;
         appearance?: Partial<Appearance>;
         components?: Partial<Components>;
-        projects?: Partial<Projects>;
+        files?: Partial<Files>;
         reminders?: Partial<Reminders>;
+        projects?: Partial<Projects>;
         quickDraft?: Partial<QuickDraft>;
     };
 }
@@ -95,9 +98,11 @@ export interface Components {
     };
 }
 
-export interface Projects extends ProjectsInfoItemProps {}
+export interface Files extends LatestUploadsInfoItemProps {}
 
 export interface Reminders extends RemindersInfoItemProps {}
+
+export interface Projects extends ProjectsInfoItemProps {}
 
 export interface QuickDraft {
     title: string;
@@ -144,6 +149,5 @@ interface WidgetsControl {
     isYearlyTargetsActive: boolean;
     isTicketsStatisticsActive: boolean;
     isLatestNewsActive: boolean;
-    isLatestUploadsActive: boolean;
     isLastProjectProgressActive: boolean;
 }

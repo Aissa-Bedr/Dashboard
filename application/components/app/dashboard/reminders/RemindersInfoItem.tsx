@@ -25,7 +25,7 @@ const RemindersInfoItem: FC<RemindersInfoItemProps> = ({ id, title, time, theme 
     function removeReminder(): void {
         dispatch({ type: "removeReminder", payload: { reminders: { id } } });
         switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Project removed successfully !`, { position: "top-center", theme: themeMode });
+            toast.warning(`Reminder removed successfully !`, { position: "top-center", theme: themeMode });
     }
 
     return (

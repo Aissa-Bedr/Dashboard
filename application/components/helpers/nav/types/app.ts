@@ -1,10 +1,1 @@
-export type LinkProps =
-    | ""
-    | "dashboard"
-    | "settings"
-    | "profile"
-    | "projects"
-    | "courses"
-    | "friends"
-    | "files"
-    | "plans";
+export type LinkProps = "" | "dashboard" | "settings" | "profile" | "business" | "courses" | "friends" | "plans";

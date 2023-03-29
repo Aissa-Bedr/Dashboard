@@ -31,10 +31,10 @@ const linksData: LinkElementProps[] = [
     },
     {
         id: 3,
-        link: "projects",
-        href: "projects",
+        link: "business",
+        href: "business",
         icon: <DiGitBranch className="text-black dark:text-white" />,
-        content: "Projects",
+        content: "Business",
     },
     {
         id: 4,
@@ -49,13 +49,6 @@ const linksData: LinkElementProps[] = [
         href: "friends",
         icon: <BiUserCircle className="text-black dark:text-white" />,
         content: "Friends",
-    },
-    {
-        id: 6,
-        link: "files",
-        href: "files",
-        icon: <AiFillFileText className="text-black dark:text-white" />,
-        content: "Files",
     },
     {
         id: 7,

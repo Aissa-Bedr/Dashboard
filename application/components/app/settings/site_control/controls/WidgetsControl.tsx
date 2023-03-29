@@ -38,11 +38,6 @@ const WidgetsControl = () => {
                         dispatchType="toggleIsLatestNewsActive"
                     />
                     <SiteControlInfoItem
-                        content="Latest uploads"
-                        isChecked={switchBooleans.widgetsControl.isLatestUploadsActive}
-                        dispatchType="toggleIsLatestUploadsActive"
-                    />
-                    <SiteControlInfoItem
                         content="Last project progress"
                         isChecked={switchBooleans.widgetsControl.isLastProjectProgressActive}
                         dispatchType="toggleIsLastProjectProgressActive"
