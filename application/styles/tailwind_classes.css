@@ -1,0 +1,123 @@
+@tailwind components;
+
+@layer components {
+    .__base {
+        @apply w-full h-full text-black bg-[#f1f5f9] dark:bg-[#1a1d21] dark:text-white duration-300;
+    }
+
+    .__base_wrapper {
+        @apply grid grid-cols-1 gap-4 pt-10 pb-5 xl:grid-cols-2 2xl:grid-cols-3;
+    }
+
+    .__box_container {
+        @apply text-black duration-300 bg-white dark:bg-dark dark:text-white;
+    }
+
+    .__link {
+        @apply block w-fit md:w-full md:flex flex-row items-center justify-start hover:bg-[#f6f6f6] dark:hover:bg-grey-dark-alt-color gap-2 py-2 px-4 duration-300 z-30;
+    }
+
+    .__active_link {
+        @apply block w-fit md:w-full md:flex flex-row items-center justify-start bg-[#f6f6f6] dark:bg-grey-dark-alt-color gap-2 py-2 px-4 duration-300 z-30;
+    }
+
+    .__logo {
+        @apply relative text-4xl font-semibold capitalize w-fit before:absolute before:-bottom-4 before:left-0 before:w-10 before:h-1 before:bg-black dark:before:bg-[#292e32] after:absolute after:-bottom-4 after:left-10 after:w-1/2 after:h-1 after:bg-white after:z-20;
+    }
+
+    .__nav_logo {
+        @apply relative font-bold text-center text-black truncate dark:text-white;
+    }
+
+    .__primary_logo {
+        @apply text-2xl font-semibold text-black capitalize duration-300 dark:text-white;
+    }
+
+    .__secondary_logo {
+        @apply font-medium capitalize duration-300 text-grey-color dark:text-grey-dark-color;
+    }
+
+    .__border_b {
+        @apply border-solid border-b-[1px] border-b-grey-alt-color dark:border-b-grey-dark-alt-color;
+    }
+
+    .__border_y {
+        @apply border-solid border-y-[1px] border-y-grey-alt-color dark:border-y-grey-dark-alt-color;
+    }
+
+    .__table_element {
+        @apply border-solid border-l-[1px] border-b-[1px] border-l-grey-alt-color border-b-grey-alt-color text-black dark:border-l-grey-dark-alt-color dark:border-b-grey-dark-alt-color dark:text-grey-dark-color p-4;
+    }
+
+    .__default_button {
+        @apply py-1 text-white duration-300;
+    }
+
+    .__primary_button {
+        @apply !bg-grey-alt-color dark:!bg-grey-dark-alt-color py-1 duration-300;
+    }
+
+    .__button_end {
+        @apply flex flex-row items-center justify-center text-right;
+    }
+
+    .__switch_btn_container {
+        @apply relative flex items-center w-20 h-8 duration-300 cursor-pointer rounded-2xl;
+    }
+
+    .__switch_btn_switcher {
+        @apply absolute flex items-center justify-center w-6 h-6 duration-300 rounded-full left-1;
+    }
+
+    .__section_button {
+        @apply flex items-center justify-center p-2 text-black duration-300 rounded-full dark:text-grey-dark-color hover:bg-grey-alt-color dark:hover:bg-grey-dark-alt-color;
+    }
+
+    .__data_list_empty {
+        @apply text-center font-semibold uppercase w-full bg-grey-alt-color text-black dark:bg-grey-dark-alt-color dark:text-grey-dark-color px-2 py-1.5 text-sm mt-2 duration-300;
+    }
+
+    .__controls_item_container {
+        @apply grid grid-cols-1 gap-4;
+    }
+
+    .__controls_item {
+        @apply flex flex-col items-center justify-center gap-2 md:flex-row md:gap-2 md:justify-between;
+    }
+
+    .__default_switch_btn_container {
+        @apply relative flex items-center w-[78px] h-8 duration-300 cursor-pointer rounded-2xl;
+    }
+
+    .__default_switch_btn_switcher {
+        @apply absolute flex items-center justify-center w-6 h-6 duration-300 rounded-full left-1;
+    }
+
+    .__primary_switch_btn_container {
+        @apply relative flex items-center w-16 h-8 duration-300 rounded cursor-pointer;
+    }
+
+    .__primary_switch_btn_switcher {
+        @apply absolute left-0.5 flex items-center justify-center h-7 duration-300 rounded w-7;
+    }
+
+    .__secondary_switch_btn_container {
+        @apply relative flex items-center w-16 h-8 duration-300 rounded-full cursor-pointer;
+    }
+
+    .__secondary_switch_btn_switcher {
+        @apply absolute flex items-center justify-center duration-300 rounded-full shadow-lg w-9 h-9 -left-2 shadow-grey-alt-color dark:shadow-none;
+    }
+
+    .__default_input_field {
+        @apply w-full border-solid border-[1px] border-[#ccc] p-2 text-sm duration-300 outline-none bg-transparent dark:border-grey-dark-alt-color dark:text-white;
+    }
+
+    .__primary_input_field {
+        @apply w-full p-2 text-sm text-black duration-300 outline-none bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white;
+    }
+
+    .__secondary_input_field {
+        @apply w-full border-solid border-l-[1px] border-grey-color py-1.5 px-2 text-sm outline-none bg-transparent dark:border-grey-dark-color dark:text-white focus:border-l-transparent dark:focus:border-l-transparent focus:border-b-[1px] duration-100;
+    }
+}
