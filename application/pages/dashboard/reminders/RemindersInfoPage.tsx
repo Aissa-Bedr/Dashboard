@@ -1,19 +1,20 @@
-import Button from "@/components/build/Button";
 import Flex from "@/components/build/Flex";
-import Grid from "@/components/build/Grid";
-import Input from "@/components/build/Input";
-import Select from "@/components/build/Select";
-import { AppState, AppStateAction, Reminders, SwitchBooleans } from "@/redux/types/main";
-import classNames from "classnames";
+import { AppState, AppStateAction, Files, Reminders, SwitchBooleans } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import RemindersInfoItem from "./RemindersInfoItem";
-import { Theme } from "./types/app";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Input from "@/components/build/Input";
+import Button from "@/components/build/Button";
+import Grid from "@/components/build/Grid";
+import BoxContainer from "@/components/app/main/BoxContainer";
+import ListLength from "@/components/build/ListLength";
+import Select from "@/components/build/Select";
+import EachReminder from "./EachReminder";
+import { Theme } from "@/components/app/dashboard/reminders/types/app";
 
-const RemindersInfo = () => {
+const RemindersInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
     const dispatch: Dispatch<AppStateAction> = useDispatch();
@@ -23,7 +24,7 @@ const RemindersInfo = () => {
         theme: "blue",
     });
 
-    const remindersInfo = state.reminders.map((item) => <RemindersInfoItem key={item.id} {...item} />);
+    const remindersInfo = state.reminders.map((item) => <EachReminder key={item.id} {...item} />);
 
     const patterns = {
         finishDate: /\d{1,2}\W\w{1,}\W\d{4}\W\W\W\d{1,2}\d{1,2}\W\w{2}/g,
@@ -52,8 +53,8 @@ const RemindersInfo = () => {
     }
 
     return (
-        <Flex className="gap-2" direction="col">
-            <Grid className="gap-2 lg:grid-cols-2" cols="1">
+        <>
+            <BoxContainer className="flex flex-col gap-4">
                 <Input
                     type="text"
                     placeholder="Enter a title"
@@ -95,27 +96,27 @@ const RemindersInfo = () => {
                         red
                     </option>
                 </Select>
-                <Button onClick={addReminder}>Add reminder</Button>
-            </Grid>
 
-            <Flex
-                className={classNames("gap-2 mt-2", { "h-40 overflow-y-scroll px-1": state.reminders.length >= 4 })}
-                direction="col"
-            >
-                {state.reminders.length >= 1 ? (
-                    <>{remindersInfo}</>
+                <Flex direction="row" items="center" justify="between">
+                    <ListLength listName="Reminders" listLength={remindersInfo.length} />
+
+                    <Button className="px-2 py-1" onClick={addReminder}>
+                        Add reminder
+                    </Button>
+                </Flex>
+            </BoxContainer>
+
+            <Grid className="gap-4 mt-4" cols="1">
+                {state.files.length > 0 ? (
+                    <Grid className="gap-4 lg:grid-cols-2 xl:grid-cols-3" cols="1">
+                        {remindersInfo}
+                    </Grid>
                 ) : (
-                    <div
-                        className={classNames("__data_list_empty", {
-                            "rounded-md": switchBooleans.uiControl.isRounded,
-                        })}
-                    >
-                        No reminders to show !
-                    </div>
+                    <BoxContainer className="text-sm font-semibold uppercase">No reminders to show !</BoxContainer>
                 )}
-            </Flex>
-        </Flex>
+            </Grid>
+        </>
     );
 };
 
-export default RemindersInfo;
+export default RemindersInfoPage;

@@ -6,15 +6,16 @@ import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import BoxContainer from "../../main/BoxContainer";
 import PrimaryLogo from "../../main/PrimaryLogo";
 import SecondaryLogo from "../../main/SecondaryLogo";
+import { WelcomeProps } from "./types/main";
 import WelcomeInfo from "./WelcomeInfo";
 
-const Welcome = () => {
+const Welcome: FC<WelcomeProps> = ({ dontIncludeShowMoreLink }) => {
     const state = useSelector<AppState, AppState>((state) => state);
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
     const dispatch: Dispatch<AppStateAction> = useDispatch();
@@ -59,7 +60,16 @@ const Welcome = () => {
                 </ContentWrapper>
 
                 <Flex className="p-5" direction="row" items="center" justify="between">
-                    <Move href="/dashboard/welcome">Show more</Move>
+                    {!dontIncludeShowMoreLink && (
+                        <Move
+                            href="/dashboard/welcome"
+                            onClick={() =>
+                                dispatch({ type: "changeLink", payload: { links: { currentLinkValue: "dashboard" } } })
+                            }
+                        >
+                            Show more
+                        </Move>
+                    )}
 
                     <Move
                         href="/profile"

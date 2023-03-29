@@ -1,8 +1,9 @@
 import ContentWrapper from "@/components/build/ContentWrapper";
 import Flex from "@/components/build/Flex";
+import ListLength from "@/components/build/ListLength";
 import LogoContainer from "@/components/build/LogoContainer";
-import { AppState, Reminders, SwitchBooleans } from "@/redux/types/main";
-import classNames from "classnames";
+import Move from "@/components/build/Move";
+import { AppState, Reminders } from "@/redux/types/main";
 import React from "react";
 import { useSelector } from "react-redux";
 import BoxContainer from "../../main/BoxContainer";
@@ -11,7 +12,6 @@ import RemindersInfo from "./RemindersInfo";
 
 const Reminders = () => {
     const reminders = useSelector<AppState, Reminders[]>((state) => state.reminders);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
 
     return (
         <BoxContainer>
@@ -19,14 +19,10 @@ const Reminders = () => {
                 <Flex className="w-full" direction="row" items="center" justify="between">
                     <PrimaryLogo text="Reminders" />
 
-                    <div
-                        className={classNames(
-                            "text-center uppercase bg-grey-alt-color text-black dark:bg-grey-dark-alt-color dark:text-grey-dark-color px-2 py-1.5 text-sm font-semibold",
-                            { "rounded-md": switchBooleans.uiControl.isRounded }
-                        )}
-                    >
-                        Reminders: {reminders.length}
-                    </div>
+                    <Flex className="gap-2" direction="row" items="center">
+                        <Move href="/dashboard/reminders">Show more</Move>
+                        <ListLength listName="Reminders" listLength={reminders.length} />
+                    </Flex>
                 </Flex>
             </LogoContainer>
 

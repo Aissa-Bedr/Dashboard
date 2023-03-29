@@ -3,21 +3,23 @@ import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import Task from "./Task";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import classNames from "classnames";
 import Grid from "@/components/build/Grid";
+import BoxContainer from "@/components/app/main/BoxContainer";
+import EachTask from "./EachTask";
+import ListLength from "@/components/build/ListLength";
 
-const TasksInfo = () => {
+const TasksInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
     const dispatch: Dispatch<AppStateAction> = useDispatch();
     const [content, setContent] = useState("");
 
-    const tasks = state.tasks.map((item) => <Task key={item.id} {...item} />);
+    const tasks = state.tasks.map((item) => <EachTask key={item.id} {...item} />);
 
     function addTask(): void | false {
         if (!content) {
@@ -50,8 +52,8 @@ const TasksInfo = () => {
     }
 
     return (
-        <div className={classNames({ "h-80 overflow-y-scroll pr-1": state.tasks.length >= 8 })}>
-            <Flex className="w-full gap-2" direction="row" items="center">
+        <>
+            <BoxContainer className="flex flex-col gap-4">
                 <Input
                     type="text"
                     placeholder="Enter a new task"
@@ -59,23 +61,26 @@ const TasksInfo = () => {
                     onChange={(e) => setContent(e.target.value)}
                 />
 
-                <Button className="w-1/4 px-2 !py-[7px]" onClick={addTask}>
-                    <p className="hidden lg:block">Add task</p>
-                    <p className="block lg:hidden">Add</p>
-                </Button>
-            </Flex>
+                <Flex direction="row" items="center" justify="between">
+                    <ListLength listName="Tasks" listLength={tasks.length} />
 
-            {state.tasks.length > 0 ? (
-                <Grid className="gap-2 mt-2" cols="1">
-                    {tasks}
-                </Grid>
-            ) : (
-                <div className={classNames("__data_list_empty", { "rounded-md": switchBooleans.uiControl.isRounded })}>
-                    No tasks to show !
-                </div>
-            )}
-        </div>
+                    <Button className="px-2 py-1" onClick={addTask}>
+                        Add task
+                    </Button>
+                </Flex>
+            </BoxContainer>
+
+            <Grid className="gap-4 mt-4" cols="1">
+                {state.tasks.length > 0 ? (
+                    <Grid className="gap-4" cols="1">
+                        {tasks}
+                    </Grid>
+                ) : (
+                    <BoxContainer className="text-sm font-semibold uppercase">No tasks to show !</BoxContainer>
+                )}
+            </Grid>
+        </>
     );
 };
 
-export default TasksInfo;
+export default TasksInfoPage;

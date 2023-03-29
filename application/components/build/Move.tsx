@@ -9,7 +9,7 @@ const Move: FC<MoveProps> = ({ className = "", href, onClick, children }) => {
     return (
         <Link
             className={classNames(
-                `text-sm font-semibold uppercase underline text-blue-alt-color hover:text-blue-color dark:text-blue-dark-alt-color dark:hover:text-blue-dark-color duration-300`,
+                `w-fit text-sm font-semibold uppercase underline text-blue-alt-color hover:text-blue-color dark:text-blue-dark-alt-color dark:hover:text-blue-dark-color duration-300`,
                 { [className]: className }
             )}
             href={href}

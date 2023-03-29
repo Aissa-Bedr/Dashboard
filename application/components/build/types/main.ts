@@ -103,3 +103,8 @@ export interface MoveProps extends ComponentProps {
     href: string;
     onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
+
+export interface ListLengthProps {
+    listName: string;
+    listLength: number;
+}
