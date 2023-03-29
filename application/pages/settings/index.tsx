@@ -8,6 +8,7 @@ import SkillsControl from "@/components/app/settings/skills_info/SkillsControl";
 import UserInfo from "@/components/app/settings/user_info/UserInfo";
 import Base from "@/components/build/Base";
 import BaseWrapper from "@/components/build/BaseWrapper";
+import Grid from "@/components/build/Grid";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import { Theme } from "@/redux/types/app";
@@ -36,10 +37,9 @@ const Settings = () => {
                 <BaseWrapper>
                     <SiteControl />
                     <GeneralInfo />
-                    <UserInfo />
                     <SkillsControl />
-                    <ProfileControl />
                     <AppearanceControl />
+                    <ProfileControl />
                     <ComponentsShapesControl />
                 </BaseWrapper>
             </Base>

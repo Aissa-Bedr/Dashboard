@@ -8,7 +8,7 @@ import SiteControlInfo from "./SiteControlInfo";
 
 const SiteControl = () => {
     return (
-        <BoxContainer className="col-span-1 xl:col-span-2 2xl:col-span-3">
+        <BoxContainer className="col-span-3">
             <LogoContainer>
                 <PrimaryLogo text="Site control" />
                 <SecondaryLogo text="Control the website if there is maintenance" />

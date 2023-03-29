@@ -1,8 +1,8 @@
 import ContentWrapper from "@/components/build/ContentWrapper";
 import Flex from "@/components/build/Flex";
+import ListLength from "@/components/build/ListLength";
 import LogoContainer from "@/components/build/LogoContainer";
-import { AppState, SwitchBooleans } from "@/redux/types/main";
-import classNames from "classnames";
+import { AppState } from "@/redux/types/main";
 import React from "react";
 import { useSelector } from "react-redux";
 import BoxContainer from "../../main/BoxContainer";
@@ -13,21 +13,14 @@ import { Skill } from "./types/main";
 
 const SkillsControl = () => {
     const skills = useSelector<AppState, Skill[]>((state) => state.skills);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
 
     return (
-        <BoxContainer>
+        <BoxContainer className="col-span-3 2xl:col-span-1">
             <LogoContainer>
                 <Flex className="w-full" direction="row" items="center" justify="between">
                     <PrimaryLogo text="Skills control" />
-                    <div
-                        className={classNames(
-                            "text-center uppercase bg-grey-alt-color text-black dark:bg-grey-dark-alt-color dark:text-grey-dark-color px-2 py-1.5 text-sm font-semibold",
-                            { "rounded-md": switchBooleans.uiControl.isRounded }
-                        )}
-                    >
-                        Skills: {skills.length}
-                    </div>
+
+                    <ListLength listName="Skills" listLength={skills.length} />
                 </Flex>
                 <SecondaryLogo text="Add or remove skills according to your interests" />
             </LogoContainer>

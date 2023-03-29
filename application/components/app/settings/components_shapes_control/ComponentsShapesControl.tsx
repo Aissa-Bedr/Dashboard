@@ -8,7 +8,7 @@ import ComponentsShapesControlInfo from "./ComponentsShapesControlInfo";
 
 const ComponentsShapesControl = () => {
     return (
-        <BoxContainer className="col-span-1 xl:col-span-2">
+        <BoxContainer className="col-span-3">
             <LogoContainer>
                 <PrimaryLogo text="Components shapes control" />
                 <SecondaryLogo text="Control the website components shapes if there is maintenance" />
