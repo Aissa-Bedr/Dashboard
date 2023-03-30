@@ -12,7 +12,7 @@ export interface ProjectsInfoItemProps {
     name: string;
     finishDate: string;
     client: string;
-    price: number | "";
-    team: number | "";
+    price: number;
+    team: number;
     status: Status;
 }
