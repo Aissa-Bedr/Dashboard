@@ -37,7 +37,7 @@ const RemindersInfoItem: FC<RemindersInfoItemProps> = ({ id, title, time, theme 
         >
             <Flex direction="row" items="center" justify="between">
                 <div>
-                    <p className="text-lg font-semibold capitalize">{title}</p>
+                    <p className="text-lg font-semibold">{title}</p>
                     <p className="text-sm font-medium text-grey-color dark:text-grey-dark-color">{time}</p>
                 </div>
 

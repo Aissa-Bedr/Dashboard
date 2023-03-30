@@ -30,7 +30,9 @@ const LatestPostInfo = () => {
                             ? latestPost?.postOwner
                             : `${state.generalInfo.firstName} ${state.generalInfo.lastName}`}
                     </p>
-                    <SecondaryLogo text={latestPost ? latestPost?.postTitle : state.quickDraft.title} />
+                    <p className="font-medium duration-300 text-grey-color dark:text-grey-dark-color">
+                        {latestPost ? latestPost?.postTitle : state.quickDraft.title}
+                    </p>
                 </div>
             </Flex>
 
