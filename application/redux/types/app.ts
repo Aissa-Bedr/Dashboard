@@ -40,7 +40,10 @@ export type AppStateActionType =
     | "removeFile"
     | "addPost"
     | "removePost"
-    | "toggleIsLiked"
-    | "toggleIsCommentsActive";
+    | "toggleIsLikedPost"
+    | "toggleIsCommentsActive"
+    | "addComment"
+    | "removeComment"
+    | "toggleIsLikedComment";
 
 export type Theme = "light" | "dark";

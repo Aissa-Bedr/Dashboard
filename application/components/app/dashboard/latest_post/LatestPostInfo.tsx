@@ -35,7 +35,7 @@ const LatestPostInfo = () => {
             </Flex>
 
             <div className="py-5 border-solid border-y-[1px] border-y-grey-alt-color dark:border-y-grey-dark-alt-color">
-                <p className="font-medium text-center capitalize lg:text-left">
+                <p className="font-medium text-center lg:text-left">
                     {latestPost ? latestPost?.postDescription : state.quickDraft.content}
                 </p>
             </div>

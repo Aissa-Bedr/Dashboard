@@ -1,24 +1,32 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, Posts, SwitchBooleans } from "@/redux/types/main";
+import { AppState, AppStateAction, Comment, Posts, SwitchBooleans } from "@/redux/types/main";
 import classNames from "classnames";
 import Image from "next/image";
-import React, { Dispatch, FC } from "react";
+import React, { Dispatch, FC, useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Theme } from "@/redux/types/app";
-import { LatestUploadsInfoItemProps } from "@/components/app/dashboard/latest_uploads/types/main";
-import SecondaryLogo from "@/components/app/main/SecondaryLogo";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubblesOutline } from "react-icons/io5";
+import Input from "@/components/build/Input";
+import Button from "@/components/build/Button";
+import EachComment from "./EachComment";
 
 const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLiked, isCommentsActive }) => {
     const state = useSelector<AppState, AppState>((state) => state);
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
     const themeMode = useSelector<AppState, Theme>((state) => state.theme);
     const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const [commentDescription, setCommentDescription] = useState("");
+
+    const commentsInfo = state.posts.map((post) =>
+        post.comments.map((comment) =>
+            post.id === id ? <EachComment key={comment.id} {...comment} postId={id!} /> : null
+        )
+    );
 
     function removePost(): void {
         dispatch({ type: "removePost", payload: { posts: { id } } });
@@ -29,8 +37,8 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
             });
     }
 
-    function toggleLikes(): void {
-        dispatch({ type: "toggleIsLiked", payload: { posts: { id } } });
+    function togglePostLike(): void {
+        dispatch({ type: "toggleIsLikedPost", payload: { posts: { id } } });
         switchBooleans.websiteControl.isNotificationActive &&
             toast.warning(isLiked ? "Post unliked successfully !" : "Post liked successfully !", {
                 position: "top-center",
@@ -40,8 +48,27 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
 
     const toggleComments = (): void => dispatch({ type: "toggleIsCommentsActive", payload: { posts: { id } } });
 
+    function addComment(): void | false {
+        if (!commentDescription) {
+            switchBooleans.websiteControl.isNotificationActive &&
+                toast.error(`Comment can't be empty !`, {
+                    position: "top-center",
+                    theme: state.theme,
+                });
+            return false;
+        }
+
+        dispatch({ type: "addComment", payload: { posts: { id }, comments: { commentDescription } } });
+        switchBooleans.websiteControl.isNotificationActive &&
+            toast.success(`Comment added successfully !`, {
+                position: "top-center",
+                theme: state.theme,
+            });
+        setCommentDescription("");
+    }
+
     return (
-        <>
+        <Flex className="gap-4" direction="col">
             <BoxContainer>
                 <Flex className="gap-4" direction="col">
                     <Flex className="gap-2" direction="row" items="center">
@@ -62,12 +89,14 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
                                     onClick={removePost}
                                 />
                             </Flex>
-                            <SecondaryLogo text={postTitle} />
+                            <p className="font-medium duration-300 text-grey-color dark:text-grey-dark-color">
+                                {postTitle}
+                            </p>
                         </div>
                     </Flex>
 
                     <div className="py-5 border-solid border-y-[1px] border-y-grey-alt-color dark:border-y-grey-dark-alt-color">
-                        <p className="font-medium text-center capitalize lg:text-left">{postDescription}</p>
+                        <p className="font-medium text-center lg:text-left">{postDescription}</p>
                     </div>
 
                     <Flex direction="row" items="center" justify="between">
@@ -77,7 +106,7 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
                                 "text-grey-color dark:text-grey-dark-color hover:!text-pink-500": !isLiked,
                             })}
                             size="1.3rem"
-                            onClick={toggleLikes}
+                            onClick={togglePostLike}
                         />
 
                         <IoChatbubblesOutline
@@ -92,7 +121,29 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
                     </Flex>
                 </Flex>
             </BoxContainer>
-        </>
+
+            {isCommentsActive && (
+                <BoxContainer>
+                    <Flex className="gap-4" direction="col">
+                        <Flex className="w-full gap-2" direction="row">
+                            <Input
+                                type="text"
+                                placeholder="Write a comment"
+                                value={commentDescription}
+                                onChange={(e) => setCommentDescription(e.target.value)}
+                            />
+                            <Button className="px-4" onClick={addComment}>
+                                Send
+                            </Button>
+                        </Flex>
+
+                        <Flex className="gap-2" direction="col">
+                            {commentsInfo}
+                        </Flex>
+                    </Flex>
+                </BoxContainer>
+            )}
+        </Flex>
     );
 };
 

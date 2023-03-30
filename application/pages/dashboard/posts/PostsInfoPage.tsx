@@ -22,6 +22,7 @@ const PostsInfoPage = () => {
         postDescription: "",
         isLiked: false,
         isCommentsActive: false,
+        comments: [],
     });
 
     const postsInfo = state.posts.map((item) => <EachPost key={item.id} {...item} />);
@@ -42,7 +43,14 @@ const PostsInfoPage = () => {
                 position: "top-center",
                 theme: state.theme,
             });
-        setPostInfo({ postOwner: "", postTitle: "", postDescription: "", isLiked: false, isCommentsActive: false });
+        setPostInfo({
+            postOwner: "",
+            postTitle: "",
+            postDescription: "",
+            isLiked: false,
+            isCommentsActive: false,
+            comments: [],
+        });
     }
 
     return (

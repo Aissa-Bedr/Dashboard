@@ -503,6 +503,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                         postDescription: action.payload?.posts?.postDescription!,
                         isLiked: false,
                         isCommentsActive: false,
+                        comments: [],
                     },
                     ...state.posts,
                 ],
@@ -514,19 +515,71 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 posts: [...state.posts].filter((post) => post.id !== action.payload?.posts?.id),
             };
 
-        case "toggleIsLiked":
+        case "toggleIsLikedPost":
             return {
                 ...state,
-                posts: [...state.posts].map((item) =>
-                    item.id === action.payload?.posts?.id ? { ...item, isLiked: !item.isLiked } : item
+                posts: [...state.posts].map((post) =>
+                    post.id === action.payload?.posts?.id ? { ...post, isLiked: !post.isLiked } : post
                 ),
             };
 
         case "toggleIsCommentsActive":
             return {
                 ...state,
-                posts: [...state.posts].map((item) =>
-                    item.id === action.payload?.posts?.id ? { ...item, isCommentsActive: !item.isCommentsActive } : item
+                posts: [...state.posts].map((post) =>
+                    post.id === action.payload?.posts?.id ? { ...post, isCommentsActive: !post.isCommentsActive } : post
+                ),
+            };
+
+        case "addComment":
+            return {
+                ...state,
+                posts: [...state.posts].map((post) =>
+                    post.id === action.payload?.posts?.id
+                        ? {
+                              ...post,
+                              comments: [
+                                  ...post.comments,
+                                  {
+                                      id: randomId(),
+                                      commentDescription: action.payload?.comments?.commentDescription!,
+                                      isLiked: false,
+                                  },
+                              ],
+                          }
+                        : post
+                ),
+            };
+
+        case "removeComment":
+            return {
+                ...state,
+                posts: [...state.posts].map((post) =>
+                    post.id === action.payload?.posts?.id
+                        ? {
+                              ...post,
+                              comments: [...post.comments].filter(
+                                  (comment) => comment.id !== action.payload?.comments?.id
+                              ),
+                          }
+                        : post
+                ),
+            };
+
+        case "toggleIsLikedComment":
+            return {
+                ...state,
+                posts: [...state.posts].map((post) =>
+                    post.id === action.payload?.posts?.id
+                        ? {
+                              ...post,
+                              comments: [...post.comments].map((comment) =>
+                                  comment.id === action.payload?.comments?.id
+                                      ? { ...comment, isLiked: !comment.isLiked }
+                                      : comment
+                              ),
+                          }
+                        : post
                 ),
             };
 

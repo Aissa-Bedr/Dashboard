@@ -57,6 +57,7 @@ export interface AppStateAction {
         projects?: Partial<Projects>;
         quickDraft?: Partial<QuickDraft>;
         posts?: Partial<Posts>;
+        comments?: Partial<Comment>;
     };
 }
 
@@ -118,6 +119,7 @@ export interface Posts {
     postDescription: string;
     isLiked: boolean;
     isCommentsActive: boolean;
+    comments: Comment[];
 }
 
 interface LightApperanceType {
@@ -161,4 +163,10 @@ interface WidgetsControl {
     isTicketsStatisticsActive: boolean;
     isLatestNewsActive: boolean;
     isLastProjectProgressActive: boolean;
+}
+
+export interface Comment {
+    id?: number;
+    commentDescription: string;
+    isLiked: boolean;
 }
