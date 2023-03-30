@@ -15,7 +15,7 @@ export const initialState: AppState = {
             isNavFixed: false,
             isNewNavbar: false,
             isNewNavInTheTop: false,
-            isSearchBarShowed: false,
+            isSearchBarShowed: true,
         },
         websiteControl: {
             isWebsiteControlActive: true,

@@ -9,18 +9,17 @@ const SearchBar = () => {
 
     return (
         <>
-            {!switchBooleans.uiControl.isNewSearchbar ||
-                (switchBooleans.uiControl.isSearchBarShowed && (
-                    <Flex
-                        className="gap-2 py-2 px-4 bg-white text-grey-color dark:bg-dark w-full dark:text-grey-dark-color rounded-full cursor-pointer mb-2"
-                        direction="row"
-                        items="center"
-                        justify="start"
-                    >
-                        <BiSearchAlt2 size="1.3rem" />
-                        <p>Search</p>
-                    </Flex>
-                ))}
+            {switchBooleans.uiControl.isSearchBarShowed && (
+                <Flex
+                    className="gap-2 py-2 px-4 bg-white text-grey-color dark:bg-dark w-full dark:text-grey-dark-color rounded-full cursor-pointer mb-2"
+                    direction="row"
+                    items="center"
+                    justify="start"
+                >
+                    <BiSearchAlt2 size="1.3rem" />
+                    <p>Search</p>
+                </Flex>
+            )}
         </>
     );
 };
