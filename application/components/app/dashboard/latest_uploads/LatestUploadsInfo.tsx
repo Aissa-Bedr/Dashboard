@@ -21,7 +21,7 @@ const LatestUploadsInfo = () => {
         fileName: "",
         fileType: "txt",
         fileUploader: "",
-        fileSize: null,
+        fileSize: "" as any,
         fileSizeType: "kb",
     });
 
