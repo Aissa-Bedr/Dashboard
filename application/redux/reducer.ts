@@ -30,6 +30,12 @@ export const initialState: AppState = {
             isLatestNewsActive: false,
             isLastProjectProgressActive: false,
         },
+        profileControl: {
+            isGeneralInfoActive: false,
+            isPersonalInfoActive: false,
+            isJobInfoActive: false,
+            isBillingInfoActive: false,
+        },
     },
     generalInfo: {
         firstName: "Aissa",
@@ -39,6 +45,15 @@ export const initialState: AppState = {
         designation: "Web Developer",
         projects: 80,
         earned: 8500,
+    },
+    profileInfo: {
+        email: "slayaissabedr@gmail.com",
+        phone: 213552328332,
+        gender: "male",
+        country: "Algeria",
+        birthDay: "20/10/2005",
+        programmingLanguage: "TypeScript",
+        experience: 1,
     },
     skills: [],
     appearance: {
@@ -329,6 +344,54 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
+        case "toggleIsGeneralInfoActive":
+            return {
+                ...state,
+                switchBooleans: {
+                    ...state.switchBooleans,
+                    profileControl: {
+                        ...state.switchBooleans.profileControl,
+                        isGeneralInfoActive: !state.switchBooleans.profileControl.isGeneralInfoActive,
+                    },
+                },
+            };
+
+        case "toggleIsPersonalInfoActive":
+            return {
+                ...state,
+                switchBooleans: {
+                    ...state.switchBooleans,
+                    profileControl: {
+                        ...state.switchBooleans.profileControl,
+                        isPersonalInfoActive: !state.switchBooleans.profileControl.isPersonalInfoActive,
+                    },
+                },
+            };
+
+        case "toggleIsJobInfoActive":
+            return {
+                ...state,
+                switchBooleans: {
+                    ...state.switchBooleans,
+                    profileControl: {
+                        ...state.switchBooleans.profileControl,
+                        isJobInfoActive: !state.switchBooleans.profileControl.isJobInfoActive,
+                    },
+                },
+            };
+
+        case "toggleIsBillingInfoActive":
+            return {
+                ...state,
+                switchBooleans: {
+                    ...state.switchBooleans,
+                    profileControl: {
+                        ...state.switchBooleans.profileControl,
+                        isBillingInfoActive: !state.switchBooleans.profileControl.isBillingInfoActive,
+                    },
+                },
+            };
+
         case "changeGeneralInfo":
             return {
                 ...state,
@@ -345,6 +408,20 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                     designation: action.payload?.userInfo?.designation!,
                     projects: action.payload?.userInfo?.projects!,
                     earned: action.payload?.userInfo?.earned!,
+                },
+            };
+
+        case "changeProfileInfo":
+            return {
+                ...state,
+                profileInfo: {
+                    email: action.payload?.profileInfo?.email!,
+                    phone: action.payload?.profileInfo?.phone!,
+                    gender: action.payload?.profileInfo?.gender!,
+                    country: action.payload?.profileInfo?.country!,
+                    birthDay: action.payload?.profileInfo?.birthDay!,
+                    programmingLanguage: action.payload?.profileInfo?.programmingLanguage!,
+                    experience: action.payload?.profileInfo?.experience!,
                 },
             };
 

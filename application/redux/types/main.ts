@@ -30,6 +30,7 @@ export interface AppState {
     switchBooleans: SwitchBooleans;
     generalInfo: GeneralInfo;
     userInfo: UserInfo;
+    profileInfo: ProfileInfo;
     skills: Skill[];
     appearance: Appearance;
     components: Components;
@@ -49,6 +50,7 @@ export interface AppStateAction {
         tasks?: DataListProps;
         generalInfo?: Partial<GeneralInfo>;
         userInfo?: Partial<UserInfo>;
+        profileInfo?: Partial<ProfileInfo>;
         skills?: DataListProps;
         appearance?: Partial<Appearance>;
         components?: Partial<Components>;
@@ -65,6 +67,7 @@ export interface SwitchBooleans {
     uiControl: UIControl;
     websiteControl: WebsiteControl;
     widgetsControl: WidgetsControl;
+    profileControl: ProfileControl;
 }
 
 interface DataListProps {
@@ -81,6 +84,16 @@ export interface UserInfo {
     designation: string;
     projects: number;
     earned: number;
+}
+
+export interface ProfileInfo {
+    email: string;
+    phone: number;
+    gender: "male" | "female";
+    country: string;
+    birthDay: string;
+    programmingLanguage: string;
+    experience: number;
 }
 
 export interface Appearance {
@@ -164,6 +177,13 @@ interface WidgetsControl {
     isTicketsStatisticsActive: boolean;
     isLatestNewsActive: boolean;
     isLastProjectProgressActive: boolean;
+}
+
+interface ProfileControl {
+    isGeneralInfoActive: boolean;
+    isPersonalInfoActive: boolean;
+    isJobInfoActive: boolean;
+    isBillingInfoActive: boolean;
 }
 
 export interface Comment {

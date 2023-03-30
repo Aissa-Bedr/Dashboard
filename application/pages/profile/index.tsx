@@ -1,5 +1,7 @@
 import { themeSwitcher } from "@/assests/logic/script";
 import Information from "@/components/app/profile/information/Information";
+import ProfileControl from "@/components/app/profile/profile_control/ProfileControl";
+import GeneralInfo from "@/components/app/settings/general_info/GeneralInfo";
 import Base from "@/components/build/Base";
 import BaseWrapper from "@/components/build/BaseWrapper";
 import Header from "@/components/build/Header";
@@ -32,6 +34,10 @@ const Profile = () => {
 
                 <BaseWrapper>
                     <Information />
+                    <GeneralInfo />
+                    <div className="!col-span-2">
+                        <ProfileControl />
+                    </div>
                 </BaseWrapper>
             </Base>
         </>

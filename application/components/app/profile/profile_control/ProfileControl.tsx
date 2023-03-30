@@ -4,6 +4,7 @@ import React from "react";
 import BoxContainer from "../../main/BoxContainer";
 import PrimaryLogo from "../../main/PrimaryLogo";
 import SecondaryLogo from "../../main/SecondaryLogo";
+import ProfileControlItem from "./ProfileControlItem";
 
 const ProfileControl = () => {
     return (
@@ -14,7 +15,7 @@ const ProfileControl = () => {
             </LogoContainer>
 
             <ContentWrapper>
-                <p>Hello !</p>
+                <ProfileControlItem />
             </ContentWrapper>
         </BoxContainer>
     );

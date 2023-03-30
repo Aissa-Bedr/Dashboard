@@ -1,10 +1,112 @@
-import React from "react";
+import Flex from "@/components/build/Flex";
+import { AppState, SwitchBooleans } from "@/redux/types/main";
+import Image from "next/image";
+import React, { FC } from "react";
+import { AiOutlineStar } from "react-icons/ai";
+import { RiVipCrownLine } from "react-icons/ri";
+import { GiSpikedDragonHead } from "react-icons/gi";
+import { useSelector } from "react-redux";
 import BoxContainer from "../../main/BoxContainer";
+import SecondaryLogo from "../../main/SecondaryLogo";
+import { MdComputer } from "react-icons/md";
+import Grid from "@/components/build/Grid";
+import InfoBox from "./InfoBox";
+import InfoBoxItem from "./InfoBoxItem";
 
 const Information = () => {
+    const state = useSelector<AppState, AppState>((state) => state);
+    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
+
     return (
         <BoxContainer className="col-span-3">
-            <p>Hello !</p>
+            <Flex className="w-full gap-4 xl:flex-row" direction="col" items="center" justify="center">
+                <Flex
+                    className="w-48 h-full gap-4 py-2 border-solid border-b-[1px] border-r-0 xl:border-b-0 xl:p-0 xl:border-r-[1px] border-grey-alt-color dark:border-grey-dark-alt-color"
+                    direction="col"
+                    items="center"
+                    justify="center"
+                >
+                    <Image src={`/${state.appearance.logo.src}`} alt="logo" width={100} height={100} />
+
+                    <SecondaryLogo text={`${state.generalInfo.firstName} ${state.generalInfo.lastName}`} />
+
+                    <Grid className="gap-2" cols="4">
+                        <AiOutlineStar
+                            className="text-yellow-300 hover:text-yellow-400 hover:scale-110 duration-300"
+                            size="1.5rem"
+                        />
+                        <RiVipCrownLine
+                            className="text-yellow-300 hover:text-yellow-400 hover:scale-110 duration-300"
+                            size="1.5rem"
+                        />
+                        <GiSpikedDragonHead
+                            className={`text-red-300 hover:text-red-400 hover:scale-110 duration-300`}
+                            size="1.5rem"
+                        />
+                        <MdComputer
+                            className="text-dark hover:text-grey-color dark:text-white dark:hover:text-grey-dark-color hover:scale-110 duration-300"
+                            size="1.5rem"
+                        />
+                    </Grid>
+                </Flex>
+
+                <Flex className="w-full" direction="col">
+                    <InfoBox
+                        title="General information"
+                        isChecked={switchBooleans.profileControl.isGeneralInfoActive}
+                        dispatchType="toggleIsGeneralInfoActive"
+                    >
+                        <InfoBoxItem
+                            prop="Full name:"
+                            value={`${state.generalInfo.firstName} ${state.generalInfo.lastName}`}
+                        />
+
+                        <InfoBoxItem prop="Gender:" value={state.profileInfo.gender} />
+
+                        <InfoBoxItem prop="Country:" value={state.profileInfo.country} />
+                    </InfoBox>
+
+                    <InfoBox
+                        title="Personal Information"
+                        isChecked={switchBooleans.profileControl.isPersonalInfoActive}
+                        dispatchType="toggleIsPersonalInfoActive"
+                    >
+                        <InfoBoxItem prop="Email:" value={state.profileInfo.email} />
+
+                        <InfoBoxItem prop="Phone:" value={state.profileInfo.phone} />
+
+                        <InfoBoxItem prop="Date of birth:" value={state.profileInfo.birthDay} />
+                    </InfoBox>
+
+                    <InfoBox
+                        title="Job information"
+                        isChecked={switchBooleans.profileControl.isJobInfoActive}
+                        dispatchType="toggleIsJobInfoActive"
+                    >
+                        <InfoBoxItem prop="Title:" value={state.userInfo.designation} />
+
+                        <InfoBoxItem
+                            prop="
+                            Programming language:"
+                            value={state.profileInfo.programmingLanguage}
+                        />
+
+                        <InfoBoxItem prop="Years of experience:" value={state.profileInfo.experience} />
+                    </InfoBox>
+
+                    <InfoBox
+                        title="Billing information"
+                        isChecked={switchBooleans.profileControl.isBillingInfoActive}
+                        dispatchType="toggleIsBillingInfoActive"
+                    >
+                        <InfoBoxItem prop="Payment Method:" value={`visa`} />
+
+                        <InfoBoxItem prop="Subscription:" value={`gold`} />
+
+                        <InfoBoxItem prop="Subscription:" value={`gold`} />
+                    </InfoBox>
+                </Flex>
+            </Flex>
         </BoxContainer>
     );
 };

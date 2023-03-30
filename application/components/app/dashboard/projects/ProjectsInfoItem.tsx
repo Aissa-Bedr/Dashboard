@@ -29,7 +29,7 @@ const ProjectsInfoItem: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, cli
     }
 
     return (
-        <tr className="duration-300 hover:bg-[#faf7f7] dark:hover:bg-[#1a1d21]">
+        <tr className="duration-300 hover:bg-[#f1f5f9] dark:hover:bg-[#1a1d21]">
             <td className="capitalize __table_element">{name}</td>
             <td className="__table_element">{finishDate}</td>
             <td className="capitalize __table_element">{client}</td>

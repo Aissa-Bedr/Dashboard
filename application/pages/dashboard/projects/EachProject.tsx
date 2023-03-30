@@ -2,7 +2,6 @@ import Flex from "@/components/build/Flex";
 import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
-import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,7 +28,7 @@ const EachProject: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, client, 
     }
 
     return (
-        <tr className="duration-300 hover:bg-[#faf7f7] dark:hover:bg-[#1a1d21]">
+        <tr className="duration-300 hover:bg-[#f1f5f9] dark:hover:bg-[#1a1d21]">
             <td className="capitalize __table_element">{name}</td>
             <td className="__table_element">{finishDate}</td>
             <td className="capitalize __table_element">{client}</td>
