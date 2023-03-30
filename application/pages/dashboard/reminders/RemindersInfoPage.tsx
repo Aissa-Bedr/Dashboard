@@ -107,7 +107,7 @@ const RemindersInfoPage = () => {
             </BoxContainer>
 
             <Grid className="gap-4 mt-4" cols="1">
-                {state.files.length > 0 ? (
+                {state.reminders.length > 0 ? (
                     <Grid className="gap-4 lg:grid-cols-2 xl:grid-cols-3" cols="1">
                         {remindersInfo}
                     </Grid>
