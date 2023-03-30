@@ -5,6 +5,6 @@ export interface LatestUploadsInfoItemProps {
     fileName: string;
     fileType: FileType;
     fileUploader: string;
-    fileSize: number | null;
+    fileSize: number;
     fileSizeType: fileSizeType;
 }

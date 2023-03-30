@@ -22,8 +22,8 @@ const ProjectsInfoPage = () => {
         name: "",
         finishDate: "",
         client: "",
-        price: "",
-        team: "",
+        price: "" as any,
+        team: "" as any,
         status: "pending",
     });
 
@@ -52,7 +52,7 @@ const ProjectsInfoPage = () => {
         dispatch({ type: "addProject", payload: { projects: projectInfo } });
         switchBooleans.websiteControl.isNotificationActive &&
             toast.success(`Project added successfully !`, { position: "top-center", theme: state.theme });
-        setProjectInfo({ name: "", finishDate: "", client: "", price: "", team: "", status: "pending" });
+        setProjectInfo({ name: "", finishDate: "", client: "", price: "" as any, team: "" as any, status: "pending" });
     }
 
     return (
