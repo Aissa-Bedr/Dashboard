@@ -5,6 +5,7 @@ import Flex from "@/components/build/Flex";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import Move from "@/components/build/Move";
+import SearchBar from "@/components/helpers/search_bar/SearchBar";
 import { Theme } from "@/redux/types/app";
 import { AppState, AppStateAction } from "@/redux/types/main";
 import { useEffect } from "react";
@@ -29,6 +30,8 @@ const PostsPage = () => {
             <Header title="Aissa | Dashboard - Posts" />
 
             <Base>
+                <SearchBar />
+
                 <Logo content="posts" />
 
                 <BaseWrapper>

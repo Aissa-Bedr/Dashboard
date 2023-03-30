@@ -32,6 +32,11 @@ const UIControl = () => {
                         dispatchType="toggleIsRounded"
                     />
                     <SiteControlInfoItem
+                        content="Search bar hide/show"
+                        isChecked={switchBooleans.uiControl.isSearchBarShowed}
+                        dispatchType="toggleIsSearchBarShowed"
+                    />
+                    <SiteControlInfoItem
                         content="Search bar look old/new"
                         isChecked={switchBooleans.uiControl.isNewSearchbar}
                         dispatchType="toggleIsNewSearchbar"

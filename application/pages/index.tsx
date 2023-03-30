@@ -15,6 +15,7 @@ import Base from "@/components/build/Base";
 import BaseWrapper from "@/components/build/BaseWrapper";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
+import SearchBar from "@/components/helpers/search_bar/SearchBar";
 import { Theme } from "@/redux/types/app";
 import { AppState, SwitchBooleans } from "@/redux/types/main";
 import dynamic from "next/dynamic";
@@ -40,6 +41,8 @@ const Home = () => {
             <Header title="Aissa | Dashboard" />
 
             <Base>
+                <SearchBar />
+
                 <Logo content="dashboard" />
 
                 <BaseWrapper>

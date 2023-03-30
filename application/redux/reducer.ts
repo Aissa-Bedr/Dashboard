@@ -15,6 +15,7 @@ export const initialState: AppState = {
             isNavFixed: false,
             isNewNavbar: false,
             isNewNavInTheTop: false,
+            isSearchBarShowed: false,
         },
         websiteControl: {
             isWebsiteControlActive: true,
@@ -204,6 +205,18 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                     uiControl: {
                         ...state.switchBooleans.uiControl,
                         isNewNavInTheTop: !state.switchBooleans.uiControl.isNewNavInTheTop,
+                    },
+                },
+            };
+
+        case "toggleIsSearchBarShowed":
+            return {
+                ...state,
+                switchBooleans: {
+                    ...state.switchBooleans,
+                    uiControl: {
+                        ...state.switchBooleans.uiControl,
+                        isSearchBarShowed: !state.switchBooleans.uiControl.isSearchBarShowed,
                     },
                 },
             };

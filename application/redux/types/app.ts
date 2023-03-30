@@ -15,6 +15,7 @@ export type AppStateActionType =
     | "toggleIsNotificationActive"
     | "toggleIsZoomIn"
     | "toggleIsNewNavInTheTop"
+    | "toggleIsSearchBarShowed"
     | "toggleWidgetsControl"
     | "toggleIsQuickDraftActive"
     | "toggleIsYearlyTargetsActive"

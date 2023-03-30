@@ -28,8 +28,8 @@ export default function App({ Component, pageProps }: AppProps) {
                         <Component {...pageProps} />
                     </Flex>
                 </Flex>
-                <NewNav />
 
+                <NewNav />
                 <ToastContainer />
             </Container>
         </Provider>

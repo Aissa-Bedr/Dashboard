@@ -9,6 +9,7 @@ import Grid from "@/components/build/Grid";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import Move from "@/components/build/Move";
+import SearchBar from "@/components/helpers/search_bar/SearchBar";
 import { Theme } from "@/redux/types/app";
 import { AppState, AppStateAction } from "@/redux/types/main";
 import { useEffect } from "react";
@@ -32,6 +33,8 @@ const WelcomePage = () => {
             <Header title="Aissa | Dashboard - Welcome" />
 
             <Base>
+                <SearchBar />
+
                 <Logo content="welcome" />
 
                 <BaseWrapper>

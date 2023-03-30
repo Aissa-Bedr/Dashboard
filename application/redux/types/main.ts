@@ -148,6 +148,7 @@ interface UIControl {
     isNavFixed: boolean;
     isNewNavbar: boolean;
     isNewNavInTheTop: boolean;
+    isSearchBarShowed: boolean;
 }
 
 interface WebsiteControl {

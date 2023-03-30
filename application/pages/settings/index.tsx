@@ -11,6 +11,7 @@ import BaseWrapper from "@/components/build/BaseWrapper";
 import Grid from "@/components/build/Grid";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
+import SearchBar from "@/components/helpers/search_bar/SearchBar";
 import { Theme } from "@/redux/types/app";
 import { AppState } from "@/redux/types/main";
 import { useEffect } from "react";
@@ -32,6 +33,8 @@ const Settings = () => {
             <Header title="Aissa | Settings" />
 
             <Base>
+                <SearchBar />
+
                 <Logo content="settings" />
 
                 <BaseWrapper>

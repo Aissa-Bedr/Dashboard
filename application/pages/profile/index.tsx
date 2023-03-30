@@ -4,6 +4,7 @@ import Base from "@/components/build/Base";
 import BaseWrapper from "@/components/build/BaseWrapper";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
+import SearchBar from "@/components/helpers/search_bar/SearchBar";
 import { Theme } from "@/redux/types/app";
 import { AppState } from "@/redux/types/main";
 import { useEffect } from "react";
@@ -25,6 +26,8 @@ const Profile = () => {
             <Header title="Aissa | Profile" />
 
             <Base>
+                <SearchBar />
+
                 <Logo content="Profile" />
 
                 <BaseWrapper>

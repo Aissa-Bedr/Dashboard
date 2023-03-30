@@ -18,11 +18,6 @@ const Section = () => {
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
     const dispatch: Dispatch<AppStateAction> = useDispatch();
 
-    const [searchBarOptions, setSearchBarOptions] = useState({
-        showSearchBar: false,
-        showSearchBtn: false,
-    });
-
     return (
         <>
             <Flex
@@ -58,38 +53,12 @@ const Section = () => {
                             </SecButton>
                         </div>
                     </Flex>
-
-                    {!switchBooleans.uiControl.isNewSearchbar && (
-                        <Flex className="relative gap-2" direction="row" items="center">
-                            <div>
-                                <BiSearchAlt2 className="absolute hidden text-lg md:block top-2 left-2 text-grey-color dark:text-grey-dark-color" />
-                                <Input
-                                    className="hidden md:block !py-1.5 !px-2 !pl-7 !w-36 focus:!w-52"
-                                    type="text"
-                                    placeholder="Type A Keyword"
-                                    onFocus={() =>
-                                        setSearchBarOptions((prevState) => ({ ...prevState, showSearchBtn: true }))
-                                    }
-                                    onBlur={() =>
-                                        setSearchBarOptions((prevState) => ({ ...prevState, showSearchBtn: false }))
-                                    }
-                                />
-                            </div>
-
-                            {searchBarOptions.showSearchBtn && <Button className="w-16 !py-1">Search</Button>}
-                        </Flex>
-                    )}
                 </Flex>
 
                 <Flex className="gap-2" direction="row" items="center">
                     <SecButton
-                        className={classNames("block", { "md:!hidden": !switchBooleans.uiControl.isNewSearchbar })}
-                        onClick={() =>
-                            setSearchBarOptions((prevState) => ({
-                                ...prevState,
-                                showSearchBar: !prevState.showSearchBar,
-                            }))
-                        }
+                        className={classNames({ "!hidden": !switchBooleans.uiControl.isNewSearchbar })}
+                        onClick={() => dispatch({ type: "toggleIsSearchBarShowed" })}
                     >
                         <BiSearchAlt2 size="1.5rem" />
                     </SecButton>
@@ -111,6 +80,7 @@ const Section = () => {
                     >
                         {state.theme === "light" ? <HiOutlineMoon size="1.5rem" /> : <HiOutlineSun size="1.5rem" />}
                     </SecButton>
+
                     <SecButton>
                         <BiBell size="1.5rem" />
                     </SecButton>
@@ -131,25 +101,6 @@ const Section = () => {
                     </Flex>
                 </Flex>
             </Flex>
-
-            {searchBarOptions.showSearchBar && (
-                <Flex
-                    className={classNames(
-                        "gap-1 px-4 py-2 bg-white dark:bg-dark border-solid border-t-[1px] border-t-grey-alt-color dark:border-t-grey-dark-color",
-                        {
-                            "absolute w-full top-[4.5rem] lg:top-14 z-50": switchBooleans.uiControl.isNavFixed,
-                            "md:hidden": !switchBooleans.uiControl.isNewSearchbar,
-                        }
-                    )}
-                    direction="row"
-                >
-                    <Input className="!p-2" type="text" placeholder="Type A Keyword" />
-
-                    <Button className="w-1/4 __button_end lg:w-32">
-                        <BiSearchAlt2 size="1.5rem" />
-                    </Button>
-                </Flex>
-            )}
         </>
     );
 };

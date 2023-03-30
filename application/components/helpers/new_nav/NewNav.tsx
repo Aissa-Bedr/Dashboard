@@ -16,13 +16,16 @@ const NewNav = () => {
             {switchBooleans.uiControl.isNewNavbar && (
                 <nav
                     className={classNames("z-50 fixed h-fit bottom-2", {
-                        "xl:top-2": switchBooleans.uiControl.isNewNavInTheTop,
+                        "xl:top-1": switchBooleans.uiControl.isNewNavInTheTop,
                     })}
                 >
                     <ul
                         className={classNames(
                             "grid grid-cols-4 md:flex md:flex-row gap-2 p-2 bg-white dark:bg-dark shadow-lg shadow-[#ccc] dark:shadow-grey-dark-alt-color",
-                            { "rounded-md": switchBooleans.uiControl.isRounded }
+                            {
+                                "rounded-md": switchBooleans.uiControl.isRounded,
+                                "xl:!shadow-none": switchBooleans.uiControl.isNewNavInTheTop,
+                            }
                         )}
                     >
                         {links}
