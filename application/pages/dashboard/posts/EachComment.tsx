@@ -33,7 +33,7 @@ const EachComment: FC<EachCommentProps> = ({ id, postId, commentDescription, isL
     function toggleCommentLike(postId: number): void {
         dispatch({ type: "toggleIsLikedComment", payload: { posts: { id: postId }, comments: { id } } });
         switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(isLiked ? "Comment unliked successfully !" : "Comment liked successfully !", {
+            toast.success(isLiked ? "Comment unliked successfully !" : "Comment liked successfully !", {
                 position: "top-center",
                 theme: themeMode,
             });
@@ -60,7 +60,7 @@ const EachComment: FC<EachCommentProps> = ({ id, postId, commentDescription, isL
                         </p>
 
                         <FiTrash2
-                            className="cursor-pointer dark:text-grey-dark-color hover:!text-red-color duration-300"
+                            className="cursor-pointer text-grey-color dark:text-grey-dark-color hover:!text-red-color duration-300"
                             onClick={() => removeComment(postId)}
                         />
                     </Flex>

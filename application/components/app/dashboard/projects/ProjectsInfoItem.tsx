@@ -49,7 +49,7 @@ const ProjectsInfoItem: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, cli
                     </div>
 
                     <FiTrash2
-                        className="cursor-pointer dark:text-grey-dark-color hover:!text-red-color duration-300"
+                        className="cursor-pointer text-grey-color dark:text-grey-dark-color hover:!text-red-color duration-300"
                         onClick={removeProject}
                     />
                 </Flex>

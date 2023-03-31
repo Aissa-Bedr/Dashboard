@@ -47,11 +47,13 @@ export type AppStateActionType =
     | "addPost"
     | "removePost"
     | "toggleIsLikedPost"
-    | "toggleIsCommentsActive"
     | "addComment"
     | "removeComment"
     | "toggleIsLikedComment"
     | "addBusinessProject"
-    | "removeBusinessProject";
+    | "removeBusinessProject"
+    | "addFriend"
+    | "removeFriend"
+    | "toggleIsLikedFriend";
 
 export type Theme = "light" | "dark";

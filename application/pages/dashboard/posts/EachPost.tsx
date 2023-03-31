@@ -15,12 +15,14 @@ import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import EachComment from "./EachComment";
 
-const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLiked, isCommentsActive }) => {
+const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLiked }) => {
     const state = useSelector<AppState, AppState>((state) => state);
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
     const themeMode = useSelector<AppState, Theme>((state) => state.theme);
     const dispatch: Dispatch<AppStateAction> = useDispatch();
+
     const [commentDescription, setCommentDescription] = useState("");
+    const [isCommentsActive, setIsCommentsActive] = useState(false);
 
     const commentsInfo = state.posts.map((post) =>
         post.comments.map((comment) =>
@@ -40,13 +42,13 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
     function togglePostLike(): void {
         dispatch({ type: "toggleIsLikedPost", payload: { posts: { id } } });
         switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(isLiked ? "Post unliked successfully !" : "Post liked successfully !", {
+            toast.success(isLiked ? "Post unliked successfully !" : "Post liked successfully !", {
                 position: "top-center",
                 theme: themeMode,
             });
     }
 
-    const toggleComments = (): void => dispatch({ type: "toggleIsCommentsActive", payload: { posts: { id } } });
+    const toggleComments = (): void => setIsCommentsActive((prevState) => !prevState);
 
     function addComment(): void | false {
         if (!commentDescription) {
@@ -85,7 +87,7 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
                                 <p className="text-lg font-bold">{postOwner}</p>
 
                                 <FiTrash2
-                                    className="cursor-pointer dark:text-grey-dark-color hover:!text-red-color duration-300"
+                                    className="cursor-pointer text-grey-color dark:text-grey-dark-color hover:!text-red-color duration-300"
                                     onClick={removePost}
                                 />
                             </Flex>

@@ -93,6 +93,7 @@ export const initialState: AppState = {
     },
     posts: [],
     businessProjects: [],
+    friends: [],
 };
 
 function reducer(state = initialState, action: AppStateAction): AppState {
@@ -593,7 +594,6 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                         postTitle: action.payload?.posts?.postTitle!,
                         postDescription: action.payload?.posts?.postDescription!,
                         isLiked: false,
-                        isCommentsActive: false,
                         comments: [],
                     },
                     ...state.posts,
@@ -611,14 +611,6 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ...state,
                 posts: [...state.posts].map((post) =>
                     post.id === action.payload?.posts?.id ? { ...post, isLiked: !post.isLiked } : post
-                ),
-            };
-
-        case "toggleIsCommentsActive":
-            return {
-                ...state,
-                posts: [...state.posts].map((post) =>
-                    post.id === action.payload?.posts?.id ? { ...post, isCommentsActive: !post.isCommentsActive } : post
                 ),
             };
 
@@ -697,6 +689,35 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ...state,
                 businessProjects: [...state.businessProjects].filter(
                     (project) => project.id !== action.payload?.businessProjects?.id
+                ),
+            };
+
+        case "addFriend":
+            return {
+                ...state,
+                friends: [
+                    {
+                        id: randomId(),
+                        name: action.payload?.friends?.name!,
+                        pictureSrc: action.payload?.friends?.pictureSrc!,
+                        job: action.payload?.friends?.job!,
+                        isLiked: false,
+                    },
+                    ...state.friends,
+                ],
+            };
+
+        case "removeFriend":
+            return {
+                ...state,
+                friends: [...state.friends].filter((friend) => friend.id !== action.payload?.friends?.id),
+            };
+
+        case "toggleIsLikedFriend":
+            return {
+                ...state,
+                friends: [...state.friends].map((friend) =>
+                    friend.id === action.payload?.friends?.id ? { ...friend, isLiked: !friend.isLiked } : friend
                 ),
             };
 

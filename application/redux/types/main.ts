@@ -17,6 +17,7 @@ import {
 } from "@/components/app/settings/components_shapes_control/controls/types/app";
 import { LatestUploadsInfoItemProps } from "@/components/app/dashboard/latest_uploads/types/main";
 import { BusinessProjectProps } from "@/components/app/business/types/main";
+import { FriendProps } from "@/components/app/friends/types/main";
 
 interface Tasks {
     id: number;
@@ -41,6 +42,7 @@ export interface AppState {
     quickDraft: QuickDraft;
     posts: Posts[];
     businessProjects: BusinessProjects[];
+    friends: Friends[];
 }
 
 export interface AppStateAction {
@@ -63,6 +65,7 @@ export interface AppStateAction {
         posts?: Partial<Posts>;
         comments?: Partial<Comment>;
         businessProjects?: Partial<BusinessProjects>;
+        friends?: Partial<Friends>;
     };
 }
 
@@ -125,6 +128,8 @@ export interface Projects extends ProjectsInfoItemProps {}
 
 export interface BusinessProjects extends BusinessProjectProps {}
 
+export interface Friends extends FriendProps {}
+
 export interface QuickDraft {
     title: string;
     content: string;
@@ -136,7 +141,6 @@ export interface Posts {
     postTitle: string;
     postDescription: string;
     isLiked: boolean;
-    isCommentsActive: boolean;
     comments: Comment[];
 }
 
