@@ -44,9 +44,7 @@ const TasksPage = () => {
                         Go back
                     </Move>
 
-                    <Flex className="!col-span-3 gap-4" direction="col">
-                        <TasksInfoPage />
-                    </Flex>
+                    <TasksInfoPage />
                 </BaseWrapper>
             </Base>
         </>

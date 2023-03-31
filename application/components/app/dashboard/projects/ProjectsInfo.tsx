@@ -60,7 +60,7 @@ const ProjectsInfo = () => {
                 <Input
                     className="col-span-3 lg:col-span-1"
                     type="text"
-                    placeholder="Enter a Name"
+                    placeholder="Enter a Project Name"
                     value={projectInfo.name}
                     onChange={(e) => setProjectInfo((prevState) => ({ ...prevState, name: e.target.value }))}
                 />

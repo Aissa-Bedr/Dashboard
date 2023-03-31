@@ -16,6 +16,7 @@ import {
     SwitchType,
 } from "@/components/app/settings/components_shapes_control/controls/types/app";
 import { LatestUploadsInfoItemProps } from "@/components/app/dashboard/latest_uploads/types/main";
+import { BusinessProjectProps } from "@/components/app/business/types/main";
 
 interface Tasks {
     id: number;
@@ -39,6 +40,7 @@ export interface AppState {
     projects: Projects[];
     quickDraft: QuickDraft;
     posts: Posts[];
+    businessProjects: BusinessProjects[];
 }
 
 export interface AppStateAction {
@@ -60,6 +62,7 @@ export interface AppStateAction {
         quickDraft?: Partial<QuickDraft>;
         posts?: Partial<Posts>;
         comments?: Partial<Comment>;
+        businessProjects?: Partial<BusinessProjects>;
     };
 }
 
@@ -119,6 +122,8 @@ export interface Files extends LatestUploadsInfoItemProps {}
 export interface Reminders extends RemindersInfoItemProps {}
 
 export interface Projects extends ProjectsInfoItemProps {}
+
+export interface BusinessProjects extends BusinessProjectProps {}
 
 export interface QuickDraft {
     title: string;

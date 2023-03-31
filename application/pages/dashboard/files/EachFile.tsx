@@ -3,7 +3,6 @@ import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
 import classNames from "classnames";
 import Image from "next/image";
 import React, { Dispatch, FC } from "react";
-import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

@@ -44,9 +44,7 @@ const PostsPage = () => {
                         Go back
                     </Move>
 
-                    <Flex className="!col-span-3 gap-4" direction="col">
-                        <PostsInfoPage />
-                    </Flex>
+                    <PostsInfoPage />
                 </BaseWrapper>
             </Base>
         </>

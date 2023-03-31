@@ -44,9 +44,7 @@ const FilesPage = () => {
                         Go back
                     </Move>
 
-                    <Flex className="!col-span-3 gap-4" direction="col">
-                        <FilesInfoPage />
-                    </Flex>
+                    <FilesInfoPage />
                 </BaseWrapper>
             </Base>
         </>

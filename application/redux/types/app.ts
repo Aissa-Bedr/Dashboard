@@ -50,6 +50,8 @@ export type AppStateActionType =
     | "toggleIsCommentsActive"
     | "addComment"
     | "removeComment"
-    | "toggleIsLikedComment";
+    | "toggleIsLikedComment"
+    | "addBusinessProject"
+    | "removeBusinessProject";
 
 export type Theme = "light" | "dark";

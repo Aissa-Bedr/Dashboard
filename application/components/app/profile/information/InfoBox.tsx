@@ -8,10 +8,7 @@ import { InfoBoxProps } from "./types/main";
 const InfoBox: FC<InfoBoxProps> = ({ title, isChecked, dispatchType, children }) => {
     return (
         <Flex
-            className={classNames(
-                "w-full gap-4 xl:gap-2 p-2 xl:items-start xl:justify-start __border_b hover:bg-[#f1f5f9] dark:hover:bg-[#1a1d21] duration-300",
-                { "opacity-0": isChecked }
-            )}
+            className="w-full gap-4 xl:gap-2 p-2 xl:items-start xl:justify-start __border_b hover:bg-[#f1f5f9] dark:hover:bg-[#1a1d21] duration-300"
             direction="col"
             items="center"
             justify="center"
@@ -19,14 +16,25 @@ const InfoBox: FC<InfoBoxProps> = ({ title, isChecked, dispatchType, children })
             <SecondaryLogo text={title} />
 
             <Flex
-                className="w-full xl:flex-row xl:justify-between gap-3 xl:gap-0"
+                className="w-full gap-3 xl:flex-row xl:justify-between xl:gap-2"
                 direction="col"
                 items="center"
                 justify="center"
             >
-                {children}
+                <Flex
+                    className={classNames("w-full gap-3 xl:flex-row xl:justify-between xl:gap-0", {
+                        "opacity-0": isChecked,
+                    })}
+                    direction="col"
+                    items="center"
+                    justify="center"
+                >
+                    {children}
+                </Flex>
 
-                <SwitchButton isChecked={isChecked} dispatchType={dispatchType} />
+                <div>
+                    <SwitchButton isChecked={isChecked} dispatchType={dispatchType} />
+                </div>
             </Flex>
         </Flex>
     );

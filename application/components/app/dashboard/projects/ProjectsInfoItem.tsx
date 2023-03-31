@@ -10,17 +10,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { Dispatch } from "redux";
 import { Theme } from "@/redux/types/app";
 
+export const statusTypes: StatusTypes = {
+    pending: "bg-orange-color",
+    "in progress": "bg-blue-color dark:bg-blue-dark-color",
+    completed: "bg-green-color",
+    rejected: "bg-red-color",
+};
+
 const ProjectsInfoItem: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, client, price, team, status }) => {
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
     const theme = useSelector<AppState, Theme>((state) => state.theme);
     const dispatch: Dispatch<AppStateAction> = useDispatch();
-
-    const statusTypes: StatusTypes = {
-        pending: "bg-orange-color",
-        "in progress": "bg-blue-color dark:bg-blue-dark-color",
-        completed: "bg-green-color",
-        rejected: "bg-red-color",
-    };
 
     function removeProject(): void {
         dispatch({ type: "removeProject", payload: { projects: { id } } });
@@ -35,7 +35,7 @@ const ProjectsInfoItem: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, cli
             <td className="capitalize __table_element">{client}</td>
             <td className="__table_element">${price}</td>
             <td className="__table_element">
-                {team} People{team >= 2 && "s"}
+                {team} Member{team >= 2 && "s"}
             </td>
             <td className="__table_element border-r-[1px] border-r-grey-alt-color dark:border-r-grey-dark-alt-color">
                 <Flex direction="row" items="center" justify="between">

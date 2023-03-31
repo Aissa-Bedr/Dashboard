@@ -32,7 +32,7 @@ export const initialState: AppState = {
         },
         profileControl: {
             isGeneralInfoActive: false,
-            isPersonalInfoActive: false,
+            isPersonalInfoActive: true,
             isJobInfoActive: false,
             isBillingInfoActive: false,
         },
@@ -92,6 +92,7 @@ export const initialState: AppState = {
             "If You See Time Speeding Up, Then You Are Wrong Because It Is Constant And It Is At The Same Pace Every Day, But You May See It As Such Due To The Stupidity Of Your Use Of It !",
     },
     posts: [],
+    businessProjects: [],
 };
 
 function reducer(state = initialState, action: AppStateAction): AppState {
@@ -670,6 +671,32 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                               ),
                           }
                         : post
+                ),
+            };
+
+        case "addBusinessProject":
+            return {
+                ...state,
+                businessProjects: [
+                    {
+                        id: randomId(),
+                        name: action.payload?.businessProjects?.name!,
+                        finishDate: action.payload?.businessProjects?.finishDate!,
+                        description: action.payload?.businessProjects?.description!,
+                        price: action.payload?.businessProjects?.price!,
+                        team: action.payload?.businessProjects?.team!,
+                        status: action.payload?.businessProjects?.status!,
+                        keyWord: action.payload?.businessProjects?.keyWord!,
+                    },
+                    ...state.businessProjects,
+                ],
+            };
+
+        case "removeBusinessProject":
+            return {
+                ...state,
+                businessProjects: [...state.businessProjects].filter(
+                    (project) => project.id !== action.payload?.businessProjects?.id
                 ),
             };
 

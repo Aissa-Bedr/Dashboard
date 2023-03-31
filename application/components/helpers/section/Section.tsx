@@ -90,7 +90,7 @@ const Section = () => {
                         direction="row"
                         items="center"
                     >
-                        <Image className="cursor-pointer" src="/favicon.ico" alt="logo" width={35} height={35} />
+                        <Image className="rounded-full" src="/aissa.jpg" alt="logo" width={40} height={40} />
 
                         <div>
                             <p className="hidden text-sm font-medium text-black lg:block dark:text-white">Aissa Bedr</p>

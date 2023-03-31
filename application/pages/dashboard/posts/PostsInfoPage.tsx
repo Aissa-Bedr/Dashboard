@@ -11,6 +11,7 @@ import Grid from "@/components/build/Grid";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import ListLength from "@/components/build/ListLength";
 import EachPost from "./EachPost";
+import classNames from "classnames";
 
 const PostsInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -55,7 +56,7 @@ const PostsInfoPage = () => {
 
     return (
         <>
-            <BoxContainer className="flex flex-col gap-4">
+            <BoxContainer className="flex flex-col col-span-3 gap-4">
                 <Input
                     type="text"
                     placeholder="Post owner"
@@ -84,7 +85,7 @@ const PostsInfoPage = () => {
                 </Flex>
             </BoxContainer>
 
-            <Grid className="gap-4 mt-4" cols="1">
+            <Grid className="col-span-3 gap-4 mt-4" cols="1">
                 {state.posts.length > 0 ? (
                     <Grid className="gap-4 lg:grid-cols-2 xl:grid-cols-3" cols="1">
                         {postsInfo}

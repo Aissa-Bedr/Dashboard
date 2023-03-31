@@ -44,9 +44,7 @@ const ProjectsPage = () => {
                         Go back
                     </Move>
 
-                    <Flex className="!col-span-3 gap-4" direction="col">
-                        <ProjectsInfoPage />
-                    </Flex>
+                    <ProjectsInfoPage />
                 </BaseWrapper>
             </Base>
         </>

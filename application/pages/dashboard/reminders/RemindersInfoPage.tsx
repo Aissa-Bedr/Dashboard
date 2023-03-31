@@ -54,7 +54,7 @@ const RemindersInfoPage = () => {
 
     return (
         <>
-            <BoxContainer className="flex flex-col gap-4">
+            <BoxContainer className="flex flex-col col-span-3 gap-4">
                 <Input
                     type="text"
                     placeholder="Enter a title"
@@ -106,7 +106,7 @@ const RemindersInfoPage = () => {
                 </Flex>
             </BoxContainer>
 
-            <Grid className="gap-4 mt-4" cols="1">
+            <Grid className="col-span-3 gap-4 mt-4" cols="1">
                 {state.reminders.length > 0 ? (
                     <Grid className="gap-4 lg:grid-cols-2 xl:grid-cols-3" cols="1">
                         {remindersInfo}

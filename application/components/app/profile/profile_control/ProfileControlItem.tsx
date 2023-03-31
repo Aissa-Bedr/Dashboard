@@ -119,8 +119,8 @@ const ProfileControlItem = () => {
             />
 
             <SettingsInfo
-                label="BirthDay"
-                labelHTMLFor="birthDay"
+                label="Date Of Birth"
+                labelHTMLFor="dateOfBirth"
                 type="text"
                 stateValue={state.profileInfo.birthDay}
                 onChange={(e) => setProfileInfo((prevState) => ({ ...prevState, birthDay: e.target.value }))}
