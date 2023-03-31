@@ -16,7 +16,7 @@ const InfoBox: FC<InfoBoxProps> = ({ title, isChecked, dispatchType, children })
             <SecondaryLogo text={title} />
 
             <Flex
-                className="w-full gap-3 xl:flex-row xl:justify-between xl:gap-2"
+                className="w-full gap-3 xl:flex-row xl:justify-between xl:gap-4"
                 direction="col"
                 items="center"
                 justify="center"
