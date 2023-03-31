@@ -71,7 +71,7 @@ const BusinessProject: FC<BusinessProjectProps> = ({
                         <div className={classNames("w-6 h-6 rounded-full", { [statusTypes[status]]: status })}></div>
                     </Flex>
 
-                    <div className="text-grey-color dark:text-grey-dark-color">$ {price}</div>
+                    <div className="text-grey-color dark:text-grey-dark-color">${price}</div>
                 </Flex>
             </Flex>
         </BoxContainer>
