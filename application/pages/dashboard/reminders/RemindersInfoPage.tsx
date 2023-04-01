@@ -1,8 +1,7 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, Files, Reminders, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
@@ -13,11 +12,13 @@ import ListLength from "@/components/build/ListLength";
 import Select from "@/components/build/Select";
 import EachReminder from "./EachReminder";
 import { Theme } from "@/components/app/dashboard/reminders/types/app";
+import addReminderAction from "@/redux/actions/add_actions/addReminderAction";
+import { Reminders } from "@/redux/types/data";
 
 const RemindersInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
+
     const [reminderInfo, setReminderInfo] = useState<Reminders>({
         title: "",
         time: "",
@@ -32,13 +33,13 @@ const RemindersInfoPage = () => {
 
     function addReminder(): void | false {
         if (!reminderInfo.title || !reminderInfo.time) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Reminder can't be empty !`, { position: "top-center", theme: state.theme });
             return false;
         }
 
         if (!patterns.finishDate.test(reminderInfo.time)) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Invalid information please try again later !`, {
                     position: "top-center",
                     theme: state.theme,
@@ -46,8 +47,8 @@ const RemindersInfoPage = () => {
             return false;
         }
 
-        dispatch({ type: "addReminder", payload: { reminders: reminderInfo } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(addReminderAction(reminderInfo));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(`Reminder added successfully !`, { position: "top-center", theme: state.theme });
         setReminderInfo({ title: "", time: "", theme: "blue" });
     }

@@ -1,20 +1,17 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
-import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Theme } from "@/redux/types/app";
 import { RemindersInfoItemProps } from "@/components/app/dashboard/reminders/types/main";
 import BoxContainer from "@/components/app/main/BoxContainer";
+import removeReminderAction from "@/redux/actions/remove_actions/removeReminderAction";
 
 const EachReminder: FC<RemindersInfoItemProps> = ({ id, title, time, theme }) => {
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const themeMode = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const state = useSelector<AppState, AppState>((state) => state);
+    const dispatch = useDispatch();
 
     const themeTypes = {
         blue: "before:bg-blue-color dark:before:bg-blue-dark-color border-l-blue-color dark:border-l-blue-dark-color",
@@ -24,9 +21,9 @@ const EachReminder: FC<RemindersInfoItemProps> = ({ id, title, time, theme }) =>
     };
 
     function removeReminder(): void {
-        dispatch({ type: "removeReminder", payload: { reminders: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Reminder removed successfully !`, { position: "top-center", theme: themeMode });
+        dispatch(removeReminderAction(id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
+            toast.warning(`Reminder removed successfully !`, { position: "top-center", theme: state.theme });
     }
 
     return (
@@ -49,7 +46,7 @@ const EachReminder: FC<RemindersInfoItemProps> = ({ id, title, time, theme }) =>
                     <button
                         className={classNames(
                             "py-1 px-2 bg-red-500 hover:bg-red-600 active:bg-red-700 text-white duration-300",
-                            { "rounded-md": switchBooleans.uiControl.isRounded }
+                            { "rounded-md": state.switchBooleans.uiControl.isRounded }
                         )}
                         onClick={removeReminder}
                     >
@@ -59,7 +56,7 @@ const EachReminder: FC<RemindersInfoItemProps> = ({ id, title, time, theme }) =>
                     <div
                         className={classNames(
                             "px-2 py-1 text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-grey-dark-color",
-                            { "rounded-md": switchBooleans.uiControl.isRounded }
+                            { "rounded-md": state.switchBooleans.uiControl.isRounded }
                         )}
                     >
                         <p className="text-sm">{time}</p>
