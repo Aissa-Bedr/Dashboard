@@ -9,13 +9,12 @@ import { Theme } from "@/redux/types/app";
 import { AppState, AppStateAction } from "@/redux/types/main";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import FilesInfoPage from "./FilesInfoPage";
 import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const FilesPage = () => {
     const theme = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         themeSwitcher(theme);
