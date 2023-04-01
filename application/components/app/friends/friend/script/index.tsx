@@ -569,7 +569,7 @@ export function friendMessage(
                             friends: { id: friendId },
                             messages: {
                                 isFriendMessage: true,
-                                messageDescription: "I don't know my age.",
+                                messageDescription: "I don't know my age bro.",
                             },
                         },
                     });
