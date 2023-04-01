@@ -10,15 +10,15 @@ import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import Move from "@/components/build/Move";
 import SearchBar from "@/components/helpers/search_bar/SearchBar";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 import { Theme } from "@/redux/types/app";
-import { AppState, AppStateAction } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 
 const WelcomePage = () => {
     const theme = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         themeSwitcher(theme);
@@ -38,12 +38,7 @@ const WelcomePage = () => {
                 <Logo content="welcome" />
 
                 <BaseWrapper>
-                    <Move
-                        href="/"
-                        onClick={() =>
-                            dispatch({ type: "changeLink", payload: { links: { currentLinkValue: "dashboard" } } })
-                        }
-                    >
+                    <Move href="/" onClick={() => dispatch(changeLinkAction("dashboard"))}>
                         Go back
                     </Move>
 
