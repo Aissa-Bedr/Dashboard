@@ -1,8 +1,7 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, Files, Posts, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
@@ -11,12 +10,13 @@ import Grid from "@/components/build/Grid";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import ListLength from "@/components/build/ListLength";
 import EachPost from "./EachPost";
-import classNames from "classnames";
+import { Posts } from "@/redux/types/data";
+import addPostAction from "@/redux/actions/add_actions/addPostAction";
 
 const PostsInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
+
     const [postInfo, setPostInfo] = useState<Posts>({
         postOwner: "",
         postTitle: "",
@@ -27,7 +27,7 @@ const PostsInfoPage = () => {
 
     function addPost(): void | false {
         if (!postInfo.postOwner || !postInfo.postTitle || !postInfo.postDescription) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Post can't be empty !`, {
                     position: "top-center",
                     theme: state.theme,
@@ -35,8 +35,8 @@ const PostsInfoPage = () => {
             return false;
         }
 
-        dispatch({ type: "addPost", payload: { posts: postInfo } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(addPostAction(postInfo));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(`Post added successfully !`, {
                 position: "top-center",
                 theme: state.theme,

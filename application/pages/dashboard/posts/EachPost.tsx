@@ -1,25 +1,26 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, Comment, Posts, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import Image from "next/image";
-import React, { Dispatch, FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Theme } from "@/redux/types/app";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import EachComment from "./EachComment";
+import { Posts } from "@/redux/types/data";
+import removePostAction from "@/redux/actions/remove_actions/removePostAction";
+import toggleIsLikedPostAction from "@/redux/actions/toggle_actions/toggleIsLikedPostAction";
+import addCommentAction from "@/redux/actions/add_actions/addCommentAction";
 
 const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLiked }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const themeMode = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     const [commentDescription, setCommentDescription] = useState("");
     const [isCommentsActive, setIsCommentsActive] = useState(false);
@@ -31,20 +32,20 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
     );
 
     function removePost(): void {
-        dispatch({ type: "removePost", payload: { posts: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(removePostAction(id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.warning(`Post removed successfully !`, {
                 position: "top-center",
-                theme: themeMode,
+                theme: state.theme,
             });
     }
 
     function togglePostLike(): void {
-        dispatch({ type: "toggleIsLikedPost", payload: { posts: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(toggleIsLikedPostAction(id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(isLiked ? "Post unliked successfully !" : "Post liked successfully !", {
                 position: "top-center",
-                theme: themeMode,
+                theme: state.theme,
             });
     }
 
@@ -52,7 +53,7 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
 
     function addComment(): void | false {
         if (!commentDescription) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Comment can't be empty !`, {
                     position: "top-center",
                     theme: state.theme,
@@ -60,8 +61,8 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
             return false;
         }
 
-        dispatch({ type: "addComment", payload: { posts: { id }, comments: { commentDescription } } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(addCommentAction(id!, commentDescription));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(`Comment added successfully !`, {
                 position: "top-center",
                 theme: state.theme,

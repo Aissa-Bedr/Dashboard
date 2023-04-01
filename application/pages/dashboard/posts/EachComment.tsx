@@ -1,6 +1,5 @@
 import Flex from "@/components/build/Flex";
-import { Theme } from "@/redux/types/app";
-import { AppState, AppStateAction, Comment, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import Image from "next/image";
 import React, { FC } from "react";
@@ -9,33 +8,29 @@ import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Dispatch } from "redux";
-
-interface EachCommentProps extends Comment {
-    postId: number;
-}
+import { EachCommentProps } from "./types/main";
+import removeCommentAction from "@/redux/actions/remove_actions/removeCommentAction";
+import toggleIsLikedCommentAction from "@/redux/actions/toggle_actions/toggleIsLikedCommentAction";
 
 const EachComment: FC<EachCommentProps> = ({ id, postId, commentDescription, isLiked }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const themeMode = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
-    function removeComment(postId: number): void {
-        dispatch({ type: "removeComment", payload: { posts: { id: postId }, comments: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
+    function removeComment(postId: string): void {
+        dispatch(removeCommentAction(postId, id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.warning(`Comment removed successfully !`, {
                 position: "top-center",
-                theme: themeMode,
+                theme: state.theme,
             });
     }
 
-    function toggleCommentLike(postId: number): void {
-        dispatch({ type: "toggleIsLikedComment", payload: { posts: { id: postId }, comments: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
+    function toggleCommentLike(postId: string): void {
+        dispatch(toggleIsLikedCommentAction(postId, id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(isLiked ? "Comment unliked successfully !" : "Comment liked successfully !", {
                 position: "top-center",
-                theme: themeMode,
+                theme: state.theme,
             });
     }
 
