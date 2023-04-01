@@ -1,8 +1,7 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, Files, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
@@ -13,11 +12,13 @@ import ListLength from "@/components/build/ListLength";
 import Select from "@/components/build/Select";
 import EachFile from "./EachFile";
 import { fileSizeType, FileType } from "@/components/app/dashboard/latest_uploads/types/app";
+import { Files } from "@/redux/types/data";
+import uploadFileAction from "@/redux/actions/add_actions/uploadFileAction";
 
 const FilesInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
+
     const [fileInfo, setFileInfo] = useState<Files>({
         fileName: "",
         fileType: "txt",
@@ -30,7 +31,7 @@ const FilesInfoPage = () => {
 
     function uploadFile(): void | false {
         if (!fileInfo.fileName || !fileInfo.fileUploader || !fileInfo.fileSize) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`${fileInfo.fileType === "jsx" ? "Component" : "File"} can't be empty !`, {
                     position: "top-center",
                     theme: state.theme,
@@ -44,7 +45,7 @@ const FilesInfoPage = () => {
                 file.fileName.length === fileInfo.fileName.length &&
                 file.fileType.includes(fileInfo.fileType)
             ) {
-                switchBooleans.websiteControl.isNotificationActive &&
+                state.switchBooleans.websiteControl.isNotificationActive &&
                     toast.error(`This ${fileInfo.fileType === "jsx" ? "Component" : "File"} already exist !`, {
                         position: "top-center",
                         theme: state.theme,
@@ -53,8 +54,8 @@ const FilesInfoPage = () => {
             }
         }
 
-        dispatch({ type: "uploadFile", payload: { files: fileInfo } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(uploadFileAction(fileInfo));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(
                 `${fileInfo.fileType === "jsx" ? "Component" : "File"} ${fileInfo.fileName}.${
                     fileInfo.fileType

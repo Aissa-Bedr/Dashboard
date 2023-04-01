@@ -1,7 +1,6 @@
 import { themeSwitcher } from "@/assests/logic/script";
 import Base from "@/components/build/Base";
 import BaseWrapper from "@/components/build/BaseWrapper";
-import Flex from "@/components/build/Flex";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import Move from "@/components/build/Move";
@@ -12,6 +11,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import FilesInfoPage from "./FilesInfoPage";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const FilesPage = () => {
     const theme = useSelector<AppState, Theme>((state) => state.theme);
@@ -35,12 +35,7 @@ const FilesPage = () => {
                 <Logo content="files" />
 
                 <BaseWrapper>
-                    <Move
-                        href="/"
-                        onClick={() =>
-                            dispatch({ type: "changeLink", payload: { links: { currentLinkValue: "dashboard" } } })
-                        }
-                    >
+                    <Move href="/" onClick={() => dispatch(changeLinkAction("dashboard"))}>
                         Go back
                     </Move>
 

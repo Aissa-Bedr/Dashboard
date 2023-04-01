@@ -1,27 +1,26 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState, AppStateAction } from "@/redux/types/main";
 import classNames from "classnames";
 import Image from "next/image";
-import React, { Dispatch, FC } from "react";
+import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Theme } from "@/redux/types/app";
 import { LatestUploadsInfoItemProps } from "@/components/app/dashboard/latest_uploads/types/main";
 import SecondaryLogo from "@/components/app/main/SecondaryLogo";
 import BoxContainer from "@/components/app/main/BoxContainer";
+import removeFileAction from "@/redux/actions/remove_actions/removeFileAction";
 
 const EachFile: FC<LatestUploadsInfoItemProps> = ({ id, fileName, fileType, fileUploader, fileSize, fileSizeType }) => {
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const themeMode = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const state = useSelector<AppState, AppState>((state) => state);
+    const dispatch = useDispatch();
 
     function removeFile(): void {
-        dispatch({ type: "removeFile", payload: { files: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(removeFileAction(id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.warning(`${fileType === "jsx" ? "Component" : "File"} removed successfully !`, {
                 position: "top-center",
-                theme: themeMode,
+                theme: state.theme,
             });
     }
 
@@ -50,7 +49,7 @@ const EachFile: FC<LatestUploadsInfoItemProps> = ({ id, fileName, fileType, file
                     <button
                         className={classNames(
                             "py-1 px-2 bg-red-500 hover:bg-red-600 active:bg-red-700 text-white duration-300",
-                            { "rounded-md": switchBooleans.uiControl.isRounded }
+                            { "rounded-md": state.switchBooleans.uiControl.isRounded }
                         )}
                         onClick={removeFile}
                     >
@@ -60,7 +59,7 @@ const EachFile: FC<LatestUploadsInfoItemProps> = ({ id, fileName, fileType, file
                     <div
                         className={classNames(
                             "px-2 py-1 text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-grey-dark-color",
-                            { "rounded-md": switchBooleans.uiControl.isRounded }
+                            { "rounded-md": state.switchBooleans.uiControl.isRounded }
                         )}
                     >
                         <p className="text-sm">
