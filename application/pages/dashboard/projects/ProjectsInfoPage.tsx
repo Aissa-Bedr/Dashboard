@@ -42,7 +42,7 @@ const ProjectsInfoPage = () => {
 
         if (projectInfo.price < 0 || projectInfo.team < 1 || !patterns.finishDate.test(projectInfo.finishDate)) {
             switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Invalid information please try again later !`, {
+                toast.error(`Invalid information !`, {
                     position: "top-center",
                     theme: state.theme,
                 });
