@@ -1,8 +1,7 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, Courses, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
@@ -11,11 +10,13 @@ import Grid from "@/components/build/Grid";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import ListLength from "@/components/build/ListLength";
 import Course from "../courses/Course";
+import addCourseAction from "@/redux/actions/add_actions/addCourseAction";
+import { Courses } from "@/redux/types/data";
 
 const CourseInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
+
     const [courseInfo, setCourseInfo] = useState<Courses>({
         title: "",
         description: "",
@@ -31,13 +32,13 @@ const CourseInfo = () => {
 
     function addCourse(): void | false {
         if (!courseInfo.title || !courseInfo.description) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Course can't be empty !`, { position: "top-center", theme: state.theme });
             return false;
         }
 
         if (courseInfo.price < 0 || !patterns.videoSrc.test(courseInfo.videoSrc)) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Invalid information !`, {
                     position: "top-center",
                     theme: state.theme,
@@ -45,8 +46,8 @@ const CourseInfo = () => {
             return false;
         }
 
-        dispatch({ type: "addCourse", payload: { courses: courseInfo } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(addCourseAction(courseInfo));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(`Course added successfully !`, { position: "top-center", theme: state.theme });
         setCourseInfo({
             title: "",
