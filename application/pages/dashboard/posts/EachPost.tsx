@@ -25,7 +25,7 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
     const [isCommentsActive, setIsCommentsActive] = useState(false);
 
     const commentsInfo = state.posts.map((post) =>
-        post.comments.map((comment) =>
+        post.comments?.map((comment) =>
             post.id === id ? <EachComment key={comment.id} {...comment} postId={id!} /> : null
         )
     );

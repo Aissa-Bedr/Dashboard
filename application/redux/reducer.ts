@@ -622,7 +622,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                         ? {
                               ...post,
                               comments: [
-                                  ...post.comments,
+                                  ...post.comments!,
                                   {
                                       id: randomId(),
                                       commentDescription: action.payload?.comments?.commentDescription!,
@@ -641,7 +641,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                     post.id === action.payload?.posts?.id
                         ? {
                               ...post,
-                              comments: [...post.comments].filter(
+                              comments: [...post.comments!].filter(
                                   (comment) => comment.id !== action.payload?.comments?.id
                               ),
                           }
@@ -656,7 +656,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                     post.id === action.payload?.posts?.id
                         ? {
                               ...post,
-                              comments: [...post.comments].map((comment) =>
+                              comments: [...post.comments!].map((comment) =>
                                   comment.id === action.payload?.comments?.id
                                       ? { ...comment, isLiked: !comment.isLiked }
                                       : comment
@@ -702,6 +702,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                         pictureSrc: action.payload?.friends?.pictureSrc!,
                         job: action.payload?.friends?.job!,
                         isLiked: false,
+                        messages: [],
                     },
                     ...state.friends,
                 ],
@@ -718,6 +719,89 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ...state,
                 friends: [...state.friends].map((friend) =>
                     friend.id === action.payload?.friends?.id ? { ...friend, isLiked: !friend.isLiked } : friend
+                ),
+            };
+
+        case "addMessage":
+            return {
+                ...state,
+                friends: [...state.friends].map((friend) =>
+                    friend.id === action.payload?.friends?.id
+                        ? {
+                              ...friend,
+                              messages: [
+                                  ...friend.messages!,
+                                  {
+                                      id: randomId(),
+                                      messageDescription: action.payload?.messages?.messageDescription!,
+                                      isLiked: false,
+                                      isFriendMessage: action.payload?.messages?.isFriendMessage!,
+                                  },
+                              ],
+                          }
+                        : friend
+                ),
+            };
+
+        case "removeMessage":
+            return {
+                ...state,
+                friends: [...state.friends].map((friend) =>
+                    friend.id === action.payload?.friends?.id
+                        ? {
+                              ...friend,
+                              messages: [...friend.messages!].filter(
+                                  (message) => message.id !== action.payload?.messages?.id
+                              ),
+                          }
+                        : friend
+                ),
+            };
+
+        case "toggleIsLikedMessage":
+            return {
+                ...state,
+                friends: [...state.friends].map((friend) =>
+                    friend.id === action.payload?.friends?.id
+                        ? {
+                              ...friend,
+                              messages: [...friend.messages!].map((message) =>
+                                  message.id === action.payload?.messages?.id
+                                      ? { ...message, isLiked: !message.isLiked }
+                                      : message
+                              ),
+                          }
+                        : friend
+                ),
+            };
+
+        case "toggleIsFriendMessage":
+            return {
+                ...state,
+                friends: [...state.friends].map((friend) =>
+                    friend.id === action.payload?.friends?.id
+                        ? {
+                              ...friend,
+                              messages: [...friend.messages!].map((message) =>
+                                  message.id === action.payload?.messages?.id
+                                      ? { ...message, isFriendMessage: !message.isFriendMessage }
+                                      : message
+                              ),
+                          }
+                        : friend
+                ),
+            };
+
+        case "clearChat":
+            return {
+                ...state,
+                friends: [...state.friends].map((friend) =>
+                    friend.id === action.payload?.friends?.id
+                        ? {
+                              ...friend,
+                              messages: [],
+                          }
+                        : friend
                 ),
             };
 

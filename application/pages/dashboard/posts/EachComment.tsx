@@ -40,10 +40,7 @@ const EachComment: FC<EachCommentProps> = ({ id, postId, commentDescription, isL
     }
 
     return (
-        <Flex
-            className="gap-4 border-solid border-b-[1px] border-b-grey-alt-color dark:border-b-grey-dark-alt-color"
-            direction="col"
-        >
+        <Flex className="gap-4 __border_b" direction="col">
             <Flex className="gap-2" direction="row" items="center">
                 <Image
                     className="rounded-full"

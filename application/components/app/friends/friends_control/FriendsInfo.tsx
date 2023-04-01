@@ -10,7 +10,7 @@ import Button from "@/components/build/Button";
 import Grid from "@/components/build/Grid";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import ListLength from "@/components/build/ListLength";
-import Friend from "../business_projects/Friend";
+import Friend from "../friend/Friend";
 
 const FriendsInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -20,7 +20,6 @@ const FriendsInfo = () => {
         name: "",
         pictureSrc: "",
         job: "",
-        isLiked: false,
     });
 
     const friendsInfo = state.friends.map((item) => <Friend key={item.id} {...item} />);
@@ -49,7 +48,6 @@ const FriendsInfo = () => {
             name: "",
             pictureSrc: "",
             job: "",
-            isLiked: false,
         });
     }
 

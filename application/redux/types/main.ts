@@ -17,7 +17,7 @@ import {
 } from "@/components/app/settings/components_shapes_control/controls/types/app";
 import { LatestUploadsInfoItemProps } from "@/components/app/dashboard/latest_uploads/types/main";
 import { BusinessProjectProps } from "@/components/app/business/types/main";
-import { FriendProps } from "@/components/app/friends/types/main";
+import { FriendProps, Message } from "@/components/app/friends/types/main";
 
 interface Tasks {
     id: number;
@@ -66,6 +66,7 @@ export interface AppStateAction {
         comments?: Partial<Comment>;
         businessProjects?: Partial<BusinessProjects>;
         friends?: Partial<Friends>;
+        messages?: Partial<Message>;
     };
 }
 
@@ -140,8 +141,8 @@ export interface Posts {
     postOwner: string;
     postTitle: string;
     postDescription: string;
-    isLiked: boolean;
-    comments: Comment[];
+    isLiked?: boolean;
+    comments?: Comment[];
 }
 
 interface LightApperanceType {

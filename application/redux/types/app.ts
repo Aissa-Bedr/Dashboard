@@ -54,6 +54,11 @@ export type AppStateActionType =
     | "removeBusinessProject"
     | "addFriend"
     | "removeFriend"
-    | "toggleIsLikedFriend";
+    | "toggleIsLikedFriend"
+    | "addMessage"
+    | "removeMessage"
+    | "toggleIsLikedMessage"
+    | "toggleIsFriendMessage"
+    | "clearChat";
 
 export type Theme = "light" | "dark";

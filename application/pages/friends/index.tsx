@@ -1,5 +1,5 @@
 import { themeSwitcher } from "@/assests/logic/script";
-import FriendsInfo from "@/components/app/friends/business_projects_control/FriendsInfo";
+import FriendsInfo from "@/components/app/friends/friends_control/FriendsInfo";
 import Base from "@/components/build/Base";
 import BaseWrapper from "@/components/build/BaseWrapper";
 import Header from "@/components/build/Header";
