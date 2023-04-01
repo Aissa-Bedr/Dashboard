@@ -18,6 +18,7 @@ import {
 import { LatestUploadsInfoItemProps } from "@/components/app/dashboard/latest_uploads/types/main";
 import { BusinessProjectProps } from "@/components/app/business/types/main";
 import { FriendProps, Message } from "@/components/app/friends/types/main";
+import { CourseProps } from "@/components/app/courses/types/main";
 
 interface Tasks {
     id: number;
@@ -43,6 +44,7 @@ export interface AppState {
     posts: Posts[];
     businessProjects: BusinessProjects[];
     friends: Friends[];
+    courses: Courses[];
 }
 
 export interface AppStateAction {
@@ -67,6 +69,7 @@ export interface AppStateAction {
         businessProjects?: Partial<BusinessProjects>;
         friends?: Partial<Friends>;
         messages?: Partial<Message>;
+        courses?: Partial<Courses>;
     };
 }
 
@@ -130,6 +133,8 @@ export interface Projects extends ProjectsInfoItemProps {}
 export interface BusinessProjects extends BusinessProjectProps {}
 
 export interface Friends extends FriendProps {}
+
+export interface Courses extends CourseProps {}
 
 export interface QuickDraft {
     title: string;

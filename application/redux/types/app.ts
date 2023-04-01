@@ -59,6 +59,9 @@ export type AppStateActionType =
     | "removeMessage"
     | "toggleIsLikedMessage"
     | "toggleIsFriendMessage"
-    | "clearChat";
+    | "clearChat"
+    | "addCourse"
+    | "removeCourse"
+    | "toggleIsLikedCourse";
 
 export type Theme = "light" | "dark";

@@ -94,6 +94,7 @@ export const initialState: AppState = {
     posts: [],
     businessProjects: [],
     friends: [],
+    courses: [],
 };
 
 function reducer(state = initialState, action: AppStateAction): AppState {
@@ -802,6 +803,36 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                               messages: [],
                           }
                         : friend
+                ),
+            };
+
+        case "addCourse":
+            return {
+                ...state,
+                courses: [
+                    {
+                        id: randomId(),
+                        title: action.payload?.courses?.title!,
+                        description: action.payload?.courses?.description!,
+                        videoSrc: action.payload?.courses?.videoSrc!,
+                        price: action.payload?.courses?.price!,
+                        isLiked: false,
+                    },
+                    ...state.courses,
+                ],
+            };
+
+        case "removeCourse":
+            return {
+                ...state,
+                courses: [...state.courses].filter((course) => course.id !== action.payload?.courses?.id),
+            };
+
+        case "toggleIsLikedCourse":
+            return {
+                ...state,
+                courses: [...state.courses].map((course) =>
+                    course.id === action.payload?.courses?.id ? { ...course, isLiked: !course.isLiked } : course
                 ),
             };
 
