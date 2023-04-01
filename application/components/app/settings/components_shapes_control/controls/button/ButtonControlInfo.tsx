@@ -1,67 +1,50 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { FC } from "react";
 import { HiCheck } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { ButtonControlInfoProps } from "../types/main";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
+import changeButtonComponentAction from "@/redux/actions/change_actions/changeButtonComponentAction";
+import changeLightAppearanceAction from "@/redux/actions/change_actions/changeLightAppearanceAction";
+import changeDarkAppearanceAction from "@/redux/actions/change_actions/changeDarkAppearanceAction";
 
 const ButtonControlInfo: FC<ButtonControlInfoProps> = ({ type }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     function editButtonType(): void {
         switch (type) {
             case "default":
-                dispatch({
-                    type: "changeButtonComponent",
-                    payload: { components: { button: { type: "default" } } },
-                });
+                dispatch(changeButtonComponentAction("default"));
                 break;
 
             case "primary":
-                dispatch({
-                    type: "changeButtonComponent",
-                    payload: { components: { button: { type: "primary" } } },
-                });
+                dispatch(changeButtonComponentAction("primary"));
                 if (state.appearance.light.theme === "default2") {
-                    dispatch({
-                        type: "changeLightAppearance",
-                        payload: {
-                            appearance: {
-                                light: {
-                                    theme: "default",
-                                    backgroundColor: "bg-blue-color hover:bg-blue-alt-color",
-                                    color: "text-blue-color",
-                                },
-                            },
-                        },
-                    });
+                    dispatch(
+                        changeLightAppearanceAction({
+                            theme: "default",
+                            backgroundColor: "bg-blue-color hover:bg-blue-alt-color",
+                            color: "text-blue-color",
+                        })
+                    );
                 }
                 if (state.appearance.dark.theme === "default2") {
-                    dispatch({
-                        type: "changeDarkAppearance",
-                        payload: {
-                            appearance: {
-                                dark: {
-                                    theme: "default",
-                                    backgroundColor: "dark:bg-blue-dark-color dark:hover:bg-blue-dark-alt-color",
-                                    color: "dark:text-blue-dark-color",
-                                },
-                            },
-                        },
-                    });
+                    dispatch(
+                        changeDarkAppearanceAction({
+                            theme: "default",
+                            backgroundColor: "dark:bg-blue-dark-color dark:hover:bg-blue-dark-alt-color",
+                            color: "dark:text-blue-dark-color",
+                        })
+                    );
                 }
                 break;
 
             default:
-                dispatch({
-                    type: "changeButtonComponent",
-                    payload: { components: { button: { type: "default" } } },
-                });
+                dispatch(changeButtonComponentAction("default"));
         }
 
         state.switchBooleans.websiteControl.isNotificationActive &&

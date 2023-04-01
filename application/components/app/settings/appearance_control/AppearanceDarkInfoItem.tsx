@@ -1,17 +1,17 @@
-import { AppState, AppStateAction } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { FC } from "react";
 import { HiCheck } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { AppearanceInfoItemProps, BackgroundThemes } from "./types/main";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import Flex from "@/components/build/Flex";
+import changeDarkAppearanceAction from "@/redux/actions/change_actions/changeDarkAppearanceAction";
 
 const AppearanceDarkInfoItem: FC<AppearanceInfoItemProps> = ({ backgroundColor }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     const darkBackgroundThemes: BackgroundThemes = {
         default: "bg-blue-dark-alt-color",
@@ -26,123 +26,83 @@ const AppearanceDarkInfoItem: FC<AppearanceInfoItemProps> = ({ backgroundColor }
     function editDarkThemeColor(): void {
         switch (backgroundColor) {
             case "default":
-                dispatch({
-                    type: "changeDarkAppearance",
-                    payload: {
-                        appearance: {
-                            dark: {
-                                theme: "default",
-                                backgroundColor: "dark:bg-blue-dark-color dark:hover:bg-blue-dark-alt-color",
-                                color: "dark:text-blue-dark-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeDarkAppearanceAction({
+                        theme: "default",
+                        backgroundColor: "dark:bg-blue-dark-color dark:hover:bg-blue-dark-alt-color",
+                        color: "dark:text-blue-dark-color",
+                    })
+                );
                 break;
 
             case "default2":
-                dispatch({
-                    type: "changeDarkAppearance",
-                    payload: {
-                        appearance: {
-                            dark: {
-                                theme: "default2",
-                                backgroundColor: "dark:bg-[#1a1d21]",
-                                color: "dark:text-[#1a1d21]",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeDarkAppearanceAction({
+                        theme: "default2",
+                        backgroundColor: "dark:bg-[#1a1d21]",
+                        color: "dark:text-[#1a1d21]",
+                    })
+                );
                 break;
 
             case "red":
-                dispatch({
-                    type: "changeDarkAppearance",
-                    payload: {
-                        appearance: {
-                            dark: {
-                                theme: "red",
-                                backgroundColor: "dark:bg-red-color",
-                                color: "dark:text-red-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeDarkAppearanceAction({
+                        theme: "red",
+                        backgroundColor: "dark:bg-red-color",
+                        color: "dark:text-red-color",
+                    })
+                );
                 break;
 
             case "green":
-                dispatch({
-                    type: "changeDarkAppearance",
-                    payload: {
-                        appearance: {
-                            dark: {
-                                theme: "green",
-                                backgroundColor: "dark:bg-green-color",
-                                color: "dark:text-green-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeDarkAppearanceAction({
+                        theme: "green",
+                        backgroundColor: "dark:bg-green-color",
+                        color: "dark:text-green-color",
+                    })
+                );
                 break;
 
             case "orange":
-                dispatch({
-                    type: "changeDarkAppearance",
-                    payload: {
-                        appearance: {
-                            dark: {
-                                theme: "orange",
-                                backgroundColor: "dark:bg-orange-color",
-                                color: "dark:text-orange-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeDarkAppearanceAction({
+                        theme: "orange",
+                        backgroundColor: "dark:bg-orange-color",
+                        color: "dark:text-orange-color",
+                    })
+                );
                 break;
 
             case "purple":
-                dispatch({
-                    type: "changeDarkAppearance",
-                    payload: {
-                        appearance: {
-                            dark: {
-                                theme: "purple",
-                                backgroundColor: "dark:bg-purple-color",
-                                color: "dark:text-purple-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeDarkAppearanceAction({
+                        theme: "purple",
+                        backgroundColor: "dark:bg-purple-color",
+                        color: "dark:text-purple-color",
+                    })
+                );
                 break;
 
             case "pink":
-                dispatch({
-                    type: "changeDarkAppearance",
-                    payload: {
-                        appearance: {
-                            dark: {
-                                theme: "pink",
-                                backgroundColor: "dark:bg-pink-color",
-                                color: "dark:text-pink-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeDarkAppearanceAction({
+                        theme: "pink",
+                        backgroundColor: "dark:bg-pink-color",
+                        color: "dark:text-pink-color",
+                    })
+                );
                 break;
 
             default:
-                dispatch({
-                    type: "changeDarkAppearance",
-                    payload: {
-                        appearance: {
-                            dark: {
-                                theme: "default",
-                                backgroundColor: "dark:bg-blue-dark-color dark:hover:bg-blue-dark-alt-color",
-                                color: "dark:text-blue-dark-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeDarkAppearanceAction({
+                        theme: "default",
+                        backgroundColor: "dark:bg-blue-dark-color dark:hover:bg-blue-dark-alt-color",
+                        color: "dark:text-blue-dark-color",
+                    })
+                );
         }
 
         state.switchBooleans.websiteControl.isNotificationActive &&

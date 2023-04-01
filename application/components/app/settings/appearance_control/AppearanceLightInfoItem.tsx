@@ -1,17 +1,17 @@
-import { AppState, AppStateAction } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { FC } from "react";
 import { HiCheck } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { AppearanceInfoItemProps, BackgroundThemes } from "./types/main";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import Flex from "@/components/build/Flex";
+import changeLightAppearanceAction from "@/redux/actions/change_actions/changeLightAppearanceAction";
 
 const AppearanceLightInfoItem: FC<AppearanceInfoItemProps> = ({ backgroundColor }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     const lightBackgroundThemes: BackgroundThemes = {
         default: "bg-blue-color",
@@ -26,123 +26,83 @@ const AppearanceLightInfoItem: FC<AppearanceInfoItemProps> = ({ backgroundColor 
     function editLightThemeColor(): void {
         switch (backgroundColor) {
             case "default":
-                dispatch({
-                    type: "changeLightAppearance",
-                    payload: {
-                        appearance: {
-                            light: {
-                                theme: "default",
-                                backgroundColor: "bg-blue-color hover:bg-blue-alt-color",
-                                color: "text-blue-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeLightAppearanceAction({
+                        theme: "default",
+                        backgroundColor: "bg-blue-color hover:bg-blue-alt-color",
+                        color: "text-blue-color",
+                    })
+                );
                 break;
 
             case "default2":
-                dispatch({
-                    type: "changeLightAppearance",
-                    payload: {
-                        appearance: {
-                            light: {
-                                theme: "default2",
-                                backgroundColor: "bg-[#f1f5f9]",
-                                color: "text-[#f1f5f9]",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeLightAppearanceAction({
+                        theme: "default2",
+                        backgroundColor: "bg-[#f1f5f9]",
+                        color: "text-[#f1f5f9]",
+                    })
+                );
                 break;
 
             case "red":
-                dispatch({
-                    type: "changeLightAppearance",
-                    payload: {
-                        appearance: {
-                            light: {
-                                theme: "red",
-                                backgroundColor: "bg-red-color",
-                                color: "text-red-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeLightAppearanceAction({
+                        theme: "red",
+                        backgroundColor: "bg-red-color",
+                        color: "text-red-color",
+                    })
+                );
                 break;
 
             case "green":
-                dispatch({
-                    type: "changeLightAppearance",
-                    payload: {
-                        appearance: {
-                            light: {
-                                theme: "green",
-                                backgroundColor: "bg-green-color",
-                                color: "text-green-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeLightAppearanceAction({
+                        theme: "green",
+                        backgroundColor: "bg-green-color",
+                        color: "text-green-color",
+                    })
+                );
                 break;
 
             case "orange":
-                dispatch({
-                    type: "changeLightAppearance",
-                    payload: {
-                        appearance: {
-                            light: {
-                                theme: "orange",
-                                backgroundColor: "bg-orange-color",
-                                color: "text-orange-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeLightAppearanceAction({
+                        theme: "orange",
+                        backgroundColor: "bg-orange-color",
+                        color: "text-orange-color",
+                    })
+                );
                 break;
 
             case "purple":
-                dispatch({
-                    type: "changeLightAppearance",
-                    payload: {
-                        appearance: {
-                            light: {
-                                theme: "purple",
-                                backgroundColor: "bg-purple-color",
-                                color: "text-purple-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeLightAppearanceAction({
+                        theme: "purple",
+                        backgroundColor: "bg-purple-color",
+                        color: "text-purple-color",
+                    })
+                );
                 break;
 
             case "pink":
-                dispatch({
-                    type: "changeLightAppearance",
-                    payload: {
-                        appearance: {
-                            light: {
-                                theme: "pink",
-                                backgroundColor: "bg-pink-color",
-                                color: "text-pink-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeLightAppearanceAction({
+                        theme: "pink",
+                        backgroundColor: "bg-pink-color",
+                        color: "text-pink-color",
+                    })
+                );
                 break;
 
             default:
-                dispatch({
-                    type: "changeLightAppearance",
-                    payload: {
-                        appearance: {
-                            light: {
-                                theme: "default",
-                                backgroundColor: "bg-blue-color hover:bg-blue-alt-color",
-                                color: "text-blue-color",
-                            },
-                        },
-                    },
-                });
+                dispatch(
+                    changeLightAppearanceAction({
+                        theme: "default",
+                        backgroundColor: "bg-blue-color hover:bg-blue-alt-color",
+                        color: "text-blue-color",
+                    })
+                );
         }
 
         state.switchBooleans.websiteControl.isNotificationActive &&

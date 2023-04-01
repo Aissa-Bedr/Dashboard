@@ -1,46 +1,34 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { FC } from "react";
 import { HiCheck } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { InputFieldControlInfoProps } from "../types/main";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
+import changeInputFieldComponentAction from "@/redux/actions/change_actions/changeInputFieldComponentAction";
 
 const InputFieldControlInfo: FC<InputFieldControlInfoProps> = ({ type }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     function editInputFieldType(): void {
         switch (type) {
             case "default":
-                dispatch({
-                    type: "changeInputFieldComponent",
-                    payload: { components: { inputField: { type: "default" } } },
-                });
+                dispatch(changeInputFieldComponentAction("default"));
                 break;
 
             case "primary":
-                dispatch({
-                    type: "changeInputFieldComponent",
-                    payload: { components: { inputField: { type: "primary" } } },
-                });
+                dispatch(changeInputFieldComponentAction("primary"));
                 break;
 
             case "secondary":
-                dispatch({
-                    type: "changeInputFieldComponent",
-                    payload: { components: { inputField: { type: "secondary" } } },
-                });
+                dispatch(changeInputFieldComponentAction("secondary"));
                 break;
 
             default:
-                dispatch({
-                    type: "changeInputFieldComponent",
-                    payload: { components: { inputField: { type: "default" } } },
-                });
+                dispatch(changeInputFieldComponentAction("default"));
         }
 
         state.switchBooleans.websiteControl.isNotificationActive &&

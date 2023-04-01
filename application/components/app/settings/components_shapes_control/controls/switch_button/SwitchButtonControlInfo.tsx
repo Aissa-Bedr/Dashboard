@@ -1,46 +1,34 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { FC } from "react";
 import { HiCheck } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { SwitchButtonControlInfoProps } from "../types/main";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
+import changeSwitchButtonComponentAction from "@/redux/actions/change_actions/changeSwitchButtonComponentAction";
 
 const SwitchButtonControlInfo: FC<SwitchButtonControlInfoProps> = ({ type }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     function editSwitchButtonType(): void {
         switch (type) {
             case "default":
-                dispatch({
-                    type: "changeSwitchButtonComponent",
-                    payload: { components: { switchButton: { type: "default" } } },
-                });
+                dispatch(changeSwitchButtonComponentAction("default"));
                 break;
 
             case "primary":
-                dispatch({
-                    type: "changeSwitchButtonComponent",
-                    payload: { components: { switchButton: { type: "primary" } } },
-                });
+                dispatch(dispatch(changeSwitchButtonComponentAction("primary")));
                 break;
 
             case "secondary":
-                dispatch({
-                    type: "changeSwitchButtonComponent",
-                    payload: { components: { switchButton: { type: "secondary" } } },
-                });
+                dispatch(dispatch(changeSwitchButtonComponentAction("secondary")));
                 break;
 
             default:
-                dispatch({
-                    type: "changeSwitchButtonComponent",
-                    payload: { components: { switchButton: { type: "default" } } },
-                });
+                dispatch(dispatch(changeSwitchButtonComponentAction("default")));
         }
 
         state.switchBooleans.websiteControl.isNotificationActive &&

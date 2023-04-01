@@ -1,17 +1,17 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, GeneralInfo, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SettingsInfo from "@/components/build/SettingsInfo";
 import Button from "@/components/build/Button";
+import changeGeneralInfoAction from "@/redux/actions/change_actions/changeGeneralnfoAction";
+import { GeneralInfo } from "@/redux/types/data";
 
 const GeneralInfoItem = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     const [generalInfo, setGeneralInfo] = useState<GeneralInfo>({
         firstName: "",
@@ -19,18 +19,10 @@ const GeneralInfoItem = () => {
     });
 
     function editGeneralInfo(): void | false {
-        dispatch({
-            type: "changeGeneralInfo",
-            payload: {
-                generalInfo: {
-                    firstName: generalInfo.firstName ? generalInfo.firstName : "Aissa",
-                    lastName: generalInfo.lastName ? generalInfo.lastName : "Bedr",
-                },
-            },
-        });
+        dispatch(changeGeneralInfoAction(generalInfo));
 
         if (!generalInfo.firstName && !generalInfo.lastName) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.success("applying the default Settings successfully !", {
                     position: "top-center",
                     theme: state.theme,
@@ -39,7 +31,7 @@ const GeneralInfoItem = () => {
             return false;
         }
 
-        switchBooleans.websiteControl.isNotificationActive &&
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success("Settings saved successfully !", {
                 position: "top-center",
                 theme: state.theme,
