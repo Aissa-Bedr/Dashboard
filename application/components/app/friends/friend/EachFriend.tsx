@@ -1,6 +1,5 @@
 import Flex from "@/components/build/Flex";
-import { Theme } from "@/redux/types/app";
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -8,15 +7,10 @@ import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Dispatch } from "redux";
-import { Message, FriendProps } from "../types/main";
+import { EachMessageProps } from "../types/main";
 import SecondaryLogo from "../../main/SecondaryLogo";
-
-interface EachMessageProps extends Message {
-    friendId: number;
-    friendPictureSrc: string;
-    friendName: string;
-}
+import removeMessageAction from "@/redux/actions/remove_actions/removeMessageAction";
+import toggleIsLikedMessageAction from "@/redux/actions/toggle_actions/toggleIsLikedMessageAction";
 
 const EachFriend: FC<EachMessageProps> = ({
     id,
@@ -28,25 +22,23 @@ const EachFriend: FC<EachMessageProps> = ({
     isFriendMessage,
 }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const themeMode = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
-    function removeMessage(friendId: number): void {
-        dispatch({ type: "removeMessage", payload: { friends: { id: friendId }, messages: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
+    function removeMessage(friendId: string): void {
+        dispatch(removeMessageAction(friendId, id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.warning(`Message removed successfully !`, {
                 position: "top-center",
-                theme: themeMode,
+                theme: state.theme,
             });
     }
 
-    function toggleMessageLike(friendId: number): void {
-        dispatch({ type: "toggleIsLikedMessage", payload: { friends: { id: friendId }, messages: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
+    function toggleMessageLike(friendId: string): void {
+        dispatch(toggleIsLikedMessageAction(friendId, id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(isLiked ? "Message unliked successfully !" : "Message liked successfully !", {
                 position: "top-center",
-                theme: themeMode,
+                theme: state.theme,
             });
     }
 

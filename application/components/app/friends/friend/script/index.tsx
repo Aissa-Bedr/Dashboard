@@ -1,10 +1,11 @@
+import sendMessageAction from "@/redux/actions/add_actions/sendMessaageAction";
 import { FriendMessage, MessageType } from "../../types/main";
 
 export function friendMessage(
     messageDescription: string,
     delay: number,
     friendName: string,
-    friendId: number,
+    friendId: string,
     { state, dispatch }: FriendMessage
 ): MessageType {
     let messageType: MessageType = "sayHello";
@@ -62,16 +63,12 @@ export function friendMessage(
                 case "Welcome":
                 case "Welcome".toUpperCase():
                 case "Welcome".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Welcome ${state.generalInfo.firstName} !`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `Welcome ${state.generalInfo.firstName} !`,
+                        })
+                    );
                     break;
 
                 case "Good morning":
@@ -80,16 +77,12 @@ export function friendMessage(
                 case "good Morning":
                 case "good Morning".toUpperCase():
                 case "good Morning".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Good morning ${state.generalInfo.firstName} !`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `Good morning ${state.generalInfo.firstName} !`,
+                        })
+                    );
                     break;
 
                 case "Good afternoon":
@@ -98,16 +91,12 @@ export function friendMessage(
                 case "good Afternoon":
                 case "good Afternoon".toUpperCase():
                 case "good Afternoon".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Good afternoon ${state.generalInfo.firstName} !`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `Good afternoon ${state.generalInfo.firstName} !`,
+                        })
+                    );
                     break;
 
                 case "Bey":
@@ -116,16 +105,12 @@ export function friendMessage(
                 case "By":
                 case "By".toUpperCase():
                 case "By".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `see you ${state.generalInfo.firstName} !`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `see you ${state.generalInfo.firstName} !`,
+                        })
+                    );
                     break;
 
                 case "Thanks":
@@ -138,16 +123,12 @@ export function friendMessage(
                 case "thank You":
                 case "Thank you".toUpperCase():
                 case "Thank you".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `any time ${state.generalInfo.firstName} !`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `any time ${state.generalInfo.firstName} !`,
+                        })
+                    );
                     break;
 
                 case "Hello":
@@ -162,16 +143,12 @@ export function friendMessage(
                 case "Hey":
                 case "Hey".toUpperCase():
                 case "Hey".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `${messageDescription} ${state.generalInfo.firstName} !`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `${messageDescription} ${state.generalInfo.firstName} !`,
+                        })
+                    );
                     break;
 
                 case "Hello There":
@@ -188,16 +165,12 @@ export function friendMessage(
                 case `hello ${`${friendName.slice(0, 1).toUpperCase()}${friendName.slice(1)}`}`:
                 case `Hello ${friendName}`.toUpperCase():
                 case `Hello ${friendName}`.toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Hello ${state.generalInfo.firstName} !`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `Hello ${state.generalInfo.firstName} !`,
+                        })
+                    );
                     break;
 
                 case "Hallo There":
@@ -214,16 +187,12 @@ export function friendMessage(
                 case `hallo ${`${friendName.slice(0, 1).toUpperCase()}${friendName.slice(1)}`}`:
                 case `Hallo ${friendName}`.toUpperCase():
                 case `Hallo ${friendName}`.toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Hallo ${state.generalInfo.firstName} !`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `Hallo ${state.generalInfo.firstName} !`,
+                        })
+                    );
                     break;
 
                 case "Hi There":
@@ -241,16 +210,12 @@ export function friendMessage(
                 case `hi ${`${friendName.slice(0, 1).toUpperCase()}${friendName.slice(1)}`}`:
                 case `Hi ${friendName}`.toUpperCase():
                 case `Hi ${friendName}`.toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Hi ${state.generalInfo.firstName} !`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `Hi ${state.generalInfo.firstName} !`,
+                        })
+                    );
                     break;
 
                 case "Hey There":
@@ -268,29 +233,21 @@ export function friendMessage(
                 case `hello ${`${friendName.slice(0, 1).toUpperCase()}${friendName.slice(1)}`}`:
                 case `Hey ${friendName}`.toUpperCase():
                 case `Hey ${friendName}`.toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Hey ${state.generalInfo.firstName} !`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `Hey ${state.generalInfo.firstName} !`,
+                        })
+                    );
                     break;
 
                 default:
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Sorry i didn't understand ${messageDescription}.`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `Sorry i didn't understand ${messageDescription}.`,
+                        })
+                    );
             }
         }, delay);
 
@@ -355,16 +312,12 @@ export function friendMessage(
                 case "what is your Name!":
                 case "what is your Name!".toUpperCase():
                 case "what is your Name!".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `My name is ${friendName}.`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `My name is ${friendName}.`,
+                        })
+                    );
                     break;
 
                 case "What's my name":
@@ -422,16 +375,12 @@ export function friendMessage(
                 case "what is my Name !":
                 case "what is my Name !".toUpperCase():
                 case "what is my Name !".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Your name is ${state.generalInfo.firstName} ${state.generalInfo.lastName}.`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `Your name is ${state.generalInfo.firstName} ${state.generalInfo.lastName}.`,
+                        })
+                    );
                     break;
 
                 case "Who are you":
@@ -484,16 +433,12 @@ export function friendMessage(
                 case "who you Are!":
                 case "Who you are!".toUpperCase():
                 case "Who you are!".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `I'am ${friendName}.`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `I'am ${friendName}.`,
+                        })
+                    );
                     break;
 
                 case "Who made you":
@@ -521,16 +466,12 @@ export function friendMessage(
                 case "who made You!":
                 case "Who made you!".toUpperCase():
                 case "Who made you!".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: "@Aissa Bedr.",
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: "@Aissa Bedr.",
+                        })
+                    );
                     break;
 
                 case "How old are you":
@@ -563,16 +504,12 @@ export function friendMessage(
                 case "how old are You!":
                 case "How old are you!".toUpperCase():
                 case "How old are you!".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: "I don't know my age bro.",
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: "I don't know my age bro.",
+                        })
+                    );
                     break;
 
                 case "How are you":
@@ -600,29 +537,21 @@ export function friendMessage(
                 case "how are You!":
                 case "How are you!".toUpperCase():
                 case "How are you!".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: "I'am fine.",
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: "I'am fine.",
+                        })
+                    );
                     break;
 
                 default:
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Sorry i didn't understand your question.`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: "Sorry i didn't understand your question.",
+                        })
+                    );
             }
         }, delay);
 
@@ -638,16 +567,12 @@ export function friendMessage(
                 case "Yeah":
                 case "Yeah".toUpperCase():
                 case "Yeah".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: "yeah",
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: "nah",
+                        })
+                    );
                     break;
 
                 case "No":
@@ -656,31 +581,23 @@ export function friendMessage(
                 case "Nah":
                 case "Nah".toUpperCase():
                 case "Nah".toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: "yeah",
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: "yeah",
+                        })
+                    );
                     break;
 
                 case `${friendName.slice(0, 1).toUpperCase()}${friendName.slice(1)}`:
                 case friendName.toUpperCase():
                 case friendName.toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: "yes",
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: "yes",
+                        })
+                    );
                     break;
 
                 case `I am ${state.generalInfo.firstName} ${state.generalInfo.lastName}`:
@@ -697,16 +614,12 @@ export function friendMessage(
                 case `I am ${state.generalInfo.firstName} ${state.generalInfo.lastName}`.toLowerCase():
                 case `I am ${state.generalInfo.firstName}`.toUpperCase():
                 case `I am ${state.generalInfo.firstName}`.toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: "yes",
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: "yes",
+                        })
+                    );
                     break;
 
                 case `You am ${friendName}`:
@@ -717,29 +630,21 @@ export function friendMessage(
                 case `${"You are".toLowerCase()} ${friendName}`:
                 case `You are ${friendName}`.toUpperCase():
                 case `You are ${friendName}`.toLowerCase():
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: "yes",
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: "yes",
+                        })
+                    );
                     break;
 
                 default:
-                    dispatch({
-                        type: "addMessage",
-                        payload: {
-                            friends: { id: friendId },
-                            messages: {
-                                isFriendMessage: true,
-                                messageDescription: `Sorry i didn't understand ${messageDescription} question`,
-                            },
-                        },
-                    });
+                    dispatch(
+                        sendMessageAction(friendId, {
+                            isFriendMessage: true,
+                            messageDescription: `Sorry i didn't understand ${messageDescription} question.`,
+                        })
+                    );
             }
         }, delay);
 

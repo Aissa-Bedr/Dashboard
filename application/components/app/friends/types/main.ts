@@ -23,3 +23,9 @@ export interface FriendMessage {
     state: AppState;
     dispatch: Dispatch<AppStateAction>;
 }
+
+export interface EachMessageProps extends Message {
+    friendId: string;
+    friendPictureSrc: string;
+    friendName: string;
+}

@@ -1,8 +1,7 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, BusinessProjects, Friends, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
@@ -11,11 +10,13 @@ import Grid from "@/components/build/Grid";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import ListLength from "@/components/build/ListLength";
 import Friend from "../friend/Friend";
+import addFriendAction from "@/redux/actions/add_actions/addFriendAction";
+import { Friends } from "@/redux/types/data";
 
 const FriendsInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
+
     const [friendInfo, setFriendInfo] = useState<Friends>({
         name: "",
         pictureSrc: "",
@@ -30,19 +31,19 @@ const FriendsInfo = () => {
 
     function addFriend(): void | false {
         if (!friendInfo.name || !friendInfo.pictureSrc || !friendInfo.job) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Friend can't be empty !`, { position: "top-center", theme: state.theme });
             return false;
         }
 
         if (!patterns.pictureSrc.test(friendInfo.pictureSrc)) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Invalid Picture Source !`, { position: "top-center", theme: state.theme });
             return false;
         }
 
-        dispatch({ type: "addFriend", payload: { friends: friendInfo } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(addFriendAction(friendInfo));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(`Friend added successfully !`, { position: "top-center", theme: state.theme });
         setFriendInfo({
             name: "",
