@@ -1,7 +1,5 @@
 import { Theme } from "@/redux/types/app";
 
-export const randomId = (char?: number): number => Math.floor(Math.random() * (char ? char : 9876543210));
-
 export function themeSwitcher(theme: Theme): Theme {
     switch (theme) {
         case "light":
