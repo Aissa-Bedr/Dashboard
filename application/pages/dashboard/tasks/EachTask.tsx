@@ -1,37 +1,37 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Theme } from "@/redux/types/app";
 import classNames from "classnames";
 import { TaskProps } from "@/components/app/dashboard/latest_tasks/types/main";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import Button from "@/components/build/Button";
+import removeTaskAction from "@/redux/actions/remove_actions/removeTaskAction";
+import completeTaskAction from "@/redux/actions/main_actions/completeTaskAction";
+import recoverTaskAction from "@/redux/actions/main_actions/recoverTaskAction";
 
 const EachTask: FC<TaskProps> = ({ id, content, isCompleted }) => {
-    const theme = useSelector<AppState, Theme>((state) => state.theme);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const state = useSelector<AppState, AppState>((state) => state);
+    const dispatch = useDispatch();
 
     function removeTask(): void {
-        dispatch({ type: "removeTask", payload: { tasks: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Task removed successfully !`, { position: "top-center", theme });
+        dispatch(removeTaskAction(id));
+        state.switchBooleans.websiteControl.isNotificationActive &&
+            toast.warning(`Task removed successfully !`, { position: "top-center", theme: state.theme });
     }
 
     function completeTask(): void {
-        dispatch({ type: "completeTask", payload: { tasks: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Task completed successfully !`, { position: "top-center", theme });
+        dispatch(completeTaskAction(id));
+        state.switchBooleans.websiteControl.isNotificationActive &&
+            toast.success(`Task completed successfully !`, { position: "top-center", theme: state.theme });
     }
 
     function recoverTask(): void {
-        dispatch({ type: "recoverTask", payload: { tasks: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Task recovered successfully !`, { position: "top-center", theme });
+        dispatch(recoverTaskAction(id));
+        state.switchBooleans.websiteControl.isNotificationActive &&
+            toast.success(`Task recovered successfully !`, { position: "top-center", theme: state.theme });
     }
 
     return (
@@ -59,7 +59,7 @@ const EachTask: FC<TaskProps> = ({ id, content, isCompleted }) => {
                 <button
                     className={classNames(
                         "py-1 px-2 bg-red-500 hover:bg-red-600 active:bg-red-700 text-white duration-300",
-                        { "rounded-md": switchBooleans.uiControl.isRounded }
+                        { "rounded-md": state.switchBooleans.uiControl.isRounded }
                     )}
                     onClick={removeTask}
                 >
