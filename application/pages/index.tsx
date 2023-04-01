@@ -16,8 +16,7 @@ import BaseWrapper from "@/components/build/BaseWrapper";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import SearchBar from "@/components/helpers/search_bar/SearchBar";
-import { Theme } from "@/redux/types/app";
-import { AppState, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -25,16 +24,15 @@ import { useSelector } from "react-redux";
 const LatestTasks = dynamic(() => import("@/components/app/dashboard/latest_tasks/LatestTasks"), { ssr: false });
 
 const Home = () => {
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const theme = useSelector<AppState, Theme>((state) => state.theme);
+    const state = useSelector<AppState, AppState>((state) => state);
 
     useEffect(() => {
-        themeSwitcher(theme);
+        themeSwitcher(state.theme);
     }, []);
 
     useEffect(() => {
-        themeSwitcher(theme);
-    }, [theme]);
+        themeSwitcher(state.theme);
+    }, [state.theme]);
 
     return (
         <>
@@ -47,14 +45,14 @@ const Home = () => {
 
                 <BaseWrapper>
                     <Welcome />
-                    {!switchBooleans.widgetsControl.isQuickDraftActive && <QuickDraft />}
-                    {!switchBooleans.widgetsControl.isYearlyTargetsActive && <YearlyTargets />}
-                    {!switchBooleans.widgetsControl.isTicketsStatisticsActive && <TicketsStatistics />}
-                    {!switchBooleans.widgetsControl.isLatestNewsActive && <LatestNews />}
+                    {!state.switchBooleans.widgetsControl.isQuickDraftActive && <QuickDraft />}
+                    {!state.switchBooleans.widgetsControl.isYearlyTargetsActive && <YearlyTargets />}
+                    {!state.switchBooleans.widgetsControl.isTicketsStatisticsActive && <TicketsStatistics />}
+                    {!state.switchBooleans.widgetsControl.isLatestNewsActive && <LatestNews />}
                     <LatestTasks />
                     <TopSearchItems />
                     <LatestUploads />
-                    {!switchBooleans.widgetsControl.isLastProjectProgressActive && <LastProjectProgress />}
+                    {!state.switchBooleans.widgetsControl.isLastProjectProgressActive && <LastProjectProgress />}
                     <Reminders />
                     <LatestPost />
                     <SocialMediaStats />
