@@ -25,10 +25,20 @@ const FriendsInfo = () => {
 
     const friendsInfo = state.friends.map((item) => <Friend key={item.id} {...item} />);
 
+    const patterns = {
+        pictureSrc: /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|png|jpeg)/g,
+    };
+
     function addFriend(): void | false {
         if (!friendInfo.name || !friendInfo.pictureSrc || !friendInfo.job) {
             switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Friend can't be empty !`, { position: "top-center", theme: state.theme });
+            return false;
+        }
+
+        if (!patterns.pictureSrc.test(friendInfo.pictureSrc)) {
+            switchBooleans.websiteControl.isNotificationActive &&
+                toast.error(`Invalid Picture Source !`, { position: "top-center", theme: state.theme });
             return false;
         }
 
