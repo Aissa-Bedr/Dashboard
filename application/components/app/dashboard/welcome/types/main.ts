@@ -3,7 +3,7 @@ export interface WelcomeProps {
 }
 
 export interface WelcomeInfoItemProps {
-    id?: number;
+    id?: string;
     firstSecContent: string;
     secondSecContent: string;
 }

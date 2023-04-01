@@ -1,5 +1,5 @@
 import Flex from "@/components/build/Flex";
-import { AppState, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
@@ -7,7 +7,6 @@ import { LastProjectProgressInfoItemProps, StatusTypes } from "./types/main";
 
 const LastProjectProgressInfoItem: FC<LastProjectProgressInfoItemProps> = ({ title, status }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
 
     const statusTypes: StatusTypes = {
         "in progress": "text-orange-color",
@@ -31,7 +30,7 @@ const LastProjectProgressInfoItem: FC<LastProjectProgressInfoItemProps> = ({ tit
             <div
                 className={classNames(
                     "uppercase px-2 py-1 text-sm font-semibold bg-grey-alt-color dark:bg-grey-dark-alt-color",
-                    { [statusTypes[status]]: status, "rounded-md": switchBooleans.uiControl.isRounded }
+                    { [statusTypes[status]]: status, "rounded-md": state.switchBooleans.uiControl.isRounded }
                 )}
             >
                 {status}

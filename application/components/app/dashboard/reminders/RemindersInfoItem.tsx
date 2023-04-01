@@ -1,19 +1,17 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { RemindersInfoItemProps } from "./types/main";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Theme } from "@/redux/types/app";
+import removeReminderAction from "@/redux/actions/remove_actions/removeReminderAction";
 
 const RemindersInfoItem: FC<RemindersInfoItemProps> = ({ id, title, time, theme }) => {
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const themeMode = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const state = useSelector<AppState, AppState>((state) => state);
+    const dispatch = useDispatch();
 
     const themeTypes = {
         blue: "before:bg-blue-color dark:before:bg-blue-dark-color border-l-blue-color dark:border-l-blue-dark-color",
@@ -23,9 +21,9 @@ const RemindersInfoItem: FC<RemindersInfoItemProps> = ({ id, title, time, theme 
     };
 
     function removeReminder(): void {
-        dispatch({ type: "removeReminder", payload: { reminders: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Reminder removed successfully !`, { position: "top-center", theme: themeMode });
+        dispatch(removeReminderAction(id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
+            toast.warning(`Reminder removed successfully !`, { position: "top-center", theme: state.theme });
     }
 
     return (

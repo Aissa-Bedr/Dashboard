@@ -3,17 +3,18 @@ import Flex from "@/components/build/Flex";
 import ListLength from "@/components/build/ListLength";
 import LogoContainer from "@/components/build/LogoContainer";
 import Move from "@/components/build/Move";
-import { AppState, AppStateAction, Reminders } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import BoxContainer from "../../main/BoxContainer";
 import PrimaryLogo from "../../main/PrimaryLogo";
 import RemindersInfo from "./RemindersInfo";
+import { Reminders } from "@/redux/types/data";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const Reminders = () => {
     const reminders = useSelector<AppState, Reminders[]>((state) => state.reminders);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <BoxContainer>
@@ -22,12 +23,7 @@ const Reminders = () => {
                     <PrimaryLogo text="Reminders" />
 
                     <Flex className="gap-2" direction="row" items="center">
-                        <Move
-                            href="/dashboard/reminders"
-                            onClick={() =>
-                                dispatch({ type: "changeLink", payload: { links: { currentLinkValue: "dashboard" } } })
-                            }
-                        >
+                        <Move href="/dashboard/reminders" onClick={() => dispatch(changeLinkAction("dashboard"))}>
                             Show more
                         </Move>
                         <ListLength listName="Reminders" listLength={reminders.length} />

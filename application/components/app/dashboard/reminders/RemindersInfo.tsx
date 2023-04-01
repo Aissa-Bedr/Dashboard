@@ -3,20 +3,21 @@ import Flex from "@/components/build/Flex";
 import Grid from "@/components/build/Grid";
 import Input from "@/components/build/Input";
 import Select from "@/components/build/Select";
-import { AppState, AppStateAction, Reminders, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import RemindersInfoItem from "./RemindersInfoItem";
 import { Theme } from "./types/app";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Reminders } from "@/redux/types/data";
+import addReminderAction from "@/redux/actions/add_actions/addReminderAction";
 
 const RemindersInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
+
     const [reminderInfo, setReminderInfo] = useState<Reminders>({
         title: "",
         time: "",
@@ -31,13 +32,13 @@ const RemindersInfo = () => {
 
     function addReminder(): void | false {
         if (!reminderInfo.title || !reminderInfo.time) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Reminder can't be empty !`, { position: "top-center", theme: state.theme });
             return false;
         }
 
         if (!patterns.finishDate.test(reminderInfo.time)) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Invalid information please try again later !`, {
                     position: "top-center",
                     theme: state.theme,
@@ -45,8 +46,8 @@ const RemindersInfo = () => {
             return false;
         }
 
-        dispatch({ type: "addReminder", payload: { reminders: reminderInfo } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(addReminderAction(reminderInfo));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(`Reminder added successfully !`, { position: "top-center", theme: state.theme });
         setReminderInfo({ title: "", time: "", theme: "blue" });
     }
@@ -107,7 +108,7 @@ const RemindersInfo = () => {
                 ) : (
                     <div
                         className={classNames("__data_list_empty", {
-                            "rounded-md": switchBooleans.uiControl.isRounded,
+                            "rounded-md": state.switchBooleans.uiControl.isRounded,
                         })}
                     >
                         No reminders to show !

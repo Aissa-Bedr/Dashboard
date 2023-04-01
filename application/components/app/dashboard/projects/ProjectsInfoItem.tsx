@@ -1,5 +1,5 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { FiTrash2 } from "react-icons/fi";
@@ -7,8 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ProjectsInfoItemProps, StatusTypes } from "./types/main";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Dispatch } from "redux";
-import { Theme } from "@/redux/types/app";
+import removeProjectAction from "@/redux/actions/remove_actions/removeProjectAction";
 
 export const statusTypes: StatusTypes = {
     pending: "bg-orange-color",
@@ -18,14 +17,13 @@ export const statusTypes: StatusTypes = {
 };
 
 const ProjectsInfoItem: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, client, price, team, status }) => {
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const theme = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const state = useSelector<AppState, AppState>((state) => state);
+    const dispatch = useDispatch();
 
     function removeProject(): void {
-        dispatch({ type: "removeProject", payload: { projects: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Project removed successfully !`, { position: "top-center", theme });
+        dispatch(removeProjectAction(id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
+            toast.warning(`Project removed successfully !`, { position: "top-center", theme: state.theme });
     }
 
     return (
@@ -42,7 +40,7 @@ const ProjectsInfoItem: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, cli
                     <div
                         className={classNames("w-fit py-1 px-2 text-white", {
                             [statusTypes[status]]: status,
-                            "rounded-md": switchBooleans.uiControl.isRounded,
+                            "rounded-md": state.switchBooleans.uiControl.isRounded,
                         })}
                     >
                         {status}

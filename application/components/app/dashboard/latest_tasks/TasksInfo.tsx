@@ -1,8 +1,7 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import Task from "./Task";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,31 +9,32 @@ import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import classNames from "classnames";
 import Grid from "@/components/build/Grid";
+import addTaskAction from "@/redux/actions/add_actions/addTaskAction";
 
 const TasksInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
+
     const [content, setContent] = useState("");
 
     const tasks = state.tasks.map((item) => <Task key={item.id} {...item} />);
 
     function addTask(): void | false {
         if (!content) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Task can't be empty !`, { position: "top-center", theme: state.theme });
             return false;
         }
 
         if (content.length < 2) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Task can't be less than two characters !`, { position: "top-center", theme: state.theme });
             return false;
         }
 
         for (const item of state.tasks) {
             if (item.content.match(content) && item.content.length === content.length) {
-                switchBooleans.websiteControl.isNotificationActive &&
+                state.switchBooleans.websiteControl.isNotificationActive &&
                     toast.error(`Task ${item.content} already exist !`, {
                         position: "top-center",
                         theme: state.theme,
@@ -43,8 +43,8 @@ const TasksInfo = () => {
             }
         }
 
-        dispatch({ type: "addTask", payload: { tasks: { content } } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(addTaskAction(content));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(`Task ${content} added successfully !`, { position: "top-center", theme: state.theme });
         setContent("");
     }
@@ -70,7 +70,11 @@ const TasksInfo = () => {
                     {tasks}
                 </Grid>
             ) : (
-                <div className={classNames("__data_list_empty", { "rounded-md": switchBooleans.uiControl.isRounded })}>
+                <div
+                    className={classNames("__data_list_empty", {
+                        "rounded-md": state.switchBooleans.uiControl.isRounded,
+                    })}
+                >
                     No tasks to show !
                 </div>
             )}

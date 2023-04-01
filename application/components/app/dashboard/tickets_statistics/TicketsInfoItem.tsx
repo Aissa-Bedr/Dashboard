@@ -1,19 +1,19 @@
 import Flex from "@/components/build/Flex";
-import { AppState, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { TicketsInfoItemProps } from "./types/main";
 
 const TicketsInfoItem: FC<TicketsInfoItemProps> = ({ icon, firstSecContent, secondSecContent }) => {
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
+    const state = useSelector<AppState, AppState>((state) => state);
 
     return (
         <>
             <Flex
                 className={classNames(
                     "border-solid border-[1px] border-grey-alt-color dark:border-grey-dark-alt-color p-5",
-                    { "rounded-md": switchBooleans.uiControl.isRounded }
+                    { "rounded-md": state.switchBooleans.uiControl.isRounded }
                 )}
                 direction="col"
                 items="center"

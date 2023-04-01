@@ -6,7 +6,6 @@ import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import SecondaryLogo from "../../main/SecondaryLogo";
 
 const LatestPostInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -52,11 +51,7 @@ const LatestPostInfo = () => {
                 />
 
                 <IoChatbubblesOutline
-                    className={classNames("duration-300 cursor-pointer", {
-                        "text-blue-color dark:text-blue-dark-color": latestPost?.isCommentsActive,
-                        "text-grey-color dark:text-grey-dark-color hover:!text-blue-color dark:hover:!text-blue-dark-color":
-                            !latestPost?.isCommentsActive,
-                    })}
+                    className="text-grey-color dark:text-grey-dark-color hover:!text-blue-color dark:hover:!text-blue-dark-color"
                     size="1.3rem"
                 />
             </Flex>

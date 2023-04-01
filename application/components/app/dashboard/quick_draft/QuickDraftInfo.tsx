@@ -1,19 +1,18 @@
 import Button from "@/components/build/Button";
 import Flex from "@/components/build/Flex";
-import Input from "@/components/build/Input";
 import SettingsInfo from "@/components/build/SettingsInfo";
-import { AppState, AppStateAction, QuickDraft, SwitchBooleans } from "@/redux/types/main";
+import changeQuickDraftAction from "@/redux/actions/change_actions/changeQuickDraftAction";
+import { QuickDraft } from "@/redux/types/data";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const QuickDraftInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     const [draftInfo, setDraftInfo] = useState<QuickDraft>({
         title: "",
@@ -21,20 +20,10 @@ const QuickDraftInfo = () => {
     });
 
     function editDraftInfo(): void | false {
-        dispatch({
-            type: "changeQuickDraft",
-            payload: {
-                quickDraft: {
-                    title: draftInfo.title ? draftInfo.title : "Advice",
-                    content: draftInfo.content
-                        ? draftInfo.content
-                        : "If You See Time Speeding Up, Then You Are Wrong Because It Is Constant And It Is At The Same Pace Every Day, But You May See It As Such Due To The Stupidity Of Your Use Of It !",
-                },
-            },
-        });
+        dispatch(changeQuickDraftAction(draftInfo));
 
         if (!draftInfo.title && !draftInfo.content) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.success("applying the default Settings successfully !", {
                     position: "top-center",
                     theme: state.theme,
@@ -43,7 +32,7 @@ const QuickDraftInfo = () => {
             return false;
         }
 
-        switchBooleans.websiteControl.isNotificationActive &&
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success("Settings saved successfully !", {
                 position: "top-center",
                 theme: state.theme,
@@ -84,7 +73,7 @@ const QuickDraftInfo = () => {
                         __secondary_input_field:
                             state.components.inputField.type !== "default" &&
                             state.components.inputField.type !== "primary",
-                        "rounded-md": switchBooleans.uiControl.isRounded,
+                        "rounded-md": state.switchBooleans.uiControl.isRounded,
                     })}
                     id="content"
                     cols={30}

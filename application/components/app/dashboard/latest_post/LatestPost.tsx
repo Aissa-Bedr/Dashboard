@@ -3,16 +3,17 @@ import Flex from "@/components/build/Flex";
 import ListLength from "@/components/build/ListLength";
 import LogoContainer from "@/components/build/LogoContainer";
 import Move from "@/components/build/Move";
-import { AppState, AppStateAction, Posts } from "@/redux/types/main";
-import React, { Dispatch } from "react";
+import { AppState } from "@/redux/types/main";
 import { useDispatch, useSelector } from "react-redux";
 import BoxContainer from "../../main/BoxContainer";
 import PrimaryLogo from "../../main/PrimaryLogo";
 import LatestPostInfo from "./LatestPostInfo";
+import { Posts } from "@/redux/types/data";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const LatestPost = () => {
     const posts = useSelector<AppState, Posts[]>((state) => state.posts);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <BoxContainer>
@@ -21,12 +22,7 @@ const LatestPost = () => {
                     <PrimaryLogo text="Latest post" />
 
                     <Flex className="gap-2" direction="row" items="center">
-                        <Move
-                            href="/dashboard/posts"
-                            onClick={() =>
-                                dispatch({ type: "changeLink", payload: { links: { currentLinkValue: "dashboard" } } })
-                            }
-                        >
+                        <Move href="/dashboard/posts" onClick={() => dispatch(changeLinkAction("dashboard"))}>
                             Show more
                         </Move>
 

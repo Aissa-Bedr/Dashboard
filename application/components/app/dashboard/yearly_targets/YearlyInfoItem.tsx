@@ -1,5 +1,5 @@
 import Flex from "@/components/build/Flex";
-import { AppState, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
@@ -13,7 +13,7 @@ const YearlyInfoItem: FC<YearlyInfoItemProps> = ({
     secondaryBackground,
     ratio,
 }) => {
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
+    const state = useSelector<AppState, AppState>((state) => state);
 
     const primaryBackgroundThemes: PrimaryBackgroundThemes = {
         blue: "bg-blue-color dark:bg-blue-dark-color",
@@ -40,7 +40,7 @@ const YearlyInfoItem: FC<YearlyInfoItemProps> = ({
                     <Flex
                         className={classNames("w-24 h-20", {
                             [secondaryBackgroundThemes[secondaryBackground]]: secondaryBackground,
-                            "rounded-md": switchBooleans.uiControl.isRounded,
+                            "rounded-md": state.switchBooleans.uiControl.isRounded,
                         })}
                         direction="row"
                         items="center"
@@ -55,20 +55,20 @@ const YearlyInfoItem: FC<YearlyInfoItemProps> = ({
                         <div
                             className={classNames("w-full h-1", {
                                 [secondaryBackgroundThemes[secondaryBackground]]: secondaryBackground,
-                                "rounded-md": switchBooleans.uiControl.isRounded,
+                                "rounded-md": state.switchBooleans.uiControl.isRounded,
                             })}
                         >
                             <div
                                 className={classNames("relative h-1 z-10", {
                                     [primaryBackgroundThemes[primaryBackground]]: primaryBackground,
                                     [itemRatioValues[ratio]]: ratio,
-                                    "rounded-md": switchBooleans.uiControl.isRounded,
+                                    "rounded-md": state.switchBooleans.uiControl.isRounded,
                                 })}
                             >
                                 <div
                                     className={classNames("absolute text-sm right-0 -top-8 py-0.5 px-1 text-white", {
                                         [primaryBackgroundThemes[primaryBackground]]: primaryBackground,
-                                        "rounded-md": switchBooleans.uiControl.isRounded,
+                                        "rounded-md": state.switchBooleans.uiControl.isRounded,
                                     })}
                                 >
                                     {ratio}%

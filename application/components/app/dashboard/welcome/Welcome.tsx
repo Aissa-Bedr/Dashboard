@@ -2,29 +2,28 @@ import ContentWrapper from "@/components/build/ContentWrapper";
 import Flex from "@/components/build/Flex";
 import LogoContainer from "@/components/build/LogoContainer";
 import Move from "@/components/build/Move";
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import Image from "next/image";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import BoxContainer from "../../main/BoxContainer";
 import PrimaryLogo from "../../main/PrimaryLogo";
 import SecondaryLogo from "../../main/SecondaryLogo";
 import { WelcomeProps } from "./types/main";
 import WelcomeInfo from "./WelcomeInfo";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const Welcome: FC<WelcomeProps> = ({ dontIncludeShowMoreLink }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <BoxContainer dontIncludeSpaces>
             <Flex className="relative" direction="col">
                 <Flex
                     className={classNames("p-5 mb-10 bg-grey-alt-color dark:bg-grey-dark-alt-color", {
-                        "rounded-md rounded-b-none": switchBooleans.uiControl.isRounded,
+                        "rounded-md rounded-b-none": state.switchBooleans.uiControl.isRounded,
                     })}
                     direction="row"
                     items="start"
@@ -60,22 +59,12 @@ const Welcome: FC<WelcomeProps> = ({ dontIncludeShowMoreLink }) => {
 
                 <Flex className="p-5" direction="row" items="center" justify="between">
                     {!dontIncludeShowMoreLink && (
-                        <Move
-                            href="/dashboard/welcome"
-                            onClick={() =>
-                                dispatch({ type: "changeLink", payload: { links: { currentLinkValue: "dashboard" } } })
-                            }
-                        >
+                        <Move href="/dashboard/welcome" onClick={() => dispatch(changeLinkAction("dashboard"))}>
                             Show more
                         </Move>
                     )}
 
-                    <Move
-                        href="/profile"
-                        onClick={() =>
-                            dispatch({ type: "changeLink", payload: { links: { currentLinkValue: "profile" } } })
-                        }
-                    >
+                    <Move href="/profile" onClick={() => dispatch(changeLinkAction("profile"))}>
                         Profile
                     </Move>
                 </Flex>

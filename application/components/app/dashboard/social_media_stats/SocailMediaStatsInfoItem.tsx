@@ -1,5 +1,5 @@
 import Flex from "@/components/build/Flex";
-import { AppState, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
@@ -14,7 +14,7 @@ const SocailMediaStatsInfoItem: FC<SocailMediaStatsInfoItemProps> = ({
     backgroundTheme,
     colorTheme,
 }) => {
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
+    const state = useSelector<AppState, AppState>((state) => state);
 
     const backgroundThemeTypes: ThemeTypes = {
         blue: "bg-[#1877f2] dark:bg-blue-dark-color",
@@ -48,7 +48,7 @@ const SocailMediaStatsInfoItem: FC<SocailMediaStatsInfoItemProps> = ({
 
                 <a
                     className={classNames("capitalize text-sm py-1 px-2 text-white", {
-                        "rounded-md": switchBooleans.uiControl.isRounded,
+                        "rounded-md": state.switchBooleans.uiControl.isRounded,
                         [backgroundThemeTypes[backgroundTheme]]: backgroundTheme,
                     })}
                     href={href}
