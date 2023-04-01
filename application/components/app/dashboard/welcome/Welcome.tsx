@@ -5,7 +5,6 @@ import Move from "@/components/build/Move";
 import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
 import classNames from "classnames";
 import Image from "next/image";
-import Link from "next/link";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
