@@ -4,14 +4,12 @@ import { BusinessProjectProps } from "../types/main";
 import Flex from "@/components/build/Flex";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import { statusTypes } from "../../dashboard/projects/ProjectsInfoItem";
 import { FiTrash2 } from "react-icons/fi";
-import { Theme } from "@/redux/types/app";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SecondaryLogo from "../../main/SecondaryLogo";
+import removeBusinessProjectAction from "@/redux/actions/remove_actions/removeBusinessProjectAction";
 
 const BusinessProject: FC<BusinessProjectProps> = ({
     id,
@@ -23,14 +21,13 @@ const BusinessProject: FC<BusinessProjectProps> = ({
     status,
     keyWord,
 }) => {
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const theme = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const state = useSelector<AppState, AppState>((state) => state);
+    const dispatch = useDispatch();
 
     function removeBusinessProject(): void {
-        dispatch({ type: "removeBusinessProject", payload: { businessProjects: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Business Project removed successfully !`, { position: "top-center", theme });
+        dispatch(removeBusinessProjectAction(id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
+            toast.warning(`Business Project removed successfully !`, { position: "top-center", theme: state.theme });
     }
 
     return (
@@ -54,7 +51,7 @@ const BusinessProject: FC<BusinessProjectProps> = ({
                     <p
                         className={classNames(
                             "text-center bg-grey-alt-color text-black dark:bg-grey-dark-alt-color dark:text-grey-dark-color px-2 py-1.5 text-sm font-semibold",
-                            { "rounded-md": switchBooleans.uiControl.isRounded }
+                            { "rounded-md": state.switchBooleans.uiControl.isRounded }
                         )}
                     >
                         {keyWord}

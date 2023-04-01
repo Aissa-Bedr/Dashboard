@@ -1,16 +1,7 @@
 import Flex from "@/components/build/Flex";
-import {
-    AppState,
-    AppStateAction,
-    BusinessProjects,
-    Files,
-    Projects,
-    Reminders,
-    SwitchBooleans,
-} from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
@@ -21,11 +12,13 @@ import ListLength from "@/components/build/ListLength";
 import Select from "@/components/build/Select";
 import { StatusTypes } from "@/components/app/dashboard/projects/types/main";
 import BusinessProject from "../business_projects/BusinessProject";
+import { BusinessProjects } from "@/redux/types/data";
+import addBusinessProjectAction from "@/redux/actions/add_actions/addBusinessProjectAction";
 
 const BusinessProjectsInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
+
     const [businessProjectInfo, setBusinessProjectInfo] = useState<BusinessProjects>({
         name: "",
         description: "",
@@ -44,7 +37,7 @@ const BusinessProjectsInfo = () => {
 
     function addBusinessProject(): void | false {
         if (!businessProjectInfo.name || !businessProjectInfo.finishDate || !businessProjectInfo.description) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Business Project can't be empty !`, { position: "top-center", theme: state.theme });
             return false;
         }
@@ -54,7 +47,7 @@ const BusinessProjectsInfo = () => {
             businessProjectInfo.team < 1 ||
             !patterns.finishDate.test(businessProjectInfo.finishDate)
         ) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Invalid information !`, {
                     position: "top-center",
                     theme: state.theme,
@@ -62,8 +55,8 @@ const BusinessProjectsInfo = () => {
             return false;
         }
 
-        dispatch({ type: "addBusinessProject", payload: { businessProjects: businessProjectInfo } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(addBusinessProjectAction(businessProjectInfo));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(`Business Project added successfully !`, { position: "top-center", theme: state.theme });
         setBusinessProjectInfo({
             name: "",
