@@ -8,7 +8,7 @@ export interface ThemeTypes {
 }
 
 export interface RemindersInfoItemProps {
-    id?: number;
+    id?: string;
     title: string;
     time: string;
     theme: Theme;

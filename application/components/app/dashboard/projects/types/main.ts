@@ -8,7 +8,7 @@ export interface StatusTypes {
 }
 
 export interface ProjectsInfoItemProps {
-    id?: number;
+    id?: string;
     name: string;
     finishDate: string;
     client: string;

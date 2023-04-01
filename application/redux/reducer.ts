@@ -1,108 +1,83 @@
-import { randomId } from "./../assests/logic/script";
+import { nanoid } from "nanoid";
 import { AppState, AppStateAction } from "./types/main";
-
-export const initialState: AppState = {
-    currentLink: "dashboard",
-    theme: "light",
-    tasks: [],
-    switchBooleans: {
-        uiControl: {
-            isUIControlActive: true,
-            isThemeDark: false,
-            isNavMinimized: false,
-            isRounded: true,
-            isNewSearchbar: false,
-            isNavFixed: false,
-            isNewNavbar: false,
-            isNewNavInTheTop: false,
-            isSearchBarShowed: true,
-        },
-        websiteControl: {
-            isWebsiteControlActive: true,
-            isNotificationActive: true,
-            isZoomIn: false,
-        },
-        widgetsControl: {
-            isWidgetsControlActive: true,
-            isQuickDraftActive: false,
-            isYearlyTargetsActive: false,
-            isTicketsStatisticsActive: false,
-            isLatestNewsActive: false,
-            isLastProjectProgressActive: false,
-        },
-        profileControl: {
-            isGeneralInfoActive: false,
-            isPersonalInfoActive: true,
-            isJobInfoActive: false,
-            isBillingInfoActive: false,
-        },
-    },
-    generalInfo: {
-        firstName: "Aissa",
-        lastName: "Bedr",
-    },
-    userInfo: {
-        designation: "Web Developer",
-        projects: 80,
-        earned: 8500,
-    },
-    profileInfo: {
-        email: "slayaissabedr@gmail.com",
-        phone: 213552328332,
-        gender: "male",
-        country: "Algeria",
-        birthDay: "20/10/2005",
-        programmingLanguage: "TypeScript",
-        experience: 1,
-    },
-    skills: [],
-    appearance: {
-        light: {
-            theme: "default",
-            backgroundColor: "bg-blue-color hover:bg-blue-alt-color",
-            color: "text-blue-color",
-        },
-        dark: {
-            theme: "default",
-            backgroundColor: "dark:bg-blue-dark-color dark:hover:bg-blue-dark-alt-color",
-            color: "dark:text-blue-dark-color",
-        },
-        logo: {
-            type: "default",
-            src: "logos/favicon.ico",
-        },
-    },
-    components: {
-        switchButton: {
-            type: "default",
-        },
-        inputField: {
-            type: "default",
-        },
-        button: {
-            type: "default",
-        },
-    },
-    files: [],
-    reminders: [],
-    projects: [],
-    quickDraft: {
-        title: "Advice",
-        content:
-            "If You See Time Speeding Up, Then You Are Wrong Because It Is Constant And It Is At The Same Pace Every Day, But You May See It As Such Due To The Stupidity Of Your Use Of It !",
-    },
-    posts: [],
-    businessProjects: [],
-    friends: [],
-    courses: [],
-};
+import { initialState } from "./state";
+import {
+    CHANGE_BUTTON_COMPONENT,
+    CHANGE_DARK_APPEARANCE,
+    CHANGE_GENERAL_INFO,
+    CHANGE_INPUT_FIELD_COMPONENT,
+    CHANGE_LIGHT_APPEARANCE,
+    CHANGE_LINK,
+    CHANGE_LOGO_APPEARANCE,
+    CHANGE_PROFILE_INFO,
+    CHANGE_QUICK_DRAFT,
+    CHANGE_SWITCH_BUTTON_COMPONENT,
+    CHANGE_USER_INFO,
+} from "./constants/changeTypes";
+import {
+    TOGGLE_IS_BILLING_INFO_ACTIVE,
+    TOGGLE_IS_FRIEND_MESSAGE,
+    TOGGLE_IS_GENERAL_INFO_ACTIVE,
+    TOGGLE_IS_JOB_INFO_ACTIVE,
+    TOGGLE_IS_LAST_PROJECT_PROGRESS_ACTIVE,
+    TOGGLE_IS_LATEST_NEWS_ACTIVE,
+    TOGGLE_IS_LIKED_COMMENT,
+    TOGGLE_IS_LIKED_COURSE,
+    TOGGLE_IS_LIKED_FRIEND,
+    TOGGLE_IS_LIKED_MESSAGE,
+    TOGGLE_IS_LIKED_POST,
+    TOGGLE_IS_NAV_FIXED,
+    TOGGLE_IS_NAV_MINIMIZED,
+    TOGGLE_IS_NEW_NAV_BAR,
+    TOGGLE_IS_NEW_NAV_IN_THE_TOP,
+    TOGGLE_IS_NEW_SEARCH_BAR,
+    TOGGLE_IS_NOTIFICATION_ACTIVE,
+    TOGGLE_IS_PERSONAL_INFO_ACTIVE,
+    TOGGLE_IS_QUICK_DRAFT_ACTIVE,
+    TOGGLE_IS_ROUNDED,
+    TOGGLE_IS_SEARCH_BAR_SHOWED,
+    TOGGLE_IS_TICKETS_STATISTICS_ACTIVE,
+    TOGGLE_IS_YEARLY_TARGETS_ACTIVE,
+    TOGGLE_IS_ZOOM_IN,
+    TOGGLE_THEME,
+    TOGGLE_UI_CONTROL,
+    TOGGLE_WEBSITE_CONTROL,
+    TOGGLE_WIDGETS_CONTROL,
+} from "./constants/toggleTypes";
+import {
+    ADD_BUSINESS_PROJECT,
+    ADD_COMMENT,
+    ADD_FRIEND,
+    SEND_MESSAGE,
+    ADD_POST,
+    ADD_PROJECT,
+    ADD_REMINDER,
+    ADD_SKILL,
+    ADD_TASK,
+    UPLOAD_FILE,
+    ADD_COURSE,
+} from "./constants/addTypes";
+import {
+    REMOVE_BUSINESS_PROJECT,
+    REMOVE_COMMENT,
+    REMOVE_COURSE,
+    REMOVE_FILE,
+    REMOVE_FRIEND,
+    REMOVE_MESSAGE,
+    REMOVE_POST,
+    REMOVE_PROJECT,
+    REMOVE_REMINDER,
+    REMOVE_SKILL,
+    REMOVE_TASK,
+} from "./constants/removeTypes";
+import { CLEAR_CHAT, COMPLETE_TASK, RECOVER_TASK } from "./constants/mainTypes";
 
 function reducer(state = initialState, action: AppStateAction): AppState {
     switch (action.type) {
-        case "changeLink":
+        case CHANGE_LINK:
             return { ...state, currentLink: action.payload?.links?.currentLinkValue! };
 
-        case "toggleTheme":
+        case TOGGLE_THEME:
             return {
                 ...state,
                 theme: state.theme === "dark" ? "light" : "dark",
@@ -115,19 +90,16 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "addTask":
+        case ADD_TASK:
             return {
                 ...state,
-                tasks: [
-                    { id: randomId(), content: action.payload?.tasks?.content!, isCompleted: false },
-                    ...state.tasks,
-                ],
+                tasks: [{ id: nanoid(), content: action.payload?.tasks?.content!, isCompleted: false }, ...state.tasks],
             };
 
-        case "removeTask":
+        case REMOVE_TASK:
             return { ...state, tasks: [...state.tasks].filter((item) => item.id !== action.payload?.tasks?.id) };
 
-        case "completeTask":
+        case COMPLETE_TASK:
             return {
                 ...state,
                 tasks: [...state.tasks].map((item) =>
@@ -135,7 +107,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "recoverTask":
+        case RECOVER_TASK:
             return {
                 ...state,
                 tasks: [...state.tasks].map((item) =>
@@ -143,7 +115,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "toggleUIControl":
+        case TOGGLE_UI_CONTROL:
             return {
                 ...state,
                 switchBooleans: {
@@ -155,7 +127,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsNavMinimized":
+        case TOGGLE_IS_NAV_MINIMIZED:
             return {
                 ...state,
                 switchBooleans: {
@@ -167,7 +139,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsRounded":
+        case TOGGLE_IS_ROUNDED:
             return {
                 ...state,
                 switchBooleans: {
@@ -179,7 +151,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsNewSearchbar":
+        case TOGGLE_IS_NEW_SEARCH_BAR:
             return {
                 ...state,
                 switchBooleans: {
@@ -191,7 +163,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsNavFixed":
+        case TOGGLE_IS_NAV_FIXED:
             return {
                 ...state,
                 switchBooleans: {
@@ -203,7 +175,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsNewNavbar":
+        case TOGGLE_IS_NEW_NAV_BAR:
             return {
                 ...state,
                 switchBooleans: {
@@ -215,7 +187,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsNewNavInTheTop":
+        case TOGGLE_IS_NEW_NAV_IN_THE_TOP:
             return {
                 ...state,
                 switchBooleans: {
@@ -227,7 +199,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsSearchBarShowed":
+        case TOGGLE_IS_SEARCH_BAR_SHOWED:
             return {
                 ...state,
                 switchBooleans: {
@@ -239,7 +211,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleWebsiteControl":
+        case TOGGLE_WEBSITE_CONTROL:
             return {
                 ...state,
                 switchBooleans: {
@@ -251,7 +223,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsNotificationActive":
+        case TOGGLE_IS_NOTIFICATION_ACTIVE:
             return {
                 ...state,
                 switchBooleans: {
@@ -263,7 +235,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsZoomIn":
+        case TOGGLE_IS_ZOOM_IN:
             return {
                 ...state,
                 switchBooleans: {
@@ -275,7 +247,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleWidgetsControl":
+        case TOGGLE_WIDGETS_CONTROL:
             return {
                 ...state,
                 switchBooleans: {
@@ -287,7 +259,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsQuickDraftActive":
+        case TOGGLE_IS_QUICK_DRAFT_ACTIVE:
             return {
                 ...state,
                 switchBooleans: {
@@ -299,7 +271,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsYearlyTargetsActive":
+        case TOGGLE_IS_YEARLY_TARGETS_ACTIVE:
             return {
                 ...state,
                 switchBooleans: {
@@ -311,7 +283,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsTicketsStatisticsActive":
+        case TOGGLE_IS_TICKETS_STATISTICS_ACTIVE:
             return {
                 ...state,
                 switchBooleans: {
@@ -323,7 +295,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsLatestNewsActive":
+        case TOGGLE_IS_LATEST_NEWS_ACTIVE:
             return {
                 ...state,
                 switchBooleans: {
@@ -335,7 +307,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsLastProjectProgressActive":
+        case TOGGLE_IS_LAST_PROJECT_PROGRESS_ACTIVE:
             return {
                 ...state,
                 switchBooleans: {
@@ -347,7 +319,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsGeneralInfoActive":
+        case TOGGLE_IS_GENERAL_INFO_ACTIVE:
             return {
                 ...state,
                 switchBooleans: {
@@ -359,7 +331,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsPersonalInfoActive":
+        case TOGGLE_IS_PERSONAL_INFO_ACTIVE:
             return {
                 ...state,
                 switchBooleans: {
@@ -371,7 +343,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsJobInfoActive":
+        case TOGGLE_IS_JOB_INFO_ACTIVE:
             return {
                 ...state,
                 switchBooleans: {
@@ -383,7 +355,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "toggleIsBillingInfoActive":
+        case TOGGLE_IS_BILLING_INFO_ACTIVE:
             return {
                 ...state,
                 switchBooleans: {
@@ -395,7 +367,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "changeGeneralInfo":
+        case CHANGE_GENERAL_INFO:
             return {
                 ...state,
                 generalInfo: {
@@ -404,7 +376,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "changeUserInfo":
+        case CHANGE_USER_INFO:
             return {
                 ...state,
                 userInfo: {
@@ -414,7 +386,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "changeProfileInfo":
+        case CHANGE_PROFILE_INFO:
             return {
                 ...state,
                 profileInfo: {
@@ -428,19 +400,19 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "addSkill":
+        case ADD_SKILL:
             return {
                 ...state,
-                skills: [{ id: randomId(), content: action.payload?.skills?.content! }, ...state.skills],
+                skills: [{ id: nanoid(), content: action.payload?.skills?.content! }, ...state.skills],
             };
 
-        case "removeSkill":
+        case REMOVE_SKILL:
             return {
                 ...state,
                 skills: [...state.skills].filter((skill) => skill.id !== action.payload?.skills?.id),
             };
 
-        case "changeLightAppearance":
+        case CHANGE_LIGHT_APPEARANCE:
             return {
                 ...state,
                 appearance: {
@@ -453,7 +425,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "changeDarkAppearance":
+        case CHANGE_DARK_APPEARANCE:
             return {
                 ...state,
                 appearance: {
@@ -466,114 +438,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "changeSwitchButtonComponent":
-            return {
-                ...state,
-                components: {
-                    ...state.components,
-                    switchButton: {
-                        type: action.payload?.components?.switchButton?.type,
-                    },
-                },
-            };
-
-        case "changeInputFieldComponent":
-            return {
-                ...state,
-                components: {
-                    ...state.components,
-                    inputField: {
-                        type: action.payload?.components?.inputField?.type,
-                    },
-                },
-            };
-
-        case "changeButtonComponent":
-            return {
-                ...state,
-                components: {
-                    ...state.components,
-                    button: {
-                        type: action.payload?.components?.button?.type,
-                    },
-                },
-            };
-
-        case "uploadFile":
-            return {
-                ...state,
-                files: [
-                    {
-                        id: randomId(),
-                        fileName: action.payload?.files?.fileName!,
-                        fileType: action.payload?.files?.fileType!,
-                        fileUploader: action.payload?.files?.fileUploader!,
-                        fileSize: action.payload?.files?.fileSize!,
-                        fileSizeType: action.payload?.files?.fileSizeType!,
-                    },
-                    ...state.files,
-                ],
-            };
-
-        case "removeFile":
-            return {
-                ...state,
-                files: [...state.files].filter((file) => file.id !== action.payload?.files?.id),
-            };
-
-        case "addReminder":
-            return {
-                ...state,
-                reminders: [
-                    {
-                        id: randomId(),
-                        title: action.payload?.reminders?.title!,
-                        time: action.payload?.reminders?.time!,
-                        theme: action.payload?.reminders?.theme!,
-                    },
-                    ...state.reminders,
-                ],
-            };
-
-        case "removeReminder":
-            return {
-                ...state,
-                reminders: [...state.reminders].filter((reminder) => reminder.id !== action.payload?.reminders?.id),
-            };
-
-        case "addProject":
-            return {
-                ...state,
-                projects: [
-                    {
-                        id: randomId(),
-                        name: action.payload?.projects?.name!,
-                        finishDate: action.payload?.projects?.finishDate!,
-                        client: action.payload?.projects?.client!,
-                        price: action.payload?.projects?.price!,
-                        team: action.payload?.projects?.team!,
-                        status: action.payload?.projects?.status!,
-                    },
-                    ...state.projects,
-                ],
-            };
-
-        case "removeProject":
-            return {
-                ...state,
-                projects: [...state.projects].filter((project) => project.id !== action.payload?.projects?.id),
-            };
-
-        case "changeQuickDraft":
-            return {
-                ...state,
-                quickDraft: {
-                    title: action.payload?.quickDraft?.title!,
-                    content: action.payload?.quickDraft?.content!,
-                },
-            };
-
-        case "changeLogoAppearance":
+        case CHANGE_LOGO_APPEARANCE:
             return {
                 ...state,
                 appearance: {
@@ -585,12 +450,119 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 },
             };
 
-        case "addPost":
+        case CHANGE_SWITCH_BUTTON_COMPONENT:
+            return {
+                ...state,
+                components: {
+                    ...state.components,
+                    switchButton: {
+                        type: action.payload?.components?.switchButton?.type,
+                    },
+                },
+            };
+
+        case CHANGE_INPUT_FIELD_COMPONENT:
+            return {
+                ...state,
+                components: {
+                    ...state.components,
+                    inputField: {
+                        type: action.payload?.components?.inputField?.type,
+                    },
+                },
+            };
+
+        case CHANGE_BUTTON_COMPONENT:
+            return {
+                ...state,
+                components: {
+                    ...state.components,
+                    button: {
+                        type: action.payload?.components?.button?.type,
+                    },
+                },
+            };
+
+        case UPLOAD_FILE:
+            return {
+                ...state,
+                files: [
+                    {
+                        id: nanoid(),
+                        fileName: action.payload?.files?.fileName!,
+                        fileType: action.payload?.files?.fileType!,
+                        fileUploader: action.payload?.files?.fileUploader!,
+                        fileSize: action.payload?.files?.fileSize!,
+                        fileSizeType: action.payload?.files?.fileSizeType!,
+                    },
+                    ...state.files,
+                ],
+            };
+
+        case REMOVE_FILE:
+            return {
+                ...state,
+                files: [...state.files].filter((file) => file.id !== action.payload?.files?.id),
+            };
+
+        case ADD_REMINDER:
+            return {
+                ...state,
+                reminders: [
+                    {
+                        id: nanoid(),
+                        title: action.payload?.reminders?.title!,
+                        time: action.payload?.reminders?.time!,
+                        theme: action.payload?.reminders?.theme!,
+                    },
+                    ...state.reminders,
+                ],
+            };
+
+        case REMOVE_REMINDER:
+            return {
+                ...state,
+                reminders: [...state.reminders].filter((reminder) => reminder.id !== action.payload?.reminders?.id),
+            };
+
+        case ADD_PROJECT:
+            return {
+                ...state,
+                projects: [
+                    {
+                        id: nanoid(),
+                        name: action.payload?.projects?.name!,
+                        finishDate: action.payload?.projects?.finishDate!,
+                        client: action.payload?.projects?.client!,
+                        price: action.payload?.projects?.price!,
+                        team: action.payload?.projects?.team!,
+                        status: action.payload?.projects?.status!,
+                    },
+                    ...state.projects,
+                ],
+            };
+
+        case REMOVE_PROJECT:
+            return {
+                ...state,
+                projects: [...state.projects].filter((project) => project.id !== action.payload?.projects?.id),
+            };
+
+        case CHANGE_QUICK_DRAFT:
+            return {
+                ...state,
+                quickDraft: {
+                    title: action.payload?.quickDraft?.title!,
+                    content: action.payload?.quickDraft?.content!,
+                },
+            };
+
+        case ADD_POST:
             return {
                 ...state,
                 posts: [
                     {
-                        id: randomId(),
+                        id: nanoid(),
                         postOwner: action.payload?.posts?.postOwner!,
                         postTitle: action.payload?.posts?.postTitle!,
                         postDescription: action.payload?.posts?.postDescription!,
@@ -601,13 +573,13 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ],
             };
 
-        case "removePost":
+        case REMOVE_POST:
             return {
                 ...state,
                 posts: [...state.posts].filter((post) => post.id !== action.payload?.posts?.id),
             };
 
-        case "toggleIsLikedPost":
+        case TOGGLE_IS_LIKED_POST:
             return {
                 ...state,
                 posts: [...state.posts].map((post) =>
@@ -615,7 +587,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "addComment":
+        case ADD_COMMENT:
             return {
                 ...state,
                 posts: [...state.posts].map((post) =>
@@ -625,7 +597,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                               comments: [
                                   ...post.comments!,
                                   {
-                                      id: randomId(),
+                                      id: nanoid(),
                                       commentDescription: action.payload?.comments?.commentDescription!,
                                       isLiked: false,
                                   },
@@ -635,7 +607,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "removeComment":
+        case REMOVE_COMMENT:
             return {
                 ...state,
                 posts: [...state.posts].map((post) =>
@@ -650,7 +622,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "toggleIsLikedComment":
+        case TOGGLE_IS_LIKED_COMMENT:
             return {
                 ...state,
                 posts: [...state.posts].map((post) =>
@@ -667,12 +639,12 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "addBusinessProject":
+        case ADD_BUSINESS_PROJECT:
             return {
                 ...state,
                 businessProjects: [
                     {
-                        id: randomId(),
+                        id: nanoid(),
                         name: action.payload?.businessProjects?.name!,
                         finishDate: action.payload?.businessProjects?.finishDate!,
                         description: action.payload?.businessProjects?.description!,
@@ -685,7 +657,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ],
             };
 
-        case "removeBusinessProject":
+        case REMOVE_BUSINESS_PROJECT:
             return {
                 ...state,
                 businessProjects: [...state.businessProjects].filter(
@@ -693,12 +665,12 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "addFriend":
+        case ADD_FRIEND:
             return {
                 ...state,
                 friends: [
                     {
-                        id: randomId(),
+                        id: nanoid(),
                         name: action.payload?.friends?.name!,
                         pictureSrc: action.payload?.friends?.pictureSrc!,
                         job: action.payload?.friends?.job!,
@@ -709,13 +681,13 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ],
             };
 
-        case "removeFriend":
+        case REMOVE_FRIEND:
             return {
                 ...state,
                 friends: [...state.friends].filter((friend) => friend.id !== action.payload?.friends?.id),
             };
 
-        case "toggleIsLikedFriend":
+        case TOGGLE_IS_LIKED_FRIEND:
             return {
                 ...state,
                 friends: [...state.friends].map((friend) =>
@@ -723,7 +695,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "addMessage":
+        case SEND_MESSAGE:
             return {
                 ...state,
                 friends: [...state.friends].map((friend) =>
@@ -733,7 +705,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                               messages: [
                                   ...friend.messages!,
                                   {
-                                      id: randomId(),
+                                      id: nanoid(),
                                       messageDescription: action.payload?.messages?.messageDescription!,
                                       isLiked: false,
                                       isFriendMessage: action.payload?.messages?.isFriendMessage!,
@@ -744,7 +716,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "removeMessage":
+        case REMOVE_MESSAGE:
             return {
                 ...state,
                 friends: [...state.friends].map((friend) =>
@@ -759,7 +731,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "toggleIsLikedMessage":
+        case TOGGLE_IS_LIKED_MESSAGE:
             return {
                 ...state,
                 friends: [...state.friends].map((friend) =>
@@ -776,7 +748,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "toggleIsFriendMessage":
+        case TOGGLE_IS_FRIEND_MESSAGE:
             return {
                 ...state,
                 friends: [...state.friends].map((friend) =>
@@ -793,7 +765,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "clearChat":
+        case CLEAR_CHAT:
             return {
                 ...state,
                 friends: [...state.friends].map((friend) =>
@@ -806,12 +778,12 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ),
             };
 
-        case "addCourse":
+        case ADD_COURSE:
             return {
                 ...state,
                 courses: [
                     {
-                        id: randomId(),
+                        id: nanoid(),
                         title: action.payload?.courses?.title!,
                         description: action.payload?.courses?.description!,
                         videoSrc: action.payload?.courses?.videoSrc!,
@@ -822,13 +794,13 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 ],
             };
 
-        case "removeCourse":
+        case REMOVE_COURSE:
             return {
                 ...state,
                 courses: [...state.courses].filter((course) => course.id !== action.payload?.courses?.id),
             };
 
-        case "toggleIsLikedCourse":
+        case TOGGLE_IS_LIKED_COURSE:
             return {
                 ...state,
                 courses: [...state.courses].map((course) =>

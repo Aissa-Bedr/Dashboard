@@ -4,14 +4,14 @@ import { Dispatch } from "redux";
 export type MessageType = "sayHello" | "interrogativeQuestion" | "rightOrWrong";
 
 export interface Message {
-    id?: number;
+    id?: string;
     messageDescription: string;
     isLiked: boolean;
     isFriendMessage: boolean;
 }
 
 export interface FriendProps {
-    id?: number;
+    id?: string;
     pictureSrc: string;
     name: string;
     job: string;

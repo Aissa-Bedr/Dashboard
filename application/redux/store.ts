@@ -1,6 +1,7 @@
 import { AppState } from "@/redux/types/main";
 import { legacy_createStore } from "redux";
-import reducer, { initialState } from "./reducer";
+import { initialState } from "./state";
+import reducer from "./reducer";
 
 const appState: AppState =
     typeof window !== "undefined" && localStorage.getItem("appState")

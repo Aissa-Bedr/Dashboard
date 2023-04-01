@@ -1,5 +1,5 @@
 export interface CourseProps {
-    id?: number;
+    id?: string;
     title: string;
     description: string;
     videoSrc: string;
