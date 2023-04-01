@@ -1,18 +1,16 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Dispatch } from "redux";
-import { Theme } from "@/redux/types/app";
 import { ProjectsInfoItemProps, StatusTypes } from "@/components/app/dashboard/projects/types/main";
+import removeProjectAction from "@/redux/actions/remove_actions/removeProjectAction";
 
 const EachProject: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, client, price, team, status }) => {
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const theme = useSelector<AppState, Theme>((state) => state.theme);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const state = useSelector<AppState, AppState>((state) => state);
+    const dispatch = useDispatch();
 
     const statusTypes: StatusTypes = {
         pending: "bg-orange-color",
@@ -22,9 +20,9 @@ const EachProject: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, client, 
     };
 
     function removeProject(): void {
-        dispatch({ type: "removeProject", payload: { projects: { id } } });
-        switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Project removed successfully !`, { position: "top-center", theme });
+        dispatch(removeProjectAction(id!));
+        state.switchBooleans.websiteControl.isNotificationActive &&
+            toast.warning(`Project removed successfully !`, { position: "top-center", theme: state.theme });
     }
 
     return (
@@ -41,7 +39,7 @@ const EachProject: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, client, 
                     <div
                         className={classNames("w-fit py-1 px-2 text-white", {
                             [statusTypes[status]]: status,
-                            "rounded-md": switchBooleans.uiControl.isRounded,
+                            "rounded-md": state.switchBooleans.uiControl.isRounded,
                         })}
                     >
                         {status}
@@ -50,7 +48,7 @@ const EachProject: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, client, 
                     <button
                         className={classNames(
                             "py-1 px-2 bg-red-500 hover:bg-red-600 active:bg-red-700 text-white duration-300",
-                            { "rounded-md": switchBooleans.uiControl.isRounded }
+                            { "rounded-md": state.switchBooleans.uiControl.isRounded }
                         )}
                         onClick={removeProject}
                     >

@@ -1,8 +1,7 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, Files, Projects, Reminders, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
@@ -13,11 +12,13 @@ import ListLength from "@/components/build/ListLength";
 import Select from "@/components/build/Select";
 import EachProject from "./EachProject";
 import { StatusTypes } from "@/components/app/dashboard/projects/types/main";
+import { Projects } from "@/redux/types/data";
+import addProjectAction from "@/redux/actions/add_actions/addProjectAction";
 
 const ProjectsInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
+
     const [projectInfo, setProjectInfo] = useState<Projects>({
         name: "",
         finishDate: "",
@@ -35,13 +36,13 @@ const ProjectsInfoPage = () => {
 
     function addProject(): void | false {
         if (!projectInfo.name || !projectInfo.finishDate || !projectInfo.client) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Project can't be empty !`, { position: "top-center", theme: state.theme });
             return false;
         }
 
         if (projectInfo.price < 0 || projectInfo.team < 1 || !patterns.finishDate.test(projectInfo.finishDate)) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.error(`Invalid information !`, {
                     position: "top-center",
                     theme: state.theme,
@@ -49,8 +50,8 @@ const ProjectsInfoPage = () => {
             return false;
         }
 
-        dispatch({ type: "addProject", payload: { projects: projectInfo } });
-        switchBooleans.websiteControl.isNotificationActive &&
+        dispatch(addProjectAction(projectInfo));
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success(`Project added successfully !`, { position: "top-center", theme: state.theme });
         setProjectInfo({ name: "", finishDate: "", client: "", price: "" as any, team: "" as any, status: "pending" });
     }
