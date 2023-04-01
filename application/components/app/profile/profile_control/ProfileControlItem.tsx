@@ -1,18 +1,24 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction, ProfileInfo, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SettingsInfo from "@/components/build/SettingsInfo";
 import Button from "@/components/build/Button";
 import Select from "@/components/build/Select";
+import { ProfileInfo } from "@/redux/types/data";
+import changeProfileInfoAction from "@/redux/actions/change_actions/changeProfileInfoAction";
+
+export const profileInfoPatters = {
+    email: /\w+@\w{2,8}\W\w{2,8}/g,
+    phone: /\d{3,15}/g,
+    birthDay: /\d{1,2}\W\d{1,2}\W\d{4}/g,
+};
 
 const ProfileControlItem = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
         email: "",
@@ -24,39 +30,18 @@ const ProfileControlItem = () => {
         experience: "" as any,
     });
 
-    const patters = {
-        email: /\w+@\w{2,8}\W\w{2,8}/g,
-        phone: /\d{3,15}/g,
-        birthDay: /\d{1,2}\W\d{1,2}\W\d{4}/g,
-    };
-
     function editProfileInfo(): void | false {
-        dispatch({
-            type: "changeProfileInfo",
-            payload: {
-                profileInfo: {
-                    email: patters.email.test(profileInfo.email) ? profileInfo.email : "slayaissabedr@gmail.com",
-                    phone: patters.phone.test(`${profileInfo.phone}`) ? profileInfo.phone : 213552328332,
-                    gender: profileInfo.gender,
-                    country: profileInfo.country ? profileInfo.country : "Algeria",
-                    birthDay: patters.birthDay.test(profileInfo.birthDay) ? profileInfo.birthDay : "20/10/2005",
-                    programmingLanguage: profileInfo.programmingLanguage
-                        ? profileInfo.programmingLanguage
-                        : "TypeScript",
-                    experience: profileInfo.experience && profileInfo.experience >= 1 ? profileInfo.experience : 1,
-                },
-            },
-        });
+        dispatch(changeProfileInfoAction(profileInfo));
 
         if (
-            !patters.email.test(profileInfo.email) ||
-            !patters.phone.test(`${profileInfo.phone}`) ||
-            !patters.birthDay.test(profileInfo.birthDay) ||
+            !profileInfoPatters.email.test(profileInfo.email) ||
+            !profileInfoPatters.phone.test(`${profileInfo.phone}`) ||
+            !profileInfoPatters.birthDay.test(profileInfo.birthDay) ||
             !profileInfo.country ||
             !profileInfo.programmingLanguage ||
             profileInfo.experience < 0
         ) {
-            switchBooleans.websiteControl.isNotificationActive &&
+            state.switchBooleans.websiteControl.isNotificationActive &&
                 toast.success("applying the default Settings successfully !", {
                     position: "top-center",
                     theme: state.theme,
@@ -65,7 +50,7 @@ const ProfileControlItem = () => {
             return false;
         }
 
-        switchBooleans.websiteControl.isNotificationActive &&
+        state.switchBooleans.websiteControl.isNotificationActive &&
             toast.success("Settings saved successfully !", {
                 position: "top-center",
                 theme: state.theme,

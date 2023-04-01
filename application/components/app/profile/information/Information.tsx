@@ -1,7 +1,7 @@
 import Flex from "@/components/build/Flex";
-import { AppState, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import Image from "next/image";
-import React, { FC } from "react";
+import React from "react";
 import { AiOutlineStar } from "react-icons/ai";
 import { RiVipCrownLine } from "react-icons/ri";
 import { GiSpikedDragonHead } from "react-icons/gi";
@@ -15,7 +15,6 @@ import InfoBoxItem from "./InfoBoxItem";
 
 const Information = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
 
     return (
         <BoxContainer className="col-span-3">
@@ -53,7 +52,7 @@ const Information = () => {
                 <Flex className="w-full" direction="col">
                     <InfoBox
                         title="General information"
-                        isChecked={switchBooleans.profileControl.isGeneralInfoActive}
+                        isChecked={state.switchBooleans.profileControl.isGeneralInfoActive}
                         dispatchType="toggleIsGeneralInfoActive"
                     >
                         <InfoBoxItem
@@ -68,7 +67,7 @@ const Information = () => {
 
                     <InfoBox
                         title="Personal Information"
-                        isChecked={switchBooleans.profileControl.isPersonalInfoActive}
+                        isChecked={state.switchBooleans.profileControl.isPersonalInfoActive}
                         dispatchType="toggleIsPersonalInfoActive"
                     >
                         <InfoBoxItem prop="Email:" value={state.profileInfo.email} />
@@ -80,7 +79,7 @@ const Information = () => {
 
                     <InfoBox
                         title="Job information"
-                        isChecked={switchBooleans.profileControl.isJobInfoActive}
+                        isChecked={state.switchBooleans.profileControl.isJobInfoActive}
                         dispatchType="toggleIsJobInfoActive"
                     >
                         <InfoBoxItem prop="Title:" value={state.userInfo.designation} />
@@ -96,7 +95,7 @@ const Information = () => {
 
                     <InfoBox
                         title="Billing information"
-                        isChecked={switchBooleans.profileControl.isBillingInfoActive}
+                        isChecked={state.switchBooleans.profileControl.isBillingInfoActive}
                         dispatchType="toggleIsBillingInfoActive"
                     >
                         <InfoBoxItem prop="Payment Method:" value={`visa`} />
