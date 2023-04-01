@@ -43,7 +43,7 @@ const ProfileControlItem = () => {
                     programmingLanguage: profileInfo.programmingLanguage
                         ? profileInfo.programmingLanguage
                         : "TypeScript",
-                    experience: profileInfo.experience >= 0 ? profileInfo.experience : 1,
+                    experience: profileInfo.experience && profileInfo.experience >= 1 ? profileInfo.experience : 1,
                 },
             },
         });
