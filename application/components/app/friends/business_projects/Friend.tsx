@@ -70,7 +70,7 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
                     <p className="text-lg font-medium">{name}</p>
 
                     <p className="text-sm font-semibold text-grey-color dark:text-grey-dark-color">
-                        {!job.includes("@") && "@"}
+                        {!job.startsWith("@") && "@"}
                         {job}
                     </p>
                 </Flex>
