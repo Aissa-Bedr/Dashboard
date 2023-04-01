@@ -55,7 +55,7 @@ const BusinessProjectsInfo = () => {
             !patterns.finishDate.test(businessProjectInfo.finishDate)
         ) {
             switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Invalid information please try again later !`, {
+                toast.error(`Invalid information !`, {
                     position: "top-center",
                     theme: state.theme,
                 });
@@ -89,7 +89,7 @@ const BusinessProjectsInfo = () => {
                 <Input
                     className="w-full"
                     type="text"
-                    placeholder="dd mm yy"
+                    placeholder="dd/mm/yy"
                     value={businessProjectInfo.finishDate}
                     onChange={(e) =>
                         setBusinessProjectInfo((prevState) => ({ ...prevState, finishDate: e.target.value }))
