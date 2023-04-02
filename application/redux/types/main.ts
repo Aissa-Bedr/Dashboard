@@ -16,6 +16,7 @@ import {
     Projects,
     QuickDraft,
     Reminders,
+    Subscription,
     SwitchBooleans,
     Tasks,
     UserInfo,
@@ -41,6 +42,7 @@ export interface AppState {
     businessProjects: BusinessProjects[];
     friends: Friends[];
     courses: Courses[];
+    subscription: Subscription;
 }
 
 export interface AppStateAction {
@@ -66,5 +68,6 @@ export interface AppStateAction {
         friends?: Partial<Friends>;
         messages?: Partial<Message>;
         courses?: Partial<Courses>;
+        subscription?: Partial<Subscription>;
     };
 }

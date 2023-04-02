@@ -16,7 +16,7 @@ const PlansInfoItem: FC<PlansInfoItemProps> = ({ subscribeType, price, logoBackg
                 {featuresInfo}
             </Flex>
 
-            <SubscribeButton backgroundColor={logoBackgroundColor} />
+            <SubscribeButton backgroundColor={logoBackgroundColor} subscribeType={subscribeType} />
         </Flex>
     );
 };

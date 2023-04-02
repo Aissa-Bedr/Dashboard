@@ -11,6 +11,7 @@ import {
     CHANGE_LOGO_APPEARANCE,
     CHANGE_PROFILE_INFO,
     CHANGE_QUICK_DRAFT,
+    CHANGE_SUBSCRIPTION,
     CHANGE_SWITCH_BUTTON_COMPONENT,
     CHANGE_USER_INFO,
 } from "./constants/changeTypes";
@@ -818,6 +819,16 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                         ...state.switchBooleans.uiControl,
                         isAutoSelect: !state.switchBooleans.uiControl.isAutoSelect,
                     },
+                },
+            };
+
+        case CHANGE_SUBSCRIPTION:
+            return {
+                ...state,
+                subscription: {
+                    ...state.subscription,
+                    isSubscribed: action.payload?.subscription?.isSubscribed!,
+                    subscribeType: action.payload?.subscription?.subscribeType!,
                 },
             };
 

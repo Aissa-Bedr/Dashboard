@@ -29,4 +29,5 @@ export interface PlansInfoItemProps extends PlanLogoProps {
 
 export interface SubscribeButtonProps {
     backgroundColor: SubscribeTheme;
+    subscribeType: SubscribeType;
 }

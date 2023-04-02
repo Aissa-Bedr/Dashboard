@@ -16,6 +16,7 @@ import { LatestUploadsInfoItemProps } from "@/components/app/dashboard/latest_up
 import { BusinessProjectProps } from "@/components/app/business/types/main";
 import { FriendProps } from "@/components/app/friends/types/main";
 import { CourseProps } from "@/components/app/courses/types/main";
+import { SubscribeType } from "@/components/app/plans/types/main";
 
 export interface Tasks {
     id: string;
@@ -156,4 +157,9 @@ export interface Comment {
     id?: string;
     commentDescription: string;
     isLiked: boolean;
+}
+
+export interface Subscription {
+    isSubscribed: boolean;
+    subscribeType: SubscribeType;
 }

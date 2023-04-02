@@ -95,4 +95,8 @@ export const initialState: AppState = {
     businessProjects: [],
     friends: [],
     courses: [],
+    subscription: {
+        isSubscribed: false,
+        subscribeType: "free",
+    },
 };
