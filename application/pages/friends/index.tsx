@@ -5,21 +5,21 @@ import BaseWrapper from "@/components/build/BaseWrapper";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import SearchBar from "@/components/helpers/search_bar/SearchBar";
-import { Theme } from "@/redux/types/app";
 import { AppState } from "@/redux/types/main";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 const Friends = () => {
-    const theme = useSelector<AppState, Theme>((state) => state.theme);
+    const state = useSelector<AppState, AppState>((state) => state);
 
     useEffect(() => {
-        themeSwitcher(theme);
+        themeSwitcher(state.theme);
     }, []);
 
     useEffect(() => {
-        themeSwitcher(theme);
-    }, [theme]);
+        themeSwitcher(state.theme);
+    }, [state.theme]);
 
     return (
         <>
@@ -33,6 +33,10 @@ const Friends = () => {
                 <BaseWrapper>
                     <FriendsInfo />
                 </BaseWrapper>
+
+                {state.switchBooleans.websiteControl.isNotificationActive && (
+                    <ToastContainer position="top-center" theme={state.theme} />
+                )}
             </Base>
         </>
     );

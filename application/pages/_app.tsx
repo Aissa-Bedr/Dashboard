@@ -7,7 +7,6 @@ import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { Provider } from "react-redux";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Container = dynamic(() => import("@/components/build/Container"), { ssr: false });
@@ -31,9 +30,6 @@ export default function App({ Component, pageProps }: AppProps) {
                 </Flex>
 
                 <NewNav />
-                {store.getState().switchBooleans.websiteControl.isNotificationActive && (
-                    <ToastContainer position="top-center" theme={store.getState().theme} />
-                )}
             </Container>
         </Provider>
     );

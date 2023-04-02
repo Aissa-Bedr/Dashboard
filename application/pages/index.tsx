@@ -20,6 +20,7 @@ import { AppState } from "@/redux/types/main";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 const LatestTasks = dynamic(() => import("@/components/app/dashboard/latest_tasks/LatestTasks"), { ssr: false });
 
@@ -58,6 +59,10 @@ const Home = () => {
                     <SocialMediaStats />
                     <Projects />
                 </BaseWrapper>
+
+                {state.switchBooleans.websiteControl.isNotificationActive && (
+                    <ToastContainer position="top-center" theme={state.theme} />
+                )}
             </Base>
         </>
     );
