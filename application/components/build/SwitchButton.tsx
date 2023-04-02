@@ -1,8 +1,7 @@
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import React, { FC } from "react";
 import { HiCheck, HiX } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { SwitchButtonProps } from "./types/main";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,8 +11,7 @@ import classNames from "classnames";
 
 const SwitchButton: FC<SwitchButtonProps> = ({ isChecked, dispatchType }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <div
@@ -29,7 +27,7 @@ const SwitchButton: FC<SwitchButtonProps> = ({ isChecked, dispatchType }) => {
             })}
             onClick={() => {
                 dispatch({ type: dispatchType });
-                switchBooleans.websiteControl.isNotificationActive &&
+                state.switchBooleans.websiteControl.isNotificationActive &&
                     toast.success("Settings saved successfully !", {
                         position: "top-center",
                         theme: state.theme,

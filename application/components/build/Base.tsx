@@ -1,8 +1,9 @@
-import { AppState, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { BaseProps } from "./types/main";
+import { SwitchBooleans } from "@/redux/types/data";
 
 const Base: FC<BaseProps> = ({ className = "", children }) => {
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);

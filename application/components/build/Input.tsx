@@ -1,4 +1,4 @@
-import { AppState, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
@@ -6,7 +6,6 @@ import { InputProps } from "./types/main";
 
 const Input: FC<InputProps> = ({ id, className = "", type, placeholder, value, onChange, onFocus, onBlur }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
 
     return (
         <input
@@ -17,7 +16,7 @@ const Input: FC<InputProps> = ({ id, className = "", type, placeholder, value, o
                 __secondary_input_field:
                     state.components.inputField.type !== "default" && state.components.inputField.type !== "primary",
                 [className]: className,
-                "rounded-md": switchBooleans.uiControl.isRounded,
+                "rounded-md": state.switchBooleans.uiControl.isRounded,
             })}
             type={type}
             placeholder={placeholder}

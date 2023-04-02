@@ -2,7 +2,8 @@ import React, { FC } from "react";
 import Head from "next/head";
 import { HeaderProps } from "./types/main";
 import { useSelector } from "react-redux";
-import { AppState, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
+import { SwitchBooleans } from "@/redux/types/data";
 
 const Header: FC<HeaderProps> = ({ title }) => {
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
