@@ -12,6 +12,12 @@ import { MdComputer } from "react-icons/md";
 import Grid from "@/components/build/Grid";
 import InfoBox from "./InfoBox";
 import InfoBoxItem from "./InfoBoxItem";
+import {
+    TOGGLE_IS_BILLING_INFO_ACTIVE,
+    TOGGLE_IS_GENERAL_INFO_ACTIVE,
+    TOGGLE_IS_JOB_INFO_ACTIVE,
+    TOGGLE_IS_PERSONAL_INFO_ACTIVE,
+} from "@/redux/constants/toggleTypes";
 
 const Information = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -31,11 +37,11 @@ const Information = () => {
 
                     <Grid className="gap-2" cols="4">
                         <AiOutlineStar
-                            className="text-yellow-300 hover:text-yellow-400 hover:scale-110 duration-300"
+                            className="text-yellow-300 duration-300 hover:text-yellow-400 hover:scale-110"
                             size="1.5rem"
                         />
                         <RiVipCrownLine
-                            className="text-yellow-300 hover:text-yellow-400 hover:scale-110 duration-300"
+                            className="text-yellow-300 duration-300 hover:text-yellow-400 hover:scale-110"
                             size="1.5rem"
                         />
                         <GiSpikedDragonHead
@@ -43,7 +49,7 @@ const Information = () => {
                             size="1.5rem"
                         />
                         <MdComputer
-                            className="text-dark hover:text-grey-color dark:text-white dark:hover:text-grey-dark-color hover:scale-110 duration-300"
+                            className="duration-300 text-dark hover:text-grey-color dark:text-white dark:hover:text-grey-dark-color hover:scale-110"
                             size="1.5rem"
                         />
                     </Grid>
@@ -53,7 +59,7 @@ const Information = () => {
                     <InfoBox
                         title="General information"
                         isChecked={state.switchBooleans.profileControl.isGeneralInfoActive}
-                        dispatchType="toggleIsGeneralInfoActive"
+                        dispatchType={TOGGLE_IS_GENERAL_INFO_ACTIVE}
                     >
                         <InfoBoxItem
                             prop="Full name:"
@@ -68,7 +74,7 @@ const Information = () => {
                     <InfoBox
                         title="Personal Information"
                         isChecked={state.switchBooleans.profileControl.isPersonalInfoActive}
-                        dispatchType="toggleIsPersonalInfoActive"
+                        dispatchType={TOGGLE_IS_PERSONAL_INFO_ACTIVE}
                     >
                         <InfoBoxItem prop="Email:" value={state.profileInfo.email} />
 
@@ -80,7 +86,7 @@ const Information = () => {
                     <InfoBox
                         title="Job information"
                         isChecked={state.switchBooleans.profileControl.isJobInfoActive}
-                        dispatchType="toggleIsJobInfoActive"
+                        dispatchType={TOGGLE_IS_JOB_INFO_ACTIVE}
                     >
                         <InfoBoxItem prop="Title:" value={state.userInfo.designation} />
 
@@ -96,7 +102,7 @@ const Information = () => {
                     <InfoBox
                         title="Billing information"
                         isChecked={state.switchBooleans.profileControl.isBillingInfoActive}
-                        dispatchType="toggleIsBillingInfoActive"
+                        dispatchType={TOGGLE_IS_BILLING_INFO_ACTIVE}
                     >
                         <InfoBoxItem prop="Payment Method:" value={`visa`} />
 
