@@ -1,15 +1,13 @@
-import { AppState, AppStateAction, SwitchBooleans } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import Link from "next/link";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { LinkElementProps } from "./types/main";
 
 const LinkElement: FC<LinkElementProps> = ({ link, href, icon, content }) => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <li>
@@ -23,7 +21,7 @@ const LinkElement: FC<LinkElementProps> = ({ link, href, icon, content }) => {
                 onClick={() => dispatch({ type: "changeLink", payload: { links: { currentLinkValue: link } } })}
             >
                 {icon}
-                {switchBooleans.uiControl.isNavMinimized ? (
+                {state.switchBooleans.uiControl.isNavMinimized ? (
                     <p className="hidden">{content}</p>
                 ) : (
                     <p className="hidden text-black lg:block dark:text-white">{content}</p>
