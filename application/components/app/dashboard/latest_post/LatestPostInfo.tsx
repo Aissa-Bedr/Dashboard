@@ -4,7 +4,6 @@ import classNames from "classnames";
 import Image from "next/image";
 import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
-import { IoChatbubblesOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 
 const LatestPostInfo = () => {
@@ -41,20 +40,13 @@ const LatestPostInfo = () => {
                 </p>
             </div>
 
-            <Flex direction="row" items="center" justify="between">
-                <AiOutlineHeart
-                    className={classNames("duration-300 cursor-pointer", {
-                        "text-pink-500": latestPost?.isLiked,
-                        "text-grey-color dark:text-grey-dark-color hover:!text-pink-500": !latestPost?.isLiked,
-                    })}
-                    size="1.3rem"
-                />
-
-                <IoChatbubblesOutline
-                    className="text-grey-color dark:text-grey-dark-color hover:!text-blue-color dark:hover:!text-blue-dark-color"
-                    size="1.3rem"
-                />
-            </Flex>
+            <AiOutlineHeart
+                className={classNames("duration-300 cursor-pointer", {
+                    "text-pink-500": latestPost?.isLiked,
+                    "text-grey-color dark:text-grey-dark-color hover:!text-pink-500": !latestPost?.isLiked,
+                })}
+                size="1.3rem"
+            />
         </Flex>
     );
 };
