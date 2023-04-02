@@ -15,10 +15,10 @@ import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import EachFriend from "./EachFriend";
 import { friendMessage } from "./script";
-import removeFileAction from "@/redux/actions/remove_actions/removeFileAction";
 import toggleIsLikedFriendAction from "@/redux/actions/toggle_actions/toggleIslikedFriendAction";
 import clearChatAction from "@/redux/actions/main_actions/clearChatAction";
 import sendMessageAction from "@/redux/actions/add_actions/sendMessaageAction";
+import removeFriendAction from "@/redux/actions/remove_actions/removeFriendAction";
 
 const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -44,8 +44,7 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
     );
 
     function removeFriend(): void {
-        dispatch({ type: "removeFriend", payload: { friends: { id } } });
-        dispatch(removeFileAction(id!));
+        dispatch(removeFriendAction(id!));
         state.switchBooleans.websiteControl.isNotificationActive &&
             toast.warning(`Friend removed successfully !`, { position: "top-center", theme: state.theme });
     }
