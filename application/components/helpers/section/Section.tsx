@@ -1,19 +1,21 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import Image from "next/image";
 import React from "react";
 import { BiBell, BiSearchAlt2 } from "react-icons/bi";
 import { HiArrowSmRight, HiMenuAlt1, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import SecButton from "./SecButton";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
+import toggleIsNavMinimizedAction from "@/redux/actions/toggle_actions/toggleIsNavMinimizedAction";
+import toggleIsSearchBarShowedAction from "@/redux/actions/toggle_actions/toggleIsSearchBarShowedAction";
+import toggleThemeAction from "@/redux/actions/toggle_actions/toggleThemeAction";
 
 const Section = () => {
     const state = useSelector<AppState, AppState>((state) => state);
-    const dispatch: Dispatch<AppStateAction> = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -41,7 +43,7 @@ const Section = () => {
                                     !state.switchBooleans.uiControl.isNewNavbar,
                             })}
                         >
-                            <SecButton onClick={() => dispatch({ type: "toggleIsNavMinimized" })}>
+                            <SecButton onClick={() => dispatch(toggleIsNavMinimizedAction())}>
                                 {state.switchBooleans.uiControl.isNavMinimized ? (
                                     <HiArrowSmRight size="1.5rem" />
                                 ) : (
@@ -55,14 +57,14 @@ const Section = () => {
                 <Flex className="gap-2" direction="row" items="center">
                     <SecButton
                         className={classNames({ "!hidden": !state.switchBooleans.uiControl.isNewSearchbar })}
-                        onClick={() => dispatch({ type: "toggleIsSearchBarShowed" })}
+                        onClick={() => dispatch(toggleIsSearchBarShowedAction())}
                     >
                         <BiSearchAlt2 size="1.5rem" />
                     </SecButton>
 
                     <SecButton
                         onClick={() => {
-                            dispatch({ type: "toggleTheme" });
+                            dispatch(toggleThemeAction());
                             state.switchBooleans.websiteControl.isNotificationActive &&
                                 toast.success(
                                     `Theme changed successfully current theme: ${

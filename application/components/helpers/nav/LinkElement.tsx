@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkElementProps } from "./types/main";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const LinkElement: FC<LinkElementProps> = ({ link, href, icon, content }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -18,7 +19,7 @@ const LinkElement: FC<LinkElementProps> = ({ link, href, icon, content }) => {
                     "rounded-md": state.switchBooleans.uiControl.isRounded,
                 })}
                 href={`/${href}`}
-                onClick={() => dispatch({ type: "changeLink", payload: { links: { currentLinkValue: link } } })}
+                onClick={() => dispatch(changeLinkAction(link))}
             >
                 {icon}
                 {state.switchBooleans.uiControl.isNavMinimized ? (
