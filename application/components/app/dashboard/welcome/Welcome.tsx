@@ -13,6 +13,7 @@ import SecondaryLogo from "../../main/SecondaryLogo";
 import { WelcomeProps } from "./types/main";
 import WelcomeInfo from "./WelcomeInfo";
 import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
+import Details from "@/components/build/Details";
 
 const Welcome: FC<WelcomeProps> = ({ dontIncludeShowMoreLink }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -57,17 +58,21 @@ const Welcome: FC<WelcomeProps> = ({ dontIncludeShowMoreLink }) => {
                     <WelcomeInfo />
                 </ContentWrapper>
 
-                <Flex className="p-5" direction="row" items="center" justify="between">
-                    {!dontIncludeShowMoreLink && (
-                        <Move href="/dashboard/welcome" onClick={() => dispatch(changeLinkAction("dashboard"))}>
-                            Show more
-                        </Move>
-                    )}
+                <div className="m-4">
+                    <Details note="Links">
+                        <Flex className="p-4" direction="row" items="center" justify="between">
+                            {!dontIncludeShowMoreLink && (
+                                <Move href="/dashboard/welcome" onClick={() => dispatch(changeLinkAction("dashboard"))}>
+                                    Welcome
+                                </Move>
+                            )}
 
-                    <Move href="/profile" onClick={() => dispatch(changeLinkAction("profile"))}>
-                        Profile
-                    </Move>
-                </Flex>
+                            <Move href="/profile" onClick={() => dispatch(changeLinkAction("profile"))}>
+                                Profile
+                            </Move>
+                        </Flex>
+                    </Details>
+                </div>
             </Flex>
         </BoxContainer>
     );

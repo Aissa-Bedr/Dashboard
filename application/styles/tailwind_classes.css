@@ -78,7 +78,7 @@
     }
 
     .__data_list_empty {
-        @apply text-center font-semibold uppercase w-full bg-grey-alt-color text-black dark:bg-grey-dark-alt-color dark:text-grey-dark-color px-2 py-1.5 text-sm mt-2 duration-300;
+        @apply text-center font-semibold uppercase w-full bg-grey-alt-color text-black dark:bg-grey-dark-alt-color dark:text-grey-dark-color px-2 py-1.5 text-sm duration-300;
     }
 
     .__controls_item_container {

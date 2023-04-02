@@ -23,7 +23,7 @@ const LatestPost = () => {
 
                     <Flex className="gap-2" direction="row" items="center">
                         <Move href="/dashboard/posts" onClick={() => dispatch(changeLinkAction("dashboard"))}>
-                            Show more
+                            Show more | posts
                         </Move>
 
                         <ListLength listName="Posts" listLength={posts.length} />

@@ -12,6 +12,9 @@ import { Theme } from "./types/app";
 import { toast } from "react-toastify";
 import { Reminders } from "@/redux/types/data";
 import addReminderAction from "@/redux/actions/add_actions/addReminderAction";
+import Details from "@/components/build/Details";
+import Move from "@/components/build/Move";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const RemindersInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -92,8 +95,18 @@ const RemindersInfo = () => {
                 <Button onClick={addReminder}>Add reminder</Button>
             </Grid>
 
+            <div className="col-span-2">
+                <Details note="Links">
+                    <Flex className="p-4" direction="row" items="center" justify="between">
+                        <Move href="/dashboard/reminders" onClick={() => dispatch(changeLinkAction("dashboard"))}>
+                            Reminders
+                        </Move>
+                    </Flex>
+                </Details>
+            </div>
+
             <Flex
-                className={classNames("gap-2 mt-2", { "h-40 overflow-y-scroll px-1": state.reminders.length >= 4 })}
+                className={classNames("gap-2", { "h-40 overflow-y-scroll px-1": state.reminders.length >= 4 })}
                 direction="col"
             >
                 {state.reminders.length >= 1 ? (

@@ -12,6 +12,9 @@ import { toast } from "react-toastify";
 import { fileSizeType, FileType } from "./types/app";
 import { Files } from "@/redux/types/data";
 import uploadFileAction from "@/redux/actions/add_actions/uploadFileAction";
+import Details from "@/components/build/Details";
+import Move from "@/components/build/Move";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const LatestUploadsInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -186,6 +189,16 @@ const LatestUploadsInfo = () => {
                 </option>
             </Select>
             <Button onClick={uploadFile}>Upload file</Button>
+
+            <div className="col-span-2">
+                <Details note="Links">
+                    <Flex className="p-4" direction="row" items="center" justify="between">
+                        <Move href="/dashboard/files" onClick={() => dispatch(changeLinkAction("dashboard"))}>
+                            Files
+                        </Move>
+                    </Flex>
+                </Details>
+            </div>
 
             <Flex
                 className={classNames("col-span-2 gap-2", {

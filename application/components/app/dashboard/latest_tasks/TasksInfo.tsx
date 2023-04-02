@@ -9,6 +9,9 @@ import Button from "@/components/build/Button";
 import classNames from "classnames";
 import Grid from "@/components/build/Grid";
 import addTaskAction from "@/redux/actions/add_actions/addTaskAction";
+import Details from "@/components/build/Details";
+import Move from "@/components/build/Move";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const TasksInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -43,7 +46,7 @@ const TasksInfo = () => {
     }
 
     return (
-        <div className={classNames({ "h-80 overflow-y-scroll pr-1": state.tasks.length >= 8 })}>
+        <div className={classNames("space-y-2", { "h-80 overflow-y-scroll pr-1": state.tasks.length >= 8 })}>
             <Flex className="w-full gap-2" direction="row" items="center">
                 <Input
                     type="text"
@@ -58,8 +61,16 @@ const TasksInfo = () => {
                 </Button>
             </Flex>
 
+            <Details note="Links">
+                <Flex className="p-4" direction="row" items="center" justify="between">
+                    <Move href="/dashboard/tasks" onClick={() => dispatch(changeLinkAction("dashboard"))}>
+                        Tasks
+                    </Move>
+                </Flex>
+            </Details>
+
             {state.tasks.length > 0 ? (
-                <Grid className="gap-2 mt-2" cols="1">
+                <Grid className="gap-2" cols="1">
                     {tasks}
                 </Grid>
             ) : (

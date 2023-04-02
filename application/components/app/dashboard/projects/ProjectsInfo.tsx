@@ -12,6 +12,9 @@ import { toast } from "react-toastify";
 import Select from "@/components/build/Select";
 import { Projects } from "@/redux/types/data";
 import addProjectAction from "@/redux/actions/add_actions/addProjectAction";
+import Details from "@/components/build/Details";
+import Move from "@/components/build/Move";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const ProjectsInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -125,6 +128,16 @@ const ProjectsInfo = () => {
                     Add project
                 </Button>
             </Grid>
+
+            <div className="col-span-3">
+                <Details note="Links">
+                    <Flex className="p-4" direction="row" items="center" justify="between">
+                        <Move href="/dashboard/projects" onClick={() => dispatch(changeLinkAction("dashboard"))}>
+                            Projects
+                        </Move>
+                    </Flex>
+                </Details>
+            </div>
 
             <div className="overflow-x-auto">
                 {state.projects.length >= 1 ? (

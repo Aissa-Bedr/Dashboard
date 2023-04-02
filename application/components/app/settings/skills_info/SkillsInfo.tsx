@@ -59,7 +59,7 @@ const SkillsInfo = () => {
                 </Grid>
             ) : (
                 <div
-                    className={classNames("__data_list_empty", {
+                    className={classNames("__data_list_empty mt-2", {
                         "rounded-md": state.switchBooleans.uiControl.isRounded,
                     })}
                 >
