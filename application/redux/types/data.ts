@@ -127,6 +127,7 @@ export interface UIControl {
     isNewNavbar: boolean;
     isNewNavInTheTop: boolean;
     isSearchBarShowed: boolean;
+    isAutoSelect: boolean;
 }
 
 export interface WebsiteControl {

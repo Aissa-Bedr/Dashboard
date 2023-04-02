@@ -26,6 +26,7 @@ const UIControl = () => {
                 isChecked={switchBooleans.uiControl.isUIControlActive}
                 dispatchType={TOGGLE_UI_CONTROL}
             />
+
             {switchBooleans.uiControl.isUIControlActive && (
                 <>
                     <SiteControlInfoItem

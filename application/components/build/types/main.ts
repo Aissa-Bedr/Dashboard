@@ -1,5 +1,3 @@
-import { AppStateActionType } from "@/redux/types/app";
-
 export default interface ComponentProps {
     id?: string;
     className?: string;
@@ -63,7 +61,7 @@ export interface BaseWrapperProps extends ComponentProps {}
 
 export interface SwitchButtonProps {
     isChecked: boolean;
-    dispatchType: AppStateActionType;
+    dispatchType: string;
 }
 
 export interface SettingsInfoProps {
@@ -107,4 +105,8 @@ export interface MoveProps extends ComponentProps {
 export interface ListLengthProps {
     listName: string;
     listLength: number;
+}
+
+export interface DetailsProps extends ComponentProps {
+    note: string;
 }

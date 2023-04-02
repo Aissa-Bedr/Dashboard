@@ -15,6 +15,7 @@ export const initialState: AppState = {
             isNewNavbar: false,
             isNewNavInTheTop: false,
             isSearchBarShowed: true,
+            isAutoSelect: false,
         },
         websiteControl: {
             isWebsiteControlActive: true,

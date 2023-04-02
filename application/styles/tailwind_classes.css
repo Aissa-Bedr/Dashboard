@@ -37,6 +37,10 @@
         @apply font-medium capitalize duration-300 text-grey-color dark:text-grey-dark-color;
     }
 
+    .__border {
+        @apply border-solid border-[1px] border-grey-alt-color dark:border-grey-dark-alt-color;
+    }
+
     .__border_b {
         @apply border-solid border-b-[1px] border-b-grey-alt-color dark:border-b-grey-dark-alt-color;
     }

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import AppearanceDarkInfoItem from "./AppearanceDarkInfoItem";
 import AppearanceLightInfoItem from "./AppearanceLightInfoItem";
 import AppearanceLogoInfoItem from "./AppearanceLogoInfoItem";
+import { HiCog } from "react-icons/hi2";
 
 const AppearanceInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -16,15 +17,21 @@ const AppearanceInfo = () => {
                 <p className="__secondary_logo">Light theme colors</p>
 
                 <Flex className="gap-2" direction="row" items="center">
-                    <AppearanceLightInfoItem backgroundColor="default" />
-                    {state.components.button.type === "default" && (
-                        <AppearanceLightInfoItem backgroundColor="default2" />
+                    {state.switchBooleans.uiControl.isAutoSelect ? (
+                        <HiCog className="text-grey-color dark:text-grey-dark-color animate-spin" size="2rem" />
+                    ) : (
+                        <>
+                            <AppearanceLightInfoItem backgroundColor="default" />
+                            {state.components.button.type === "default" && (
+                                <AppearanceLightInfoItem backgroundColor="default2" />
+                            )}
+                            <AppearanceLightInfoItem backgroundColor="red" />
+                            <AppearanceLightInfoItem backgroundColor="green" />
+                            <AppearanceLightInfoItem backgroundColor="orange" />
+                            <AppearanceLightInfoItem backgroundColor="purple" />
+                            <AppearanceLightInfoItem backgroundColor="pink" />
+                        </>
                     )}
-                    <AppearanceLightInfoItem backgroundColor="red" />
-                    <AppearanceLightInfoItem backgroundColor="green" />
-                    <AppearanceLightInfoItem backgroundColor="orange" />
-                    <AppearanceLightInfoItem backgroundColor="purple" />
-                    <AppearanceLightInfoItem backgroundColor="pink" />
                 </Flex>
             </Flex>
 
@@ -32,15 +39,21 @@ const AppearanceInfo = () => {
                 <p className="__secondary_logo">Dark theme colors</p>
 
                 <Flex className="gap-2" direction="row" items="center">
-                    <AppearanceDarkInfoItem backgroundColor="default" />
-                    {state.components.button.type === "default" && (
-                        <AppearanceDarkInfoItem backgroundColor="default2" />
+                    {state.switchBooleans.uiControl.isAutoSelect ? (
+                        <HiCog className="text-grey-color dark:text-grey-dark-color animate-spin" size="2rem" />
+                    ) : (
+                        <>
+                            <AppearanceDarkInfoItem backgroundColor="default" />
+                            {state.components.button.type === "default" && (
+                                <AppearanceDarkInfoItem backgroundColor="default2" />
+                            )}
+                            <AppearanceDarkInfoItem backgroundColor="red" />
+                            <AppearanceDarkInfoItem backgroundColor="green" />
+                            <AppearanceDarkInfoItem backgroundColor="orange" />
+                            <AppearanceDarkInfoItem backgroundColor="purple" />
+                            <AppearanceDarkInfoItem backgroundColor="pink" />
+                        </>
                     )}
-                    <AppearanceDarkInfoItem backgroundColor="red" />
-                    <AppearanceDarkInfoItem backgroundColor="green" />
-                    <AppearanceDarkInfoItem backgroundColor="orange" />
-                    <AppearanceDarkInfoItem backgroundColor="purple" />
-                    <AppearanceDarkInfoItem backgroundColor="pink" />
                 </Flex>
             </Flex>
 

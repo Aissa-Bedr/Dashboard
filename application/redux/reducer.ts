@@ -15,6 +15,7 @@ import {
     CHANGE_USER_INFO,
 } from "./constants/changeTypes";
 import {
+    TOGGLE_IS_AUTO_SELECT,
     TOGGLE_IS_BILLING_INFO_ACTIVE,
     TOGGLE_IS_FRIEND_MESSAGE,
     TOGGLE_IS_GENERAL_INFO_ACTIVE,
@@ -806,6 +807,18 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 courses: [...state.courses].map((course) =>
                     course.id === action.payload?.courses?.id ? { ...course, isLiked: !course.isLiked } : course
                 ),
+            };
+
+        case TOGGLE_IS_AUTO_SELECT:
+            return {
+                ...state,
+                switchBooleans: {
+                    ...state.switchBooleans,
+                    uiControl: {
+                        ...state.switchBooleans.uiControl,
+                        isAutoSelect: !state.switchBooleans.uiControl.isAutoSelect,
+                    },
+                },
             };
 
         default:
