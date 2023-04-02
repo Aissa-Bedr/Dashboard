@@ -3,7 +3,6 @@ import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import Grid from "@/components/build/Grid";
@@ -27,20 +26,13 @@ const PostsInfoPage = () => {
 
     function addPost(): void | false {
         if (!postInfo.postOwner || !postInfo.postTitle || !postInfo.postDescription) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Post can't be empty !`, {
-                    position: "top-center",
-                    theme: state.theme,
-                });
+            toast.error("Post can't be empty !");
             return false;
         }
 
         dispatch(addPostAction(postInfo));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Post added successfully !`, {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success("Post added successfully !");
+
         setPostInfo({
             postOwner: "",
             postTitle: "",

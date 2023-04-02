@@ -3,7 +3,6 @@ import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import Grid from "@/components/build/Grid";
@@ -22,31 +21,25 @@ const TasksInfoPage = () => {
 
     function addTask(): void | false {
         if (!content) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Task can't be empty !`, { position: "top-center", theme: state.theme });
+            toast.error("Task can't be empty !");
             return false;
         }
 
         if (content.length < 2) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Task can't be less than two characters !`, { position: "top-center", theme: state.theme });
+            toast.error("Task can't be less than two characters !");
             return false;
         }
 
         for (const item of state.tasks) {
             if (item.content.match(content) && item.content.length === content.length) {
-                state.switchBooleans.websiteControl.isNotificationActive &&
-                    toast.error(`Task ${item.content} already exist !`, {
-                        position: "top-center",
-                        theme: state.theme,
-                    });
+                toast.error(`Task ${item.content} already exist !`);
                 return false;
             }
         }
 
         dispatch(addTaskAction(content));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Task ${content} added successfully !`, { position: "top-center", theme: state.theme });
+        toast.success(`Task ${content} added successfully !`);
+
         setContent("");
     }
 

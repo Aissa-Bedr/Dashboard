@@ -3,7 +3,6 @@ import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import Grid from "@/components/build/Grid";
@@ -31,11 +30,7 @@ const FilesInfoPage = () => {
 
     function uploadFile(): void | false {
         if (!fileInfo.fileName || !fileInfo.fileUploader || !fileInfo.fileSize) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`${fileInfo.fileType === "jsx" ? "Component" : "File"} can't be empty !`, {
-                    position: "top-center",
-                    theme: state.theme,
-                });
+            toast.error(`${fileInfo.fileType === "jsx" ? "Component" : "File"} can't be empty !`);
             return false;
         }
 
@@ -45,26 +40,18 @@ const FilesInfoPage = () => {
                 file.fileName.length === fileInfo.fileName.length &&
                 file.fileType.includes(fileInfo.fileType)
             ) {
-                state.switchBooleans.websiteControl.isNotificationActive &&
-                    toast.error(`This ${fileInfo.fileType === "jsx" ? "Component" : "File"} already exist !`, {
-                        position: "top-center",
-                        theme: state.theme,
-                    });
+                toast.error(`This ${fileInfo.fileType === "jsx" ? "Component" : "File"} already exist !`);
                 return false;
             }
         }
 
         dispatch(uploadFileAction(fileInfo));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(
-                `${fileInfo.fileType === "jsx" ? "Component" : "File"} ${fileInfo.fileName}.${
-                    fileInfo.fileType
-                } uploaded successfully !`,
-                {
-                    position: "top-center",
-                    theme: state.theme,
-                }
-            );
+        toast.success(
+            `${fileInfo.fileType === "jsx" ? "Component" : "File"} ${fileInfo.fileName}.${
+                fileInfo.fileType
+            } uploaded successfully !`
+        );
+
         setFileInfo({ fileName: "", fileType: "txt", fileUploader: "", fileSize: "" as any, fileSizeType: "kb" });
     }
 

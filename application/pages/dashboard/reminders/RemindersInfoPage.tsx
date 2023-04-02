@@ -3,7 +3,6 @@ import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import Grid from "@/components/build/Grid";
@@ -33,23 +32,18 @@ const RemindersInfoPage = () => {
 
     function addReminder(): void | false {
         if (!reminderInfo.title || !reminderInfo.time) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Reminder can't be empty !`, { position: "top-center", theme: state.theme });
+            toast.error("Reminder can't be empty !");
             return false;
         }
 
         if (!patterns.finishDate.test(reminderInfo.time)) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Invalid information please try again later !`, {
-                    position: "top-center",
-                    theme: state.theme,
-                });
+            toast.error("Invalid information please try again later !");
             return false;
         }
 
         dispatch(addReminderAction(reminderInfo));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Reminder added successfully !`, { position: "top-center", theme: state.theme });
+        toast.success("Reminder added successfully !");
+
         setReminderInfo({ title: "", time: "", theme: "blue" });
     }
 

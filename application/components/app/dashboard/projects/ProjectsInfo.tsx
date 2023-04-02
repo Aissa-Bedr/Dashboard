@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Status } from "../last_project_progress/types/app";
 import ProjectsInfoItem from "./ProjectsInfoItem";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Select from "@/components/build/Select";
 import { Projects } from "@/redux/types/data";
 import addProjectAction from "@/redux/actions/add_actions/addProjectAction";
@@ -35,23 +34,18 @@ const ProjectsInfo = () => {
 
     function addProject(): void | false {
         if (!projectInfo.name || !projectInfo.finishDate || !projectInfo.client) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Project can't be empty !`, { position: "top-center", theme: state.theme });
+            toast.error("Project can't be empty !");
             return false;
         }
 
         if (projectInfo.price < 0 || projectInfo.team < 1 || !patterns.finishDate.test(projectInfo.finishDate)) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Invalid information !`, {
-                    position: "top-center",
-                    theme: state.theme,
-                });
+            toast.error("Invalid information !");
             return false;
         }
 
         dispatch(addProjectAction(projectInfo));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Project added successfully !`, { position: "top-center", theme: state.theme });
+        toast.success("Project added successfully !");
+
         setProjectInfo({ name: "", finishDate: "", client: "", price: "" as any, team: "" as any, status: "pending" });
     }
 

@@ -2,7 +2,6 @@ import { AppState } from "@/redux/types/main";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import { AppearanceLogoItemProps } from "./types/main";
 import changeLogoAppearanceAction from "@/redux/actions/change_actions/changeLogoAppearanceAction";
@@ -37,11 +36,7 @@ const AppearanceLogoInfoItem: FC<AppearanceLogoItemProps> = ({ type, children })
                 dispatch(changeLogoAppearanceAction({ type: "default", src: "logos/favicon.ico" }));
         }
 
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success("Logo saved successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success("Logo saved successfully !");
     }
 
     return (

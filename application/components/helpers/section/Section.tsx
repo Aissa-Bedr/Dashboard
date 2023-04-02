@@ -7,7 +7,6 @@ import { HiArrowSmRight, HiMenuAlt1, HiOutlineMoon, HiOutlineSun } from "react-i
 import { useDispatch, useSelector } from "react-redux";
 import SecButton from "./SecButton";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import toggleIsNavMinimizedAction from "@/redux/actions/toggle_actions/toggleIsNavMinimizedAction";
 import toggleIsSearchBarShowedAction from "@/redux/actions/toggle_actions/toggleIsSearchBarShowedAction";
@@ -65,16 +64,14 @@ const Section = () => {
                     <SecButton
                         onClick={() => {
                             dispatch(toggleThemeAction());
-                            state.switchBooleans.websiteControl.isNotificationActive &&
-                                toast.success(
-                                    `Theme changed successfully current theme: ${
-                                        state.theme === "dark" ? "light" : "dark"
-                                    }`,
-                                    {
-                                        position: "top-center",
-                                        theme: state.theme === "dark" ? "light" : "dark",
-                                    }
-                                );
+                            toast.success(
+                                `Theme changed successfully current theme: ${
+                                    state.theme === "dark" ? "light" : "dark"
+                                }`,
+                                {
+                                    theme: state.theme === "dark" ? "light" : "dark",
+                                }
+                            );
                         }}
                     >
                         {state.theme === "light" ? <HiOutlineMoon size="1.5rem" /> : <HiOutlineSun size="1.5rem" />}

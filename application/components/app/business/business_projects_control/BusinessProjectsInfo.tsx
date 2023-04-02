@@ -3,7 +3,6 @@ import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import Grid from "@/components/build/Grid";
@@ -37,8 +36,7 @@ const BusinessProjectsInfo = () => {
 
     function addBusinessProject(): void | false {
         if (!businessProjectInfo.name || !businessProjectInfo.finishDate || !businessProjectInfo.description) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Business Project can't be empty !`, { position: "top-center", theme: state.theme });
+            toast.error("Business Project can't be empty !");
             return false;
         }
 
@@ -47,17 +45,13 @@ const BusinessProjectsInfo = () => {
             businessProjectInfo.team < 1 ||
             !patterns.finishDate.test(businessProjectInfo.finishDate)
         ) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Invalid information !`, {
-                    position: "top-center",
-                    theme: state.theme,
-                });
+            toast.error("Invalid information !");
             return false;
         }
 
         dispatch(addBusinessProjectAction(businessProjectInfo));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Business Project added successfully !`, { position: "top-center", theme: state.theme });
+        toast.success("Business Project added successfully !");
+
         setBusinessProjectInfo({
             name: "",
             finishDate: "",

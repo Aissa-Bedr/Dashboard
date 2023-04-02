@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import RemindersInfoItem from "./RemindersInfoItem";
 import { Theme } from "./types/app";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Reminders } from "@/redux/types/data";
 import addReminderAction from "@/redux/actions/add_actions/addReminderAction";
 

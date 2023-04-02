@@ -8,7 +8,6 @@ import { AppState } from "@/redux/types/main";
 import { statusTypes } from "../../dashboard/projects/ProjectsInfoItem";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import removeBusinessProjectAction from "@/redux/actions/remove_actions/removeBusinessProjectAction";
 
 const BusinessProject: FC<BusinessProjectProps> = ({
@@ -26,8 +25,7 @@ const BusinessProject: FC<BusinessProjectProps> = ({
 
     function removeBusinessProject(): void {
         dispatch(removeBusinessProjectAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Business Project removed successfully !`, { position: "top-center", theme: state.theme });
+        toast.warning("Business Project removed successfully !");
     }
 
     return (

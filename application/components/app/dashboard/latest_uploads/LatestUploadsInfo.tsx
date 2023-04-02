@@ -9,7 +9,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LatestUploadsInfoItem from "./LatestUploadsInfoItem";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { fileSizeType, FileType } from "./types/app";
 import { Files } from "@/redux/types/data";
 import uploadFileAction from "@/redux/actions/add_actions/uploadFileAction";
@@ -30,11 +29,7 @@ const LatestUploadsInfo = () => {
 
     function uploadFile(): void | false {
         if (!fileInfo.fileName || !fileInfo.fileUploader || !fileInfo.fileSize) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`${fileInfo.fileType === "jsx" ? "Component" : "File"} can't be empty !`, {
-                    position: "top-center",
-                    theme: state.theme,
-                });
+            toast.error(`${fileInfo.fileType === "jsx" ? "Component" : "File"} can't be empty !`);
             return false;
         }
 
@@ -44,26 +39,18 @@ const LatestUploadsInfo = () => {
                 file.fileName.length === fileInfo.fileName.length &&
                 file.fileType.includes(fileInfo.fileType)
             ) {
-                state.switchBooleans.websiteControl.isNotificationActive &&
-                    toast.error(`This ${fileInfo.fileType === "jsx" ? "Component" : "File"} already exist !`, {
-                        position: "top-center",
-                        theme: state.theme,
-                    });
+                toast.error(`This ${fileInfo.fileType === "jsx" ? "Component" : "File"} already exist !`);
                 return false;
             }
         }
 
         dispatch(uploadFileAction(fileInfo));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(
-                `${fileInfo.fileType === "jsx" ? "Component" : "File"} ${fileInfo.fileName}.${
-                    fileInfo.fileType
-                } uploaded successfully !`,
-                {
-                    position: "top-center",
-                    theme: state.theme,
-                }
-            );
+        toast.success(
+            `${fileInfo.fileType === "jsx" ? "Component" : "File"} ${fileInfo.fileName}.${
+                fileInfo.fileType
+            } uploaded successfully !`
+        );
+
         setFileInfo({ fileName: "", fileType: "txt", fileUploader: "", fileSize: "" as any, fileSizeType: "kb" });
     }
 

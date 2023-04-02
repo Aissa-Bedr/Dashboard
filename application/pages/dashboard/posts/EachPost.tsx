@@ -6,7 +6,6 @@ import React, { FC, useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubblesOutline } from "react-icons/io5";
@@ -33,40 +32,25 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
 
     function removePost(): void {
         dispatch(removePostAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Post removed successfully !`, {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.warning("Post removed successfully !");
     }
 
     function togglePostLike(): void {
         dispatch(toggleIsLikedPostAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(isLiked ? "Post unliked successfully !" : "Post liked successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success(isLiked ? "Post unliked successfully !" : "Post liked successfully !");
     }
 
     const toggleComments = (): void => setIsCommentsActive((prevState) => !prevState);
 
     function addComment(): void | false {
         if (!commentDescription) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Comment can't be empty !`, {
-                    position: "top-center",
-                    theme: state.theme,
-                });
+            toast.error("Comment can't be empty !");
             return false;
         }
 
         dispatch(addCommentAction(id!, commentDescription));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Comment added successfully !`, {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success("Comment added successfully !");
+
         setCommentDescription("");
     }
 

@@ -3,7 +3,6 @@ import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import Grid from "@/components/build/Grid";
@@ -31,20 +30,18 @@ const FriendsInfo = () => {
 
     function addFriend(): void | false {
         if (!friendInfo.name || !friendInfo.pictureSrc || !friendInfo.job) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Friend can't be empty !`, { position: "top-center", theme: state.theme });
+            toast.error("Friend can't be empty !");
             return false;
         }
 
         if (!patterns.pictureSrc.test(friendInfo.pictureSrc)) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Invalid Picture Source !`, { position: "top-center", theme: state.theme });
+            toast.error("Invalid Picture Source !");
             return false;
         }
 
         dispatch(addFriendAction(friendInfo));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Friend added successfully !`, { position: "top-center", theme: state.theme });
+        toast.success("Friend added successfully !");
+
         setFriendInfo({
             name: "",
             pictureSrc: "",

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Skill from "./Skill";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import Button from "@/components/build/Button";
 import Input from "@/components/build/Input";
@@ -21,25 +20,20 @@ const SkillsInfo = () => {
 
     function addSkill(): void | false {
         if (!content) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Skill can't be empty !`, { position: "top-center", theme: state.theme });
+            toast.error("Skill can't be empty !");
             return false;
         }
 
         for (const item of state.skills) {
             if (item.content.match(content) && item.content.length === content.length) {
-                state.switchBooleans.websiteControl.isNotificationActive &&
-                    toast.error(`Skill ${item.content} all ready exist !`, {
-                        position: "top-center",
-                        theme: state.theme,
-                    });
+                toast.error(`Skill ${item.content} all ready exist !`);
                 return false;
             }
         }
 
         dispatch(addSkillAction(content));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Skill ${content} added successfully !`, { position: "top-center", theme: state.theme });
+        toast.success(`Skill ${content} added successfully !`);
+
         setContent("");
     }
 

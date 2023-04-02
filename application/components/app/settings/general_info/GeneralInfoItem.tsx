@@ -3,7 +3,6 @@ import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import SettingsInfo from "@/components/build/SettingsInfo";
 import Button from "@/components/build/Button";
 import changeGeneralInfoAction from "@/redux/actions/change_actions/changeGeneralnfoAction";
@@ -22,20 +21,11 @@ const GeneralInfoItem = () => {
         dispatch(changeGeneralInfoAction(generalInfo));
 
         if (!generalInfo.firstName && !generalInfo.lastName) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.success("applying the default Settings successfully !", {
-                    position: "top-center",
-                    theme: state.theme,
-                });
-
+            toast.success("applying the default Settings successfully !");
             return false;
         }
 
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success("Settings saved successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success("Settings saved successfully !");
     }
 
     return (

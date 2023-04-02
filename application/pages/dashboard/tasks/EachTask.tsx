@@ -3,7 +3,6 @@ import { AppState } from "@/redux/types/main";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import { TaskProps } from "@/components/app/dashboard/latest_tasks/types/main";
 import BoxContainer from "@/components/app/main/BoxContainer";
@@ -18,20 +17,17 @@ const EachTask: FC<TaskProps> = ({ id, content, isCompleted }) => {
 
     function removeTask(): void {
         dispatch(removeTaskAction(id));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Task removed successfully !`, { position: "top-center", theme: state.theme });
+        toast.warning("Task removed successfully !");
     }
 
     function completeTask(): void {
         dispatch(completeTaskAction(id));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Task completed successfully !`, { position: "top-center", theme: state.theme });
+        toast.success("Task completed successfully !");
     }
 
     function recoverTask(): void {
         dispatch(recoverTaskAction(id));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Task recovered successfully !`, { position: "top-center", theme: state.theme });
+        toast.success("Task recovered successfully !");
     }
 
     return (

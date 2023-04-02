@@ -4,7 +4,6 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { ProjectsInfoItemProps, StatusTypes } from "@/components/app/dashboard/projects/types/main";
 import removeProjectAction from "@/redux/actions/remove_actions/removeProjectAction";
 
@@ -21,8 +20,7 @@ const EachProject: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, client, 
 
     function removeProject(): void {
         dispatch(removeProjectAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Project removed successfully !`, { position: "top-center", theme: state.theme });
+        toast.warning("Project removed successfully !");
     }
 
     return (

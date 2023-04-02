@@ -4,7 +4,6 @@ import { HiCheck, HiX } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { SwitchButtonProps } from "./types/main";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { BiRadioCircle } from "react-icons/bi";
 import { TbMinusVertical } from "react-icons/tb";
 import classNames from "classnames";
@@ -27,11 +26,7 @@ const SwitchButton: FC<SwitchButtonProps> = ({ isChecked, dispatchType }) => {
             })}
             onClick={() => {
                 dispatch({ type: dispatchType });
-                state.switchBooleans.websiteControl.isNotificationActive &&
-                    toast.success("Settings saved successfully !", {
-                        position: "top-center",
-                        theme: state.theme,
-                    });
+                toast.success("Settings saved successfully !");
             }}
         >
             <div

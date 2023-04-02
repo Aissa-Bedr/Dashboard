@@ -3,7 +3,6 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Skill } from "./types/main";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import removeSkillAction from "@/redux/actions/remove_actions/removeSkillAction";
 
@@ -13,8 +12,7 @@ const Skill: FC<Skill> = ({ id, content }) => {
 
     function removeTask(): void {
         dispatch(removeSkillAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Skill removed successfully !`, { position: "top-center", theme: state.theme });
+        toast.warning("Skill removed successfully !");
     }
 
     return (

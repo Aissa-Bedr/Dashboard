@@ -7,7 +7,6 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { EachCommentProps } from "./types/main";
 import removeCommentAction from "@/redux/actions/remove_actions/removeCommentAction";
 import toggleIsLikedCommentAction from "@/redux/actions/toggle_actions/toggleIsLikedCommentAction";
@@ -18,20 +17,12 @@ const EachComment: FC<EachCommentProps> = ({ id, postId, commentDescription, isL
 
     function removeComment(postId: string): void {
         dispatch(removeCommentAction(postId, id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Comment removed successfully !`, {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.warning("Comment removed successfully !");
     }
 
     function toggleCommentLike(postId: string): void {
         dispatch(toggleIsLikedCommentAction(postId, id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(isLiked ? "Comment unliked successfully !" : "Comment liked successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success(isLiked ? "Comment unliked successfully !" : "Comment liked successfully !");
     }
 
     return (

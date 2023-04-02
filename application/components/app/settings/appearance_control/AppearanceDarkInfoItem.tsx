@@ -4,7 +4,6 @@ import { HiCheck } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { AppearanceInfoItemProps, BackgroundThemes } from "./types/main";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import Flex from "@/components/build/Flex";
 import changeDarkAppearanceAction from "@/redux/actions/change_actions/changeDarkAppearanceAction";
@@ -105,11 +104,7 @@ const AppearanceDarkInfoItem: FC<AppearanceInfoItemProps> = ({ backgroundColor }
                 );
         }
 
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success("Color theme saved successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success("Color theme saved successfully !");
     }
 
     return (

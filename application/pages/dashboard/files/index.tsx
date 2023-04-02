@@ -6,7 +6,7 @@ import Logo from "@/components/build/Logo";
 import Move from "@/components/build/Move";
 import SearchBar from "@/components/helpers/search_bar/SearchBar";
 import { Theme } from "@/redux/types/app";
-import { AppState, AppStateAction } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FilesInfoPage from "./FilesInfoPage";

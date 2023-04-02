@@ -1,11 +1,10 @@
 import Flex from "@/components/build/Flex";
-import { AppState, AppStateAction } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import classNames from "classnames";
 import Image from "next/image";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { LatestUploadsInfoItemProps } from "@/components/app/dashboard/latest_uploads/types/main";
 import SecondaryLogo from "@/components/app/main/SecondaryLogo";
 import BoxContainer from "@/components/app/main/BoxContainer";
@@ -17,11 +16,7 @@ const EachFile: FC<LatestUploadsInfoItemProps> = ({ id, fileName, fileType, file
 
     function removeFile(): void {
         dispatch(removeFileAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`${fileType === "jsx" ? "Component" : "File"} removed successfully !`, {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.warning(`${fileType === "jsx" ? "Component" : "File"} removed successfully !`);
     }
 
     return (

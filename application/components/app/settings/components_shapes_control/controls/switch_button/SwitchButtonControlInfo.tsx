@@ -5,7 +5,6 @@ import { HiCheck } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { SwitchButtonControlInfoProps } from "../types/main";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import changeSwitchButtonComponentAction from "@/redux/actions/change_actions/changeSwitchButtonComponentAction";
 
@@ -31,11 +30,7 @@ const SwitchButtonControlInfo: FC<SwitchButtonControlInfoProps> = ({ type }) => 
                 dispatch(dispatch(changeSwitchButtonComponentAction("default")));
         }
 
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success("Settings saved successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success("Settings saved successfully !");
     }
 
     return (

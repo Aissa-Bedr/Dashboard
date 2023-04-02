@@ -3,7 +3,6 @@ import { AppState } from "@/redux/types/main";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Input from "@/components/build/Input";
 import Button from "@/components/build/Button";
 import Grid from "@/components/build/Grid";
@@ -36,23 +35,18 @@ const ProjectsInfoPage = () => {
 
     function addProject(): void | false {
         if (!projectInfo.name || !projectInfo.finishDate || !projectInfo.client) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Project can't be empty !`, { position: "top-center", theme: state.theme });
+            toast.error("Project can't be empty !");
             return false;
         }
 
         if (projectInfo.price < 0 || projectInfo.team < 1 || !patterns.finishDate.test(projectInfo.finishDate)) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Invalid information !`, {
-                    position: "top-center",
-                    theme: state.theme,
-                });
+            toast.error("Invalid information !");
             return false;
         }
 
         dispatch(addProjectAction(projectInfo));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Project added successfully !`, { position: "top-center", theme: state.theme });
+        toast.success("Project added successfully !");
+
         setProjectInfo({ name: "", finishDate: "", client: "", price: "" as any, team: "" as any, status: "pending" });
     }
 

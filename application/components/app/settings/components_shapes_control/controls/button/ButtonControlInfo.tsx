@@ -5,7 +5,6 @@ import { HiCheck } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonControlInfoProps } from "../types/main";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import changeButtonComponentAction from "@/redux/actions/change_actions/changeButtonComponentAction";
 import changeLightAppearanceAction from "@/redux/actions/change_actions/changeLightAppearanceAction";
@@ -47,11 +46,7 @@ const ButtonControlInfo: FC<ButtonControlInfoProps> = ({ type }) => {
                 dispatch(changeButtonComponentAction("default"));
         }
 
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success("Settings saved successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success("Settings saved successfully !");
     }
 
     return (

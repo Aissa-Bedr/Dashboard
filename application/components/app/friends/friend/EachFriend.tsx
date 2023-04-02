@@ -6,7 +6,6 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { EachMessageProps } from "../types/main";
 import SecondaryLogo from "../../main/SecondaryLogo";
 import removeMessageAction from "@/redux/actions/remove_actions/removeMessageAction";
@@ -26,20 +25,12 @@ const EachFriend: FC<EachMessageProps> = ({
 
     function removeMessage(friendId: string): void {
         dispatch(removeMessageAction(friendId, id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Message removed successfully !`, {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.warning("Message removed successfully !");
     }
 
     function toggleMessageLike(friendId: string): void {
         dispatch(toggleIsLikedMessageAction(friendId, id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(isLiked ? "Message unliked successfully !" : "Message liked successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success(isLiked ? "Message unliked successfully !" : "Message liked successfully !");
     }
 
     return (

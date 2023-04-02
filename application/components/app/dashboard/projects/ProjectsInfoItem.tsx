@@ -6,7 +6,6 @@ import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { ProjectsInfoItemProps, StatusTypes } from "./types/main";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import removeProjectAction from "@/redux/actions/remove_actions/removeProjectAction";
 
 export const statusTypes: StatusTypes = {
@@ -22,8 +21,7 @@ const ProjectsInfoItem: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, cli
 
     function removeProject(): void {
         dispatch(removeProjectAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Project removed successfully !`, { position: "top-center", theme: state.theme });
+        toast.warning("Project removed successfully !");
     }
 
     return (

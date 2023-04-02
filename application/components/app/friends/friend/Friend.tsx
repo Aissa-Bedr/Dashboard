@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "@/redux/types/main";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { AiOutlineHeart } from "react-icons/ai";
 import classNames from "classnames";
@@ -45,17 +44,12 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
 
     function removeFriend(): void {
         dispatch(removeFriendAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Friend removed successfully !`, { position: "top-center", theme: state.theme });
+        toast.warning("Friend removed successfully !");
     }
 
     function toggleFriendLike(): void {
         dispatch(toggleIsLikedFriendAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(isLiked ? "Friend unliked successfully !" : "Friend liked successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success(isLiked ? "Friend unliked successfully !" : "Friend liked successfully !");
     }
 
     const toggleChat = (): void =>
@@ -63,11 +57,7 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
 
     function addMessage(): void | false {
         if (!friendOptions.messageDescription) {
-            state.switchBooleans.websiteControl.isNotificationActive &&
-                toast.error(`Message can't be empty !`, {
-                    position: "top-center",
-                    theme: state.theme,
-                });
+            toast.error("Message can't be empty !");
             return false;
         }
 
@@ -77,21 +67,14 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
 
         friendMessage(friendOptions.messageDescription, 1500, name, id!, { state, dispatch });
 
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(`Message sent successfully !`, {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success("Message sent successfully !");
+
         setFriendOptions((prevState) => ({ ...prevState, messageDescription: "" }));
     }
 
     function clearChat(): void {
         dispatch(clearChatAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success("Chat cleared successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success("Chat cleared successfully !");
     }
 
     return (

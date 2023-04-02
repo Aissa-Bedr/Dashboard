@@ -4,7 +4,6 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { RemindersInfoItemProps } from "@/components/app/dashboard/reminders/types/main";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import removeReminderAction from "@/redux/actions/remove_actions/removeReminderAction";
@@ -22,8 +21,7 @@ const EachReminder: FC<RemindersInfoItemProps> = ({ id, title, time, theme }) =>
 
     function removeReminder(): void {
         dispatch(removeReminderAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Reminder removed successfully !`, { position: "top-center", theme: state.theme });
+        toast.warning("Reminder removed successfully !");
     }
 
     return (

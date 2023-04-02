@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "@/redux/types/main";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import { AiOutlineHeart } from "react-icons/ai";
 import removeCourseAction from "@/redux/actions/remove_actions/removeCourseAction";
@@ -19,17 +18,12 @@ const Course: FC<CourseProps> = ({ id, title, description, videoSrc, price, isLi
 
     function removeCourse(): void {
         dispatch(removeCourseAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`Course removed successfully !`, { position: "top-center", theme: state.theme });
+        toast.warning("Course removed successfully !");
     }
 
     function toggleCourseLike(): void {
         dispatch(toggleIsLikedCourseAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.success(isLiked ? "Course unliked successfully !" : "Course liked successfully !", {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.success(isLiked ? "Course unliked successfully !" : "Course liked successfully !");
     }
 
     return (

@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import SecondaryLogo from "../../main/SecondaryLogo";
 import { LatestUploadsInfoItemProps } from "./types/main";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import removeFileAction from "@/redux/actions/remove_actions/removeFileAction";
 
 const LatestUploadsInfoItem: FC<LatestUploadsInfoItemProps> = ({
@@ -24,11 +23,7 @@ const LatestUploadsInfoItem: FC<LatestUploadsInfoItemProps> = ({
 
     function removeFile(): void {
         dispatch(removeFileAction(id!));
-        state.switchBooleans.websiteControl.isNotificationActive &&
-            toast.warning(`${fileType === "jsx" ? "Component" : "File"} removed successfully !`, {
-                position: "top-center",
-                theme: state.theme,
-            });
+        toast.warning(`${fileType === "jsx" ? "Component" : "File"} removed successfully !`);
     }
 
     return (
