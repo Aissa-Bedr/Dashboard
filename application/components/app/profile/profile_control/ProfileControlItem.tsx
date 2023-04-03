@@ -53,7 +53,7 @@ const ProfileControlItem = () => {
                 label="Email"
                 labelHTMLFor="email"
                 type="text"
-                stateValue={state.profileInfo.email}
+                stateValue={state.information.profileInfo.email}
                 onChange={(e) => setProfileInfo((prevState) => ({ ...prevState, email: e.target.value }))}
             />
 
@@ -61,7 +61,7 @@ const ProfileControlItem = () => {
                 label="Phone"
                 labelHTMLFor="phone"
                 type="number"
-                stateValue={state.profileInfo.phone}
+                stateValue={state.information.profileInfo.phone}
                 onChange={(e) => setProfileInfo((prevState) => ({ ...prevState, phone: +e.target.value }))}
             />
 
@@ -89,7 +89,7 @@ const ProfileControlItem = () => {
                 label="Country"
                 labelHTMLFor="country"
                 type="text"
-                stateValue={state.profileInfo.country}
+                stateValue={state.information.profileInfo.country}
                 onChange={(e) => setProfileInfo((prevState) => ({ ...prevState, country: e.target.value }))}
             />
 
@@ -97,7 +97,7 @@ const ProfileControlItem = () => {
                 label="Date Of Birth"
                 labelHTMLFor="dateOfBirth"
                 type="text"
-                stateValue={state.profileInfo.birthDay}
+                stateValue={state.information.profileInfo.birthDay}
                 onChange={(e) => setProfileInfo((prevState) => ({ ...prevState, birthDay: e.target.value }))}
             />
 
@@ -105,7 +105,7 @@ const ProfileControlItem = () => {
                 label="Programming Language"
                 labelHTMLFor="programmingLanguage"
                 type="text"
-                stateValue={state.profileInfo.programmingLanguage}
+                stateValue={state.information.profileInfo.programmingLanguage}
                 onChange={(e) => setProfileInfo((prevState) => ({ ...prevState, programmingLanguage: e.target.value }))}
             />
 
@@ -113,7 +113,7 @@ const ProfileControlItem = () => {
                 label="Experience"
                 labelHTMLFor="experience"
                 type="number"
-                stateValue={state.profileInfo.experience}
+                stateValue={state.information.profileInfo.experience}
                 onChange={(e) =>
                     setProfileInfo((prevState) => ({ ...prevState, experience: parseInt(e.target.value) }))
                 }

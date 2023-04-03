@@ -53,13 +53,13 @@ const Information = () => {
                         )}
                         {state.switchBooleans.subscribeControl.isAchievementsEnabled && (
                             <>
-                                {state.subscription.subscribeType === "max" && (
-                                    <GiSpikedDragonHead
-                                        className="text-red-400 duration-300 hover:scale-110"
-                                        size="1.5rem"
-                                    />
-                                )}
+                                <GiSpikedDragonHead
+                                    className="text-red-400 duration-300 hover:scale-110"
+                                    size="1.5rem"
+                                />
+
                                 <AiOutlineStar className="text-yellow-300 duration-300 hover:scale-110" size="1.5rem" />
+
                                 <MdComputer
                                     className="duration-300 text-dark dark:text-white hover:scale-110"
                                     size="1.5rem"

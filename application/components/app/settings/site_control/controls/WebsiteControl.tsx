@@ -51,7 +51,7 @@ const WebsiteControl = () => {
                             </p>
                         </Flex>
                     </div>
-                    <Subscribe subscribeType="gold" feature="Website control" />
+                    <p className="text-sm __secondary_logo">Subscribe first to access this feature</p>
                 </>
             )}
         </>

@@ -8,6 +8,7 @@ import changeSubscriptionAction from "@/redux/actions/change_actions/changeSubsc
 import changeSubscribeControlAction from "@/redux/actions/change_actions/changeSubscribeControlAction";
 import disableAllSubscribeControlAction from "@/redux/actions/main_actions/disableAllSubscribeControlAction";
 import enableAllSubscribeControlAction from "@/redux/actions/main_actions/enableAllSubscribeControlAction";
+import disableAutoSelectAction from "@/redux/actions/main_actions/disableAutoSelectAction";
 
 const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundColor }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -18,6 +19,7 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
             case "free":
                 dispatch(changeSubscriptionAction({ isSubscribed: false, subscribeType: "free" }));
                 dispatch(disableAllSubscribeControlAction());
+                dispatch(disableAutoSelectAction());
                 break;
 
             case "silver":
@@ -36,6 +38,7 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                         isChatBotEnabled: false,
                     })
                 );
+                dispatch(disableAutoSelectAction());
                 break;
 
             case "gold":
@@ -54,6 +57,7 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                         isChatBotEnabled: false,
                     })
                 );
+                dispatch(disableAutoSelectAction());
                 break;
 
             case "platinum":
@@ -72,6 +76,7 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                         isChatBotEnabled: false,
                     })
                 );
+                dispatch(disableAutoSelectAction());
                 break;
 
             case "super":

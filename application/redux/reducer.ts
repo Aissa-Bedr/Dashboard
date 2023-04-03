@@ -79,6 +79,7 @@ import {
     CLEAR_CHAT_BOT,
     COMPLETE_TASK,
     DISABLE_ALL_SUBSCRIBE_CONTROL,
+    DISABLE_AUTO_SELECT,
     ENABLE_ALL_SUBSCRIBE_CONTROL,
     RECOVER_TASK,
 } from "./constants/mainTypes";
@@ -836,6 +837,18 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                     uiControl: {
                         ...state.switchBooleans.uiControl,
                         isAutoSelect: !state.switchBooleans.uiControl.isAutoSelect,
+                    },
+                },
+            };
+
+        case DISABLE_AUTO_SELECT:
+            return {
+                ...state,
+                switchBooleans: {
+                    ...state.switchBooleans,
+                    uiControl: {
+                        ...state.switchBooleans.uiControl,
+                        isAutoSelect: false,
                     },
                 },
             };
