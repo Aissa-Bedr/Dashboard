@@ -17,7 +17,7 @@ const SiteControlInfo = () => {
             {state.subscription.subscribeType === "super" ||
                 (state.subscription.subscribeType === "max" && (
                     <Details className="mb-4" note="Important note">
-                        <Flex className="gap-2 p-2" direction="col">
+                        <Flex className="gap-2 px-4 py-2" direction="col">
                             <p className="text-sm __secondary_logo">
                                 The auto-select will be apply only in the current color theme and will effect the
                                 appearance control themes and components shapes control

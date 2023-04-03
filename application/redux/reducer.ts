@@ -76,6 +76,7 @@ import {
 } from "./constants/removeTypes";
 import {
     CLEAR_CHAT,
+    CLEAR_CHAT_BOT,
     COMPLETE_TASK,
     DISABLE_ALL_SUBSCRIBE_CONTROL,
     ENABLE_ALL_SUBSCRIBE_CONTROL,
@@ -908,13 +909,19 @@ function reducer(state = initialState, action: AppStateAction): AppState {
             return {
                 ...state,
                 chatBotMessages: [
+                    ...state.chatBotMessages,
                     {
                         id: nanoid(),
                         content: action.payload?.chatBotMessages?.content!,
                         isBotMessage: action.payload?.chatBotMessages?.isBotMessage!,
                     },
-                    ...state.chatBotMessages,
                 ],
+            };
+
+        case CLEAR_CHAT_BOT:
+            return {
+                ...state,
+                chatBotMessages: [],
             };
 
         default:

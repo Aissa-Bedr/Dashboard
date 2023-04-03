@@ -14,9 +14,9 @@ const EachChatBotMessage: FC<EachChatBotMessageProps> = ({ id, content, isBotMes
         <Flex className="gap-4" direction="col">
             <Flex className="gap-2" direction="row" items="center">
                 {isBotMessage ? (
-                    <BsRobot className="text-black dark:text-white" />
+                    <BsRobot className="text-black dark:text-white" size="2rem" />
                 ) : (
-                    <img className="w-12 h-12 rounded-full" src={`/${state.appearance.logo.src}`} alt="logo" />
+                    <img className="w-10 h-10 rounded-full" src={`/${state.appearance.logo.src}`} alt="logo" />
                 )}
 
                 <SecondaryLogo text={isBotMessage ? "Bot" : "You"} />

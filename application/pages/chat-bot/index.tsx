@@ -1,9 +1,11 @@
 import { themeSwitcher } from "@/assests/logic/script";
 import ChatBotMessages from "@/components/app/chat-bot/chat/ChatBotMessages";
+import BoxContainer from "@/components/app/main/BoxContainer";
 import Base from "@/components/build/Base";
 import BaseWrapper from "@/components/build/BaseWrapper";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
+import Subscribe from "@/components/build/Subscribe";
 import SearchBar from "@/components/helpers/search_bar/SearchBar";
 import { AppState } from "@/redux/types/main";
 import { useEffect } from "react";
@@ -28,10 +30,16 @@ const ChatBot = () => {
             <Base>
                 <SearchBar />
 
-                <Logo content="Chat bot" />
+                <Logo content="Chat bot [Alpha]" />
 
                 <BaseWrapper>
-                    <ChatBotMessages />
+                    {state.switchBooleans.subscribeControl.isChatBotEnabled ? (
+                        <ChatBotMessages />
+                    ) : (
+                        <BoxContainer className="col-span-3">
+                            <Subscribe subscribeType="max" feature="Chat Bot" />
+                        </BoxContainer>
+                    )}
                 </BaseWrapper>
 
                 {state.switchBooleans.websiteControl.isNotificationActive && (
