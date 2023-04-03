@@ -73,7 +73,13 @@ import {
     REMOVE_SKILL,
     REMOVE_TASK,
 } from "./constants/removeTypes";
-import { CLEAR_CHAT, COMPLETE_TASK, RECOVER_TASK } from "./constants/mainTypes";
+import {
+    CLEAR_CHAT,
+    COMPLETE_TASK,
+    DISABLE_ALL_SUBSCRIBE_CONTROL,
+    ENABLE_ALL_SUBSCRIBE_CONTROL,
+    RECOVER_TASK,
+} from "./constants/mainTypes";
 
 function reducer(state = initialState, action: AppStateAction): AppState {
     switch (action.type) {
@@ -852,6 +858,46 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                         isAchievementsEnabled: action.payload?.subscribeControl?.isAchievementsEnabled!,
                         isUnlimitedDataEnabled: action.payload?.subscribeControl?.isUnlimitedDataEnabled!,
                         isChatBotEnabled: action.payload?.subscribeControl?.isChatBotEnabled!,
+                    },
+                },
+            };
+
+        case ENABLE_ALL_SUBSCRIBE_CONTROL:
+            return {
+                ...state,
+                switchBooleans: {
+                    ...state.switchBooleans,
+                    subscribeControl: {
+                        isChangeGeneralInfoEnabled: true,
+                        isAutoSelectEnabled: true,
+                        isAccessWebsiteControlEnabled: true,
+                        isAccessWidgetsControlEnabled: true,
+                        isChangeDarkAppearanceColorEnabled: true,
+                        isChangeLogoTypeEnabled: true,
+                        isChangeComponentsShapesEnabled: true,
+                        isAchievementsEnabled: true,
+                        isUnlimitedDataEnabled: true,
+                        isChatBotEnabled: true,
+                    },
+                },
+            };
+
+        case DISABLE_ALL_SUBSCRIBE_CONTROL:
+            return {
+                ...state,
+                switchBooleans: {
+                    ...state.switchBooleans,
+                    subscribeControl: {
+                        isChangeGeneralInfoEnabled: false,
+                        isAutoSelectEnabled: false,
+                        isAccessWebsiteControlEnabled: false,
+                        isAccessWidgetsControlEnabled: false,
+                        isChangeDarkAppearanceColorEnabled: false,
+                        isChangeLogoTypeEnabled: false,
+                        isChangeComponentsShapesEnabled: false,
+                        isAchievementsEnabled: false,
+                        isUnlimitedDataEnabled: false,
+                        isChatBotEnabled: false,
                     },
                 },
             };
