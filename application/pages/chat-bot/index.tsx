@@ -1,11 +1,11 @@
 import { themeSwitcher } from "@/assests/logic/script";
+import ChatBotMessages from "@/components/app/chat-bot/chat/ChatBotMessages";
 import Base from "@/components/build/Base";
 import BaseWrapper from "@/components/build/BaseWrapper";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import SearchBar from "@/components/helpers/search_bar/SearchBar";
 import { AppState } from "@/redux/types/main";
-import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -31,7 +31,7 @@ const ChatBot = () => {
                 <Logo content="Chat bot" />
 
                 <BaseWrapper>
-                    <p>Hello Chat Bot !</p>
+                    <ChatBotMessages />
                 </BaseWrapper>
 
                 {state.switchBooleans.websiteControl.isNotificationActive && (
