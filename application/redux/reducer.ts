@@ -59,6 +59,7 @@ import {
     ADD_TASK,
     UPLOAD_FILE,
     ADD_COURSE,
+    SEND_CHAT_BOT_MESSAGE,
 } from "./constants/addTypes";
 import {
     REMOVE_BUSINESS_PROJECT,
@@ -901,6 +902,19 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                         isChatBotEnabled: false,
                     },
                 },
+            };
+
+        case SEND_CHAT_BOT_MESSAGE:
+            return {
+                ...state,
+                chatBotMessages: [
+                    {
+                        id: nanoid(),
+                        content: action.payload?.chatBotMessages?.content!,
+                        isBotMessage: action.payload?.chatBotMessages?.isBotMessage!,
+                    },
+                    ...state.chatBotMessages,
+                ],
             };
 
         default:

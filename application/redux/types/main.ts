@@ -22,7 +22,7 @@ import {
     Tasks,
     UserInfo,
 } from "./data";
-import { Message } from "@/components/app/friends/types/main";
+import { ChatBotMessage, Message } from "@/components/app/friends/types/main";
 
 export interface AppState {
     currentLink: LinkProps;
@@ -44,6 +44,7 @@ export interface AppState {
     friends: Friends[];
     courses: Courses[];
     subscription: Subscription;
+    chatBotMessages: ChatBotMessage[];
 }
 
 export interface AppStateAction {
@@ -71,5 +72,6 @@ export interface AppStateAction {
         courses?: Partial<Courses>;
         subscription?: Partial<Subscription>;
         subscribeControl?: Partial<SubscribeControl>;
+        chatBotMessages?: Partial<ChatBotMessage>;
     };
 }

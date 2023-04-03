@@ -1,4 +1,4 @@
-import { AppState, AppStateAction } from "@/redux/types/main";
+import { AppState } from "@/redux/types/main";
 import { Dispatch } from "redux";
 
 export type MessageType = "sayHello" | "interrogativeQuestion" | "rightOrWrong";
@@ -21,11 +21,17 @@ export interface FriendProps {
 
 export interface FriendMessage {
     state: AppState;
-    dispatch: Dispatch<AppStateAction>;
+    dispatch: Dispatch;
 }
 
 export interface EachMessageProps extends Message {
     friendId: string;
     friendPictureSrc: string;
     friendName: string;
+}
+
+export interface ChatBotMessage {
+    id?: string;
+    content: string;
+    isBotMessage: boolean;
 }

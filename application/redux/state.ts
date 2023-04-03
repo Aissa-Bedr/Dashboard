@@ -111,4 +111,5 @@ export const initialState: AppState = {
         isSubscribed: false,
         subscribeType: "free",
     },
+    chatBotMessages: [],
 };
