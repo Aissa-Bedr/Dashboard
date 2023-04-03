@@ -62,7 +62,7 @@ const TasksInfo = () => {
             </Flex>
 
             <Details note="Links">
-                <Flex className="p-4" direction="row" items="center" justify="between">
+                <Flex className="px-4 py-2" direction="row" items="center" justify="between">
                     <Move href="/dashboard/tasks" onClick={() => dispatch(changeLinkAction("dashboard"))}>
                         Tasks
                     </Move>

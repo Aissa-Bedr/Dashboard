@@ -37,7 +37,7 @@ export const initialState: AppState = {
             isBillingInfoActive: false,
         },
         subscribeControl: {
-            isChangeGeneralInfoEnabled: false,
+            isChangeGeneralAndUserInfoEnabled: false,
             isAutoSelectEnabled: false,
             isAccessWebsiteControlEnabled: false,
             isAccessWidgetsControlEnabled: false,

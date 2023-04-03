@@ -131,7 +131,7 @@ const ProjectsInfo = () => {
 
             <div className="col-span-3">
                 <Details note="Links">
-                    <Flex className="p-4" direction="row" items="center" justify="between">
+                    <Flex className="px-4 py-2" direction="row" items="center" justify="between">
                         <Move href="/dashboard/projects" onClick={() => dispatch(changeLinkAction("dashboard"))}>
                             Projects
                         </Move>

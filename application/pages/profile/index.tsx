@@ -1,5 +1,4 @@
 import { themeSwitcher } from "@/assests/logic/script";
-import SecondaryLogo from "@/components/app/main/SecondaryLogo";
 import Information from "@/components/app/profile/information/Information";
 import ProfileControl from "@/components/app/profile/profile_control/ProfileControl";
 import GeneralInfo from "@/components/app/settings/general_info/GeneralInfo";
@@ -35,11 +34,8 @@ const Profile = () => {
 
                 <BaseWrapper>
                     <Information />
-                    {state.switchBooleans.subscribeControl.isChangeGeneralInfoEnabled ? (
-                        <GeneralInfo />
-                    ) : (
-                        <SecondaryLogo text="Subscribe first to access this feature" />
-                    )}
+                    <GeneralInfo />
+
                     <div className="!col-span-2">
                         <ProfileControl />
                     </div>

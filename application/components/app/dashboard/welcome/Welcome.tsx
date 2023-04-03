@@ -60,7 +60,7 @@ const Welcome: FC<WelcomeProps> = ({ dontIncludeShowMoreLink }) => {
 
                 <div className="m-4">
                     <Details note="Links">
-                        <Flex className="p-4" direction="row" items="center" justify="between">
+                        <Flex className="px-4 py-2" direction="row" items="center" justify="between">
                             {!dontIncludeShowMoreLink && (
                                 <Move href="/dashboard/welcome" onClick={() => dispatch(changeLinkAction("dashboard"))}>
                                     Welcome

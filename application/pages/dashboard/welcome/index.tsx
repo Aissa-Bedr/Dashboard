@@ -1,6 +1,5 @@
 import { themeSwitcher } from "@/assests/logic/script";
 import Welcome from "@/components/app/dashboard/welcome/Welcome";
-import SecondaryLogo from "@/components/app/main/SecondaryLogo";
 import GeneralInfo from "@/components/app/settings/general_info/GeneralInfo";
 import UserInfo from "@/components/app/settings/user_info/UserInfo";
 import Base from "@/components/build/Base";
@@ -15,6 +14,7 @@ import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 import { AppState } from "@/redux/types/main";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 const WelcomePage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -46,15 +46,15 @@ const WelcomePage = () => {
                         <Welcome dontIncludeShowMoreLink />
 
                         <Grid className="gap-4 lg:grid-cols-2" cols="1">
-                            {state.switchBooleans.subscribeControl.isChangeGeneralInfoEnabled ? (
-                                <GeneralInfo />
-                            ) : (
-                                <SecondaryLogo text="Subscribe first to access this feature" />
-                            )}
+                            <GeneralInfo />
                             <UserInfo />
                         </Grid>
                     </Flex>
                 </BaseWrapper>
+
+                {state.switchBooleans.websiteControl.isNotificationActive && (
+                    <ToastContainer position="top-center" theme={state.theme} />
+                )}
             </Base>
         </>
     );

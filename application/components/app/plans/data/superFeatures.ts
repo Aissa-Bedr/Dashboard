@@ -3,8 +3,8 @@ import { FeatureProps } from "../types/main";
 const superFeatures: FeatureProps[] = [
     {
         id: 0,
-        content: "Change the general information",
-        completeContent: "You will be able to change the first and last name",
+        content: "Change the general and user information",
+        completeContent: "You will be able to change the first and last name and designation and more...",
         isChecked: true,
     },
     {

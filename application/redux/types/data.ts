@@ -155,7 +155,7 @@ export interface ProfileControl {
 }
 
 export interface SubscribeControl {
-    isChangeGeneralInfoEnabled: boolean;
+    isChangeGeneralAndUserInfoEnabled: boolean;
     isAutoSelectEnabled: boolean;
     isAccessWebsiteControlEnabled: boolean;
     isAccessWidgetsControlEnabled: boolean;

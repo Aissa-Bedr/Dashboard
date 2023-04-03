@@ -5,24 +5,24 @@ import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import Move from "@/components/build/Move";
 import SearchBar from "@/components/helpers/search_bar/SearchBar";
-import { Theme } from "@/redux/types/app";
 import { AppState } from "@/redux/types/main";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RemindersInfoPage from "./RemindersInfoPage";
 import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
+import { ToastContainer } from "react-toastify";
 
 const RemindersPage = () => {
-    const theme = useSelector<AppState, Theme>((state) => state.theme);
+    const state = useSelector<AppState, AppState>((state) => state);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        themeSwitcher(theme);
+        themeSwitcher(state.theme);
     }, []);
 
     useEffect(() => {
-        themeSwitcher(theme);
-    }, [theme]);
+        themeSwitcher(state.theme);
+    }, [state.theme]);
 
     return (
         <>
@@ -40,6 +40,10 @@ const RemindersPage = () => {
 
                     <RemindersInfoPage />
                 </BaseWrapper>
+
+                {state.switchBooleans.websiteControl.isNotificationActive && (
+                    <ToastContainer position="top-center" theme={state.theme} />
+                )}
             </Base>
         </>
     );

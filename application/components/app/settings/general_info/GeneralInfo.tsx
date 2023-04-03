@@ -7,6 +7,7 @@ import SecondaryLogo from "../../main/SecondaryLogo";
 import GeneralInfoItem from "./GeneralInfoItem";
 import { useSelector } from "react-redux";
 import { AppState } from "@/redux/types/main";
+import Subscribe from "@/components/build/Subscribe";
 
 const GeneralInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -19,10 +20,10 @@ const GeneralInfo = () => {
             </LogoContainer>
 
             <ContentWrapper>
-                {state.switchBooleans.subscribeControl.isChangeGeneralInfoEnabled ? (
+                {state.switchBooleans.subscribeControl.isChangeGeneralAndUserInfoEnabled ? (
                     <GeneralInfoItem />
                 ) : (
-                    <SecondaryLogo text="Subscribe first to access this feature" />
+                    <Subscribe subscribeType="silver" feature="General information" />
                 )}
             </ContentWrapper>
         </BoxContainer>

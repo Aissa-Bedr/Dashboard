@@ -846,7 +846,8 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                     ...state.switchBooleans,
                     subscribeControl: {
                         ...state.switchBooleans.subscribeControl,
-                        isChangeGeneralInfoEnabled: action.payload?.subscribeControl?.isChangeGeneralInfoEnabled!,
+                        isChangeGeneralAndUserInfoEnabled:
+                            action.payload?.subscribeControl?.isChangeGeneralAndUserInfoEnabled!,
                         isAutoSelectEnabled: action.payload?.subscribeControl?.isAutoSelectEnabled!,
                         isAccessWebsiteControlEnabled: action.payload?.subscribeControl?.isAccessWebsiteControlEnabled!,
                         isAccessWidgetsControlEnabled: action.payload?.subscribeControl?.isAccessWidgetsControlEnabled!,
@@ -868,7 +869,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 switchBooleans: {
                     ...state.switchBooleans,
                     subscribeControl: {
-                        isChangeGeneralInfoEnabled: true,
+                        isChangeGeneralAndUserInfoEnabled: true,
                         isAutoSelectEnabled: true,
                         isAccessWebsiteControlEnabled: true,
                         isAccessWidgetsControlEnabled: true,
@@ -888,7 +889,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                 switchBooleans: {
                     ...state.switchBooleans,
                     subscribeControl: {
-                        isChangeGeneralInfoEnabled: false,
+                        isChangeGeneralAndUserInfoEnabled: false,
                         isAutoSelectEnabled: false,
                         isAccessWebsiteControlEnabled: false,
                         isAccessWidgetsControlEnabled: false,

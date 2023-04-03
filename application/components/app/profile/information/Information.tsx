@@ -36,7 +36,7 @@ const Information = () => {
                     <SecondaryLogo text={`${state.generalInfo.firstName} ${state.generalInfo.lastName}`} />
 
                     <Grid className="gap-2" cols="4">
-                        {state.switchBooleans.subscribeControl.isAchievementsEnabled ? (
+                        {state.switchBooleans.subscribeControl.isAchievementsEnabled && (
                             <>
                                 <AiOutlineStar
                                     className="text-yellow-300 duration-300 hover:text-yellow-400 hover:scale-110"
@@ -55,8 +55,6 @@ const Information = () => {
                                     size="1.5rem"
                                 />
                             </>
-                        ) : (
-                            <SecondaryLogo text="Subscribe first to access this feature" />
                         )}
                     </Grid>
                 </Flex>

@@ -24,7 +24,7 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                 dispatch(changeSubscriptionAction({ isSubscribed: true, subscribeType: "silver" }));
                 dispatch(
                     changeSubscribeControlAction({
-                        isChangeGeneralInfoEnabled: true,
+                        isChangeGeneralAndUserInfoEnabled: true,
                         isAutoSelectEnabled: true,
                         isAccessWebsiteControlEnabled: false,
                         isAccessWidgetsControlEnabled: false,
@@ -42,7 +42,7 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                 dispatch(changeSubscriptionAction({ isSubscribed: true, subscribeType: "gold" }));
                 dispatch(
                     changeSubscribeControlAction({
-                        isChangeGeneralInfoEnabled: true,
+                        isChangeGeneralAndUserInfoEnabled: true,
                         isAutoSelectEnabled: true,
                         isAccessWebsiteControlEnabled: true,
                         isAccessWidgetsControlEnabled: true,
@@ -60,7 +60,7 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                 dispatch(changeSubscriptionAction({ isSubscribed: true, subscribeType: "platinum" }));
                 dispatch(
                     changeSubscribeControlAction({
-                        isChangeGeneralInfoEnabled: true,
+                        isChangeGeneralAndUserInfoEnabled: true,
                         isAutoSelectEnabled: true,
                         isAccessWebsiteControlEnabled: true,
                         isAccessWidgetsControlEnabled: true,
@@ -78,7 +78,7 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                 dispatch(changeSubscriptionAction({ isSubscribed: true, subscribeType: "super" }));
                 dispatch(
                     changeSubscribeControlAction({
-                        isChangeGeneralInfoEnabled: true,
+                        isChangeGeneralAndUserInfoEnabled: true,
                         isAutoSelectEnabled: true,
                         isAccessWebsiteControlEnabled: true,
                         isAccessWidgetsControlEnabled: true,

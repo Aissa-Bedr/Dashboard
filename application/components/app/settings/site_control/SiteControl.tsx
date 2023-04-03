@@ -71,7 +71,7 @@ const SiteControl = () => {
                 <Flex direction="row" items="center" justify="between">
                     <PrimaryLogo text="Site control" />
 
-                    {state.switchBooleans.subscribeControl.isAutoSelectEnabled ? (
+                    {state.switchBooleans.subscribeControl.isAutoSelectEnabled && (
                         <Flex className="gap-4" direction="row" items="center">
                             <SecondaryLogo text="Auto select" />
                             <SwitchButton
@@ -79,8 +79,6 @@ const SiteControl = () => {
                                 dispatchType={TOGGLE_IS_AUTO_SELECT}
                             />
                         </Flex>
-                    ) : (
-                        <SecondaryLogo text="Subscribe first to access this feature" />
                     )}
                 </Flex>
                 <SecondaryLogo text="Control the website if there is maintenance" />

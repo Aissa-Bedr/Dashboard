@@ -7,6 +7,7 @@ import SwitchButtonControl from "./controls/switch_button/SwitchButtonControl";
 import { useSelector } from "react-redux";
 import { AppState } from "@/redux/types/main";
 import SecondaryLogo from "../../main/SecondaryLogo";
+import Subscribe from "@/components/build/Subscribe";
 
 const ComponentsShapesControlInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -33,7 +34,7 @@ const ComponentsShapesControlInfo = () => {
                 {state.switchBooleans.subscribeControl.isChangeComponentsShapesEnabled ? (
                     <ButtonControl />
                 ) : (
-                    <SecondaryLogo text="Subscribe first to access this feature" />
+                    <Subscribe subscribeType="super" feature="Components shapes control" />
                 )}
             </ControlsCSItem>
         </Flex>

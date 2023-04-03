@@ -1,3 +1,5 @@
+import { SubscribeType } from "@/components/app/plans/types/main";
+
 export default interface ComponentProps {
     id?: string;
     className?: string;
@@ -109,4 +111,9 @@ export interface ListLengthProps {
 
 export interface DetailsProps extends ComponentProps {
     note: string;
+}
+
+export interface SubscribeProps {
+    subscribeType: SubscribeType;
+    feature: string;
 }

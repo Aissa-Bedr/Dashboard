@@ -97,7 +97,7 @@ const RemindersInfo = () => {
 
             <div className="col-span-2">
                 <Details note="Links">
-                    <Flex className="p-4" direction="row" items="center" justify="between">
+                    <Flex className="px-4 py-2" direction="row" items="center" justify="between">
                         <Move href="/dashboard/reminders" onClick={() => dispatch(changeLinkAction("dashboard"))}>
                             Reminders
                         </Move>

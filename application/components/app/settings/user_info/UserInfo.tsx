@@ -5,8 +5,13 @@ import BoxContainer from "../../main/BoxContainer";
 import PrimaryLogo from "../../main/PrimaryLogo";
 import SecondaryLogo from "../../main/SecondaryLogo";
 import UserInfoItem from "./UserInfoItem";
+import { useSelector } from "react-redux";
+import { AppState } from "@/redux/types/main";
+import Subscribe from "@/components/build/Subscribe";
 
 const UserInfo = () => {
+    const state = useSelector<AppState, AppState>((state) => state);
+
     return (
         <BoxContainer>
             <LogoContainer>
@@ -15,7 +20,11 @@ const UserInfo = () => {
             </LogoContainer>
 
             <ContentWrapper>
-                <UserInfoItem />
+                {state.switchBooleans.subscribeControl.isChangeGeneralAndUserInfoEnabled ? (
+                    <UserInfoItem />
+                ) : (
+                    <Subscribe subscribeType="silver" feature="User information" />
+                )}
             </ContentWrapper>
         </BoxContainer>
     );

@@ -9,6 +9,7 @@ import {
     TOGGLE_WEBSITE_CONTROL,
 } from "@/redux/constants/toggleTypes";
 import SecondaryLogo from "@/components/app/main/SecondaryLogo";
+import Subscribe from "@/components/build/Subscribe";
 
 const WebsiteControl = () => {
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
@@ -16,28 +17,31 @@ const WebsiteControl = () => {
     return (
         <>
             {switchBooleans.subscribeControl.isAccessWebsiteControlEnabled ? (
-                <SiteControlInfoItem
-                    title="Website control"
-                    content="Control the website default settings hide/show"
-                    isChecked={switchBooleans.websiteControl.isWebsiteControlActive}
-                    dispatchType={TOGGLE_WEBSITE_CONTROL}
-                />
-            ) : (
-                <SecondaryLogo text="Subscribe first to access this feature" />
-            )}
-            {switchBooleans.websiteControl.isWebsiteControlActive && (
                 <>
                     <SiteControlInfoItem
-                        content="Notification show off/on"
-                        isChecked={switchBooleans.websiteControl.isNotificationActive}
-                        dispatchType={TOGGLE_IS_NOTIFICATION_ACTIVE}
+                        title="Website control"
+                        content="Control the website default settings hide/show"
+                        isChecked={switchBooleans.websiteControl.isWebsiteControlActive}
+                        dispatchType={TOGGLE_WEBSITE_CONTROL}
                     />
-                    <SiteControlInfoItem
-                        content="Website zoom average out/in"
-                        isChecked={switchBooleans.websiteControl.isZoomIn}
-                        dispatchType={TOGGLE_IS_ZOOM_IN}
-                    />
+
+                    {switchBooleans.websiteControl.isWebsiteControlActive && (
+                        <>
+                            <SiteControlInfoItem
+                                content="Notification show off/on"
+                                isChecked={switchBooleans.websiteControl.isNotificationActive}
+                                dispatchType={TOGGLE_IS_NOTIFICATION_ACTIVE}
+                            />
+                            <SiteControlInfoItem
+                                content="Website zoom average out/in"
+                                isChecked={switchBooleans.websiteControl.isZoomIn}
+                                dispatchType={TOGGLE_IS_ZOOM_IN}
+                            />
+                        </>
+                    )}
                 </>
+            ) : (
+                <Subscribe subscribeType="gold" feature="Website control" />
             )}
         </>
     );

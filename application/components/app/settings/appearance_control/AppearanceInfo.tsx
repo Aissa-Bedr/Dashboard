@@ -8,6 +8,7 @@ import AppearanceLightInfoItem from "./AppearanceLightInfoItem";
 import AppearanceLogoInfoItem from "./AppearanceLogoInfoItem";
 import { HiCog } from "react-icons/hi2";
 import SecondaryLogo from "../../main/SecondaryLogo";
+import Subscribe from "@/components/build/Subscribe";
 
 const AppearanceInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -122,7 +123,7 @@ const AppearanceInfo = () => {
                         )}
                     </Flex>
                 ) : (
-                    <SecondaryLogo text="Subscribe first to access this feature" />
+                    <Subscribe subscribeType="platinum" feature="Logo and dark color theme appearance" />
                 )}
             </Flex>
         </Flex>
