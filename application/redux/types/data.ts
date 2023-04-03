@@ -156,12 +156,12 @@ export interface ProfileControl {
 
 export interface SubscribeControl {
     isChangeGeneralAndUserInfoEnabled: boolean;
-    isAutoSelectEnabled: boolean;
     isAccessWebsiteControlEnabled: boolean;
     isAccessWidgetsControlEnabled: boolean;
     isChangeDarkAppearanceColorEnabled: boolean;
     isChangeLogoTypeEnabled: boolean;
     isChangeComponentsShapesEnabled: boolean;
+    isAutoSelectEnabled: boolean;
     isAchievementsEnabled: boolean;
     isUnlimitedDataEnabled: boolean;
     isChatBotEnabled: boolean;

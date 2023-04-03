@@ -25,12 +25,12 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                 dispatch(
                     changeSubscribeControlAction({
                         isChangeGeneralAndUserInfoEnabled: true,
-                        isAutoSelectEnabled: true,
                         isAccessWebsiteControlEnabled: false,
                         isAccessWidgetsControlEnabled: false,
                         isChangeDarkAppearanceColorEnabled: false,
                         isChangeLogoTypeEnabled: false,
                         isChangeComponentsShapesEnabled: false,
+                        isAutoSelectEnabled: false,
                         isAchievementsEnabled: false,
                         isUnlimitedDataEnabled: false,
                         isChatBotEnabled: false,
@@ -43,12 +43,12 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                 dispatch(
                     changeSubscribeControlAction({
                         isChangeGeneralAndUserInfoEnabled: true,
-                        isAutoSelectEnabled: true,
                         isAccessWebsiteControlEnabled: true,
                         isAccessWidgetsControlEnabled: true,
                         isChangeDarkAppearanceColorEnabled: false,
                         isChangeLogoTypeEnabled: false,
                         isChangeComponentsShapesEnabled: false,
+                        isAutoSelectEnabled: false,
                         isAchievementsEnabled: false,
                         isUnlimitedDataEnabled: false,
                         isChatBotEnabled: false,
@@ -61,12 +61,12 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                 dispatch(
                     changeSubscribeControlAction({
                         isChangeGeneralAndUserInfoEnabled: true,
-                        isAutoSelectEnabled: true,
                         isAccessWebsiteControlEnabled: true,
                         isAccessWidgetsControlEnabled: true,
                         isChangeDarkAppearanceColorEnabled: true,
                         isChangeLogoTypeEnabled: true,
                         isChangeComponentsShapesEnabled: false,
+                        isAutoSelectEnabled: false,
                         isAchievementsEnabled: false,
                         isUnlimitedDataEnabled: false,
                         isChatBotEnabled: false,
@@ -79,13 +79,13 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                 dispatch(
                     changeSubscribeControlAction({
                         isChangeGeneralAndUserInfoEnabled: true,
-                        isAutoSelectEnabled: true,
                         isAccessWebsiteControlEnabled: true,
                         isAccessWidgetsControlEnabled: true,
                         isChangeDarkAppearanceColorEnabled: true,
                         isChangeLogoTypeEnabled: true,
                         isChangeComponentsShapesEnabled: true,
-                        isAchievementsEnabled: true,
+                        isAutoSelectEnabled: true,
+                        isAchievementsEnabled: false,
                         isUnlimitedDataEnabled: false,
                         isChatBotEnabled: false,
                     })

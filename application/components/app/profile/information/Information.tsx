@@ -18,6 +18,7 @@ import {
     TOGGLE_IS_JOB_INFO_ACTIVE,
     TOGGLE_IS_PERSONAL_INFO_ACTIVE,
 } from "@/redux/constants/toggleTypes";
+import classNames from "classnames";
 
 const Information = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -36,22 +37,29 @@ const Information = () => {
                     <SecondaryLogo text={`${state.generalInfo.firstName} ${state.generalInfo.lastName}`} />
 
                     <Grid className="gap-2" cols="4">
+                        {state.subscription.isSubscribed && (
+                            <RiVipCrownLine
+                                className={classNames("duration-300 hover:scale-110", {
+                                    "text-[#f1f5f9]": state.subscription.subscribeType === "silver",
+                                    "text-[#FDFFBC]": state.subscription.subscribeType === "gold",
+                                    "text-[#DAEAF1]": state.subscription.subscribeType === "platinum",
+                                    "text-purple-400": state.subscription.subscribeType === "super",
+                                    "text-red-400": state.subscription.subscribeType === "max",
+                                })}
+                                size="1.5rem"
+                            />
+                        )}
                         {state.switchBooleans.subscribeControl.isAchievementsEnabled && (
                             <>
-                                <AiOutlineStar
-                                    className="text-yellow-300 duration-300 hover:text-yellow-400 hover:scale-110"
-                                    size="1.5rem"
-                                />
-                                <RiVipCrownLine
-                                    className="text-yellow-300 duration-300 hover:text-yellow-400 hover:scale-110"
-                                    size="1.5rem"
-                                />
-                                <GiSpikedDragonHead
-                                    className={`text-red-300 hover:text-red-400 hover:scale-110 duration-300`}
-                                    size="1.5rem"
-                                />
+                                {state.subscription.subscribeType === "max" && (
+                                    <GiSpikedDragonHead
+                                        className="text-red-400 duration-300 hover:scale-110"
+                                        size="1.5rem"
+                                    />
+                                )}
+                                <AiOutlineStar className="text-yellow-300 duration-300 hover:scale-110" size="1.5rem" />
                                 <MdComputer
-                                    className="duration-300 text-dark hover:text-grey-color dark:text-white dark:hover:text-grey-dark-color hover:scale-110"
+                                    className="duration-300 text-dark dark:text-white hover:scale-110"
                                     size="1.5rem"
                                 />
                             </>

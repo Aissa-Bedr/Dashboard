@@ -848,7 +848,6 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                         ...state.switchBooleans.subscribeControl,
                         isChangeGeneralAndUserInfoEnabled:
                             action.payload?.subscribeControl?.isChangeGeneralAndUserInfoEnabled!,
-                        isAutoSelectEnabled: action.payload?.subscribeControl?.isAutoSelectEnabled!,
                         isAccessWebsiteControlEnabled: action.payload?.subscribeControl?.isAccessWebsiteControlEnabled!,
                         isAccessWidgetsControlEnabled: action.payload?.subscribeControl?.isAccessWidgetsControlEnabled!,
                         isChangeDarkAppearanceColorEnabled:
@@ -856,6 +855,7 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                         isChangeLogoTypeEnabled: action.payload?.subscribeControl?.isChangeLogoTypeEnabled!,
                         isChangeComponentsShapesEnabled:
                             action.payload?.subscribeControl?.isChangeComponentsShapesEnabled!,
+                        isAutoSelectEnabled: action.payload?.subscribeControl?.isAutoSelectEnabled!,
                         isAchievementsEnabled: action.payload?.subscribeControl?.isAchievementsEnabled!,
                         isUnlimitedDataEnabled: action.payload?.subscribeControl?.isUnlimitedDataEnabled!,
                         isChatBotEnabled: action.payload?.subscribeControl?.isChatBotEnabled!,
@@ -870,12 +870,12 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                     ...state.switchBooleans,
                     subscribeControl: {
                         isChangeGeneralAndUserInfoEnabled: true,
-                        isAutoSelectEnabled: true,
                         isAccessWebsiteControlEnabled: true,
                         isAccessWidgetsControlEnabled: true,
                         isChangeDarkAppearanceColorEnabled: true,
                         isChangeLogoTypeEnabled: true,
                         isChangeComponentsShapesEnabled: true,
+                        isAutoSelectEnabled: true,
                         isAchievementsEnabled: true,
                         isUnlimitedDataEnabled: true,
                         isChatBotEnabled: true,
@@ -890,12 +890,12 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                     ...state.switchBooleans,
                     subscribeControl: {
                         isChangeGeneralAndUserInfoEnabled: false,
-                        isAutoSelectEnabled: false,
                         isAccessWebsiteControlEnabled: false,
                         isAccessWidgetsControlEnabled: false,
                         isChangeDarkAppearanceColorEnabled: false,
                         isChangeLogoTypeEnabled: false,
                         isChangeComponentsShapesEnabled: false,
+                        isAutoSelectEnabled: false,
                         isAchievementsEnabled: false,
                         isUnlimitedDataEnabled: false,
                         isChatBotEnabled: false,
