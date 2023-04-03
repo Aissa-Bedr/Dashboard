@@ -36,22 +36,28 @@ const Information = () => {
                     <SecondaryLogo text={`${state.generalInfo.firstName} ${state.generalInfo.lastName}`} />
 
                     <Grid className="gap-2" cols="4">
-                        <AiOutlineStar
-                            className="text-yellow-300 duration-300 hover:text-yellow-400 hover:scale-110"
-                            size="1.5rem"
-                        />
-                        <RiVipCrownLine
-                            className="text-yellow-300 duration-300 hover:text-yellow-400 hover:scale-110"
-                            size="1.5rem"
-                        />
-                        <GiSpikedDragonHead
-                            className={`text-red-300 hover:text-red-400 hover:scale-110 duration-300`}
-                            size="1.5rem"
-                        />
-                        <MdComputer
-                            className="duration-300 text-dark hover:text-grey-color dark:text-white dark:hover:text-grey-dark-color hover:scale-110"
-                            size="1.5rem"
-                        />
+                        {state.switchBooleans.subscribeControl.isAchievementsEnabled ? (
+                            <>
+                                <AiOutlineStar
+                                    className="text-yellow-300 duration-300 hover:text-yellow-400 hover:scale-110"
+                                    size="1.5rem"
+                                />
+                                <RiVipCrownLine
+                                    className="text-yellow-300 duration-300 hover:text-yellow-400 hover:scale-110"
+                                    size="1.5rem"
+                                />
+                                <GiSpikedDragonHead
+                                    className={`text-red-300 hover:text-red-400 hover:scale-110 duration-300`}
+                                    size="1.5rem"
+                                />
+                                <MdComputer
+                                    className="duration-300 text-dark hover:text-grey-color dark:text-white dark:hover:text-grey-dark-color hover:scale-110"
+                                    size="1.5rem"
+                                />
+                            </>
+                        ) : (
+                            <SecondaryLogo text="Subscribe first to access this feature" />
+                        )}
                     </Grid>
                 </Flex>
 

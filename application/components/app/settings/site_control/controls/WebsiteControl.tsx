@@ -8,18 +8,23 @@ import {
     TOGGLE_IS_ZOOM_IN,
     TOGGLE_WEBSITE_CONTROL,
 } from "@/redux/constants/toggleTypes";
+import SecondaryLogo from "@/components/app/main/SecondaryLogo";
 
 const WebsiteControl = () => {
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
 
     return (
         <>
-            <SiteControlInfoItem
-                title="Website control"
-                content="Control the website default settings hide/show"
-                isChecked={switchBooleans.websiteControl.isWebsiteControlActive}
-                dispatchType={TOGGLE_WEBSITE_CONTROL}
-            />
+            {switchBooleans.subscribeControl.isAccessWebsiteControlEnabled ? (
+                <SiteControlInfoItem
+                    title="Website control"
+                    content="Control the website default settings hide/show"
+                    isChecked={switchBooleans.websiteControl.isWebsiteControlActive}
+                    dispatchType={TOGGLE_WEBSITE_CONTROL}
+                />
+            ) : (
+                <SecondaryLogo text="Subscribe first to access this feature" />
+            )}
             {switchBooleans.websiteControl.isWebsiteControlActive && (
                 <>
                     <SiteControlInfoItem

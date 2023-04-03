@@ -71,13 +71,17 @@ const SiteControl = () => {
                 <Flex direction="row" items="center" justify="between">
                     <PrimaryLogo text="Site control" />
 
-                    <Flex className="gap-4" direction="row" items="center">
-                        <SecondaryLogo text="Auto select" />
-                        <SwitchButton
-                            isChecked={state.switchBooleans.uiControl.isAutoSelect}
-                            dispatchType={TOGGLE_IS_AUTO_SELECT}
-                        />
-                    </Flex>
+                    {state.switchBooleans.subscribeControl.isAutoSelectEnabled ? (
+                        <Flex className="gap-4" direction="row" items="center">
+                            <SecondaryLogo text="Auto select" />
+                            <SwitchButton
+                                isChecked={state.switchBooleans.uiControl.isAutoSelect}
+                                dispatchType={TOGGLE_IS_AUTO_SELECT}
+                            />
+                        </Flex>
+                    ) : (
+                        <SecondaryLogo text="Subscribe first to access this feature" />
+                    )}
                 </Flex>
                 <SecondaryLogo text="Control the website if there is maintenance" />
             </LogoContainer>

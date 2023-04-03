@@ -11,18 +11,23 @@ import {
     TOGGLE_IS_YEARLY_TARGETS_ACTIVE,
     TOGGLE_WIDGETS_CONTROL,
 } from "@/redux/constants/toggleTypes";
+import SecondaryLogo from "@/components/app/main/SecondaryLogo";
 
 const WidgetsControl = () => {
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
 
     return (
         <>
-            <SiteControlInfoItem
-                title="Widgets control"
-                content="Control the website widgets items show/hide"
-                isChecked={switchBooleans.widgetsControl.isWidgetsControlActive}
-                dispatchType={TOGGLE_WIDGETS_CONTROL}
-            />
+            {switchBooleans.subscribeControl.isAccessWebsiteControlEnabled ? (
+                <SiteControlInfoItem
+                    title="Widgets control"
+                    content="Control the website widgets items show/hide"
+                    isChecked={switchBooleans.widgetsControl.isWidgetsControlActive}
+                    dispatchType={TOGGLE_WIDGETS_CONTROL}
+                />
+            ) : (
+                <SecondaryLogo text="Subscribe first to access this feature" />
+            )}
 
             {switchBooleans.widgetsControl.isWidgetsControlActive && (
                 <>

@@ -1,5 +1,6 @@
 import { themeSwitcher } from "@/assests/logic/script";
 import Welcome from "@/components/app/dashboard/welcome/Welcome";
+import SecondaryLogo from "@/components/app/main/SecondaryLogo";
 import GeneralInfo from "@/components/app/settings/general_info/GeneralInfo";
 import UserInfo from "@/components/app/settings/user_info/UserInfo";
 import Base from "@/components/build/Base";
@@ -11,22 +12,21 @@ import Logo from "@/components/build/Logo";
 import Move from "@/components/build/Move";
 import SearchBar from "@/components/helpers/search_bar/SearchBar";
 import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
-import { Theme } from "@/redux/types/app";
 import { AppState } from "@/redux/types/main";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const WelcomePage = () => {
-    const theme = useSelector<AppState, Theme>((state) => state.theme);
+    const state = useSelector<AppState, AppState>((state) => state);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        themeSwitcher(theme);
+        themeSwitcher(state.theme);
     }, []);
 
     useEffect(() => {
-        themeSwitcher(theme);
-    }, [theme]);
+        themeSwitcher(state.theme);
+    }, [state.theme]);
 
     return (
         <>
@@ -46,7 +46,11 @@ const WelcomePage = () => {
                         <Welcome dontIncludeShowMoreLink />
 
                         <Grid className="gap-4 lg:grid-cols-2" cols="1">
-                            <GeneralInfo />
+                            {state.switchBooleans.subscribeControl.isChangeGeneralInfoEnabled ? (
+                                <GeneralInfo />
+                            ) : (
+                                <SecondaryLogo text="Subscribe first to access this feature" />
+                            )}
                             <UserInfo />
                         </Grid>
                     </Flex>
