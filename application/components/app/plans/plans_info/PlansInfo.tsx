@@ -11,7 +11,7 @@ import maxFeatures from "../data/maxFeatures";
 
 const PlansInfo = () => {
     return (
-        <Grid className="col-span-3 gap-4 lg:grid-cols-2 xl:grid-cols-3" cols="1">
+        <Grid className="col-span-3 gap-4 xl:grid-cols-2 2xl:grid-cols-3" cols="1">
             <BoxContainer>
                 <PlansInfoItem subscribeType="free" price={0} logoBackgroundColor="green" features={freeFeatures} />
             </BoxContainer>

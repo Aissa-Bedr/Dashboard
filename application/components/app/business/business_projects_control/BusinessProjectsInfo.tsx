@@ -163,7 +163,7 @@ const BusinessProjectsInfo = () => {
 
             <Grid className="col-span-3 gap-4 mt-4" cols="1">
                 {state.businessProjects.length > 0 ? (
-                    <Grid className="gap-4 lg:grid-cols-2 xl:grid-cols-3" cols="1">
+                    <Grid className="gap-4 xl:grid-cols-2 2xl:grid-cols-3" cols="1">
                         {businessProjectsInfo}
                     </Grid>
                 ) : (

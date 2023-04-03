@@ -45,7 +45,7 @@ const WelcomePage = () => {
                     <Flex className="!col-span-3 gap-4" direction="col">
                         <Welcome dontIncludeShowMoreLink />
 
-                        <Grid className="gap-4 lg:grid-cols-2" cols="1">
+                        <Grid className="gap-4 xl:grid-cols-2" cols="1">
                             <GeneralInfo />
                             <UserInfo />
                         </Grid>

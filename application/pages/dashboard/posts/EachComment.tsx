@@ -39,7 +39,7 @@ const EachComment: FC<EachCommentProps> = ({ id, postId, commentDescription, isL
                 <div className="w-full space-y-1">
                     <Flex direction="row" items="center" justify="between">
                         <p className="text-lg font-bold">
-                            {state.generalInfo.firstName} {state.generalInfo.lastName}
+                            {state.information.generalInfo.firstName} {state.information.generalInfo.lastName}
                         </p>
 
                         <FiTrash2

@@ -13,7 +13,7 @@ const GeneralInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
 
     return (
-        <BoxContainer className="col-span-3 2xl:col-span-1">
+        <BoxContainer>
             <LogoContainer>
                 <PrimaryLogo text="General info" />
                 <SecondaryLogo text="General Information About Your Account" />
