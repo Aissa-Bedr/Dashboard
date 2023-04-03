@@ -21,7 +21,9 @@ const TasksInfo = () => {
 
     const tasks = state.tasks.map((item) => <Task key={item.id} {...item} />);
 
-    function addTask(): void | false {
+    function addTask(e: React.FormEvent<HTMLFormElement>): void | false {
+        e.preventDefault();
+
         if (!content) {
             toast.error("Task can't be empty !");
             return false;
@@ -47,19 +49,21 @@ const TasksInfo = () => {
 
     return (
         <div className={classNames("space-y-2", { "h-80 overflow-y-scroll pr-1": state.tasks.length >= 8 })}>
-            <Flex className="w-full gap-2" direction="row" items="center">
-                <Input
-                    type="text"
-                    placeholder="Enter a new task"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                />
+            <form onSubmit={addTask}>
+                <Flex className="w-full gap-2" direction="row" items="center">
+                    <Input
+                        type="text"
+                        placeholder="Enter a new task"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                    />
 
-                <Button className="w-1/4 px-2 !py-[7px]" onClick={addTask}>
-                    <p className="hidden lg:block">Add task</p>
-                    <p className="block lg:hidden">Add</p>
-                </Button>
-            </Flex>
+                    <Button className="w-1/4 px-2 !py-[7px]">
+                        <p className="hidden lg:block">Add task</p>
+                        <p className="block lg:hidden">Add</p>
+                    </Button>
+                </Flex>
+            </form>
 
             <Details note="Links">
                 <Flex className="px-4 py-2" direction="row" items="center" justify="between">

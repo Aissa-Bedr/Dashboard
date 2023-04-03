@@ -19,7 +19,9 @@ const TasksInfoPage = () => {
 
     const tasks = state.tasks.map((item) => <EachTask key={item.id} {...item} />);
 
-    function addTask(): void | false {
+    function addTask(e: React.FormEvent<HTMLFormElement>): void | false {
+        e.preventDefault();
+
         if (!content) {
             toast.error("Task can't be empty !");
             return false;
@@ -45,21 +47,21 @@ const TasksInfoPage = () => {
 
     return (
         <>
-            <BoxContainer className="flex flex-col col-span-3 gap-4">
-                <Input
-                    type="text"
-                    placeholder="Enter a new task"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                />
+            <BoxContainer className="col-span-3">
+                <form className="flex flex-col gap-4" onSubmit={addTask}>
+                    <Input
+                        type="text"
+                        placeholder="Enter a new task"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                    />
 
-                <Flex direction="row" items="center" justify="between">
-                    <ListLength listName="Tasks" listLength={tasks.length} />
+                    <Flex direction="row" items="center" justify="between">
+                        <ListLength listName="Tasks" listLength={tasks.length} />
 
-                    <Button className="px-2 py-1" onClick={addTask}>
-                        Add task
-                    </Button>
-                </Flex>
+                        <Button className="px-2 py-1">Add task</Button>
+                    </Flex>
+                </form>
             </BoxContainer>
 
             <Grid className="col-span-3 gap-4 mt-4" cols="1">

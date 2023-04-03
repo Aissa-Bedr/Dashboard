@@ -55,7 +55,9 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
     const toggleChat = (): void =>
         setFriendOptions((prevState) => ({ ...prevState, isChatActive: !prevState.isChatActive }));
 
-    function addMessage(): void | false {
+    function addMessage(e: React.FormEvent<HTMLFormElement>): void | false {
+        e.preventDefault();
+
         if (!friendOptions.messageDescription) {
             toast.error("Message can't be empty !");
             return false;
@@ -156,22 +158,22 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
             {friendOptions.isChatActive && (
                 <BoxContainer>
                     <Flex className="gap-4" direction="col">
-                        <Flex className="w-full gap-2" direction="row">
-                            <Input
-                                type="text"
-                                placeholder="Write a message"
-                                value={friendOptions.messageDescription}
-                                onChange={(e) =>
-                                    setFriendOptions((prevState) => ({
-                                        ...prevState,
-                                        messageDescription: e.target.value,
-                                    }))
-                                }
-                            />
-                            <Button className="px-4" onClick={addMessage}>
-                                Send
-                            </Button>
-                        </Flex>
+                        <form onSubmit={addMessage}>
+                            <Flex className="w-full gap-2" direction="row">
+                                <Input
+                                    type="text"
+                                    placeholder="Write a message"
+                                    value={friendOptions.messageDescription}
+                                    onChange={(e) =>
+                                        setFriendOptions((prevState) => ({
+                                            ...prevState,
+                                            messageDescription: e.target.value,
+                                        }))
+                                    }
+                                />
+                                <Button className="px-4">Send</Button>
+                            </Flex>
+                        </form>
 
                         <Flex className="gap-2" direction="col">
                             {messagesInfo}

@@ -42,7 +42,9 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
 
     const toggleComments = (): void => setIsCommentsActive((prevState) => !prevState);
 
-    function addComment(): void | false {
+    function addComment(e: React.FormEvent<HTMLFormElement>): void | false {
+        e.preventDefault();
+
         if (!commentDescription) {
             toast.error("Comment can't be empty !");
             return false;
@@ -112,17 +114,17 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
             {isCommentsActive && (
                 <BoxContainer>
                     <Flex className="gap-4" direction="col">
-                        <Flex className="w-full gap-2" direction="row">
-                            <Input
-                                type="text"
-                                placeholder="Write a comment"
-                                value={commentDescription}
-                                onChange={(e) => setCommentDescription(e.target.value)}
-                            />
-                            <Button className="px-4" onClick={addComment}>
-                                Send
-                            </Button>
-                        </Flex>
+                        <form onSubmit={addComment}>
+                            <Flex className="w-full gap-2" direction="row">
+                                <Input
+                                    type="text"
+                                    placeholder="Write a comment"
+                                    value={commentDescription}
+                                    onChange={(e) => setCommentDescription(e.target.value)}
+                                />
+                                <Button className="px-4">Send</Button>
+                            </Flex>
+                        </form>
 
                         <Flex className="gap-2" direction="col">
                             {commentsInfo}
