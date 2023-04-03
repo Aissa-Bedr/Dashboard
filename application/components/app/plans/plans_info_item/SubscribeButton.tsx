@@ -11,22 +11,31 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
     const dispatch = useDispatch();
 
     function subscribe(): void | SubscribeType {
-        if (subscribeType === "free") return;
+        if (subscribeType === "free") {
+            dispatch(changeSubscriptionAction({ isSubscribed: false, subscribeType: "free" }));
+            return;
+        }
 
         dispatch(changeSubscriptionAction({ isSubscribed: true, subscribeType }));
+        return subscribeType;
     }
 
     return (
-        <button
-            className={classNames("w-fit text-sm font-semibold py-1 px-2", {
-                "rounded-md": state.switchBooleans.uiControl.isRounded,
-                [logoBackgroundColors[backgroundColor]]: backgroundColor,
-                "text-white": state.subscription.isSubscribed,
-            })}
-            onClick={subscribe}
-        >
-            {subscribeType === state.subscription.subscribeType ? "Subscribed" : "Subscribe"}
-        </button>
+        <div>
+            {subscribeType === state.subscription.subscribeType ? (
+                <p className="__secondary_logo text-center">This is your current plan</p>
+            ) : (
+                <button
+                    className={classNames("w-fit text-sm font-semibold py-1 px-2", {
+                        "rounded-md": state.switchBooleans.uiControl.isRounded,
+                        [logoBackgroundColors[backgroundColor]]: backgroundColor,
+                    })}
+                    onClick={subscribe}
+                >
+                    Subscribe
+                </button>
+            )}
+        </div>
     );
 };
 
