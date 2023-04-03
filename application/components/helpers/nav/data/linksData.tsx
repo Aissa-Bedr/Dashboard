@@ -3,9 +3,9 @@ import { FiSettings } from "react-icons/fi";
 import { BiUser, BiUserCircle } from "react-icons/bi";
 import { DiGitBranch } from "react-icons/di";
 import { HiAcademicCap } from "react-icons/hi2";
-import { AiFillFileText } from "react-icons/ai";
 import { FaMoneyCheck } from "react-icons/fa";
 import { LinkElementProps } from "../types/main";
+import { BsRobot } from "react-icons/bs";
 
 const linksData: LinkElementProps[] = [
     {
@@ -56,6 +56,13 @@ const linksData: LinkElementProps[] = [
         href: "plans",
         icon: <FaMoneyCheck className="text-black dark:text-white" />,
         content: "Plans",
+    },
+    {
+        id: 8,
+        link: "chat-bot",
+        href: "chat-bot",
+        icon: <BsRobot className="text-black dark:text-white" />,
+        content: "Chat Bot",
     },
 ];
 
