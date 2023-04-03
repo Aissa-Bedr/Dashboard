@@ -29,6 +29,7 @@ export interface SwitchBooleans {
     websiteControl: WebsiteControl;
     widgetsControl: WidgetsControl;
     profileControl: ProfileControl;
+    subscribeControl: SubscribeControl;
 }
 
 export interface DataListProps {
@@ -151,6 +152,19 @@ export interface ProfileControl {
     isPersonalInfoActive: boolean;
     isJobInfoActive: boolean;
     isBillingInfoActive: boolean;
+}
+
+export interface SubscribeControl {
+    isChangeGeneralInfoEnabled: boolean;
+    isAutoSelectEnabled: boolean;
+    isAccessWebsiteControlEnabled: boolean;
+    isAccessWidgetsControlEnabled: boolean;
+    isChangeDarkAppearanceColorEnabled: boolean;
+    isChangeLogoTypeEnabled: boolean;
+    isChangeComponentsShapesEnabled: boolean;
+    isAchievementsEnabled: boolean;
+    isUnlimitedDataEnabled: boolean;
+    isChatBotEnabled: boolean;
 }
 
 export interface Comment {

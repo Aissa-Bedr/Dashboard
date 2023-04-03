@@ -16,6 +16,7 @@ import {
     Projects,
     QuickDraft,
     Reminders,
+    SubscribeControl,
     Subscription,
     SwitchBooleans,
     Tasks,
@@ -69,5 +70,6 @@ export interface AppStateAction {
         messages?: Partial<Message>;
         courses?: Partial<Courses>;
         subscription?: Partial<Subscription>;
+        subscribeControl?: Partial<SubscribeControl>;
     };
 }

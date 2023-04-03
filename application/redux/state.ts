@@ -36,6 +36,18 @@ export const initialState: AppState = {
             isJobInfoActive: false,
             isBillingInfoActive: false,
         },
+        subscribeControl: {
+            isChangeGeneralInfoEnabled: false,
+            isAutoSelectEnabled: false,
+            isAccessWebsiteControlEnabled: false,
+            isAccessWidgetsControlEnabled: false,
+            isChangeDarkAppearanceColorEnabled: false,
+            isChangeLogoTypeEnabled: false,
+            isChangeComponentsShapesEnabled: false,
+            isAchievementsEnabled: false,
+            isUnlimitedDataEnabled: false,
+            isChatBotEnabled: false,
+        },
     },
     generalInfo: {
         firstName: "Aissa",

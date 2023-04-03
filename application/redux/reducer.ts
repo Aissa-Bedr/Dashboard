@@ -11,6 +11,7 @@ import {
     CHANGE_LOGO_APPEARANCE,
     CHANGE_PROFILE_INFO,
     CHANGE_QUICK_DRAFT,
+    CHANGE_SUBSCRIBE_CONTROL,
     CHANGE_SUBSCRIPTION,
     CHANGE_SWITCH_BUTTON_COMPONENT,
     CHANGE_USER_INFO,
@@ -829,6 +830,29 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                     ...state.subscription,
                     isSubscribed: action.payload?.subscription?.isSubscribed!,
                     subscribeType: action.payload?.subscription?.subscribeType!,
+                },
+            };
+
+        case CHANGE_SUBSCRIBE_CONTROL:
+            return {
+                ...state,
+                switchBooleans: {
+                    ...state.switchBooleans,
+                    subscribeControl: {
+                        ...state.switchBooleans.subscribeControl,
+                        isChangeGeneralInfoEnabled: action.payload?.subscribeControl?.isChangeGeneralInfoEnabled!,
+                        isAutoSelectEnabled: action.payload?.subscribeControl?.isAutoSelectEnabled!,
+                        isAccessWebsiteControlEnabled: action.payload?.subscribeControl?.isAccessWebsiteControlEnabled!,
+                        isAccessWidgetsControlEnabled: action.payload?.subscribeControl?.isAccessWidgetsControlEnabled!,
+                        isChangeDarkAppearanceColorEnabled:
+                            action.payload?.subscribeControl?.isChangeDarkAppearanceColorEnabled!,
+                        isChangeLogoTypeEnabled: action.payload?.subscribeControl?.isChangeLogoTypeEnabled!,
+                        isChangeComponentsShapesEnabled:
+                            action.payload?.subscribeControl?.isChangeComponentsShapesEnabled!,
+                        isAchievementsEnabled: action.payload?.subscribeControl?.isAchievementsEnabled!,
+                        isUnlimitedDataEnabled: action.payload?.subscribeControl?.isUnlimitedDataEnabled!,
+                        isChatBotEnabled: action.payload?.subscribeControl?.isChatBotEnabled!,
+                    },
                 },
             };
 
