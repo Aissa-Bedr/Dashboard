@@ -65,7 +65,7 @@ const WidgetsControl = () => {
                         <Flex className="text-center md:text-left" direction="col">
                             <p className="text-lg font-medium text-black capitalize dark:text-white">Widgets control</p>
                             <p className="text-sm font-semibold capitalize text-grey-color dark:text-grey-dark-color">
-                                Control the website default settings
+                                Control The Website Widgets Items
                             </p>
                         </Flex>
                     </div>
