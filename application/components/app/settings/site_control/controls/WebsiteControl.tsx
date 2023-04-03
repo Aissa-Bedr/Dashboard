@@ -10,6 +10,7 @@ import {
 } from "@/redux/constants/toggleTypes";
 import SecondaryLogo from "@/components/app/main/SecondaryLogo";
 import Subscribe from "@/components/build/Subscribe";
+import Flex from "@/components/build/Flex";
 
 const WebsiteControl = () => {
     const switchBooleans = useSelector<AppState, SwitchBooleans>((state) => state.switchBooleans);
@@ -41,7 +42,17 @@ const WebsiteControl = () => {
                     )}
                 </>
             ) : (
-                <Subscribe subscribeType="gold" feature="Website control" />
+                <>
+                    <div className="__controls_item">
+                        <Flex className="text-center md:text-left" direction="col">
+                            <p className="text-lg font-medium text-black capitalize dark:text-white">Website control</p>
+                            <p className="text-sm font-semibold capitalize text-grey-color dark:text-grey-dark-color">
+                                Control the website default settings
+                            </p>
+                        </Flex>
+                    </div>
+                    <Subscribe subscribeType="gold" feature="Website control" />
+                </>
             )}
         </>
     );

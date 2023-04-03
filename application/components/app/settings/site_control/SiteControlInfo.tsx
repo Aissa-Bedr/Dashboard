@@ -12,12 +12,12 @@ const SiteControlInfo = () => {
         <Grid cols="1">
             <Details className="mb-4" note="Important note">
                 <Flex className="gap-2 p-2" direction="col">
-                    <p className="text-sm font-semibold">
-                        The auto-select will applyed only in the current color theme and will effect the appearance
+                    <p className="text-sm __secondary_logo">
+                        The auto-select will be apply only in the current color theme and will effect the appearance
                         control themes and components shapes control
                     </p>
 
-                    <p className="text-sm font-semibold">
+                    <p className="text-sm __secondary_logo">
                         When auto-select is enabled, you will not be able to edit anything that has been changed
                         automatically
                     </p>

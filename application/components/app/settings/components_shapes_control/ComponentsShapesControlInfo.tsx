@@ -6,7 +6,6 @@ import InputFieldControl from "./controls/input_field/InputFieldControl";
 import SwitchButtonControl from "./controls/switch_button/SwitchButtonControl";
 import { useSelector } from "react-redux";
 import { AppState } from "@/redux/types/main";
-import SecondaryLogo from "../../main/SecondaryLogo";
 import Subscribe from "@/components/build/Subscribe";
 
 const ComponentsShapesControlInfo = () => {
@@ -18,7 +17,7 @@ const ComponentsShapesControlInfo = () => {
                 {state.switchBooleans.subscribeControl.isChangeComponentsShapesEnabled ? (
                     <SwitchButtonControl />
                 ) : (
-                    <SecondaryLogo text="Subscribe first to access this feature" />
+                    <p className="text-sm __secondary_logo">Subscribe first to access this feature</p>
                 )}
             </ControlsCSItem>
 
@@ -26,7 +25,7 @@ const ComponentsShapesControlInfo = () => {
                 {state.switchBooleans.subscribeControl.isChangeComponentsShapesEnabled ? (
                     <InputFieldControl />
                 ) : (
-                    <SecondaryLogo text="Subscribe first to access this feature" />
+                    <p className="text-sm __secondary_logo">Subscribe first to access this feature</p>
                 )}
             </ControlsCSItem>
 

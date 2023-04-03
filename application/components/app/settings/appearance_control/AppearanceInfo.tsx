@@ -7,7 +7,6 @@ import AppearanceDarkInfoItem from "./AppearanceDarkInfoItem";
 import AppearanceLightInfoItem from "./AppearanceLightInfoItem";
 import AppearanceLogoInfoItem from "./AppearanceLogoInfoItem";
 import { HiCog } from "react-icons/hi2";
-import SecondaryLogo from "../../main/SecondaryLogo";
 import Subscribe from "@/components/build/Subscribe";
 
 const AppearanceInfo = () => {
@@ -59,7 +58,7 @@ const AppearanceInfo = () => {
                         )}
                     </Flex>
                 ) : (
-                    <SecondaryLogo text="Subscribe first to access this feature" />
+                    <p className="text-sm __secondary_logo">Subscribe first to access this feature</p>
                 )}
             </Flex>
 
