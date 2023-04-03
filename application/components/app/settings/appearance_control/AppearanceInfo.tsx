@@ -67,59 +67,55 @@ const AppearanceInfo = () => {
 
                 {state.switchBooleans.subscribeControl.isChangeDarkAppearanceColorEnabled ? (
                     <Flex className="gap-2" direction="row" items="center">
-                        {state.switchBooleans.uiControl.isAutoSelect ? (
-                            <HiCog className="text-grey-color dark:text-grey-dark-color animate-spin" size="2rem" />
-                        ) : (
-                            <>
-                                <Flex className="gap-2" direction="row" items="center">
-                                    <AppearanceLogoInfoItem type="default">
-                                        <Image
-                                            className="cursor-pointer"
-                                            src="/logos/favicon.ico"
-                                            alt="logo"
-                                            width={45}
-                                            height={45}
-                                        />
-                                    </AppearanceLogoInfoItem>
-                                    <AppearanceLogoInfoItem type="person1">
-                                        <Image
-                                            className="cursor-pointer"
-                                            src="/logos/person1.png"
-                                            alt="logo"
-                                            width={45}
-                                            height={45}
-                                        />
-                                    </AppearanceLogoInfoItem>
-                                    <AppearanceLogoInfoItem type="person2">
-                                        <Image
-                                            className="cursor-pointer"
-                                            src="/logos/person2.png"
-                                            alt="logo"
-                                            width={45}
-                                            height={45}
-                                        />
-                                    </AppearanceLogoInfoItem>
-                                    <AppearanceLogoInfoItem type="person3">
-                                        <Image
-                                            className="cursor-pointer"
-                                            src="/logos/person3.png"
-                                            alt="logo"
-                                            width={45}
-                                            height={45}
-                                        />
-                                    </AppearanceLogoInfoItem>
-                                    <AppearanceLogoInfoItem type="person4">
-                                        <Image
-                                            className="cursor-pointer"
-                                            src="/logos/person4.png"
-                                            alt="logo"
-                                            width={45}
-                                            height={45}
-                                        />
-                                    </AppearanceLogoInfoItem>
-                                </Flex>
-                            </>
-                        )}
+                        <>
+                            <Flex className="gap-2" direction="row" items="center">
+                                <AppearanceLogoInfoItem type="default">
+                                    <Image
+                                        className="cursor-pointer"
+                                        src="/logos/favicon.ico"
+                                        alt="logo"
+                                        width={45}
+                                        height={45}
+                                    />
+                                </AppearanceLogoInfoItem>
+                                <AppearanceLogoInfoItem type="person1">
+                                    <Image
+                                        className="cursor-pointer"
+                                        src="/logos/person1.png"
+                                        alt="logo"
+                                        width={45}
+                                        height={45}
+                                    />
+                                </AppearanceLogoInfoItem>
+                                <AppearanceLogoInfoItem type="person2">
+                                    <Image
+                                        className="cursor-pointer"
+                                        src="/logos/person2.png"
+                                        alt="logo"
+                                        width={45}
+                                        height={45}
+                                    />
+                                </AppearanceLogoInfoItem>
+                                <AppearanceLogoInfoItem type="person3">
+                                    <Image
+                                        className="cursor-pointer"
+                                        src="/logos/person3.png"
+                                        alt="logo"
+                                        width={45}
+                                        height={45}
+                                    />
+                                </AppearanceLogoInfoItem>
+                                <AppearanceLogoInfoItem type="person4">
+                                    <Image
+                                        className="cursor-pointer"
+                                        src="/logos/person4.png"
+                                        alt="logo"
+                                        width={45}
+                                        height={45}
+                                    />
+                                </AppearanceLogoInfoItem>
+                            </Flex>
+                        </>
                     </Flex>
                 ) : (
                     <Subscribe subscribeType="platinum" feature="Logo and dark color theme appearance" />
