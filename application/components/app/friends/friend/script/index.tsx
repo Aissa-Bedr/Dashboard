@@ -66,7 +66,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `Welcome ${state.generalInfo.firstName} !`,
+                            messageDescription: `Welcome ${state.information.generalInfo.firstName} !`,
                         })
                     );
                     break;
@@ -80,7 +80,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `Good morning ${state.generalInfo.firstName} !`,
+                            messageDescription: `Good morning ${state.information.generalInfo.firstName} !`,
                         })
                     );
                     break;
@@ -94,7 +94,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `Good afternoon ${state.generalInfo.firstName} !`,
+                            messageDescription: `Good afternoon ${state.information.generalInfo.firstName} !`,
                         })
                     );
                     break;
@@ -108,7 +108,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `see you ${state.generalInfo.firstName} !`,
+                            messageDescription: `see you ${state.information.generalInfo.firstName} !`,
                         })
                     );
                     break;
@@ -126,7 +126,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `any time ${state.generalInfo.firstName} !`,
+                            messageDescription: `any time ${state.information.generalInfo.firstName} !`,
                         })
                     );
                     break;
@@ -146,7 +146,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `${messageDescription} ${state.generalInfo.firstName} !`,
+                            messageDescription: `${messageDescription} ${state.information.generalInfo.firstName} !`,
                         })
                     );
                     break;
@@ -168,7 +168,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `Hello ${state.generalInfo.firstName} !`,
+                            messageDescription: `Hello ${state.information.generalInfo.firstName} !`,
                         })
                     );
                     break;
@@ -190,7 +190,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `Hallo ${state.generalInfo.firstName} !`,
+                            messageDescription: `Hallo ${state.information.generalInfo.firstName} !`,
                         })
                     );
                     break;
@@ -213,7 +213,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `Hi ${state.generalInfo.firstName} !`,
+                            messageDescription: `Hi ${state.information.generalInfo.firstName} !`,
                         })
                     );
                     break;
@@ -236,7 +236,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `Hey ${state.generalInfo.firstName} !`,
+                            messageDescription: `Hey ${state.information.generalInfo.firstName} !`,
                         })
                     );
                     break;
@@ -378,7 +378,7 @@ export function friendMessage(
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,
-                            messageDescription: `Your name is ${state.generalInfo.firstName} ${state.generalInfo.lastName}.`,
+                            messageDescription: `Your name is ${state.information.generalInfo.firstName} ${state.information.generalInfo.lastName}.`,
                         })
                     );
                     break;
@@ -600,20 +600,24 @@ export function friendMessage(
                     );
                     break;
 
-                case `I am ${state.generalInfo.firstName} ${state.generalInfo.lastName}`:
-                case `i Am ${state.generalInfo.firstName} ${state.generalInfo.lastName}`:
-                case `I am ${state.generalInfo.firstName}`:
-                case `i Am ${state.generalInfo.firstName}`:
-                case `${"I am".toUpperCase()} ${state.generalInfo.firstName} ${state.generalInfo.lastName}`:
-                case `${"I am".toLowerCase()} ${state.generalInfo.firstName} ${state.generalInfo.lastName}`:
-                case `${"I am".toUpperCase()} ${state.generalInfo.firstName}`:
-                case `${"I am".toLowerCase()} ${state.generalInfo.firstName}`:
-                case `I am ${state.generalInfo.firstName}`.toUpperCase():
-                case `I am ${state.generalInfo.firstName}`.toLowerCase():
-                case `I am ${state.generalInfo.firstName} ${state.generalInfo.lastName}`.toUpperCase():
-                case `I am ${state.generalInfo.firstName} ${state.generalInfo.lastName}`.toLowerCase():
-                case `I am ${state.generalInfo.firstName}`.toUpperCase():
-                case `I am ${state.generalInfo.firstName}`.toLowerCase():
+                case `I am ${state.information.generalInfo.firstName} ${state.information.generalInfo.lastName}`:
+                case `i Am ${state.information.generalInfo.firstName} ${state.information.generalInfo.lastName}`:
+                case `I am ${state.information.generalInfo.firstName}`:
+                case `i Am ${state.information.generalInfo.firstName}`:
+                case `${"I am".toUpperCase()} ${state.information.generalInfo.firstName} ${
+                    state.information.generalInfo.lastName
+                }`:
+                case `${"I am".toLowerCase()} ${state.information.generalInfo.firstName} ${
+                    state.information.generalInfo.lastName
+                }`:
+                case `${"I am".toUpperCase()} ${state.information.generalInfo.firstName}`:
+                case `${"I am".toLowerCase()} ${state.information.generalInfo.firstName}`:
+                case `I am ${state.information.generalInfo.firstName}`.toUpperCase():
+                case `I am ${state.information.generalInfo.firstName}`.toLowerCase():
+                case `I am ${state.information.generalInfo.firstName} ${state.information.generalInfo.lastName}`.toUpperCase():
+                case `I am ${state.information.generalInfo.firstName} ${state.information.generalInfo.lastName}`.toLowerCase():
+                case `I am ${state.information.generalInfo.firstName}`.toUpperCase():
+                case `I am ${state.information.generalInfo.firstName}`.toLowerCase():
                     dispatch(
                         sendMessageAction(friendId, {
                             isFriendMessage: true,

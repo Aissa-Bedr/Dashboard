@@ -35,7 +35,7 @@ const Nav = () => {
                             "lg:w-32 lg:text-xl": !state.switchBooleans.uiControl.isNavMinimized,
                         })}
                     >
-                        {state.generalInfo.firstName}
+                        {state.information.generalInfo.firstName}
                     </p>
                 </Flex>
 

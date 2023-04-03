@@ -26,7 +26,7 @@ const LatestPostInfo = () => {
                     <p className="text-lg font-bold">
                         {latestPost
                             ? latestPost?.postOwner
-                            : `${state.generalInfo.firstName} ${state.generalInfo.lastName}`}
+                            : `${state.information.generalInfo.firstName} ${state.information.generalInfo.lastName}`}
                     </p>
                     <p className="font-medium duration-300 text-grey-color dark:text-grey-dark-color">
                         {latestPost ? latestPost?.postTitle : state.quickDraft.title}
