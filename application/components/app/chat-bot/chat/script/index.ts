@@ -399,7 +399,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}what's my name !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `Your name is ${state.generalInfo.firstName} ${state.generalInfo.lastName}.`,
+                        content: `Your name is ${state.information.generalInfo.firstName} ${state.information.generalInfo.lastName}.`,
                         isBotMessage: true,
                     })
                 );
@@ -2227,7 +2227,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}chat-bot !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `Yes ${state.generalInfo.firstName} how can i help you ?`,
+                        content: `Yes ${state.information.generalInfo.firstName} how can i help you ?`,
                         isBotMessage: true,
                     })
                 );
@@ -2363,7 +2363,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}welcome bot !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `Welcome ${state.generalInfo.firstName} how can i help you ?`,
+                        content: `Welcome ${state.information.generalInfo.firstName} how can i help you ?`,
                         isBotMessage: true,
                     })
                 );
@@ -2499,7 +2499,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}hello bot !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `Hello ${state.generalInfo.firstName} how can i help you ?`,
+                        content: `Hello ${state.information.generalInfo.firstName} how can i help you ?`,
                         isBotMessage: true,
                     })
                 );
@@ -2635,7 +2635,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}hallo bot !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `Hallo ${state.generalInfo.firstName} how can i help you ?`,
+                        content: `Hallo ${state.information.generalInfo.firstName} how can i help you ?`,
                         isBotMessage: true,
                     })
                 );
@@ -2771,7 +2771,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}hi bot !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `Hi ${state.generalInfo.firstName} how can i help you ?`,
+                        content: `Hi ${state.information.generalInfo.firstName} how can i help you ?`,
                         isBotMessage: true,
                     })
                 );
@@ -2907,7 +2907,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}hey bot !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `Hey ${state.generalInfo.firstName} how can i help you ?`,
+                        content: `Hey ${state.information.generalInfo.firstName} how can i help you ?`,
                         isBotMessage: true,
                     })
                 );
@@ -3075,7 +3075,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}Good Morning bot !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `Good morning ${state.generalInfo.firstName} how can i help you ?`,
+                        content: `Good morning ${state.information.generalInfo.firstName} how can i help you ?`,
                         isBotMessage: true,
                     })
                 );
@@ -3243,7 +3243,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}Good Afternoon bot !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `Good afternoon ${state.generalInfo.firstName} how can i help you ?`,
+                        content: `Good afternoon ${state.information.generalInfo.firstName} how can i help you ?`,
                         isBotMessage: true,
                     })
                 );
@@ -3403,7 +3403,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}Thanks bot !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `any time ${state.generalInfo.firstName}, Is there anything else I can help you with ?`,
+                        content: `any time ${state.information.generalInfo.firstName}, Is there anything else I can help you with ?`,
                         isBotMessage: true,
                     })
                 );
@@ -3539,7 +3539,7 @@ export function botMessage(content: string, { state, dispatch, router }: BotMess
             case `${content.slice(0, 3)}Bey bot !`.toLowerCase():
                 dispatch(
                     sendChatBotMessageAction({
-                        content: `see you ${state.generalInfo.firstName}, When you need me send a message.`,
+                        content: `see you ${state.information.generalInfo.firstName}, When you need me send a message.`,
                         isBotMessage: true,
                     })
                 );

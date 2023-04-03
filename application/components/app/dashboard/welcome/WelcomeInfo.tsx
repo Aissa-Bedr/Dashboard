@@ -10,11 +10,11 @@ const WelcomeInfo = () => {
     return (
         <Flex className="gap-2 p-5 __border_y lg:flex-row" direction="col" items="center" justify="around">
             <WelcomeInfoItem
-                firstSecContent={`${state.generalInfo.firstName} ${state.generalInfo.lastName}`}
-                secondSecContent={state.userInfo.designation}
+                firstSecContent={`${state.information.generalInfo.firstName} ${state.information.generalInfo.lastName}`}
+                secondSecContent={state.information.userInfo.designation}
             />
-            <WelcomeInfoItem firstSecContent={`${state.userInfo.projects}`} secondSecContent="Projects" />
-            <WelcomeInfoItem firstSecContent={`$${state.userInfo.earned}`} secondSecContent="Earned" />
+            <WelcomeInfoItem firstSecContent={`${state.information.userInfo.projects}`} secondSecContent="Projects" />
+            <WelcomeInfoItem firstSecContent={`$${state.information.userInfo.earned}`} secondSecContent="Earned" />
         </Flex>
     );
 };

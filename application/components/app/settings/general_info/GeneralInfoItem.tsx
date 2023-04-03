@@ -34,7 +34,7 @@ const GeneralInfoItem = () => {
                 label="First Name"
                 labelHTMLFor="first_name"
                 type="text"
-                stateValue={state.generalInfo.firstName}
+                stateValue={state.information.generalInfo.firstName}
                 onChange={(e) => setGeneralInfo((prevState) => ({ ...prevState, firstName: e.target.value }))}
             />
 
@@ -42,7 +42,7 @@ const GeneralInfoItem = () => {
                 label="Last Name"
                 labelHTMLFor="last_name"
                 type="text"
-                stateValue={state.generalInfo.lastName}
+                stateValue={state.information.generalInfo.lastName}
                 onChange={(e) => setGeneralInfo((prevState) => ({ ...prevState, lastName: e.target.value }))}
             />
 

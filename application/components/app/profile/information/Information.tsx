@@ -34,7 +34,9 @@ const Information = () => {
                 >
                     <Image src={`/${state.appearance.logo.src}`} alt="logo" width={100} height={100} />
 
-                    <SecondaryLogo text={`${state.generalInfo.firstName} ${state.generalInfo.lastName}`} />
+                    <SecondaryLogo
+                        text={`${state.information.generalInfo.firstName} ${state.information.generalInfo.lastName}`}
+                    />
 
                     <Grid className="gap-2" cols="4">
                         {state.subscription.isSubscribed && (
@@ -75,12 +77,12 @@ const Information = () => {
                     >
                         <InfoBoxItem
                             prop="Full name:"
-                            value={`${state.generalInfo.firstName} ${state.generalInfo.lastName}`}
+                            value={`${state.information.generalInfo.firstName} ${state.information.generalInfo.lastName}`}
                         />
 
-                        <InfoBoxItem prop="Gender:" value={state.profileInfo.gender} />
+                        <InfoBoxItem prop="Gender:" value={state.information.profileInfo.gender} />
 
-                        <InfoBoxItem prop="Country:" value={state.profileInfo.country} />
+                        <InfoBoxItem prop="Country:" value={state.information.profileInfo.country} />
                     </InfoBox>
 
                     <InfoBox
@@ -88,11 +90,11 @@ const Information = () => {
                         isChecked={state.switchBooleans.profileControl.isPersonalInfoActive}
                         dispatchType={TOGGLE_IS_PERSONAL_INFO_ACTIVE}
                     >
-                        <InfoBoxItem prop="Email:" value={state.profileInfo.email} />
+                        <InfoBoxItem prop="Email:" value={state.information.profileInfo.email} />
 
-                        <InfoBoxItem prop="Phone:" value={state.profileInfo.phone} />
+                        <InfoBoxItem prop="Phone:" value={state.information.profileInfo.phone} />
 
-                        <InfoBoxItem prop="Date of birth:" value={state.profileInfo.birthDay} />
+                        <InfoBoxItem prop="Date of birth:" value={state.information.profileInfo.birthDay} />
                     </InfoBox>
 
                     <InfoBox
@@ -100,15 +102,15 @@ const Information = () => {
                         isChecked={state.switchBooleans.profileControl.isJobInfoActive}
                         dispatchType={TOGGLE_IS_JOB_INFO_ACTIVE}
                     >
-                        <InfoBoxItem prop="Title:" value={state.userInfo.designation} />
+                        <InfoBoxItem prop="Title:" value={state.information.userInfo.designation} />
 
                         <InfoBoxItem
                             prop="
                             Programming language:"
-                            value={state.profileInfo.programmingLanguage}
+                            value={state.information.profileInfo.programmingLanguage}
                         />
 
-                        <InfoBoxItem prop="Years of experience:" value={state.profileInfo.experience} />
+                        <InfoBoxItem prop="Years of experience:" value={state.information.profileInfo.experience} />
                     </InfoBox>
 
                     <InfoBox

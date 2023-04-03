@@ -32,7 +32,7 @@ const Welcome: FC<WelcomeProps> = ({ dontIncludeShowMoreLink }) => {
                 >
                     <LogoContainer>
                         <PrimaryLogo text="welcome" />
-                        <SecondaryLogo text={state.generalInfo.firstName} />
+                        <SecondaryLogo text={state.information.generalInfo.firstName} />
                     </LogoContainer>
 
                     <>

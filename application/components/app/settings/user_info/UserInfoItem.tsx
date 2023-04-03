@@ -35,7 +35,7 @@ const UserInfoItem = () => {
                 label="Designation"
                 labelHTMLFor="designation"
                 type="text"
-                stateValue={state.userInfo.designation}
+                stateValue={state.information.userInfo.designation}
                 onChange={(e) => setUserInfo((prevState) => ({ ...prevState, designation: e.target.value }))}
             />
 
@@ -43,7 +43,7 @@ const UserInfoItem = () => {
                 label="Projects"
                 labelHTMLFor="projects"
                 type="number"
-                stateValue={state.userInfo.projects}
+                stateValue={state.information.userInfo.projects}
                 onChange={(e) => setUserInfo((prevState) => ({ ...prevState, projects: Number(e.target.value) }))}
             />
 
@@ -51,7 +51,7 @@ const UserInfoItem = () => {
                 label="Earned"
                 labelHTMLFor="earned"
                 type="number"
-                stateValue={state.userInfo.earned}
+                stateValue={state.information.userInfo.earned}
                 onChange={(e) => setUserInfo((prevState) => ({ ...prevState, earned: Number(e.target.value) }))}
             />
 

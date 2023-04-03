@@ -1,8 +1,7 @@
 import Flex from "@/components/build/Flex";
 import { AppState } from "@/redux/types/main";
 import React, { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 import { EachChatBotMessageProps } from "../types/main";
 import SecondaryLogo from "../../main/SecondaryLogo";
 import { BsRobot } from "react-icons/bs";

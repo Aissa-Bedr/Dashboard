@@ -29,9 +29,11 @@ export interface AppState {
     theme: Theme;
     tasks: Tasks[];
     switchBooleans: SwitchBooleans;
-    generalInfo: GeneralInfo;
-    userInfo: UserInfo;
-    profileInfo: ProfileInfo;
+    information: {
+        generalInfo: GeneralInfo;
+        userInfo: UserInfo;
+        profileInfo: ProfileInfo;
+    };
     skills: Skill[];
     appearance: Appearance;
     components: Components;

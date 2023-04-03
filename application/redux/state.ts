@@ -49,23 +49,25 @@ export const initialState: AppState = {
             isChatBotEnabled: false,
         },
     },
-    generalInfo: {
-        firstName: "Aissa",
-        lastName: "Bedr",
-    },
-    userInfo: {
-        designation: "Web Developer",
-        projects: 80,
-        earned: 8500,
-    },
-    profileInfo: {
-        email: "slayaissabedr@gmail.com",
-        phone: 213552328332,
-        gender: "male",
-        country: "Algeria",
-        birthDay: "20/10/2005",
-        programmingLanguage: "TypeScript",
-        experience: 1,
+    information: {
+        generalInfo: {
+            firstName: "Aissa",
+            lastName: "Bedr",
+        },
+        userInfo: {
+            designation: "Web Developer",
+            projects: 80,
+            earned: 8500,
+        },
+        profileInfo: {
+            email: "slayaissabedr@gmail.com",
+            phone: 213552328332,
+            gender: "male",
+            country: "Algeria",
+            birthDay: "20/10/2005",
+            programmingLanguage: "TypeScript",
+            experience: 1,
+        },
     },
     skills: [],
     appearance: {

@@ -381,33 +381,42 @@ function reducer(state = initialState, action: AppStateAction): AppState {
         case CHANGE_GENERAL_INFO:
             return {
                 ...state,
-                generalInfo: {
-                    firstName: action.payload?.generalInfo?.firstName!,
-                    lastName: action.payload?.generalInfo?.lastName!,
+                information: {
+                    ...state.information,
+                    generalInfo: {
+                        firstName: action.payload?.generalInfo?.firstName!,
+                        lastName: action.payload?.generalInfo?.lastName!,
+                    },
                 },
             };
 
         case CHANGE_USER_INFO:
             return {
                 ...state,
-                userInfo: {
-                    designation: action.payload?.userInfo?.designation!,
-                    projects: action.payload?.userInfo?.projects!,
-                    earned: action.payload?.userInfo?.earned!,
+                information: {
+                    ...state.information,
+                    userInfo: {
+                        designation: action.payload?.userInfo?.designation!,
+                        projects: action.payload?.userInfo?.projects!,
+                        earned: action.payload?.userInfo?.earned!,
+                    },
                 },
             };
 
         case CHANGE_PROFILE_INFO:
             return {
                 ...state,
-                profileInfo: {
-                    email: action.payload?.profileInfo?.email!,
-                    phone: action.payload?.profileInfo?.phone!,
-                    gender: action.payload?.profileInfo?.gender!,
-                    country: action.payload?.profileInfo?.country!,
-                    birthDay: action.payload?.profileInfo?.birthDay!,
-                    programmingLanguage: action.payload?.profileInfo?.programmingLanguage!,
-                    experience: action.payload?.profileInfo?.experience!,
+                information: {
+                    ...state.information,
+                    profileInfo: {
+                        email: action.payload?.profileInfo?.email!,
+                        phone: action.payload?.profileInfo?.phone!,
+                        gender: action.payload?.profileInfo?.gender!,
+                        country: action.payload?.profileInfo?.country!,
+                        birthDay: action.payload?.profileInfo?.birthDay!,
+                        programmingLanguage: action.payload?.profileInfo?.programmingLanguage!,
+                        experience: action.payload?.profileInfo?.experience!,
+                    },
                 },
             };
 
