@@ -38,7 +38,7 @@ const TasksInfoPage = () => {
         for (const item of state.tasks) {
             if (item.content.match(content) && item.content.length === content.length) {
                 toast.error(`Task ${item.content} already exist !`);
-                dispatch(pushNotificationAction(`Task ${item.content} already exist !`));
+                dispatch(pushNotificationAction(`Task ${item.content} already exist.`));
                 return false;
             }
         }
@@ -57,7 +57,7 @@ const TasksInfoPage = () => {
 
         dispatch(addTaskAction(content));
         toast.success(`Task ${content} added successfully !`);
-        dispatch(pushNotificationAction(`Task ${content} added successfully !`));
+        dispatch(pushNotificationAction(`Task ${content} added successfully.`));
 
         setContent("");
     }
