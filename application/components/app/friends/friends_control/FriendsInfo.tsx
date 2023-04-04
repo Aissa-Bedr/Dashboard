@@ -42,6 +42,13 @@ const FriendsInfo = () => {
         dispatch(addFriendAction(friendInfo));
         toast.success("Friend added successfully !");
 
+        if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
+            if (state.friends.length === 10) {
+                toast.error("You cannot add more than 10 friends Projects Subscribe to activate unlimited data.");
+                return false;
+            }
+        }
+
         setFriendInfo({
             name: "",
             pictureSrc: "",

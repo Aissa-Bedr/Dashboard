@@ -49,6 +49,13 @@ const BusinessProjectsInfo = () => {
             return false;
         }
 
+        if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
+            if (state.businessProjects.length === 10) {
+                toast.error("You cannot add more than 10 business Projects Subscribe to activate unlimited data.");
+                return false;
+            }
+        }
+
         dispatch(addBusinessProjectAction(businessProjectInfo));
         toast.success("Business Project added successfully !");
 

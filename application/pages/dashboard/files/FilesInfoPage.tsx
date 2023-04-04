@@ -45,6 +45,13 @@ const FilesInfoPage = () => {
             }
         }
 
+        if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
+            if (state.files.length === 10) {
+                toast.error("You cannot add more than 10 files Projects Subscribe to activate unlimited data.");
+                return false;
+            }
+        }
+
         dispatch(uploadFileAction(fileInfo));
         toast.success(
             `${fileInfo.fileType === "jsx" ? "Component" : "File"} ${fileInfo.fileName}.${

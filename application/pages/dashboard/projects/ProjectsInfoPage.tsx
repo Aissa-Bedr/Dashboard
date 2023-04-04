@@ -44,6 +44,13 @@ const ProjectsInfoPage = () => {
             return false;
         }
 
+        if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
+            if (state.projects.length === 10) {
+                toast.error("You cannot add more than 10 projects Projects Subscribe to activate unlimited data.");
+                return false;
+            }
+        }
+
         dispatch(addProjectAction(projectInfo));
         toast.success("Project added successfully !");
 

@@ -41,6 +41,13 @@ const RemindersInfoPage = () => {
             return false;
         }
 
+        if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
+            if (state.reminders.length === 10) {
+                toast.error("You cannot add more than 10 reminders Projects Subscribe to activate unlimited data.");
+                return false;
+            }
+        }
+
         dispatch(addReminderAction(reminderInfo));
         toast.success("Reminder added successfully !");
 

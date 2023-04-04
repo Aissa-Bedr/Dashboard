@@ -39,6 +39,13 @@ const TasksInfoPage = () => {
             }
         }
 
+        if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
+            if (state.tasks.length === 10) {
+                toast.error("You cannot add more than 10 tasks Projects Subscribe to activate unlimited data.");
+                return false;
+            }
+        }
+
         dispatch(addTaskAction(content));
         toast.success(`Task ${content} added successfully !`);
 
