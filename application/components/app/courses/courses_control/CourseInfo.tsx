@@ -41,7 +41,7 @@ const CourseInfo = () => {
         }
 
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
-            if (state.courses.length === 10) {
+            if (state.courses.length >= 10) {
                 toast.error("You cannot add more than 10 courses Subscribe to activate unlimited data.");
                 return false;
             }

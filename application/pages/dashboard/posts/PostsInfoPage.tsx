@@ -31,7 +31,7 @@ const PostsInfoPage = () => {
         }
 
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
-            if (state.posts.length === 10) {
+            if (state.posts.length >= 10) {
                 toast.error("You cannot add more than 10 posts Projects Subscribe to activate unlimited data.");
                 return false;
             }

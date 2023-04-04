@@ -43,7 +43,7 @@ const FriendsInfo = () => {
         toast.success("Friend added successfully !");
 
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
-            if (state.friends.length === 10) {
+            if (state.friends.length >= 10) {
                 toast.error("You cannot add more than 10 friends Projects Subscribe to activate unlimited data.");
                 return false;
             }

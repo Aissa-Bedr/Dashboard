@@ -48,7 +48,7 @@ const LatestUploadsInfo = () => {
         }
 
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
-            if (state.files.length === 10) {
+            if (state.files.length >= 10) {
                 toast.error("You cannot add more than 10 files Subscribe to activate unlimited data.");
                 return false;
             }
