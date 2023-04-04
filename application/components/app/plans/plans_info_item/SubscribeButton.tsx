@@ -110,7 +110,7 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
         }
 
         toast.success(`Subscribed successfully your current plan ${subscribeType}`);
-        dispatch(pushNotificationAction(`Subscribed successfully your current plan ${subscribeType}`));
+        dispatch(pushNotificationAction(`Subscribed successfully your current plan ${subscribeType}.`));
     }
 
     return (

@@ -1,6 +1,7 @@
 import Button from "@/components/build/Button";
 import Flex from "@/components/build/Flex";
 import SettingsInfo from "@/components/build/SettingsInfo";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 import changeQuickDraftAction from "@/redux/actions/change_actions/changeQuickDraftAction";
 import { QuickDraft } from "@/redux/types/data";
 import { AppState } from "@/redux/types/main";
@@ -23,10 +24,12 @@ const QuickDraftInfo = () => {
 
         if (!draftInfo.title && !draftInfo.content) {
             toast.success("applying the default Settings successfully !");
+            dispatch(pushNotificationAction("applying the default Settings successfully."));
             return false;
         }
 
         toast.success("Settings saved successfully !");
+        dispatch(pushNotificationAction("Settings saved successfully."));
     }
 
     return (
