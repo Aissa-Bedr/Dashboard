@@ -15,6 +15,7 @@ import { botMessage } from "./script";
 import Move from "@/components/build/Move";
 import { useRouter } from "next/router";
 import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const ChatBotMessages = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -32,6 +33,7 @@ const ChatBotMessages = () => {
 
         if (!content) {
             toast.error("Message can't be empty !");
+            dispatch(pushNotificationAction("Message can't be empty."));
             return false;
         }
 
@@ -45,6 +47,7 @@ const ChatBotMessages = () => {
     function clearChatBot(): void | false {
         dispatch(clearChatBotAction());
         toast.success("Chat cleared successfully !");
+        dispatch(pushNotificationAction("Chat cleared successfully."));
     }
 
     return (
@@ -60,9 +63,9 @@ const ChatBotMessages = () => {
                                 onChange={(e) => setContent(e.target.value)}
                             />
 
-                            {chatBotMessagesInfo.length >= 1 ? (
+                            {state.chatBotMessages.length >= 1 ? (
                                 <Flex direction="row" items="center" justify="between">
-                                    {chatBotMessagesInfo.length >= 1 && (
+                                    {state.chatBotMessages.length >= 1 && (
                                         <button
                                             className={classNames(
                                                 "py-1 px-2 bg-red-500 hover:bg-red-600 active:bg-red-700 text-white duration-300",
@@ -121,7 +124,7 @@ const ChatBotMessages = () => {
                 </Flex>
             </BoxContainer>
 
-            {chatBotMessagesInfo.length >= 1 ? (
+            {state.chatBotMessages.length >= 1 ? (
                 <BoxContainer className="col-span-3">
                     <Flex className="w-full gap-2" direction="col">
                         {chatBotMessagesInfo}

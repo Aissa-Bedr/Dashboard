@@ -10,6 +10,7 @@ import BoxContainer from "@/components/app/main/BoxContainer";
 import EachTask from "./EachTask";
 import ListLength from "@/components/build/ListLength";
 import addTaskAction from "@/redux/actions/add_actions/addTaskAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const TasksInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -24,17 +25,20 @@ const TasksInfoPage = () => {
 
         if (!content) {
             toast.error("Task can't be empty !");
+            dispatch(pushNotificationAction("Task can't be empty."));
             return false;
         }
 
         if (content.length < 2) {
             toast.error("Task can't be less than two characters !");
+            dispatch(pushNotificationAction("Task can't be less than two characters."));
             return false;
         }
 
         for (const item of state.tasks) {
             if (item.content.match(content) && item.content.length === content.length) {
                 toast.error(`Task ${item.content} already exist !`);
+                dispatch(pushNotificationAction(`Task ${item.content} already exist !`));
                 return false;
             }
         }
@@ -42,12 +46,18 @@ const TasksInfoPage = () => {
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
             if (state.tasks.length >= 10) {
                 toast.error("You cannot add more than 10 tasks Projects Subscribe to activate unlimited data.");
+                dispatch(
+                    pushNotificationAction(
+                        "You cannot add more than 10 tasks Projects Subscribe to activate unlimited data."
+                    )
+                );
                 return false;
             }
         }
 
         dispatch(addTaskAction(content));
         toast.success(`Task ${content} added successfully !`);
+        dispatch(pushNotificationAction(`Task ${content} added successfully !`));
 
         setContent("");
     }

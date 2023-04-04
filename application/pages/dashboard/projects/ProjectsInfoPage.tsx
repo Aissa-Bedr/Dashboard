@@ -13,6 +13,7 @@ import EachProject from "./EachProject";
 import { StatusTypes } from "@/components/app/dashboard/projects/types/main";
 import { Projects } from "@/redux/types/data";
 import addProjectAction from "@/redux/actions/add_actions/addProjectAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const ProjectsInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -36,23 +37,31 @@ const ProjectsInfoPage = () => {
     function addProject(): void | false {
         if (!projectInfo.name || !projectInfo.finishDate || !projectInfo.client) {
             toast.error("Project can't be empty !");
+            dispatch(pushNotificationAction("Project can't be empty."));
             return false;
         }
 
         if (projectInfo.price < 0 || projectInfo.team < 1 || !patterns.finishDate.test(projectInfo.finishDate)) {
-            toast.error("Invalid information !");
+            toast.error("Invalid Project information !");
+            dispatch(pushNotificationAction("Invalid Project information."));
             return false;
         }
 
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
             if (state.projects.length >= 10) {
                 toast.error("You cannot add more than 10 projects Projects Subscribe to activate unlimited data.");
+                dispatch(
+                    pushNotificationAction(
+                        "You cannot add more than 10 projects Projects Subscribe to activate unlimited data."
+                    )
+                );
                 return false;
             }
         }
 
         dispatch(addProjectAction(projectInfo));
         toast.success("Project added successfully !");
+        dispatch(pushNotificationAction("Project added successfully."));
 
         setProjectInfo({ name: "", finishDate: "", client: "", price: "" as any, team: "" as any, status: "pending" });
     }

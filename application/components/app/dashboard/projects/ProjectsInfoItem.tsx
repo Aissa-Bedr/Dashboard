@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ProjectsInfoItemProps, StatusTypes } from "./types/main";
 import { toast } from "react-toastify";
 import removeProjectAction from "@/redux/actions/remove_actions/removeProjectAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 export const statusTypes: StatusTypes = {
     pending: "bg-orange-color",
@@ -22,6 +23,7 @@ const ProjectsInfoItem: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, cli
     function removeProject(): void {
         dispatch(removeProjectAction(id!));
         toast.warning("Project removed successfully !");
+        dispatch(pushNotificationAction("Project removed successfully."));
     }
 
     return (

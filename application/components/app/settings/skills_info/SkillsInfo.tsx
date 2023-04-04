@@ -9,6 +9,7 @@ import Button from "@/components/build/Button";
 import Input from "@/components/build/Input";
 import Grid from "@/components/build/Grid";
 import addSkillAction from "@/redux/actions/add_actions/addSkillAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const SkillsInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -21,18 +22,21 @@ const SkillsInfo = () => {
     function addSkill(): void | false {
         if (!content) {
             toast.error("Skill can't be empty !");
+            dispatch(pushNotificationAction("Skill can't be empty ."));
             return false;
         }
 
         for (const item of state.skills) {
             if (item.content.match(content) && item.content.length === content.length) {
                 toast.error(`Skill ${item.content} all ready exist !`);
+                dispatch(pushNotificationAction(`Skill ${item.content} all ready exist.`));
                 return false;
             }
         }
 
         dispatch(addSkillAction(content));
         toast.success(`Skill ${content} added successfully !`);
+        dispatch(pushNotificationAction(`Skill ${content} added successfully.`));
 
         setContent("");
     }

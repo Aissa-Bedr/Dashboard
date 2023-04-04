@@ -11,6 +11,7 @@ import ListLength from "@/components/build/ListLength";
 import Friend from "../friend/Friend";
 import addFriendAction from "@/redux/actions/add_actions/addFriendAction";
 import { Friends } from "@/redux/types/data";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const FriendsInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -31,16 +32,19 @@ const FriendsInfo = () => {
     function addFriend(): void | false {
         if (!friendInfo.name || !friendInfo.pictureSrc || !friendInfo.job) {
             toast.error("Friend can't be empty !");
+            dispatch(pushNotificationAction("Friend can't be empty."));
             return false;
         }
 
         if (!patterns.pictureSrc.test(friendInfo.pictureSrc)) {
             toast.error("Invalid Picture Source !");
+            dispatch(pushNotificationAction("Invalid Picture Source."));
             return false;
         }
 
         dispatch(addFriendAction(friendInfo));
         toast.success("Friend added successfully !");
+        dispatch(pushNotificationAction("Friend added successfully."));
 
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
             if (state.friends.length >= 10) {

@@ -11,6 +11,7 @@ import ListLength from "@/components/build/ListLength";
 import Course from "../courses/Course";
 import addCourseAction from "@/redux/actions/add_actions/addCourseAction";
 import { Courses } from "@/redux/types/data";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const CourseInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -32,23 +33,29 @@ const CourseInfo = () => {
     function addCourse(): void | false {
         if (!courseInfo.title || !courseInfo.description) {
             toast.error("Course can't be empty !");
+            dispatch(pushNotificationAction("Course can't be empty."));
             return false;
         }
 
         if (courseInfo.price < 0 || !patterns.videoSrc.test(courseInfo.videoSrc)) {
             toast.error("Invalid information !");
+            dispatch(pushNotificationAction("Invalid Course information."));
             return false;
         }
 
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
             if (state.courses.length >= 10) {
                 toast.error("You cannot add more than 10 courses Subscribe to activate unlimited data.");
+                dispatch(
+                    pushNotificationAction("You cannot add more than 10 courses Subscribe to activate unlimited data.")
+                );
                 return false;
             }
         }
 
         dispatch(addCourseAction(courseInfo));
         toast.success("Course added successfully !");
+        dispatch(pushNotificationAction("Course added successfully."));
 
         setCourseInfo({
             title: "",

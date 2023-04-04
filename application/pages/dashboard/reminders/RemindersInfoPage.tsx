@@ -13,6 +13,7 @@ import EachReminder from "./EachReminder";
 import { Theme } from "@/components/app/dashboard/reminders/types/app";
 import addReminderAction from "@/redux/actions/add_actions/addReminderAction";
 import { Reminders } from "@/redux/types/data";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const RemindersInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -33,23 +34,31 @@ const RemindersInfoPage = () => {
     function addReminder(): void | false {
         if (!reminderInfo.title || !reminderInfo.time) {
             toast.error("Reminder can't be empty !");
+            dispatch(pushNotificationAction("Reminder can't be empty."));
             return false;
         }
 
         if (!patterns.finishDate.test(reminderInfo.time)) {
-            toast.error("Invalid information please try again later !");
+            toast.error("Invalid information !");
+            dispatch(pushNotificationAction("Invalid Reminder information."));
             return false;
         }
 
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
             if (state.reminders.length >= 10) {
                 toast.error("You cannot add more than 10 reminders Projects Subscribe to activate unlimited data.");
+                dispatch(
+                    pushNotificationAction(
+                        "You cannot add more than 10 reminders Projects Subscribe to activate unlimited data."
+                    )
+                );
                 return false;
             }
         }
 
         dispatch(addReminderAction(reminderInfo));
         toast.success("Reminder added successfully !");
+        dispatch(pushNotificationAction("Reminder added successfully."));
 
         setReminderInfo({ title: "", time: "", theme: "blue" });
     }

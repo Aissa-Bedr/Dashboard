@@ -5,6 +5,7 @@ import { Skill } from "./types/main";
 import { toast } from "react-toastify";
 import classNames from "classnames";
 import removeSkillAction from "@/redux/actions/remove_actions/removeSkillAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const Skill: FC<Skill> = ({ id, content }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -13,6 +14,7 @@ const Skill: FC<Skill> = ({ id, content }) => {
     function removeTask(): void {
         dispatch(removeSkillAction(id!));
         toast.warning("Skill removed successfully !");
+        dispatch(pushNotificationAction("Skill removed successfully."));
     }
 
     return (

@@ -52,6 +52,7 @@ export interface ProfileInfo {
     email: string;
     phone: number;
     gender: "male" | "female";
+    paymentMethod: "visa" | "paypal";
     country: string;
     birthDay: string;
     programmingLanguage: string;

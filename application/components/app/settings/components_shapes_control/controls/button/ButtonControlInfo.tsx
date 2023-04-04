@@ -9,6 +9,7 @@ import classNames from "classnames";
 import changeButtonComponentAction from "@/redux/actions/change_actions/changeButtonComponentAction";
 import changeLightAppearanceAction from "@/redux/actions/change_actions/changeLightAppearanceAction";
 import changeDarkAppearanceAction from "@/redux/actions/change_actions/changeDarkAppearanceAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const ButtonControlInfo: FC<ButtonControlInfoProps> = ({ type }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -47,6 +48,7 @@ const ButtonControlInfo: FC<ButtonControlInfoProps> = ({ type }) => {
         }
 
         toast.success("Settings saved successfully !");
+        dispatch(pushNotificationAction("Settings saved successfully."));
     }
 
     return (

@@ -11,6 +11,7 @@ import classNames from "classnames";
 import removeTaskAction from "@/redux/actions/remove_actions/removeTaskAction";
 import completeTaskAction from "@/redux/actions/main_actions/completeTaskAction";
 import recoverTaskAction from "@/redux/actions/main_actions/recoverTaskAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const Task: FC<TaskProps> = ({ id, content, isCompleted }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -19,16 +20,19 @@ const Task: FC<TaskProps> = ({ id, content, isCompleted }) => {
     function removeTask(): void {
         dispatch(removeTaskAction(id));
         toast.warning("Task removed successfully !");
+        dispatch(pushNotificationAction("Task removed successfully."));
     }
 
     function completeTask(): void {
         dispatch(completeTaskAction(id));
         toast.success("Task completed successfully !");
+        dispatch(pushNotificationAction("Task completed successfully."));
     }
 
     function recoverTask(): void {
         dispatch(recoverTaskAction(id));
         toast.success("Task recovered successfully !");
+        dispatch(pushNotificationAction("Task recovered successfully."));
     }
 
     return (

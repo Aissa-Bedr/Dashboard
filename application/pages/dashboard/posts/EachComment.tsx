@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { EachCommentProps } from "./types/main";
 import removeCommentAction from "@/redux/actions/remove_actions/removeCommentAction";
 import toggleIsLikedCommentAction from "@/redux/actions/toggle_actions/toggleIsLikedCommentAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const EachComment: FC<EachCommentProps> = ({ id, postId, commentDescription, isLiked }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -18,11 +19,13 @@ const EachComment: FC<EachCommentProps> = ({ id, postId, commentDescription, isL
     function removeComment(postId: string): void {
         dispatch(removeCommentAction(postId, id!));
         toast.warning("Comment removed successfully !");
+        dispatch(pushNotificationAction("Comment removed successfully."));
     }
 
     function toggleCommentLike(postId: string): void {
         dispatch(toggleIsLikedCommentAction(postId, id!));
         toast.success(isLiked ? "Comment unliked successfully !" : "Comment liked successfully !");
+        dispatch(pushNotificationAction(isLiked ? "Comment unliked successfully." : "Comment liked successfully."));
     }
 
     return (

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { RemindersInfoItemProps } from "@/components/app/dashboard/reminders/types/main";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import removeReminderAction from "@/redux/actions/remove_actions/removeReminderAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const EachReminder: FC<RemindersInfoItemProps> = ({ id, title, time, theme }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -22,6 +23,7 @@ const EachReminder: FC<RemindersInfoItemProps> = ({ id, title, time, theme }) =>
     function removeReminder(): void {
         dispatch(removeReminderAction(id!));
         toast.warning("Reminder removed successfully !");
+        dispatch(pushNotificationAction("Reminder removed successfully."));
     }
 
     return (

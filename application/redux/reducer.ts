@@ -60,6 +60,7 @@ import {
     UPLOAD_FILE,
     ADD_COURSE,
     SEND_CHAT_BOT_MESSAGE,
+    PUSH_NOTIFICATION,
 } from "./constants/addTypes";
 import {
     REMOVE_BUSINESS_PROJECT,
@@ -68,6 +69,7 @@ import {
     REMOVE_FILE,
     REMOVE_FRIEND,
     REMOVE_MESSAGE,
+    REMOVE_NOTIFICATION,
     REMOVE_POST,
     REMOVE_PROJECT,
     REMOVE_REMINDER,
@@ -77,6 +79,7 @@ import {
 import {
     CLEAR_CHAT,
     CLEAR_CHAT_BOT,
+    CLEAR_NOTIFICATIONS,
     COMPLETE_TASK,
     DISABLE_ALL_SUBSCRIBE_CONTROL,
     DISABLE_AUTO_SELECT,
@@ -412,11 +415,12 @@ function reducer(state = initialState, action: AppStateAction): AppState {
                     profileInfo: {
                         email: action.payload?.profileInfo?.email!,
                         phone: action.payload?.profileInfo?.phone!,
-                        gender: action.payload?.profileInfo?.gender!,
                         country: action.payload?.profileInfo?.country!,
                         birthDay: action.payload?.profileInfo?.birthDay!,
                         programmingLanguage: action.payload?.profileInfo?.programmingLanguage!,
                         experience: action.payload?.profileInfo?.experience!,
+                        gender: action.payload?.profileInfo?.gender!,
+                        paymentMethod: action.payload?.profileInfo?.paymentMethod!,
                     },
                 },
             };
@@ -944,6 +948,29 @@ function reducer(state = initialState, action: AppStateAction): AppState {
             return {
                 ...state,
                 chatBotMessages: [],
+            };
+
+        case PUSH_NOTIFICATION:
+            return {
+                ...state,
+                notifications: [
+                    { id: nanoid(), content: action.payload?.notifications?.content! },
+                    ...state.notifications,
+                ],
+            };
+
+        case REMOVE_NOTIFICATION:
+            return {
+                ...state,
+                notifications: [...state.notifications].filter(
+                    (notification) => notification.id !== action.payload?.notifications?.id
+                ),
+            };
+
+        case CLEAR_NOTIFICATIONS:
+            return {
+                ...state,
+                notifications: [],
             };
 
         default:

@@ -13,6 +13,7 @@ import { StatusTypes } from "@/components/app/dashboard/projects/types/main";
 import BusinessProject from "../business_projects/BusinessProject";
 import { BusinessProjects } from "@/redux/types/data";
 import addBusinessProjectAction from "@/redux/actions/add_actions/addBusinessProjectAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const BusinessProjectsInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -37,6 +38,7 @@ const BusinessProjectsInfo = () => {
     function addBusinessProject(): void | false {
         if (!businessProjectInfo.name || !businessProjectInfo.finishDate || !businessProjectInfo.description) {
             toast.error("Business Project can't be empty !");
+            dispatch(pushNotificationAction("Business Project can't be empty."));
             return false;
         }
 
@@ -46,18 +48,25 @@ const BusinessProjectsInfo = () => {
             !patterns.finishDate.test(businessProjectInfo.finishDate)
         ) {
             toast.error("Invalid information !");
+            dispatch(pushNotificationAction("Invalid Business Project information."));
             return false;
         }
 
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
             if (state.businessProjects.length >= 10) {
                 toast.error("You cannot add more than 10 business Projects Subscribe to activate unlimited data.");
+                dispatch(
+                    pushNotificationAction(
+                        "You cannot add more than 10 business Projects Subscribe to activate unlimited data."
+                    )
+                );
                 return false;
             }
         }
 
         dispatch(addBusinessProjectAction(businessProjectInfo));
         toast.success("Business Project added successfully !");
+        dispatch(pushNotificationAction("Business Project added successfully."));
 
         setBusinessProjectInfo({
             name: "",

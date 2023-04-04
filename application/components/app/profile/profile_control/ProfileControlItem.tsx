@@ -8,6 +8,7 @@ import Button from "@/components/build/Button";
 import Select from "@/components/build/Select";
 import { ProfileInfo } from "@/redux/types/data";
 import changeProfileInfoAction from "@/redux/actions/change_actions/changeProfileInfoAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 export const profileInfoPatters = {
     email: /\w+@\w{2,8}\W\w{2,8}/g,
@@ -22,11 +23,12 @@ const ProfileControlItem = () => {
     const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
         email: "",
         phone: "" as any,
-        gender: "male",
         country: "",
         birthDay: "",
         programmingLanguage: "",
         experience: "" as any,
+        gender: "male",
+        paymentMethod: "visa",
     });
 
     function editProfileInfo(): void | false {
@@ -41,10 +43,12 @@ const ProfileControlItem = () => {
             profileInfo.experience < 0
         ) {
             toast.success("applying the default Settings successfully !");
+            dispatch(pushNotificationAction("applying the default Settings successfully."));
             return false;
         }
 
         toast.success("Settings saved successfully !");
+        dispatch(pushNotificationAction("Settings saved successfully."));
     }
 
     return (
@@ -64,26 +68,6 @@ const ProfileControlItem = () => {
                 stateValue={state.information.profileInfo.phone}
                 onChange={(e) => setProfileInfo((prevState) => ({ ...prevState, phone: +e.target.value }))}
             />
-
-            <Select
-                value={profileInfo.gender}
-                onChange={(e) =>
-                    setProfileInfo((prevState) => ({ ...prevState, gender: e.target.value as "male" | "female" }))
-                }
-            >
-                <option
-                    className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
-                    value="male"
-                >
-                    Male
-                </option>
-                <option
-                    className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
-                    value="female"
-                >
-                    Female
-                </option>
-            </Select>
 
             <SettingsInfo
                 label="Country"
@@ -118,6 +102,49 @@ const ProfileControlItem = () => {
                     setProfileInfo((prevState) => ({ ...prevState, experience: parseInt(e.target.value) }))
                 }
             />
+
+            <Select
+                value={profileInfo.gender}
+                onChange={(e) =>
+                    setProfileInfo((prevState) => ({ ...prevState, gender: e.target.value as "male" | "female" }))
+                }
+            >
+                <option
+                    className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                    value="male"
+                >
+                    Male
+                </option>
+                <option
+                    className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                    value="female"
+                >
+                    Female
+                </option>
+            </Select>
+
+            <Select
+                value={profileInfo.paymentMethod}
+                onChange={(e) =>
+                    setProfileInfo((prevState) => ({
+                        ...prevState,
+                        paymentMethod: e.target.value as "visa" | "paypal",
+                    }))
+                }
+            >
+                <option
+                    className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                    value="visa"
+                >
+                    Visa
+                </option>
+                <option
+                    className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                    value="paypal"
+                >
+                    Paypal
+                </option>
+            </Select>
 
             <Flex direction="row" items="end" justify="end">
                 <Button className="w-16" onClick={editProfileInfo}>

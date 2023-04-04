@@ -118,11 +118,11 @@ const Information = () => {
                         isChecked={state.switchBooleans.profileControl.isBillingInfoActive}
                         dispatchType={TOGGLE_IS_BILLING_INFO_ACTIVE}
                     >
-                        <InfoBoxItem prop="Payment Method:" value={`visa`} />
+                        <InfoBoxItem prop="paymentMethod:" value={state.information.profileInfo.paymentMethod} />
 
-                        <InfoBoxItem prop="Subscription:" value={`gold`} />
+                        <InfoBoxItem prop="subscribed:" value={state.subscription.isSubscribed ? "yes" : "no"} />
 
-                        <InfoBoxItem prop="Subscription:" value={`gold`} />
+                        <InfoBoxItem prop="Subscription:" value={state.subscription.subscribeType} />
                     </InfoBox>
                 </Flex>
             </Flex>

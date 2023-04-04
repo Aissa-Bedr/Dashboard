@@ -16,6 +16,7 @@ import { Posts } from "@/redux/types/data";
 import removePostAction from "@/redux/actions/remove_actions/removePostAction";
 import toggleIsLikedPostAction from "@/redux/actions/toggle_actions/toggleIsLikedPostAction";
 import addCommentAction from "@/redux/actions/add_actions/addCommentAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLiked }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -33,11 +34,13 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
     function removePost(): void {
         dispatch(removePostAction(id!));
         toast.warning("Post removed successfully !");
+        dispatch(pushNotificationAction("Post removed successfully."));
     }
 
     function togglePostLike(): void {
         dispatch(toggleIsLikedPostAction(id!));
         toast.success(isLiked ? "Post unliked successfully !" : "Post liked successfully !");
+        dispatch(pushNotificationAction(isLiked ? "Post unliked successfully." : "Post liked successfully."));
     }
 
     const toggleComments = (): void => setIsCommentsActive((prevState) => !prevState);
@@ -47,11 +50,13 @@ const EachPost: FC<Posts> = ({ id, postOwner, postTitle, postDescription, isLike
 
         if (!commentDescription) {
             toast.error("Comment can't be empty !");
+            dispatch(pushNotificationAction("Comment can't be empty."));
             return false;
         }
 
         dispatch(addCommentAction(id!, commentDescription));
         toast.success("Comment added successfully !");
+        dispatch(pushNotificationAction("Comment added successfully."));
 
         setCommentDescription("");
     }

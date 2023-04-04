@@ -18,6 +18,7 @@ import toggleIsLikedFriendAction from "@/redux/actions/toggle_actions/toggleIsli
 import clearChatAction from "@/redux/actions/main_actions/clearChatAction";
 import sendMessageAction from "@/redux/actions/add_actions/sendMessaageAction";
 import removeFriendAction from "@/redux/actions/remove_actions/removeFriendAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -45,11 +46,13 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
     function removeFriend(): void {
         dispatch(removeFriendAction(id!));
         toast.warning("Friend removed successfully !");
+        dispatch(pushNotificationAction("Friend removed successfully."));
     }
 
     function toggleFriendLike(): void {
         dispatch(toggleIsLikedFriendAction(id!));
         toast.success(isLiked ? "Friend unliked successfully !" : "Friend liked successfully !");
+        dispatch(pushNotificationAction(isLiked ? "Friend unliked successfully." : "Friend liked successfully."));
     }
 
     const toggleChat = (): void =>
@@ -60,6 +63,7 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
 
         if (!friendOptions.messageDescription) {
             toast.error("Message can't be empty !");
+            dispatch(pushNotificationAction("Message can't be empty."));
             return false;
         }
 
@@ -70,6 +74,7 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
         friendMessage(friendOptions.messageDescription, 1500, name, id!, { state, dispatch });
 
         toast.success("Message sent successfully !");
+        dispatch(pushNotificationAction("Message sent successfully."));
 
         setFriendOptions((prevState) => ({ ...prevState, messageDescription: "" }));
     }
@@ -77,6 +82,7 @@ const Friend: FC<FriendProps> = ({ id, pictureSrc, name, job, isLiked }) => {
     function clearChat(): void {
         dispatch(clearChatAction(id!));
         toast.success("Chat cleared successfully !");
+        dispatch(pushNotificationAction("Chat cleared successfully."));
     }
 
     return (

@@ -7,6 +7,7 @@ import { InputFieldControlInfoProps } from "../types/main";
 import { toast } from "react-toastify";
 import classNames from "classnames";
 import changeInputFieldComponentAction from "@/redux/actions/change_actions/changeInputFieldComponentAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const InputFieldControlInfo: FC<InputFieldControlInfoProps> = ({ type }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -31,6 +32,7 @@ const InputFieldControlInfo: FC<InputFieldControlInfoProps> = ({ type }) => {
         }
 
         toast.success("Settings saved successfully !");
+        dispatch(pushNotificationAction("Settings saved successfully."));
     }
 
     return (

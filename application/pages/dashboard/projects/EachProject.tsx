@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { ProjectsInfoItemProps, StatusTypes } from "@/components/app/dashboard/projects/types/main";
 import removeProjectAction from "@/redux/actions/remove_actions/removeProjectAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const EachProject: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, client, price, team, status }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -21,6 +22,7 @@ const EachProject: FC<ProjectsInfoItemProps> = ({ id, name, finishDate, client, 
     function removeProject(): void {
         dispatch(removeProjectAction(id!));
         toast.warning("Project removed successfully !");
+        dispatch(pushNotificationAction("Project removed successfully."));
     }
 
     return (

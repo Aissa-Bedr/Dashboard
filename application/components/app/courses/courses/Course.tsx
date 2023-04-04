@@ -11,6 +11,7 @@ import Image from "next/image";
 import { AiOutlineHeart } from "react-icons/ai";
 import removeCourseAction from "@/redux/actions/remove_actions/removeCourseAction";
 import toggleIsLikedCourseAction from "@/redux/actions/toggle_actions/toggleIsLikedCourse";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const Course: FC<CourseProps> = ({ id, title, description, videoSrc, price, isLiked }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -19,11 +20,13 @@ const Course: FC<CourseProps> = ({ id, title, description, videoSrc, price, isLi
     function removeCourse(): void {
         dispatch(removeCourseAction(id!));
         toast.warning("Course removed successfully !");
+        dispatch(pushNotificationAction("Course removed successfully."));
     }
 
     function toggleCourseLike(): void {
         dispatch(toggleIsLikedCourseAction(id!));
         toast.success(isLiked ? "Course unliked successfully !" : "Course liked successfully !");
+        dispatch(pushNotificationAction(isLiked ? "Course unliked successfully." : "Course liked successfully."));
     }
 
     return (

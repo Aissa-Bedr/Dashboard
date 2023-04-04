@@ -9,6 +9,7 @@ import { LatestUploadsInfoItemProps } from "@/components/app/dashboard/latest_up
 import SecondaryLogo from "@/components/app/main/SecondaryLogo";
 import BoxContainer from "@/components/app/main/BoxContainer";
 import removeFileAction from "@/redux/actions/remove_actions/removeFileAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const EachFile: FC<LatestUploadsInfoItemProps> = ({ id, fileName, fileType, fileUploader, fileSize, fileSizeType }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -17,6 +18,7 @@ const EachFile: FC<LatestUploadsInfoItemProps> = ({ id, fileName, fileType, file
     function removeFile(): void {
         dispatch(removeFileAction(id!));
         toast.warning(`${fileType === "jsx" ? "Component" : "File"} removed successfully !`);
+        dispatch(pushNotificationAction(`${fileType === "jsx" ? "Component" : "File"} removed successfully.`));
     }
 
     return (

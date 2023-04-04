@@ -7,6 +7,7 @@ import SettingsInfo from "@/components/build/SettingsInfo";
 import Button from "@/components/build/Button";
 import changeUserInfoAction from "@/redux/actions/change_actions/changeUserInfoAction";
 import { UserInfo } from "@/redux/types/data";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const UserInfoItem = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -23,10 +24,12 @@ const UserInfoItem = () => {
 
         if (!userInfo.designation) {
             toast.success("applying the default Settings successfully !");
+            dispatch(pushNotificationAction("applying the default Settings successfully."));
             return false;
         }
 
         toast.success("Settings saved successfully !");
+        dispatch(pushNotificationAction("Settings saved successfully."));
     }
 
     return (

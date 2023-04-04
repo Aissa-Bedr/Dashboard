@@ -13,6 +13,7 @@ import EachFile from "./EachFile";
 import { fileSizeType, FileType } from "@/components/app/dashboard/latest_uploads/types/app";
 import { Files } from "@/redux/types/data";
 import uploadFileAction from "@/redux/actions/add_actions/uploadFileAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const FilesInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -31,6 +32,7 @@ const FilesInfoPage = () => {
     function uploadFile(): void | false {
         if (!fileInfo.fileName || !fileInfo.fileUploader || !fileInfo.fileSize) {
             toast.error(`${fileInfo.fileType === "jsx" ? "Component" : "File"} can't be empty !`);
+            dispatch(pushNotificationAction(`${fileInfo.fileType === "jsx" ? "Component" : "File"} can't be empty.`));
             return false;
         }
 
@@ -41,6 +43,9 @@ const FilesInfoPage = () => {
                 file.fileType.includes(fileInfo.fileType)
             ) {
                 toast.error(`This ${fileInfo.fileType === "jsx" ? "Component" : "File"} already exist !`);
+                dispatch(
+                    pushNotificationAction(`This ${fileInfo.fileType === "jsx" ? "Component" : "File"} already exist.`)
+                );
                 return false;
             }
         }
@@ -48,6 +53,11 @@ const FilesInfoPage = () => {
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
             if (state.files.length >= 10) {
                 toast.error("You cannot add more than 10 files Projects Subscribe to activate unlimited data.");
+                dispatch(
+                    pushNotificationAction(
+                        "You cannot add more than 10 files Projects Subscribe to activate unlimited data."
+                    )
+                );
                 return false;
             }
         }
@@ -57,6 +67,13 @@ const FilesInfoPage = () => {
             `${fileInfo.fileType === "jsx" ? "Component" : "File"} ${fileInfo.fileName}.${
                 fileInfo.fileType
             } uploaded successfully !`
+        );
+        dispatch(
+            pushNotificationAction(
+                `${fileInfo.fileType === "jsx" ? "Component" : "File"} ${fileInfo.fileName}.${
+                    fileInfo.fileType
+                } uploaded successfully !`
+            )
         );
 
         setFileInfo({ fileName: "", fileType: "txt", fileUploader: "", fileSize: "" as any, fileSizeType: "kb" });

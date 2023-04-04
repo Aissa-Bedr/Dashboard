@@ -12,6 +12,7 @@ import addTaskAction from "@/redux/actions/add_actions/addTaskAction";
 import Details from "@/components/build/Details";
 import Move from "@/components/build/Move";
 import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const TasksInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -26,17 +27,20 @@ const TasksInfo = () => {
 
         if (!content) {
             toast.error("Task can't be empty !");
+            dispatch(pushNotificationAction("Task can't be empty."));
             return false;
         }
 
         if (content.length < 2) {
             toast.error("Task can't be less than two characters !");
+            dispatch(pushNotificationAction("Task can't be less than two characters."));
             return false;
         }
 
         for (const item of state.tasks) {
             if (item.content.match(content) && item.content.length === content.length) {
                 toast.error(`Task ${item.content} already exist !`);
+                dispatch(pushNotificationAction(`Task ${item.content} already exist.`));
                 return false;
             }
         }
@@ -44,12 +48,16 @@ const TasksInfo = () => {
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
             if (state.tasks.length >= 10) {
                 toast.error("You cannot add more than 10 tasks Subscribe to activate unlimited data.");
+                dispatch(
+                    pushNotificationAction("You cannot add more than 10 tasks Subscribe to activate unlimited data.")
+                );
                 return false;
             }
         }
 
         dispatch(addTaskAction(content));
         toast.success(`Task ${content} added successfully !`);
+        dispatch(pushNotificationAction(`Task ${content} added successfully.`));
 
         setContent("");
     }

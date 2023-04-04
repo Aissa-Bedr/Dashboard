@@ -9,6 +9,7 @@ import { statusTypes } from "../../dashboard/projects/ProjectsInfoItem";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
 import removeBusinessProjectAction from "@/redux/actions/remove_actions/removeBusinessProjectAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const BusinessProject: FC<BusinessProjectProps> = ({
     id,
@@ -26,6 +27,7 @@ const BusinessProject: FC<BusinessProjectProps> = ({
     function removeBusinessProject(): void {
         dispatch(removeBusinessProjectAction(id!));
         toast.warning("Business Project removed successfully !");
+        dispatch(pushNotificationAction("Business Project removed successfully."));
     }
 
     return (

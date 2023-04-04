@@ -9,6 +9,8 @@ import changeSubscribeControlAction from "@/redux/actions/change_actions/changeS
 import disableAllSubscribeControlAction from "@/redux/actions/main_actions/disableAllSubscribeControlAction";
 import enableAllSubscribeControlAction from "@/redux/actions/main_actions/enableAllSubscribeControlAction";
 import disableAutoSelectAction from "@/redux/actions/main_actions/disableAutoSelectAction";
+import { toast } from "react-toastify";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundColor }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -106,6 +108,9 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({ subscribeType, backgroundCo
                 dispatch(changeSubscriptionAction({ isSubscribed: false, subscribeType: "free" }));
                 dispatch(disableAllSubscribeControlAction());
         }
+
+        toast.success(`Subscribed successfully your current plan ${subscribeType}`);
+        dispatch(pushNotificationAction(`Subscribed successfully your current plan ${subscribeType}`));
     }
 
     return (

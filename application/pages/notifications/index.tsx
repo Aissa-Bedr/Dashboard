@@ -1,11 +1,7 @@
 import { themeSwitcher } from "@/assests/logic/script";
-import Information from "@/components/app/profile/information/Information";
-import ProfileControl from "@/components/app/profile/profile_control/ProfileControl";
-import GeneralInfo from "@/components/app/settings/general_info/GeneralInfo";
+import Notifications from "@/components/app/notifications/notiify/Notifications";
 import Base from "@/components/build/Base";
 import BaseWrapper from "@/components/build/BaseWrapper";
-import Flex from "@/components/build/Flex";
-import Grid from "@/components/build/Grid";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import SearchBar from "@/components/helpers/search_bar/SearchBar";
@@ -14,7 +10,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
-const Profile = () => {
+const NotificationsPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
 
     useEffect(() => {
@@ -27,22 +23,15 @@ const Profile = () => {
 
     return (
         <>
-            <Header title="Aissa | Profile" />
+            <Header title="Aissa | Notifications" />
 
             <Base>
                 <SearchBar />
 
-                <Logo content="Profile" />
+                <Logo content="notifications" />
 
                 <BaseWrapper>
-                    <Flex className="!col-span-3 gap-4" direction="col">
-                        <Information />
-
-                        <Grid className="gap-4 xl:grid-cols-2" cols="1">
-                            <GeneralInfo />
-                            <ProfileControl />
-                        </Grid>
-                    </Flex>
+                    <Notifications />
                 </BaseWrapper>
 
                 {state.switchBooleans.websiteControl.isNotificationActive && (
@@ -53,4 +42,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default NotificationsPage;

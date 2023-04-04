@@ -9,6 +9,7 @@ import SecondaryLogo from "../../main/SecondaryLogo";
 import { LatestUploadsInfoItemProps } from "./types/main";
 import { toast } from "react-toastify";
 import removeFileAction from "@/redux/actions/remove_actions/removeFileAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const LatestUploadsInfoItem: FC<LatestUploadsInfoItemProps> = ({
     id,
@@ -24,6 +25,7 @@ const LatestUploadsInfoItem: FC<LatestUploadsInfoItemProps> = ({
     function removeFile(): void {
         dispatch(removeFileAction(id!));
         toast.warning(`${fileType === "jsx" ? "Component" : "File"} removed successfully !`);
+        dispatch(pushNotificationAction(`${fileType === "jsx" ? "Component" : "File"} removed successfully.`));
     }
 
     return (

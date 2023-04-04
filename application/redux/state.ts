@@ -62,11 +62,12 @@ export const initialState: AppState = {
         profileInfo: {
             email: "slayaissabedr@gmail.com",
             phone: 213552328332,
-            gender: "male",
             country: "Algeria",
             birthDay: "20/10/2005",
             programmingLanguage: "TypeScript",
             experience: 1,
+            gender: "male",
+            paymentMethod: "visa",
         },
     },
     skills: [],
@@ -114,4 +115,5 @@ export const initialState: AppState = {
         subscribeType: "free",
     },
     chatBotMessages: [],
+    notifications: [],
 };

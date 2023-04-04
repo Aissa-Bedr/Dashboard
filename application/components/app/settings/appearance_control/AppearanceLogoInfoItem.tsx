@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import classNames from "classnames";
 import { AppearanceLogoItemProps } from "./types/main";
 import changeLogoAppearanceAction from "@/redux/actions/change_actions/changeLogoAppearanceAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const AppearanceLogoInfoItem: FC<AppearanceLogoItemProps> = ({ type, children }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -37,6 +38,7 @@ const AppearanceLogoInfoItem: FC<AppearanceLogoItemProps> = ({ type, children })
         }
 
         toast.success("Logo saved successfully !");
+        dispatch(pushNotificationAction("Logo saved successfully."));
     }
 
     return (

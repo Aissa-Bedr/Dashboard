@@ -7,6 +7,7 @@ import { SwitchButtonControlInfoProps } from "../types/main";
 import { toast } from "react-toastify";
 import classNames from "classnames";
 import changeSwitchButtonComponentAction from "@/redux/actions/change_actions/changeSwitchButtonComponentAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const SwitchButtonControlInfo: FC<SwitchButtonControlInfoProps> = ({ type }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -31,6 +32,7 @@ const SwitchButtonControlInfo: FC<SwitchButtonControlInfoProps> = ({ type }) => 
         }
 
         toast.success("Settings saved successfully !");
+        dispatch(pushNotificationAction("Settings saved successfully."));
     }
 
     return (

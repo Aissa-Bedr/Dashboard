@@ -11,9 +11,12 @@ import classNames from "classnames";
 import toggleIsNavMinimizedAction from "@/redux/actions/toggle_actions/toggleIsNavMinimizedAction";
 import toggleIsSearchBarShowedAction from "@/redux/actions/toggle_actions/toggleIsSearchBarShowedAction";
 import toggleThemeAction from "@/redux/actions/toggle_actions/toggleThemeAction";
+import { useRouter } from "next/router";
+import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 
 const Section = () => {
     const state = useSelector<AppState, AppState>((state) => state);
+    const router = useRouter();
     const dispatch = useDispatch();
 
     return (
@@ -77,8 +80,27 @@ const Section = () => {
                         {state.theme === "light" ? <HiOutlineMoon size="1.5rem" /> : <HiOutlineSun size="1.5rem" />}
                     </SecButton>
 
-                    <SecButton>
-                        <BiBell size="1.5rem" />
+                    <SecButton
+                        onClick={() => {
+                            router.push("/notifications");
+                            dispatch(changeLinkAction("dashboard"));
+                        }}
+                    >
+                        <div className="relative">
+                            <Flex
+                                className={classNames("absolute w-5 h-5 -top-2 -right-2 rounded-full", {
+                                    "bg-red-color text-white": state.notifications.length >= 1,
+                                    "bg-[#f1f5f9] text-black dark:bg-[#1a1d21] dark:text-white":
+                                        state.notifications.length === 0,
+                                })}
+                                direction="row"
+                                items="center"
+                                justify="center"
+                            >
+                                <p className="text-sm font-semibold">{state.notifications.length}</p>
+                            </Flex>
+                            <BiBell size="1.5rem" />
+                        </div>
                     </SecButton>
 
                     <Flex

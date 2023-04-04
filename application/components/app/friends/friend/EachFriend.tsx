@@ -10,6 +10,7 @@ import { EachMessageProps } from "../types/main";
 import SecondaryLogo from "../../main/SecondaryLogo";
 import removeMessageAction from "@/redux/actions/remove_actions/removeMessageAction";
 import toggleIsLikedMessageAction from "@/redux/actions/toggle_actions/toggleIsLikedMessageAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const EachFriend: FC<EachMessageProps> = ({
     id,
@@ -26,11 +27,13 @@ const EachFriend: FC<EachMessageProps> = ({
     function removeMessage(friendId: string): void {
         dispatch(removeMessageAction(friendId, id!));
         toast.warning("Message removed successfully !");
+        dispatch(pushNotificationAction("Message removed successfully."));
     }
 
     function toggleMessageLike(friendId: string): void {
         dispatch(toggleIsLikedMessageAction(friendId, id!));
         toast.success(isLiked ? "Message unliked successfully !" : "Message liked successfully !");
+        dispatch(pushNotificationAction(isLiked ? "Message unliked successfully." : "Message liked successfully."));
     }
 
     return (

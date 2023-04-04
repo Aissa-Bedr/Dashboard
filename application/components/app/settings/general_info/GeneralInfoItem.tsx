@@ -7,6 +7,7 @@ import SettingsInfo from "@/components/build/SettingsInfo";
 import Button from "@/components/build/Button";
 import changeGeneralInfoAction from "@/redux/actions/change_actions/changeGeneralnfoAction";
 import { GeneralInfo } from "@/redux/types/data";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const GeneralInfoItem = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -22,10 +23,12 @@ const GeneralInfoItem = () => {
 
         if (!generalInfo.firstName && !generalInfo.lastName) {
             toast.success("applying the default Settings successfully !");
+            dispatch(pushNotificationAction("applying the default Settings successfully."));
             return false;
         }
 
         toast.success("Settings saved successfully !");
+        dispatch(pushNotificationAction("Settings saved successfully."));
     }
 
     return (

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import classNames from "classnames";
 import Flex from "@/components/build/Flex";
 import changeDarkAppearanceAction from "@/redux/actions/change_actions/changeDarkAppearanceAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const AppearanceDarkInfoItem: FC<AppearanceInfoItemProps> = ({ backgroundColor }) => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -105,6 +106,7 @@ const AppearanceDarkInfoItem: FC<AppearanceInfoItemProps> = ({ backgroundColor }
         }
 
         toast.success("Color theme saved successfully !");
+        dispatch(pushNotificationAction("Color theme saved successfully."));
     }
 
     return (

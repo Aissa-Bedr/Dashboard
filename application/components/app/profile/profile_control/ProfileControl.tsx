@@ -8,7 +8,7 @@ import ProfileControlItem from "./ProfileControlItem";
 
 const ProfileControl = () => {
     return (
-        <BoxContainer className="col-span-3">
+        <BoxContainer>
             <LogoContainer>
                 <PrimaryLogo text="Profile control" />
                 <SecondaryLogo text="Profile Information About Your Account" />

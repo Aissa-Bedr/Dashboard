@@ -11,6 +11,7 @@ import ListLength from "@/components/build/ListLength";
 import EachPost from "./EachPost";
 import { Posts } from "@/redux/types/data";
 import addPostAction from "@/redux/actions/add_actions/addPostAction";
+import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
 const PostsInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -27,18 +28,25 @@ const PostsInfoPage = () => {
     function addPost(): void | false {
         if (!postInfo.postOwner || !postInfo.postTitle || !postInfo.postDescription) {
             toast.error("Post can't be empty !");
+            dispatch(pushNotificationAction("Post can't be empty."));
             return false;
         }
 
         if (!state.switchBooleans.subscribeControl.isUnlimitedDataEnabled) {
             if (state.posts.length >= 10) {
                 toast.error("You cannot add more than 10 posts Projects Subscribe to activate unlimited data.");
+                dispatch(
+                    pushNotificationAction(
+                        "You cannot add more than 10 posts Projects Subscribe to activate unlimited data."
+                    )
+                );
                 return false;
             }
         }
 
         dispatch(addPostAction(postInfo));
         toast.success("Post added successfully !");
+        dispatch(pushNotificationAction("Post added successfully."));
 
         setPostInfo({
             postOwner: "",

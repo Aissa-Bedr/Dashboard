@@ -35,3 +35,5 @@ export interface ChatBotMessage {
     content: string;
     isBotMessage: boolean;
 }
+
+export interface Notifications extends Omit<ChatBotMessage, "isBotMessage"> {}
