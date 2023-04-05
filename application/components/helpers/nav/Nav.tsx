@@ -12,43 +12,44 @@ const Nav = () => {
     const links = linksData.map((link) => <LinkElement key={link.id} {...link} />);
 
     return (
-        <>
-            <nav
-                className={classNames("h-screen bg-white dark:bg-dark shadow-lg z-50 duration-300", {
-                    "sticky top-0 shadow-[#ddd] dark:shadow-grey-dark-alt-color":
-                        state.switchBooleans.uiControl.isNavFixed,
-                    "relative shadow-none": !state.switchBooleans.uiControl.isNavFixed,
-                })}
-            >
-                <Flex
-                    className={classNames("my-4", {
-                        "lg:mb-10": !state.switchBooleans.uiControl.isNavMinimized,
-                        hidden: state.switchBooleans.uiControl.isNewNavbar,
-                    })}
-                    direction="row"
-                    items="center"
-                    justify="center"
-                >
-                    <p
-                        className={classNames("__nav_logo text-sm", {
-                            "w-12": state.switchBooleans.uiControl.isNavMinimized,
-                            "lg:w-32 lg:text-xl": !state.switchBooleans.uiControl.isNavMinimized,
+        <nav
+            className={classNames("h-screen bg-white dark:bg-dark shadow-lg z-50 duration-300", {
+                "sticky top-0 shadow-[#ddd] dark:shadow-grey-dark-alt-color": state.switchBooleans.uiControl.isNavFixed,
+                "relative shadow-none": !state.switchBooleans.uiControl.isNavFixed,
+            })}
+        >
+            {!state.switchBooleans.uiControl.isNewNavbar && (
+                <>
+                    <Flex
+                        className={classNames("my-4", {
+                            "lg:mb-10": !state.switchBooleans.uiControl.isNavMinimized,
+                            hidden: state.switchBooleans.uiControl.isNewNavbar,
+                        })}
+                        direction="row"
+                        items="center"
+                        justify="center"
+                    >
+                        <p
+                            className={classNames("__nav_logo text-sm", {
+                                "w-12": state.switchBooleans.uiControl.isNavMinimized,
+                                "lg:w-32 lg:text-xl": !state.switchBooleans.uiControl.isNavMinimized,
+                            })}
+                        >
+                            {state.information.generalInfo.firstName}
+                        </p>
+                    </Flex>
+
+                    <ul
+                        className={classNames("flex flex-col w-12 gap-2 mx-2", {
+                            "lg:w-48 lg:mx-4": !state.switchBooleans.uiControl.isNavMinimized,
+                            hidden: state.switchBooleans.uiControl.isNewNavbar,
                         })}
                     >
-                        {state.information.generalInfo.firstName}
-                    </p>
-                </Flex>
-
-                <ul
-                    className={classNames("flex flex-col w-12 gap-2 mx-2", {
-                        "lg:w-48 lg:mx-4": !state.switchBooleans.uiControl.isNavMinimized,
-                        hidden: state.switchBooleans.uiControl.isNewNavbar,
-                    })}
-                >
-                    {links}
-                </ul>
-            </nav>
-        </>
+                        {links}
+                    </ul>
+                </>
+            )}
+        </nav>
     );
 };
 

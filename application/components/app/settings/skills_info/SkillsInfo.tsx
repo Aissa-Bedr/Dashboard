@@ -19,10 +19,12 @@ const SkillsInfo = () => {
 
     const skills = state.skills.map((skill) => <Skill key={skill.id} {...skill} />);
 
-    function addSkill(): void | false {
+    function addSkill(e: React.FormEvent<HTMLFormElement>): void | false {
+        e.preventDefault();
+
         if (!content) {
             toast.error("Skill can't be empty !");
-            dispatch(pushNotificationAction("Skill can't be empty ."));
+            dispatch(pushNotificationAction("Skill can't be empty."));
             return false;
         }
 
@@ -43,19 +45,21 @@ const SkillsInfo = () => {
 
     return (
         <div className={classNames({ "h-60 overflow-y-scroll pr-1": state.skills.length >= 20 })}>
-            <Flex className="w-full gap-2" direction="row" items="center">
-                <Input
-                    type="text"
-                    placeholder="Enter a skill"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                />
+            <form onSubmit={addSkill}>
+                <Flex className="w-full gap-2" direction="row" items="center">
+                    <Input
+                        type="text"
+                        placeholder="Enter a skill"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                    />
 
-                <Button className="w-1/4 px-2 !py-[7px]" onClick={addSkill}>
-                    <p className="hidden lg:block">Add skill</p>
-                    <p className="block lg:hidden">Add</p>
-                </Button>
-            </Flex>
+                    <Button className="w-1/4 px-2 !py-[7px]">
+                        <p className="hidden lg:block">Add skill</p>
+                        <p className="block lg:hidden">Add</p>
+                    </Button>
+                </Flex>
+            </form>
 
             {state.skills.length > 0 ? (
                 <Grid className="gap-2 mt-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4" cols="1">
