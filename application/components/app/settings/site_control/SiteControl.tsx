@@ -66,7 +66,7 @@ const SiteControl = () => {
     }, [state.theme]);
 
     return (
-        <BoxContainer className="col-span-3">
+        <BoxContainer>
             <LogoContainer>
                 <Flex direction="row" items="center" justify="between">
                     <PrimaryLogo text="Site control" />

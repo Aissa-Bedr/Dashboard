@@ -13,6 +13,7 @@ module.exports = {
             },
             colors: {
                 dark: "#212529",
+                light: "#f1f5f9",
                 "blue-color": "#0075ff",
                 "blue-dark-color": "#3a497b",
                 "blue-alt-color": "#0d69d5",

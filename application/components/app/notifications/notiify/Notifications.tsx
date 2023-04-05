@@ -20,9 +20,9 @@ const Notifications = () => {
         <EachNotification key={notification.id} {...notification} />
     ));
 
-    const links = linksData.map(({ href, link, content }) => {
+    const links = linksData.map(({ id, href, link, content }) => {
         return (
-            <Move href={`/${href}`} onClick={() => dispatch(changeLinkAction(link))}>
+            <Move key={id} href={`/${href}`} onClick={() => dispatch(changeLinkAction(link))}>
                 {content}
             </Move>
         );
@@ -44,7 +44,7 @@ const Notifications = () => {
             </BoxContainer>
 
             {state.notifications.length >= 1 ? (
-                <BoxContainer className="flex flex-col gap-2 col-span-3">
+                <BoxContainer className="flex flex-col col-span-3 gap-2">
                     <Flex direction="row" items="end" justify="end">
                         {state.notifications.length >= 1 && (
                             <button

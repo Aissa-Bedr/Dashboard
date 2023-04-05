@@ -1,9 +1,9 @@
 import Flex from "@/components/build/Flex";
 import { AppState } from "@/redux/types/main";
 import Image from "next/image";
-import React from "react";
-import { BiBell, BiSearchAlt2 } from "react-icons/bi";
-import { HiArrowSmRight, HiMenuAlt1, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
+import React, { useState } from "react";
+import { BiBell, BiRefresh, BiSearchAlt2, BiUser } from "react-icons/bi";
+import { HiArrowSmRight, HiCurrencyDollar, HiMenuAlt1, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import SecButton from "./SecButton";
 import { toast } from "react-toastify";
@@ -13,11 +13,18 @@ import toggleIsSearchBarShowedAction from "@/redux/actions/toggle_actions/toggle
 import toggleThemeAction from "@/redux/actions/toggle_actions/toggleThemeAction";
 import { useRouter } from "next/router";
 import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
+import Link from "next/link";
+import { BsRobot } from "react-icons/bs";
+import { FiSettings } from "react-icons/fi";
 
 const Section = () => {
     const state = useSelector<AppState, AppState>((state) => state);
     const router = useRouter();
     const dispatch = useDispatch();
+
+    const [isSettingsActive, setIsSettingsActive] = useState(false);
+
+    const refresh = (): void => window.location.reload();
 
     return (
         <>
@@ -90,7 +97,7 @@ const Section = () => {
                             <Flex
                                 className={classNames("absolute w-5 h-5 -top-2 -right-2 rounded-full", {
                                     "bg-red-color text-white": state.notifications.length >= 1,
-                                    "bg-[#f1f5f9] text-black dark:bg-[#1a1d21] dark:text-white":
+                                    "bg-light text-black dark:bg-[#1a1d21] dark:text-white":
                                         state.notifications.length === 0,
                                 })}
                                 direction="row"
@@ -107,6 +114,7 @@ const Section = () => {
                         className="gap-2 p-0 cursor-pointer lg:py-2 lg:px-4 lg:bg-grey-alt-color lg:dark:bg-grey-dark-alt-color"
                         direction="row"
                         items="center"
+                        onClick={() => setIsSettingsActive((prevState) => !prevState)}
                     >
                         <Image className="rounded-full" src="/aissa.jpg" alt="logo" width={40} height={40} />
 
@@ -117,6 +125,78 @@ const Section = () => {
                             </p>
                         </div>
                     </Flex>
+
+                    {isSettingsActive && (
+                        <Flex
+                            className={classNames(
+                                "absolute gap-4 w-full right-0 top-20 py-4 bg-white text-black dark:bg-dark dark:text-grey-dark-color __border lg:w-48 lg:top-16 lg:right-4",
+                                { "rounded-md": state.switchBooleans.uiControl.isRounded }
+                            )}
+                            direction="col"
+                            items="start"
+                        >
+                            <p className="px-2 text-sm font-medium">
+                                Welcome {state.information.generalInfo.firstName} !
+                            </p>
+
+                            <Flex className="w-full gap-2" direction="col">
+                                <div className="w-full pb-2 __border_b">
+                                    <Link
+                                        className="flex flex-row items-center w-full gap-2 hover:bg-light dark:hover:bg-[#1a1d21] p-2 duration-300"
+                                        href="/profile"
+                                        onClick={() => dispatch(changeLinkAction("profile"))}
+                                    >
+                                        <BiUser className="text-black dark:text-grey-dark-color" />
+
+                                        <p className="text-sm font-semibold">Profile</p>
+                                    </Link>
+
+                                    <Link
+                                        className="flex flex-row items-center w-full gap-2 hover:bg-light dark:hover:bg-[#1a1d21] p-2 duration-300"
+                                        href="/chat-bot"
+                                        onClick={() => dispatch(changeLinkAction("chat-bot"))}
+                                    >
+                                        <BsRobot className="text-black dark:text-grey-dark-color" />
+
+                                        <p className="text-sm font-semibold">Chat Bot</p>
+                                    </Link>
+                                </div>
+
+                                <div className="w-full">
+                                    <Link
+                                        className="flex flex-row items-center w-full gap-2 hover:bg-light dark:hover:bg-[#1a1d21] p-2 duration-300"
+                                        href="/settings"
+                                        onClick={() => dispatch(changeLinkAction("settings"))}
+                                    >
+                                        <FiSettings className="text-black dark:text-grey-dark-color" />
+
+                                        <p className="text-sm font-semibold">Settings</p>
+                                    </Link>
+
+                                    <Flex
+                                        className="w-full gap-2 hover:bg-light dark:hover:bg-[#1a1d21] p-2 duration-300"
+                                        direction="row"
+                                        items="center"
+                                    >
+                                        <HiCurrencyDollar className="text-black dark:text-grey-dark-color" />
+
+                                        <p className="text-sm font-semibold">Balance: ${0}</p>
+                                    </Flex>
+
+                                    <Flex
+                                        className="w-full gap-2 hover:bg-light dark:hover:bg-[#1a1d21] p-2 duration-300 cursor-pointer"
+                                        direction="row"
+                                        items="center"
+                                        onClick={refresh}
+                                    >
+                                        <BiRefresh className="text-black dark:text-grey-dark-color" />
+
+                                        <p className="text-sm font-semibold">Refresh</p>
+                                    </Flex>
+                                </div>
+                            </Flex>
+                        </Flex>
+                    )}
                 </Flex>
             </Flex>
         </>

@@ -15,7 +15,7 @@ const SkillsControl = () => {
     const skills = useSelector<AppState, Skill[]>((state) => state.skills);
 
     return (
-        <BoxContainer className="col-span-3 2xl:col-span-1">
+        <BoxContainer>
             <LogoContainer>
                 <Flex className="w-full" direction="row" items="center" justify="between">
                     <PrimaryLogo text="Skills control" />

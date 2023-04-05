@@ -6,6 +6,8 @@ import SiteControl from "@/components/app/settings/site_control/SiteControl";
 import SkillsControl from "@/components/app/settings/skills_info/SkillsControl";
 import Base from "@/components/build/Base";
 import BaseWrapper from "@/components/build/BaseWrapper";
+import Flex from "@/components/build/Flex";
+import Grid from "@/components/build/Grid";
 import Header from "@/components/build/Header";
 import Logo from "@/components/build/Logo";
 import SearchBar from "@/components/helpers/search_bar/SearchBar";
@@ -35,11 +37,17 @@ const Settings = () => {
                 <Logo content="settings" />
 
                 <BaseWrapper>
-                    <SiteControl />
-                    <GeneralInfo />
-                    <SkillsControl />
-                    <AppearanceControl />
-                    <ComponentsShapesControl />
+                    <Flex className="!col-span-3 gap-4" direction="col">
+                        <SiteControl />
+
+                        <Grid className="gap-4 xl:grid-cols-2 2xl:grid-cols-3" cols="1">
+                            <GeneralInfo />
+                            <SkillsControl />
+                            <AppearanceControl />
+                        </Grid>
+
+                        <ComponentsShapesControl />
+                    </Flex>
                 </BaseWrapper>
 
                 {state.switchBooleans.websiteControl.isNotificationActive && (
