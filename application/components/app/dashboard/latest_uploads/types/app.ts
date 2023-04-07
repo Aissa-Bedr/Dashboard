@@ -15,4 +15,4 @@ export type FileType =
     | "ts"
     | "jsx"
     | "py";
-export type fileSizeType = "kb" | "mb" | "gb" | "tb" | "pb";
+export type FileSizeType = "kb" | "mb" | "gb" | "tb" | "pb";

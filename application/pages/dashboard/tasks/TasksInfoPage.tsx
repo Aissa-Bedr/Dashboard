@@ -11,32 +11,47 @@ import EachTask from "./EachTask";
 import ListLength from "@/components/build/ListLength";
 import addTaskAction from "@/redux/actions/add_actions/addTaskAction";
 import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
+import Select from "@/components/build/Select";
+import { TaskOptions } from "./types/main";
+import { FilterKey } from "./types/app";
 
 const TasksInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
     const dispatch = useDispatch();
 
-    const [content, setContent] = useState("");
+    const [taskOptions, setTaskOptions] = useState<TaskOptions>({
+        content: "",
+        filterKey: "task",
+        filterValue: "",
+    });
 
-    const tasks = state.tasks.map((item) => <EachTask key={item.id} {...item} />);
+    const tasks = state.tasks
+        .filter((task) =>
+            taskOptions.filterKey === "task"
+                ? task.content.includes(taskOptions.filterValue)
+                : taskOptions.filterKey === "completed"
+                ? task.isCompleted
+                : !task.isCompleted
+        )
+        .map((item) => <EachTask key={item.id} {...item} />);
 
     function addTask(e: React.FormEvent<HTMLFormElement>): void | false {
         e.preventDefault();
 
-        if (!content) {
+        if (!taskOptions.content) {
             toast.error("Task can't be empty !");
             dispatch(pushNotificationAction("Task can't be empty."));
             return false;
         }
 
-        if (content.length < 2) {
+        if (taskOptions.content.length < 2) {
             toast.error("Task can't be less than two characters !");
             dispatch(pushNotificationAction("Task can't be less than two characters."));
             return false;
         }
 
         for (const item of state.tasks) {
-            if (item.content.match(content) && item.content.length === content.length) {
+            if (item.content.match(taskOptions.content) && item.content.length === taskOptions.content.length) {
                 toast.error(`Task ${item.content} already exist !`);
                 dispatch(pushNotificationAction(`Task ${item.content} already exist.`));
                 return false;
@@ -55,11 +70,11 @@ const TasksInfoPage = () => {
             }
         }
 
-        dispatch(addTaskAction(content));
-        toast.success(`Task ${content} added successfully !`);
-        dispatch(pushNotificationAction(`Task ${content} added successfully.`));
+        dispatch(addTaskAction(taskOptions.content));
+        toast.success(`Task ${taskOptions.content} added successfully !`);
+        dispatch(pushNotificationAction(`Task ${taskOptions.content} added successfully.`));
 
-        setContent("");
+        setTaskOptions((prevState) => ({ ...prevState, content: "" }));
     }
 
     return (
@@ -69,8 +84,8 @@ const TasksInfoPage = () => {
                     <Input
                         type="text"
                         placeholder="Enter a new task"
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
+                        value={taskOptions.content}
+                        onChange={(e) => setTaskOptions((prevState) => ({ ...prevState, content: e.target.value }))}
                     />
 
                     <Flex direction="row" items="center" justify="between">
@@ -79,6 +94,47 @@ const TasksInfoPage = () => {
                         <Button className="px-2 py-1">Add task</Button>
                     </Flex>
                 </form>
+            </BoxContainer>
+
+            <BoxContainer className="col-span-3">
+                <Flex className="gap-2" direction="col">
+                    <Select
+                        value={taskOptions.filterKey}
+                        onChange={(e) =>
+                            setTaskOptions((prevState) => ({ ...prevState, filterKey: e.target.value as FilterKey }))
+                        }
+                    >
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="task"
+                        >
+                            Task
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="completed"
+                        >
+                            Completed
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="notCompleted"
+                        >
+                            Not completed
+                        </option>
+                    </Select>
+
+                    {taskOptions.filterKey === "task" && (
+                        <Input
+                            type="text"
+                            placeholder="Search tasks..."
+                            value={taskOptions.filterValue}
+                            onChange={(e) =>
+                                setTaskOptions((prevState) => ({ ...prevState, filterValue: e.target.value }))
+                            }
+                        />
+                    )}
+                </Flex>
             </BoxContainer>
 
             <Grid className="col-span-3 gap-4 mt-4" cols="1">

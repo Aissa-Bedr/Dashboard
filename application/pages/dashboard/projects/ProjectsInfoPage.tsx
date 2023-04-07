@@ -14,25 +14,27 @@ import { StatusTypes } from "@/components/app/dashboard/projects/types/main";
 import { Projects } from "@/redux/types/data";
 import addProjectAction from "@/redux/actions/add_actions/addProjectAction";
 import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
+import { initialProjectsState, patterns } from "@/components/app/dashboard/projects/ProjectsInfo";
+import { ProjectOptions } from "./types/main";
+import { Filterkey } from "./types/app";
 
 const ProjectsInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
     const dispatch = useDispatch();
 
-    const [projectInfo, setProjectInfo] = useState<Projects>({
-        name: "",
-        finishDate: "",
-        client: "",
-        price: "" as any,
-        team: "" as any,
-        status: "pending",
+    const [projectInfo, setProjectInfo] = useState<Projects>(initialProjectsState);
+    const [projectOptions, setProjectOptions] = useState<ProjectOptions>({
+        filterKey: "projectName",
+        filterValue: "",
     });
 
-    const patterns = {
-        finishDate: /\d{1,2}\W\w{1,}\W\d{4}/g,
-    };
-
-    const projectsInfo = state.projects.map((item) => <EachProject key={item.id} {...item} />);
+    const projectsInfo = state.projects
+        .filter((project) =>
+            projectOptions.filterKey === "projectName"
+                ? project.name.includes(projectOptions.filterValue)
+                : project.status === projectOptions.filterValue
+        )
+        .map((item) => <EachProject key={item.id} {...item} />);
 
     function addProject(): void | false {
         if (!projectInfo.name || !projectInfo.finishDate || !projectInfo.client) {
@@ -63,7 +65,7 @@ const ProjectsInfoPage = () => {
         toast.success("Project added successfully !");
         dispatch(pushNotificationAction("Project added successfully."));
 
-        setProjectInfo({ name: "", finishDate: "", client: "", price: "" as any, team: "" as any, status: "pending" });
+        setProjectInfo(initialProjectsState);
     }
 
     return (
@@ -72,7 +74,7 @@ const ProjectsInfoPage = () => {
                 <Input
                     className="w-full"
                     type="text"
-                    placeholder="Enter a Name"
+                    placeholder="Enter a Project Name"
                     value={projectInfo.name}
                     onChange={(e) => setProjectInfo((prevState) => ({ ...prevState, name: e.target.value }))}
                 />
@@ -146,6 +148,77 @@ const ProjectsInfoPage = () => {
                         Add project
                     </Button>
                 </Flex>
+            </BoxContainer>
+
+            <BoxContainer className="flex flex-col col-span-3 gap-4">
+                <Select
+                    className="w-full"
+                    value={projectOptions.filterKey}
+                    onChange={(e) =>
+                        setProjectOptions((prevState) => ({ filterKey: e.target.value as Filterkey, filterValue: "" }))
+                    }
+                >
+                    <option
+                        className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                        value="projectName"
+                    >
+                        Project Name
+                    </option>
+                    <option
+                        className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                        value="projectStatus"
+                    >
+                        Status
+                    </option>
+                </Select>
+
+                {projectOptions.filterKey === "projectName" ? (
+                    <Input
+                        className="w-full"
+                        type="text"
+                        placeholder="Enter a Project Name"
+                        value={projectOptions.filterValue}
+                        onChange={(e) =>
+                            setProjectOptions((prevState) => ({
+                                ...prevState,
+                                filterValue: e.target.value,
+                            }))
+                        }
+                    />
+                ) : (
+                    <Select
+                        className="w-full"
+                        value={projectOptions.filterValue}
+                        onChange={(e) =>
+                            setProjectOptions((prevState) => ({ ...prevState, filterValue: e.target.value }))
+                        }
+                    >
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="pending"
+                        >
+                            pending
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="in progress"
+                        >
+                            in progress
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="completed"
+                        >
+                            completed
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="rejected"
+                        >
+                            rejected
+                        </option>
+                    </Select>
+                )}
             </BoxContainer>
 
             <Grid className="col-span-3 gap-4 mt-4" cols="1">

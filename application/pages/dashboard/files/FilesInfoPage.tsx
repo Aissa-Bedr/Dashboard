@@ -10,24 +10,33 @@ import BoxContainer from "@/components/app/main/BoxContainer";
 import ListLength from "@/components/build/ListLength";
 import Select from "@/components/build/Select";
 import EachFile from "./EachFile";
-import { fileSizeType, FileType } from "@/components/app/dashboard/latest_uploads/types/app";
-import { Files } from "@/redux/types/data";
+import { FileSizeType, FileType } from "@/components/app/dashboard/latest_uploads/types/app";
 import uploadFileAction from "@/redux/actions/add_actions/uploadFileAction";
 import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
+import { FileOptions } from "./types/main";
+import { FilterKey } from "./types/app";
+import { Files } from "@/redux/types/data";
+import { initialFilesState } from "@/components/app/dashboard/latest_uploads/LatestUploadsInfo";
 
 const FilesInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
     const dispatch = useDispatch();
 
-    const [fileInfo, setFileInfo] = useState<Files>({
-        fileName: "",
-        fileType: "txt",
-        fileUploader: "",
-        fileSize: "" as any,
-        fileSizeType: "kb",
+    const [fileInfo, setFileInfo] = useState<Files>(initialFilesState);
+    const [fileOptions, setFileOptions] = useState<FileOptions>({
+        filterKey: "fileName",
+        filterValue: "",
     });
 
-    const filesInfo = state.files.map((item) => <EachFile key={item.id} {...item} />);
+    const filesInfo = state.files
+        .filter((file) =>
+            fileOptions.filterKey === "fileName"
+                ? file.fileName.includes(fileOptions.filterValue)
+                : fileOptions.filterKey === "fileType"
+                ? file.fileType === (fileOptions.filterValue as FileType)
+                : file.fileSizeType === (fileOptions.filterValue as FileSizeType)
+        )
+        .map((item) => <EachFile key={item.id} {...item} />);
 
     function uploadFile(): void | false {
         if (!fileInfo.fileName || !fileInfo.fileUploader || !fileInfo.fileSize) {
@@ -76,7 +85,7 @@ const FilesInfoPage = () => {
             )
         );
 
-        setFileInfo({ fileName: "", fileType: "txt", fileUploader: "", fileSize: "" as any, fileSizeType: "kb" });
+        setFileInfo(initialFilesState);
     }
 
     return (
@@ -208,7 +217,7 @@ const FilesInfoPage = () => {
                 <Select
                     value={fileInfo.fileSizeType}
                     onChange={(e) =>
-                        setFileInfo((prevState) => ({ ...prevState, fileSizeType: e.target.value as fileSizeType }))
+                        setFileInfo((prevState) => ({ ...prevState, fileSizeType: e.target.value as FileSizeType }))
                     }
                 >
                     <option
@@ -250,6 +259,183 @@ const FilesInfoPage = () => {
                         Upload file
                     </Button>
                 </Flex>
+            </BoxContainer>
+
+            <BoxContainer className="flex flex-col col-span-3 gap-4">
+                <Select
+                    value={fileOptions.filterKey}
+                    onChange={(e) =>
+                        setFileOptions((prevState) => ({ filterKey: e.target.value as FilterKey, filterValue: "" }))
+                    }
+                >
+                    <option
+                        className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                        value="fileName"
+                    >
+                        File Name
+                    </option>
+
+                    <option
+                        className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                        value="fileType"
+                    >
+                        File Type
+                    </option>
+
+                    <option
+                        className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                        value="fileSize"
+                    >
+                        File Size
+                    </option>
+                </Select>
+
+                {fileOptions.filterKey === "fileName" ? (
+                    <Input
+                        type="text"
+                        placeholder={"Search files..."}
+                        value={fileOptions.filterValue}
+                        onChange={(e) => setFileOptions((prevState) => ({ ...prevState, filterValue: e.target.value }))}
+                    />
+                ) : fileOptions.filterKey === "fileType" ? (
+                    <Select
+                        value={fileOptions.filterValue}
+                        onChange={(e) => setFileOptions((prevState) => ({ ...prevState, filterValue: e.target.value }))}
+                    >
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="txt"
+                        >
+                            txt
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="pdf"
+                        >
+                            pdf
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="avi"
+                        >
+                            avi
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="psd"
+                        >
+                            psd
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="zip"
+                        >
+                            zip
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="dll"
+                        >
+                            dll
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="eps"
+                        >
+                            eps
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="ai"
+                        >
+                            ai
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="iso"
+                        >
+                            iso
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="png"
+                        >
+                            png
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="html"
+                        >
+                            html
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="css"
+                        >
+                            css
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="js"
+                        >
+                            js
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="ts"
+                        >
+                            ts
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="jsx"
+                        >
+                            jsx
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="py"
+                        >
+                            py
+                        </option>
+                    </Select>
+                ) : (
+                    <Select
+                        value={fileOptions.filterValue}
+                        onChange={(e) => setFileOptions((prevState) => ({ ...prevState, filterValue: e.target.value }))}
+                    >
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="kb"
+                        >
+                            kb
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="mb"
+                        >
+                            mb
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="gb"
+                        >
+                            gb
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="tb"
+                        >
+                            tb
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="pb"
+                        >
+                            pb
+                        </option>
+                    </Select>
+                )}
             </BoxContainer>
 
             <Grid className="col-span-3 gap-4 mt-4" cols="1">

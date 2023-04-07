@@ -17,21 +17,23 @@ import Move from "@/components/build/Move";
 import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
+export const patterns = {
+    finishDate: /\d{1,2}\W\w{1,}\W\d{4}\W\W\W\d{1,2}\d{1,2}\W\w{2}/g,
+};
+
+export const initialRemindersState: Reminders = {
+    title: "",
+    time: "",
+    theme: "blue",
+};
+
 const RemindersInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
     const dispatch = useDispatch();
 
-    const [reminderInfo, setReminderInfo] = useState<Reminders>({
-        title: "",
-        time: "",
-        theme: "blue",
-    });
+    const [reminderInfo, setReminderInfo] = useState<Reminders>(initialRemindersState);
 
     const remindersInfo = state.reminders.map((item) => <RemindersInfoItem key={item.id} {...item} />);
-
-    const patterns = {
-        finishDate: /\d{1,2}\W\w{1,}\W\d{4}\W\W\W\d{1,2}\d{1,2}\W\w{2}/g,
-    };
 
     function addReminder(): void | false {
         if (!reminderInfo.title || !reminderInfo.time) {
@@ -61,7 +63,7 @@ const RemindersInfo = () => {
         dispatch(addReminderAction(reminderInfo));
         toast.success("Reminder added successfully !");
         dispatch(pushNotificationAction("Reminder added successfully."));
-        setReminderInfo({ title: "", time: "", theme: "blue" });
+        setReminderInfo(initialRemindersState);
     }
 
     return (

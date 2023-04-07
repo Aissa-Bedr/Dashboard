@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LatestUploadsInfoItem from "./LatestUploadsInfoItem";
 import { toast } from "react-toastify";
-import { fileSizeType, FileType } from "./types/app";
+import { FileSizeType, FileType } from "./types/app";
 import { Files } from "@/redux/types/data";
 import uploadFileAction from "@/redux/actions/add_actions/uploadFileAction";
 import Details from "@/components/build/Details";
@@ -17,17 +17,19 @@ import Move from "@/components/build/Move";
 import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
+export const initialFilesState: Files = {
+    fileName: "",
+    fileType: "txt",
+    fileUploader: "",
+    fileSize: "" as any,
+    fileSizeType: "kb",
+};
+
 const LatestUploadsInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
     const dispatch = useDispatch();
 
-    const [fileInfo, setFileInfo] = useState<Files>({
-        fileName: "",
-        fileType: "txt",
-        fileUploader: "",
-        fileSize: "" as any,
-        fileSizeType: "kb",
-    });
+    const [fileInfo, setFileInfo] = useState<Files>(initialFilesState);
 
     const filesInfo = state.files.map((item) => <LatestUploadsInfoItem key={item.id} {...item} />);
 
@@ -76,7 +78,7 @@ const LatestUploadsInfo = () => {
             )
         );
 
-        setFileInfo({ fileName: "", fileType: "txt", fileUploader: "", fileSize: "" as any, fileSizeType: "kb" });
+        setFileInfo(initialFilesState);
     }
 
     return (
@@ -191,7 +193,7 @@ const LatestUploadsInfo = () => {
             <Select
                 value={fileInfo.fileSizeType}
                 onChange={(e) =>
-                    setFileInfo((prevState) => ({ ...prevState, fileSizeType: e.target.value as fileSizeType }))
+                    setFileInfo((prevState) => ({ ...prevState, fileSizeType: e.target.value as FileSizeType }))
                 }
             >
                 <option className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white" value="kb">

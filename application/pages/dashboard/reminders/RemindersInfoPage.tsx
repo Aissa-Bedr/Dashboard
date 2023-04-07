@@ -14,22 +14,27 @@ import { Theme } from "@/components/app/dashboard/reminders/types/app";
 import addReminderAction from "@/redux/actions/add_actions/addReminderAction";
 import { Reminders } from "@/redux/types/data";
 import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
+import { initialRemindersState, patterns } from "@/components/app/dashboard/reminders/RemindersInfo";
+import { ReminderOptions } from "./types/main";
+import { FilterKey } from "./types/app";
 
 const RemindersInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
     const dispatch = useDispatch();
 
-    const [reminderInfo, setReminderInfo] = useState<Reminders>({
-        title: "",
-        time: "",
-        theme: "blue",
+    const [reminderInfo, setReminderInfo] = useState<Reminders>(initialRemindersState);
+    const [reminderOptions, setReminderOptions] = useState<ReminderOptions>({
+        filterKey: "reminderTitle",
+        filterValue: "",
     });
 
-    const remindersInfo = state.reminders.map((item) => <EachReminder key={item.id} {...item} />);
-
-    const patterns = {
-        finishDate: /\d{1,2}\W\w{1,}\W\d{4}\W\W\W\d{1,2}\d{1,2}\W\w{2}/g,
-    };
+    const remindersInfo = state.reminders
+        .filter((reminder) =>
+            reminderOptions.filterKey === "reminderTitle"
+                ? reminder.title.includes(reminderOptions.filterValue)
+                : reminder.theme === reminderOptions.filterValue
+        )
+        .map((item) => <EachReminder key={item.id} {...item} />);
 
     function addReminder(): void | false {
         if (!reminderInfo.title || !reminderInfo.time) {
@@ -60,7 +65,7 @@ const RemindersInfoPage = () => {
         toast.success("Reminder added successfully !");
         dispatch(pushNotificationAction("Reminder added successfully."));
 
-        setReminderInfo({ title: "", time: "", theme: "blue" });
+        setReminderInfo(initialRemindersState);
     }
 
     return (
@@ -115,6 +120,71 @@ const RemindersInfoPage = () => {
                         Add reminder
                     </Button>
                 </Flex>
+            </BoxContainer>
+
+            <BoxContainer className="flex flex-col col-span-3 gap-4">
+                <Select
+                    value={reminderOptions.filterKey}
+                    onChange={(e) =>
+                        setReminderOptions((prevState) => ({ filterKey: e.target.value as FilterKey, filterValue: "" }))
+                    }
+                >
+                    <option
+                        className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                        value="reminderTitle"
+                    >
+                        Title
+                    </option>
+                    <option
+                        className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                        value="reminderStatus"
+                    >
+                        Status
+                    </option>
+                </Select>
+
+                {reminderOptions.filterKey === "reminderTitle" ? (
+                    <Input
+                        type="text"
+                        placeholder="Enter a title"
+                        value={reminderOptions.filterValue}
+                        onChange={(e) =>
+                            setReminderOptions((prevState) => ({ ...prevState, filterValue: e.target.value }))
+                        }
+                    />
+                ) : (
+                    <Select
+                        value={reminderOptions.filterValue}
+                        onChange={(e) =>
+                            setReminderOptions((prevState) => ({ ...prevState, filterValue: e.target.value }))
+                        }
+                    >
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="blue"
+                        >
+                            blue
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="green"
+                        >
+                            green
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="orange"
+                        >
+                            orange
+                        </option>
+                        <option
+                            className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                            value="red"
+                        >
+                            red
+                        </option>
+                    </Select>
+                )}
             </BoxContainer>
 
             <Grid className="col-span-3 gap-4 mt-4" cols="1">

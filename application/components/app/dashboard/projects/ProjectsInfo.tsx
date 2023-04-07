@@ -17,22 +17,24 @@ import Move from "@/components/build/Move";
 import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
 
+export const patterns = {
+    finishDate: /\d{1,2}\W\w{1,}\W\d{4}/g,
+};
+
+export const initialProjectsState: Projects = {
+    name: "",
+    finishDate: "",
+    client: "",
+    price: "" as any,
+    team: "" as any,
+    status: "pending",
+};
+
 const ProjectsInfo = () => {
     const state = useSelector<AppState, AppState>((state) => state);
     const dispatch = useDispatch();
 
-    const [projectInfo, setProjectInfo] = useState<Projects>({
-        name: "",
-        finishDate: "",
-        client: "",
-        price: "" as any,
-        team: "" as any,
-        status: "pending",
-    });
-
-    const patterns = {
-        finishDate: /\d{1,2}\W\w{1,}\W\d{4}/g,
-    };
+    const [projectInfo, setProjectInfo] = useState<Projects>(initialProjectsState);
 
     const projectsInfo = state.projects.map((item) => <ProjectsInfoItem key={item.id} {...item} />);
 
@@ -63,7 +65,7 @@ const ProjectsInfo = () => {
         toast.success("Project added successfully !");
         dispatch(pushNotificationAction("Project added successfully."));
 
-        setProjectInfo({ name: "", finishDate: "", client: "", price: "" as any, team: "" as any, status: "pending" });
+        setProjectInfo(initialProjectsState);
     }
 
     return (

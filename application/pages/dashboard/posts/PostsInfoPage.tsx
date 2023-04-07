@@ -12,6 +12,9 @@ import EachPost from "./EachPost";
 import { Posts } from "@/redux/types/data";
 import addPostAction from "@/redux/actions/add_actions/addPostAction";
 import pushNotificationAction from "@/redux/actions/add_actions/pushNotificationAction";
+import Select from "@/components/build/Select";
+import { PostOptions } from "./types/main";
+import { FilterKey } from "./types/app";
 
 const PostsInfoPage = () => {
     const state = useSelector<AppState, AppState>((state) => state);
@@ -22,8 +25,20 @@ const PostsInfoPage = () => {
         postTitle: "",
         postDescription: "",
     });
+    const [postOptions, setPostOptions] = useState<PostOptions>({
+        filterKey: "postDescription",
+        filterValue: "",
+    });
 
-    const postsInfo = state.posts.map((item) => <EachPost key={item.id} {...item} />);
+    const postsInfo = state.posts
+        .filter((post) =>
+            postOptions.filterKey === "postDescription"
+                ? post.postDescription.includes(postOptions.filterValue)
+                : postOptions.filterKey === "liked"
+                ? post.isLiked
+                : !post.isLiked
+        )
+        .map((item) => <EachPost key={item.id} {...item} />);
 
     function addPost(): void | false {
         if (!postInfo.postOwner || !postInfo.postTitle || !postInfo.postDescription) {
@@ -84,6 +99,43 @@ const PostsInfoPage = () => {
                         Add post
                     </Button>
                 </Flex>
+            </BoxContainer>
+
+            <BoxContainer className="flex flex-col col-span-3 gap-4">
+                <Select
+                    value={postOptions.filterKey}
+                    onChange={(e) =>
+                        setPostOptions((prevState) => ({ filterKey: e.target.value as FilterKey, filterValue: "" }))
+                    }
+                >
+                    <option
+                        className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                        value="postDescription"
+                    >
+                        Description
+                    </option>
+                    <option
+                        className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                        value="liked"
+                    >
+                        Liked
+                    </option>
+                    <option
+                        className="text-black bg-grey-alt-color dark:bg-grey-dark-alt-color dark:text-white"
+                        value="notLiked"
+                    >
+                        Not Liked
+                    </option>
+                </Select>
+
+                {postOptions.filterKey === "postDescription" && (
+                    <Input
+                        type="text"
+                        placeholder="Post description"
+                        value={postOptions.filterValue}
+                        onChange={(e) => setPostOptions((prevState) => ({ ...prevState, filterValue: e.target.value }))}
+                    />
+                )}
             </BoxContainer>
 
             <Grid className="col-span-3 gap-4 mt-4" cols="1">

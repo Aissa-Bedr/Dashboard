@@ -1,4 +1,4 @@
-import { fileSizeType, FileType } from "./app";
+import { FileSizeType, FileType } from "./app";
 
 export interface LatestUploadsInfoItemProps {
     id?: string;
@@ -6,5 +6,5 @@ export interface LatestUploadsInfoItemProps {
     fileType: FileType;
     fileUploader: string;
     fileSize: number;
-    fileSizeType: fileSizeType;
+    fileSizeType: FileSizeType;
 }
